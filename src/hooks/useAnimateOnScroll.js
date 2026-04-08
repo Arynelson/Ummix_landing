@@ -1,9 +1,9 @@
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 
-export function useAnimateOnScroll(threshold = 0.2) {
+export function useAnimateOnScroll(threshold = 0.1) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: threshold })
+  const isInView = useInView(ref, { once: true, amount: threshold, margin: '0px 0px -50px 0px' })
 
   return {
     ref,
