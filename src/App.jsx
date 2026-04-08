@@ -5,6 +5,7 @@ import Features from './components/Features'
 import Segmentation from './components/Segmentation'
 import Partners from './components/Partners'
 import Testimonials from './components/Testimonials'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Segmentation />
         <Partners />
         <Testimonials />
+        <Contact />
       </main>
       <Footer />
     </>
