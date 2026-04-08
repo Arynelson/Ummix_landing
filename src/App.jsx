@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
 import ValueProp from './components/ValueProp'
+import Features from './components/Features'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
       <main>
         <Hero />
         <ValueProp />
+        <Features />
       </main>
       <Footer />
     </>
