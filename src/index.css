@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ummix-red: #C8102E;
+  --color-ummix-red-dark: #A00D24;
+  --color-ummix-dark: #1A1A1A;
+  --color-ummix-gray: #F5F5F5;
+  --color-ummix-gray-dark: #333333;
+  --font-family-heading: 'Inter', sans-serif;
+  --font-family-body: 'Inter', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-family-body);
+  }
+  body {
+    @apply antialiased text-ummix-dark;
+  }
+}

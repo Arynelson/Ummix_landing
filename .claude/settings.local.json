@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(echo \"EXIT_CODE: $?\")",
+      "Read(//c/Users/aryha/Documents/Ummix/**)",
+      "Bash(npx create-vite@latest temp-vite -- --template react)",
+      "Bash(npm install:*)",
+      "Bash(cp assets/img_bg_hero.jpg public/assets/)",
+      "Bash(cp assets/logo_bandnews.png public/assets/)",
+      "Bash(cp assets/logo_cebrom.png public/assets/)",
+      "Bash(cp assets/logo_detran.png public/assets/)",
+      "Bash(cp assets/logo_radio89.png public/assets/)",
+      "Bash(timeout 10 npx vite --host)"
+    ]
+  }
+}
