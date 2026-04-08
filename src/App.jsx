@@ -3,6 +3,8 @@ import Hero from './components/Hero'
 import ValueProp from './components/ValueProp'
 import Features from './components/Features'
 import Segmentation from './components/Segmentation'
+import Partners from './components/Partners'
+import Testimonials from './components/Testimonials'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -14,6 +16,8 @@ export default function App() {
         <ValueProp />
         <Features />
         <Segmentation />
+        <Partners />
+        <Testimonials />
       </main>
       <Footer />
     </>
