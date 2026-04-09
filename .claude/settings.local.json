@@ -11,7 +11,13 @@
       "Bash(cp assets/logo_cebrom.png public/assets/)",
       "Bash(cp assets/logo_detran.png public/assets/)",
       "Bash(cp assets/logo_radio89.png public/assets/)",
-      "Bash(timeout 10 npx vite --host)"
+      "Bash(timeout 10 npx vite --host)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx vite:*)",
+      "Bash(npx sharp-cli:*)",
+      "Bash(mv public/assets/img_bg_hero.jpg public/assets/img_bg_hero_original.jpg)",
+      "Bash(mv public/assets/img_bg_hero_opt.jpg public/assets/img_bg_hero.jpg)"
     ]
   }
 }

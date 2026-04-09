@@ -1,15 +1,7 @@
 import { useState, useEffect } from 'react'
 
-const navLinks = [
-  { label: 'Soluções', href: '#solucoes' },
-  { label: 'Segmentações', href: '#segmentacoes' },
-  { label: 'Veículos', href: '#veiculos' },
-  { label: 'Depoimentos', href: '#depoimentos' },
-]
-
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -32,63 +24,13 @@ export default function Header() {
           </span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-ummix-red ${
-                scrolled ? 'text-ummix-gray-dark' : 'text-white/90'
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#contato"
-            className="bg-ummix-red hover:bg-ummix-red-dark text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:scale-105"
-          >
-            Falar com especialista
-          </a>
-        </nav>
-
-        <button
-          className="md:hidden flex flex-col gap-1.5"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
+        <a
+          href="#contato"
+          className="bg-ummix-red hover:bg-ummix-red-dark text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:scale-105"
         >
-          {[0, 1, 2].map(i => (
-            <span
-              key={i}
-              className={`block w-6 h-0.5 transition-all ${
-                scrolled ? 'bg-ummix-dark' : 'bg-white'
-              }`}
-            />
-          ))}
-        </button>
+          Plataforma Ummix Ads
+        </a>
       </div>
-
-      {menuOpen && (
-        <div className="md:hidden bg-white shadow-lg px-6 py-4 space-y-3">
-          {navLinks.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="block text-sm font-medium text-ummix-gray-dark hover:text-ummix-red"
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#contato"
-            className="block bg-ummix-red text-white text-center px-6 py-2.5 rounded-lg text-sm font-semibold"
-            onClick={() => setMenuOpen(false)}
-          >
-            Falar com especialista
-          </a>
-        </div>
-      )}
     </header>
   )
 }

@@ -43,17 +43,12 @@ export default function Contact() {
                 required
                 className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:border-ummix-red focus:ring-2 focus:ring-ummix-red/20 outline-none transition-all text-ummix-dark"
               />
-              <select
+              <input
+                type="text"
+                placeholder="Nome"
                 required
-                defaultValue=""
                 className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:border-ummix-red focus:ring-2 focus:ring-ummix-red/20 outline-none transition-all text-ummix-dark"
-              >
-                <option value="" disabled>Volume de investimento estimado</option>
-                <option>Até R$ 10.000/mês</option>
-                <option>R$ 10.000 - R$ 50.000/mês</option>
-                <option>R$ 50.000 - R$ 200.000/mês</option>
-                <option>Acima de R$ 200.000/mês</option>
-              </select>
+              />
               <button
                 type="submit"
                 className="w-full bg-ummix-red hover:bg-ummix-red-dark text-white font-bold py-4 rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg"

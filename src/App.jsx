@@ -1,6 +1,6 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
-import ValueProp from './components/ValueProp'
+import VideoEmbed from './components/VideoEmbed'
 import Features from './components/Features'
 import Segmentation from './components/Segmentation'
 import Partners from './components/Partners'
@@ -14,7 +14,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <ValueProp />
+        <VideoEmbed />
         <Features />
         <Segmentation />
         <Partners />
