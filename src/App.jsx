@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
 import VideoEmbed from './components/VideoEmbed'
+import CountersStrip from './components/CountersStrip'
 import Features from './components/Features'
 import Segmentation from './components/Segmentation'
 import Partners from './components/Partners'
@@ -14,6 +15,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <CountersStrip />
         <VideoEmbed />
         <Features />
         <Segmentation />
