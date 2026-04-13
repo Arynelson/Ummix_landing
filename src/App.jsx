@@ -8,6 +8,7 @@ import Partners from './components/Partners'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import FloatingCTA from './components/FloatingCTA'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Testimonials />
         <Contact />
       </main>
+      <FloatingCTA />
       <Footer />
     </>
   )
