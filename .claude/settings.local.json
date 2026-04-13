@@ -17,7 +17,10 @@
       "Bash(npx vite:*)",
       "Bash(npx sharp-cli:*)",
       "Bash(mv public/assets/img_bg_hero.jpg public/assets/img_bg_hero_original.jpg)",
-      "Bash(mv public/assets/img_bg_hero_opt.jpg public/assets/img_bg_hero.jpg)"
+      "Bash(mv public/assets/img_bg_hero_opt.jpg public/assets/img_bg_hero.jpg)",
+      "Bash(timeout 10 npm run dev)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npm run:*)"
     ]
   }
 }
