@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { PLATFORM_SIGNUP } from '../constants/urls'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -25,7 +26,9 @@ export default function Header() {
         </a>
 
         <a
-          href="#contato"
+          href={PLATFORM_SIGNUP}
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-ummix-red hover:bg-ummix-red-dark text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:scale-105"
         >
           Plataforma Ummix Ads
