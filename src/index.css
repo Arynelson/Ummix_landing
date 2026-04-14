@@ -6,8 +6,8 @@
   --color-ummix-dark: #1A1A1A;
   --color-ummix-gray: #F5F5F5;
   --color-ummix-gray-dark: #333333;
-  --font-family-heading: 'Inter', sans-serif;
-  --font-family-body: 'Inter', sans-serif;
+  --font-family-heading: 'Baloo 2', sans-serif;
+  --font-family-body: 'Plus Jakarta Sans', sans-serif;
 }
 
 @layer base {
@@ -17,5 +17,8 @@
   }
   body {
     @apply antialiased text-ummix-dark;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
   }
 }
