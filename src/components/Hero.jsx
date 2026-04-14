@@ -17,6 +17,28 @@ export default function Hero() {
 
           {/* Left — copy */}
           <div className="flex-1 text-white text-center lg:text-left">
+
+            {/* Award badge */}
+            <motion.a
+              href="https://www.premiodeinovacao.com.br/vencedores/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/25 rounded-full pl-2 pr-5 py-2 mb-8 transition-all hover:scale-105 cursor-pointer"
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              <img
+                src="/assets/cni_premio_inovacao.jpg"
+                alt="Prêmio Nacional de Inovação"
+                className="h-8 w-8 rounded-full object-cover object-top"
+              />
+              <span className="text-sm font-semibold text-white/90 leading-tight">
+                🏆 Vencedor · 9ª Ed. Prêmio Nacional de Inovação
+                <span className="text-white/55 font-normal"> · CNI/SEBRAE</span>
+              </span>
+            </motion.a>
+
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6"
               initial={{ opacity: 0, y: 30 }}
@@ -78,7 +100,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      {/* <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
@@ -86,7 +108,7 @@ export default function Hero() {
         <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2">
           <div className="w-1.5 h-3 bg-white/60 rounded-full" />
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   )
 }
