@@ -1,43 +1,90 @@
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll'
 
-const logos = [
-  { name: 'SBT', src: '/assets/logo_sbt.png' },
-  { name: 'RedeTV', src: '/assets/logo_redetv.png' },
-  { name: 'Band News', src: '/assets/logo_bandnews.png' },
+const vehicles = [
+  { name: 'SBT',      src: '/assets/logo_sbt.png' },
+  { name: 'RedeTV',   src: '/assets/logo_redetv.png' },
+  { name: 'Band News',src: '/assets/logo_bandnews.png' },
   { name: 'Radio 89', src: '/assets/logo_radio89.png' },
-  { name: 'Sicredi', src: '/assets/logo_sicredi.png' },
-  { name: 'Sicoob', src: '/assets/logo_sicoob.png' },
-  { name: 'Detran', src: '/assets/logo_detran.png' },
-  { name: 'Cebrom', src: '/assets/logo_cebrom.png' },
+  { name: 'Sicredi',  src: '/assets/logo_sicredi.png' },
+  { name: 'Sicoob',   src: '/assets/logo_sicoob.png' },
+  { name: 'Detran',   src: '/assets/logo_detran.png' },
+  { name: 'Cebrom',   src: '/assets/logo_cebrom.png' },
 ]
 
-export default function Partners() {
-  const anim = useAnimateOnScroll()
+const clients = [
+  { name: 'ALKA',           src: '/assets/logo_cliente/ALKA.png' },
+  { name: 'Col Vitória',    src: '/assets/logo_cliente/COL VITORIA.png' },
+  { name: 'Eysecor',        src: '/assets/logo_cliente/Eysecor.png' },
+  { name: 'Faje Go',        src: '/assets/logo_cliente/FAJE GO.png' },
+  { name: 'Fecomércio',     src: '/assets/logo_cliente/Fecomercio.png' },
+  { name: 'GWM',            src: '/assets/logo_cliente/GWM.png' },
+  { name: 'Governo de Goiás', src: '/assets/logo_cliente/Governo de Goiás.png' },
+  { name: 'Hub Cerrado',    src: '/assets/logo_cliente/Hub Cerrado.png' },
+  { name: 'Realizatto',     src: '/assets/logo_cliente/Realizatto_logo.png' },
+  { name: 'RedeFonte',      src: '/assets/logo_cliente/RedeFonte_logo.jpg' },
+  { name: 'Secovi Goiás',   src: '/assets/logo_cliente/SecoviGoias_logo.jpg' },
+  { name: 'TerraForte',     src: '/assets/logo_cliente/TerraForte_Goias.png' },
+  { name: 'DPA',            src: '/assets/logo_cliente/dpa.png' },
+  { name: 'Jasper',         src: '/assets/logo_cliente/jasper_logo.jpg' },
+  { name: 'OMenu',          src: '/assets/logo_cliente/omenu_logo.jpg' },
+  { name: 'Paeze',          src: '/assets/logo_cliente/paeze_logo.jpg' },
+  { name: 'Pignatti',       src: '/assets/logo_cliente/pignatti_logo.png' },
+]
+
+function Marquee({ items, reverse = false, speed = 35 }) {
+  // Duplicate for seamless loop
+  const doubled = [...items, ...items]
 
   return (
-    <section id="veiculos" className="py-20 md:py-28 bg-ummix-gray">
+    <div className="overflow-hidden w-full">
+      <div
+        className="flex items-center gap-10 w-max"
+        style={{
+          animation: `${reverse ? 'marquee-reverse' : 'marquee'} ${speed}s linear infinite`,
+        }}
+      >
+        {doubled.map((item, i) => (
+          <div
+            key={`${item.name}-${i}`}
+            className="shrink-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 px-2"
+          >
+            <img
+              src={item.src}
+              alt={item.name}
+              className="h-12 md:h-14 w-auto object-contain max-w-[120px]"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default function Partners() {
+  const animVehicles = useAnimateOnScroll()
+  const animClients  = useAnimateOnScroll()
+
+  return (
+    <section id="veiculos" className="py-20 md:py-28 bg-ummix-gray overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
-        <div ref={anim.ref} style={anim.style} className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-ummix-dark mb-4">
+
+        {/* Vehicles */}
+        <div ref={animVehicles.ref} style={animVehicles.style} className="mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-ummix-dark text-center mb-10">
             Sua marca nos veículos mais compatíveis
           </h2>
+          <Marquee items={vehicles} speed={28} />
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 items-center justify-items-center">
-          {logos.map(logo => (
-            <div
-              key={logo.name}
-              className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500 hover:scale-110 p-4"
-            >
-              <img
-                src={logo.src}
-                alt={logo.name}
-                className="h-16 md:h-20 object-contain"
-                loading="lazy"
-              />
-            </div>
-          ))}
+        {/* Clients */}
+        <div ref={animClients.ref} style={animClients.style}>
+          <h2 className="text-2xl md:text-3xl font-bold text-ummix-dark text-center mb-10">
+            Marcas que confiaram em nós.
+          </h2>
+          <Marquee items={clients} reverse speed={40} />
         </div>
+
       </div>
     </section>
   )
