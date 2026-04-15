@@ -55,12 +55,7 @@ export default function Testimonials() {
     <section id="depoimentos" className="py-20 md:py-28 bg-ummix-red">
       <div className="max-w-4xl mx-auto px-6">
         <div ref={anim.ref} style={anim.style}>
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
-            Anunciantes que confiam na Ummix
-          </h2>
-          <p className="text-white/70 text-center mb-14">
-            O que nossos clientes dizem sobre a Ummix Ads
-          </p>
+        
 
           <div className="relative">
             <AnimatePresence mode="wait" custom={direction}>

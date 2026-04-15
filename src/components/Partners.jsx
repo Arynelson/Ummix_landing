@@ -66,7 +66,7 @@ export default function Partners() {
   const animClients  = useAnimateOnScroll()
 
   return (
-    <section id="veiculos" className="py-20 md:py-28 bg-ummix-gray overflow-hidden">
+    <section id="veiculos" className="py-20 md:py-28 bg-ummix-red overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Vehicles */}
@@ -80,7 +80,7 @@ export default function Partners() {
         {/* Clients */}
         <div ref={animClients.ref} style={animClients.style}>
           <h2 className="text-2xl md:text-3xl font-bold text-ummix-dark text-center mb-10">
-            Marcas que confiaram em nós.
+             Anunciantes que confiam na Ummix
           </h2>
           <Marquee items={clients} reverse speed={40} />
         </div>
