@@ -52,7 +52,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section id="depoimentos" className="py-20 md:py-28 bg-ummix-red">
+    <section id="depoimentos" className="py-16 md:py-20 bg-ummix-gray">
       <div className="max-w-4xl mx-auto px-6">
         <div ref={anim.ref} style={anim.style}>
         

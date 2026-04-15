@@ -66,7 +66,7 @@ export default function Partners() {
   const animClients  = useAnimateOnScroll()
 
   return (
-    <section id="veiculos" className="py-20 md:py-28 bg-ummix-red overflow-hidden">
+    <section id="veiculos" className="py-16 md:py-20 bg-ummix-gray overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Vehicles */}
