@@ -6,32 +6,32 @@ const features = [
   {
     icon: Target,
     title: 'Impacto Real',
-    description: 'Acesse milhões de consumidores, filtrando por geolocalização, faixa etária, renda, interesses e até posicionamento político, garantindo anúncios mais eficientes e relevantes.',
+    description: 'Milhões de consumidores, zero desperdício. Filtre por cidade, faixa etária, renda e comportamento para veicular só onde seu cliente está.',
   },
   {
     icon: BarChart3,
     title: 'Precisão do Digital',
-    description: 'Anuncie em mídia exterior, jornais, rádios e TVs utilizando dados de performance e segmentação de ponta, garantindo que cada real investido gere mais impacto e conversões.',
+    description: 'Use dados de performance como no Google e Meta. Agora também nas principais rádios e TVs do Brasil.',
   },
   {
     icon: Tv,
     title: 'Os Principais Veículos',
-    description: 'Sua marca presente nas maiores rádios e TVs do país, como Jovem Pan, Alpha, SBT, Record, Band, Rede TV e muito mais, tudo com inteligência de dados e otimização em tempo real.',
+    description: 'Jovem Pan, Alpha, SBT, Record, Band, Rede TV e mais de 200 emissoras. Sua marca nas maiores audiências do país, com inteligência de dados.',
   },
   {
     icon: Zap,
     title: 'Alta Performance',
-    description: 'Aumente em 400% a eficiência ou reduza em 50% o custo dos seus anúncios nos principais veículos de rádio, TV e mídia impressa com tecnologia baseada em dados.',
+    description: 'Nossos clientes aumentam em até 400% a eficiência ou reduzem em 50% o custo dos anúncios, sem trocar de veículo.',
   },
   {
     icon: Users,
     title: 'Segmentação Inteligente',
-    description: 'Milhões de pessoas mapeadas com segmentação avançada por geolocalização, interesses, ocupação, renda, comportamento de consumo e muito mais. Alcance o público certo, no momento certo.',
+    description: 'Dados de comportamento, localização e renda de milhões de brasileiros. Sua mensagem vai para quem tem perfil para comprar, no canal e horário certos.',
   },
   {
     icon: LineChart,
     title: 'Resultados Mensuráveis',
-    description: 'Com a UmMixAds, você tem acesso a métricas precisas mesmo em mídia tradicional. Acompanhe em tempo real o alcance, impacto e retorno de suas campanhas em rádio, TV e mídia impressa através de nossa tecnologia exclusiva de mensuração.',
+    description: 'Pare de adivinhar o ROI de TV e rádio. Nossa tecnologia rastreia alcance, frequência e conversões em tempo real, em qualquer emissora.',
   },
 ]
 
@@ -44,9 +44,9 @@ export default function Features() {
 
         <div ref={anim.ref} style={anim.style} className="max-w-3xl mx-auto text-center mb-16">
           <p className="text-xl md:text-2xl leading-relaxed text-white/80">
-            Entregamos sua mensagem e apresentamos seu produto ou serviço
-            para as <strong className="text-white">pessoas certas</strong> dentro
-            das maiores mídias tradicionais.
+            Alcance de TV e rádio, controle de digital.{' '}
+            <strong className="text-white">Seu anúncio chega a quem importa</strong>{' '}
+            e você vê os números.
           </p>
         </div>
 

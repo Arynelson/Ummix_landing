@@ -51,7 +51,7 @@ function Marquee({ items, reverse = false, speed = 35 }) {
             <img
               src={item.src}
               alt={item.name}
-              className="h-12 md:h-14 w-auto object-contain max-w-[120px]"
+              className="h-12 md:h-14 w-auto object-contain max-w-30"
               loading="lazy"
             />
           </div>
@@ -80,7 +80,7 @@ export default function Partners() {
         {/* Clients */}
         <div ref={animClients.ref} style={animClients.style}>
           <h2 className="text-2xl md:text-3xl font-bold text-ummix-dark text-center mb-10">
-             Anunciantes que confiam na Ummix
+             Anunciantes que confiam na ummix
           </h2>
           <Marquee items={clients} reverse speed={40} />
         </div>

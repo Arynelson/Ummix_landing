@@ -98,7 +98,7 @@ export default function BrowserFrame({ src, alt = 'Ummix Ads Platform' }) {
   return (
     <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
       {/* Browser chrome */}
-      <div className="bg-[#1e1e1e] px-4 py-3 flex items-center gap-3">
+      <div className="bg-ummix-dark px-4 py-3 flex items-center gap-3">
         <div className="flex gap-1.5">
           <span className="w-3 h-3 rounded-full bg-red-500" />
           <span className="w-3 h-3 rounded-full bg-yellow-400" />
@@ -124,7 +124,7 @@ export default function BrowserFrame({ src, alt = 'Ummix Ads Platform' }) {
           </div>
         )}
         {/* Bottom fade mask */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-ummix-dark to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-ummix-dark to-transparent pointer-events-none" />
       </div>
     </div>
   )
@@ -513,10 +513,10 @@ export default function PlatformAccess() {
           <p className="mt-8 text-sm text-white/40">
             Dúvidas?{' '}
             <a
-              href="mailto:fale@ummixads.com.br"
+              href="mailto:tecnologia@ummix.com.br"
               className="underline hover:text-white/70 transition-colors"
             >
-              fale@ummixads.com.br
+              tecnologia@ummix.com.br
             </a>
           </p>
         </div>

@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ummix-red: #C8102E;
-  --color-ummix-red-dark: #A00D24;
-  --color-ummix-dark: #1A1A1A;
-  --color-ummix-gray: #F5F5F5;
+  --color-ummix-red: #9b191a;
+  --color-ummix-red-dark: #7a1415;
+  --color-ummix-dark: #1e1e1e;
+  --color-ummix-gray: #f4f2f2;
   --color-ummix-gray-dark: #333333;
   --font-family-heading: 'Baloo 2', sans-serif;
   --font-family-body: 'Plus Jakarta Sans', sans-serif;

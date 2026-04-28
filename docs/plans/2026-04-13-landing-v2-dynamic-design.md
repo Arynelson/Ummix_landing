@@ -83,7 +83,7 @@ The current `Contact` component (lead-gen form) is replaced by `PlatformAccess`:
 - Headline: `Pronto para começar?`
 - Subtitle: `Acesse a plataforma e crie sua primeira campanha hoje.`
 - Two buttons: `Criar conta grátis` (red, full) + `Já tenho conta — Entrar` (outline white)
-- Optional: small link below — `Dúvidas? fale@ummixads.com.br`
+- Optional: small link below — `Dúvidas? tecnologia@ummix.com.br`
 
 ---
 

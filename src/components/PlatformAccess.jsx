@@ -44,10 +44,10 @@ export default function PlatformAccess() {
           <p className="mt-8 text-sm text-white/40">
             Dúvidas?{' '}
             <a
-              href="mailto:fale@ummixads.com.br"
+              href="mailto:tecnologia@ummix.com.br"
               className="underline hover:text-white/70 transition-colors"
             >
-              fale@ummixads.com.br
+              tecnologia@ummix.com.br
             </a>
           </p>
         </div>

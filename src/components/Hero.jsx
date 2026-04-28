@@ -18,26 +18,51 @@ export default function Hero() {
           {/* Left — copy */}
           <div className="flex-1 text-white text-center lg:text-left">
 
-            {/* Award badge */}
-            <motion.a
-              href="https://www.premiodeinovacao.com.br/vencedores/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/25 rounded-full pl-2 pr-5 py-2 mb-8 transition-all hover:scale-105 cursor-pointer"
+            {/* Award badges */}
+            <motion.div
+              className="flex gap-3 justify-center lg:justify-start mb-8"
               initial={{ opacity: 0, y: -16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <img
-                src="/assets/cni_premio_inovacao.jpg"
-                alt="Prêmio Nacional de Inovação"
-                className="h-8 w-8 rounded-full object-cover object-top"
-              />
-              <span className="text-sm font-semibold text-white/90 leading-tight">
-                🏆 Vencedor · 9ª Ed. Prêmio Nacional de Inovação
-                <span className="text-white/55 font-normal"> · CNI/SEBRAE</span>
-              </span>
-            </motion.a>
+              <a
+                href="https://www.premiodeinovacao.com.br/vencedores/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-4 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/25 rounded-full pl-4 pr-4 py-2 transition-all hover:scale-105 cursor-pointer"
+              >
+                <span className="text-3xl">🏆</span>
+                <span className="text-sm font-semibold text-white/90 leading-tight">
+                  Vencedor · Prêmio Nacional de Inovação
+                  <span className="text-white/55 font-normal"> · CNI/SEBRAE</span>
+                </span>
+                <img
+                  src="/assets/cni_premio_inovacao.jpg"
+                  alt="Prêmio Nacional de Inovação"
+                  className="h-10 w-10 rounded-full object-cover object-top"
+                />
+              </a>
+
+              <a
+                href="https://curicaca.abdi.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-4 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/25 rounded-full pl-4 pr-4 py-2 transition-all hover:scale-105 cursor-pointer"
+              >
+                <span className="text-3xl">🏅</span>
+                <span className="text-sm font-semibold text-white/90 leading-tight">
+                 Top 4 ideias mais inovadoras do Brasil
+                  <span className="text-white/55 font-normal"> · ABDI</span>
+                </span>
+                <img
+                  src="/assets/Logo_ABDI_Principal .png"
+                  alt="ABDI - Desafio Nacional de Inovação"
+                  className="h-10 w-auto max-w-10 rounded-full object-contain bg-white p-0.5"
+                />
+              </a>
+            
+             
+            </motion.div>
 
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6"
@@ -45,9 +70,9 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              MÍDIA INTELIGENTE{' '}
+              ALCANCE MILHÕES.{' '}
               <br className="hidden md:block" />
-              NOS VEÍCULOS DE MASSA
+              CONVERTA OS CERTOS.
             </motion.h1>
 
             <motion.p
@@ -56,8 +81,8 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Anuncie nas maiores emissoras e canais do país com a precisão
-              do digital. Segmentação, mensuração e performance em mídia offline.
+              Anuncie em centenas de rádios e TVs. Filtre por localização,
+              renda e comportamento, e veja o que cada veiculação gera.
             </motion.p>
 
             <motion.div

@@ -18,11 +18,9 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2">
-          <span className={`text-2xl font-black tracking-tight transition-colors ${
-            scrolled ? 'text-ummix-dark' : 'text-white'
-          }`}>
-            ummix<span className="text-ummix-red">ads</span>
-          </span>
+          <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-10 transition-all ${
+            scrolled ? 'opacity-100' : 'brightness-0 invert'
+          }`} />
         </a>
 
         <a

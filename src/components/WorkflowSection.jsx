@@ -6,32 +6,32 @@ const steps = [
   {
     icon: Headphones,
     title: 'Pesquisa com o Público',
-    description: 'Entendemos quem é o seu cliente ideal',
+    description: 'Mapeamos o perfil exato do seu cliente ideal',
   },
   {
     icon: Database,
     title: 'Base de Dados',
-    description: 'Dados qualificados para segmentação precisa',
+    description: 'Cruzamos dados de milhões de brasileiros para identificar sua audiência',
   },
   {
     icon: Settings,
     title: 'Método Ummix',
-    description: 'Nossa metodologia proprietária de mídia',
+    description: 'Definimos em quais veículos, horários e formatos sua verba rende mais',
   },
   {
     icon: Megaphone,
     title: 'Criação de Campanha',
-    description: 'Campanhas personalizadas para cada canal',
+    description: 'Campanhas personalizadas por veículo, horário e formato',
   },
   {
     icon: Filter,
     title: 'Leads Qualificados',
-    description: 'Audiência filtrada e pronta para converter',
+    description: 'Sua mensagem chega só a quem tem perfil para comprar',
   },
   {
     icon: TrendingUp,
     title: 'Resultados',
-    description: 'Marca, autoridade e vendas mensuráveis',
+    description: 'Acompanhe alcance, conversões e ROI em tempo real',
   },
 ]
 
@@ -52,10 +52,10 @@ export default function WorkflowSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Anunciar na Rádio e TV com a Ummix
+            Como a Ummix Funciona
           </h2>
           <p className="text-white/60 max-w-xl mx-auto">
-            Um processo inteligente do briefing até os resultados
+            Seis etapas, do briefing à análise de resultados
           </p>
         </motion.div>
 

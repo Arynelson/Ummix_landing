@@ -5,19 +5,24 @@ import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const testimonials = [
   {
-    quote: 'Antes, anunciar em rádio e TV era um tiro no escuro. Com a Ummix Ads, conseguimos segmentar nossa campanha e aumentar o retorno sobre o investimento em mais de 3x.',
-    author: 'Gerente de Marketing',
-    company: 'Cliente Ummix Ads',
+    quote: 'Podemos reduzir em 50% o custo por lead com a segmentação avançada da UmmixAds. Hoje só investimos em mídia tradicional com inteligência de dados.',
+    author: 'Daniela Gomes de Oliveira',
+    company: 'Diretora do Instituto Você',
   },
   {
-    quote: 'A precisão de segmentação que a Ummix oferece em mídia tradicional é impressionante. Conseguimos atingir exatamente o público que queríamos e reduzimos nosso custo por aquisição em 40%.',
-    author: 'Diretor Comercial',
-    company: 'Cliente Ummix Ads',
+    quote: 'A UmmixAds nos permite atingir exatamente quem queremos, no momento certo.',
+    author: 'Caiser Fagundes',
+    company: 'Diretor de Operações da FitLife',
   },
   {
-    quote: 'Nunca imaginei que seria possível ter dashboards em tempo real para campanhas de TV e rádio. A Ummix mudou completamente a forma como gerenciamos nossa verba de mídia.',
-    author: 'CEO',
-    company: 'Cliente Ummix Ads',
+    quote: 'Antes, anunciar em rádio e TV era um tiro no escuro. Com a UmmixAds, conseguimos segmentar nossa campanha e aumentar o retorno sobre o investimento.',
+    author: 'Lidiane Oliveira',
+    company: 'Diretora Lida Consultoria',
+  },
+  {
+    quote: 'A precisão na segmentação faz toda diferença. Podemos impactar nosso público alvo na TV e rádio com anúncios mais assertivos e eficientes.',
+    author: 'Evandro José',
+    company: 'Diretor PostNet Goiânia',
   },
 ]
 

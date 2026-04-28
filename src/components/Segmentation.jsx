@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll'
 
 const tabs = {
-  'Demográfico': ['Idade', 'Gênero', 'Renda', 'Escolaridade', 'Estado Civil', 'Classe Social'],
-  'Geográfico': ['Estado', 'Cidade', 'Bairro', 'CEP', 'Região Metropolitana', 'Raio de Cobertura'],
-  'Comportamental': ['Interesses', 'Hábitos de Consumo', 'Estilo de Vida', 'Audiência de TV', 'Horário de Pico', 'Afinidade de Marca'],
+  'Geográfico': ['Estado', 'Cidade', 'Região', 'Bairro', 'Raio de Cobertura', 'Cidade de Nascimento', 'Estado de Nascimento'],
+  'Demográfico': ['Idade', 'Sexo', 'Escolaridade', 'Ocupação', 'Renda Familiar', 'Possui Filhos', 'Mobilidade'],
+  'Comportamento': ['Estilo de Vida', 'Atividades Físicas', 'Pets', 'Agronegócio', 'Conteúdo de Interesse', 'Consumo de Mídia', 'Meio', 'Dia', 'Horário'],
+  'Intenções': ['Viagem', 'Eletrônicos', 'Automóveis', 'Imóveis', 'Reforma/Construção', 'Investimentos', 'Cursos', 'Procedimentos Estéticos'],
+  'Opinião e Perfil': ['Posição Política', 'Aprovação de Gestões', 'Restrições Financeiras', 'Energia Residencial', 'Plano de Saúde', 'Seguros'],
 }
 
 const tabKeys = Object.keys(tabs)
@@ -22,7 +24,7 @@ export default function Segmentation() {
             Segmentações Disponíveis
           </h2>
           <p className="text-ummix-gray-dark max-w-xl mx-auto">
-            Encontre seu público ideal com granularidade e precisão.
+            Mais de 30 critérios, do bairro ao estilo de vida.
           </p>
         </div>
 
