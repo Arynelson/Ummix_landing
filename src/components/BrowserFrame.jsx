@@ -22,7 +22,7 @@ export default function BrowserFrame({ images = DEFAULT_IMAGES }) {
   return (
     <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
       {/* Browser chrome */}
-      <div className="bg-[#1e1e1e] px-4 py-3 flex items-center gap-3">
+      <div className="bg-ummix-dark px-4 py-3 flex items-center gap-3">
         <div className="flex gap-1.5 shrink-0">
           <span className="w-3 h-3 rounded-full bg-red-500" />
           <span className="w-3 h-3 rounded-full bg-yellow-400" />
@@ -49,7 +49,7 @@ export default function BrowserFrame({ images = DEFAULT_IMAGES }) {
         </AnimatePresence>
 
         {/* Bottom fade mask */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-ummix-dark to-transparent pointer-events-none z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-ummix-dark to-transparent pointer-events-none z-10" />
 
         {/* Dot indicators */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">

@@ -5,10 +5,10 @@ const vehicles = [
   { name: 'RedeTV',   src: '/assets/logo_redetv.png' },
   { name: 'Band News',src: '/assets/logo_bandnews.png' },
   { name: 'Radio 89', src: '/assets/logo_radio89.png' },
-  { name: 'Sicredi',  src: '/assets/logo_sicredi.png' },
-  { name: 'Sicoob',   src: '/assets/logo_sicoob.png' },
-  { name: 'Detran',   src: '/assets/logo_detran.png' },
-  { name: 'Cebrom',   src: '/assets/logo_cebrom.png' },
+   { name: 'SBT',      src: '/assets/logo_sbt.png' },
+  { name: 'RedeTV',   src: '/assets/logo_redetv.png' },
+  { name: 'Band News',src: '/assets/logo_bandnews.png' },
+  { name: 'Radio 89', src: '/assets/logo_radio89.png' },
 ]
 
 const clients = [
@@ -18,8 +18,6 @@ const clients = [
   { name: 'Faje Go',        src: '/assets/logo_cliente/FAJE GO.png' },
   { name: 'Fecomércio',     src: '/assets/logo_cliente/Fecomercio.png' },
   { name: 'GWM',            src: '/assets/logo_cliente/GWM.png' },
-  { name: 'Governo de Goiás', src: '/assets/logo_cliente/Governo de Goiás.png' },
-  { name: 'Hub Cerrado',    src: '/assets/logo_cliente/Hub Cerrado.png' },
   { name: 'Realizatto',     src: '/assets/logo_cliente/Realizatto_logo.png' },
   { name: 'RedeFonte',      src: '/assets/logo_cliente/RedeFonte_logo.jpg' },
   { name: 'Secovi Goiás',   src: '/assets/logo_cliente/SecoviGoias_logo.jpg' },

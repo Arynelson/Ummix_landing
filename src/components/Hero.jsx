@@ -4,13 +4,31 @@ import { PLATFORM_SIGNUP, PLATFORM_LOGIN } from '../constants/urls'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-ummix-dark">
+      {/* Dot grid */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/assets/img_bg_hero.jpg')" }}
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }}
       />
-      <div className="absolute inset-0 bg-linear-to-br from-ummix-red/85 to-ummix-dark/90" />
+      {/* Primary glow — left, behind copy */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse 70% 80% at 20% 50%, rgba(155,25,26,0.45) 0%, transparent 70%)',
+        }}
+      />
+      {/* Secondary glow — top right, adds depth */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse 50% 50% at 85% 10%, rgba(155,25,26,0.18) 0%, transparent 60%)',
+        }}
+      />
+      {/* Bottom vignette */}
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-ummix-dark to-transparent" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-28 lg:py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
