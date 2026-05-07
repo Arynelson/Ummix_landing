@@ -11,7 +11,7 @@ const features = [
   {
     icon: BarChart3,
     title: 'Precisão do Digital',
-    description: 'Use dados de performance como no Google e Meta. Agora também nas principais rádios e TVs do Brasil.',
+    description: 'Dados de performance, como no Google e Meta, agora disponível via UMMIX nas principais rádios e TVs do Brasil.',
   },
   {
     icon: Tv,
