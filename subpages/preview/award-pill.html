@@ -1,0 +1,136 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Award pill" subtitle="Gold→red medallion makes the trophy the hero" viewport="720x180" --><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#F4F2F2;font-family:var(--font-body)}
+  .wrap{padding:24px;display:flex;flex-direction:column;gap:14px}
+
+  /* ---- Shared pill chrome ---- */
+  .pill{
+    display:inline-flex; align-items:center; gap:12px;
+    border-radius:999px;
+    padding: 6px 18px 6px 6px;
+    font-size:13px; font-weight:600;
+    backdrop-filter:blur(8px);
+    transition: transform 200ms, box-shadow 200ms;
+  }
+  .pill:hover{ transform: translateY(-1px); }
+
+  /* Emoji medallion — the new hero of the pill */
+  .pill .medal{
+    position:relative;
+    width:40px; height:40px; flex-shrink:0;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; line-height:1;
+    background: radial-gradient(circle at 30% 30%, #FFE08A 0%, #E6A23C 45%, #9B191A 100%);
+    box-shadow:
+      inset 0 -2px 4px rgba(0,0,0,0.2),
+      inset 0 2px 3px rgba(255,255,255,0.35),
+      0 4px 12px -4px rgba(155,25,26,0.5);
+  }
+  /* Subtle rotating shine ring behind the medal */
+  .pill .medal::before{
+    content:""; position:absolute; inset:-4px;
+    border-radius:50%;
+    background: conic-gradient(from 0deg,
+      rgba(255,210,120,0.5), transparent 30%,
+      rgba(155,25,26,0.4), transparent 60%,
+      rgba(255,210,120,0.5));
+    z-index:-1;
+    opacity:0.7;
+    filter: blur(2px);
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Body copy slot */
+  .pill .body{
+    display:flex; flex-direction:column; gap:1px; line-height:1.2;
+  }
+  .pill .top{
+    font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  }
+  .pill .main{
+    font-size:13px; font-weight:600; letter-spacing:-0.005em;
+  }
+  .pill .muted{ font-weight:400; }
+
+  /* Light variant (on off-white) */
+  .pill.light{
+    background: #fff;
+    border: 1px solid rgba(30,30,30,0.08);
+    color: #1E1E1E;
+    box-shadow: 0 4px 14px -6px rgba(30,30,30,0.15);
+  }
+  .pill.light .top{ color:#9B191A; }
+  .pill.light .muted{ color:#3A3A3A; }
+
+  /* Dark variant (on grafite) */
+  .dark-stage{
+    background:#1E1E1E; padding:24px; border-radius:18px;
+    display:flex; flex-direction:column; gap:12px;
+    background-image: radial-gradient(400px 200px at 10% 50%, rgba(155,25,26,0.25), transparent 60%);
+  }
+  .pill.dark{
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+  }
+  .pill.dark .top{ color:#FFCF70; }  /* gold top-line on dark */
+  .pill.dark .muted{ color:rgba(255,255,255,0.55); }
+
+  /* Large / hero variant — more dramatic medal */
+  .pill.hero-size{
+    padding: 8px 22px 8px 8px;
+    font-size:14px;
+  }
+  .pill.hero-size .medal{
+    width:52px; height:52px; font-size:28px;
+  }
+
+  .lbl{
+    font-family:var(--font-mono); font-size:10px;
+    color:var(--fg2); margin-top:6px;
+  }
+</style></head>
+<body><div class="wrap">
+
+  <!-- Standard, light -->
+  <div class="pill light">
+    <span class="medal" aria-hidden="true">🏆</span>
+    <span class="body">
+      <span class="top">Vencedor</span>
+      <span class="main">9ª Ed. Prêmio Nacional de Inovação <span class="muted">· CNI/SEBRAE</span></span>
+    </span>
+  </div>
+
+  <!-- Hero size, light -->
+  <div class="pill light hero-size">
+    <span class="medal" aria-hidden="true">🏆</span>
+    <span class="body">
+      <span class="top">Prêmio Nacional de Inovação</span>
+      <span class="main">Categoria Inovação em Tecnologia · 2024</span>
+    </span>
+  </div>
+
+  <!-- Dark stage: both sizes -->
+  <div class="dark-stage">
+    <div class="pill dark">
+      <span class="medal" aria-hidden="true">🏆</span>
+      <span class="body">
+        <span class="top">Vencedor</span>
+        <span class="main">9ª Ed. Prêmio Nacional de Inovação <span class="muted">· CNI/SEBRAE</span></span>
+      </span>
+    </div>
+    <div class="pill dark hero-size">
+      <span class="medal" aria-hidden="true">🏆</span>
+      <span class="body">
+        <span class="top">Prêmio Nacional de Inovação</span>
+        <span class="main">Categoria Inovação em Tecnologia · 2024</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="lbl">Award pill — medallion (gold→red gradient, shine ring) puts 🏆 front-and-center</div>
+</div></body></html>

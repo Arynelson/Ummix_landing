@@ -125,7 +125,7 @@ export default function Hero() {
 
             {/* Award badges */}
             <motion.div
-              className="flex justify-center lg:justify-start mb-8"
+              className="flex justify-start mb-8"
               initial={{ opacity: 0, y: -16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}

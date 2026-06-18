@@ -1,0 +1,9 @@
+/* =========================================================================
+   Ummix Ads — Design System · global entry stylesheet
+   -------------------------------------------------------------------------
+   Link THIS file from any consuming page to get the full brand foundation
+   (color tokens, type scale, fonts, radii, shadows, motion + base styles).
+   Page-specific stylesheets (landing_v2/styles.css, subpages/styles.css)
+   build on top of these tokens and are linked per-page.
+   ========================================================================= */
+@import url("colors_and_type.css");

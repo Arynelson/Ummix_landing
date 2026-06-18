@@ -1,0 +1,26 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Tabs & chips" subtitle="Segmentation pattern" viewport="720x170" --><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#fff;font-family:var(--font-body)}
+  .wrap{padding:24px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+  .tab{padding:10px 22px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;transition:all 200ms;border:0}
+  .active{background:var(--ummix-red);color:#fff;box-shadow:0 10px 15px rgba(0,0,0,0.1)}
+  .idle{background:#F5F5F5;color:#333}
+  .idle:hover{background:rgba(200,16,46,0.1);color:var(--ummix-red)}
+  .chip{padding:9px 18px;background:#F5F5F5;border:1px solid #e5e7eb;border-radius:999px;font-size:12.5px;color:var(--ummix-dark);font-weight:500;transition:all 200ms}
+  .chip:hover{border-color:var(--ummix-red);color:var(--ummix-red)}
+  .row{width:100%;display:flex;gap:10px;flex-wrap:wrap}
+  .lbl{font-family:var(--font-mono);font-size:10px;color:var(--fg2);width:100%;margin-top:4px}
+</style></head>
+<body><div class="wrap">
+  <div class="row">
+    <button class="tab active">Demográfico</button>
+    <button class="tab idle">Geográfico</button>
+    <button class="tab idle">Comportamental</button>
+  </div>
+  <div class="row" style="margin-top:6px">
+    <span class="chip">Idade</span><span class="chip">Gênero</span><span class="chip">Renda</span><span class="chip">Escolaridade</span><span class="chip">Classe Social</span>
+  </div>
+  <div class="lbl">Tabs + tag chips — Segmentations section pattern</div>
+</div></body></html>

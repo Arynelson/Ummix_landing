@@ -16,9 +16,9 @@ export default function Header() {
         scrolled ? 'bg-white/95 backdrop-blur shadow-md py-3' : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-10 transition-all ${
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-3">
+        <a href="#" className="flex items-center gap-2 shrink-0">
+          <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-8 md:h-10 transition-all ${
             scrolled ? 'opacity-100' : 'brightness-0 invert'
           }`} />
         </a>
@@ -27,9 +27,10 @@ export default function Header() {
           href={PLATFORM_SIGNUP}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-ummix-red hover:bg-ummix-red-dark text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:scale-105"
+          className="bg-ummix-red hover:bg-ummix-red-dark text-white px-3 py-2 md:px-6 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 whitespace-nowrap"
         >
-          Plataforma Ummix Ads
+          <span className="sm:hidden">Acessar plataforma</span>
+          <span className="hidden sm:inline">Plataforma Ummix Ads</span>
         </a>
       </div>
     </header>

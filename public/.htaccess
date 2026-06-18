@@ -1,0 +1,11 @@
+Options -MultiViews
+RewriteEngine On
+
+# Subpages: /cashback e /partner sem extensão .html
+RewriteRule ^cashback/?$ /cashback.html [L]
+RewriteRule ^partner/?$  /partner.html  [L]
+
+# SPA fallback para a landing principal
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]

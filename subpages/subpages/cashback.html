@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ummix Ads — Cashback de 3% em mídia</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <button id="tweaks-fab" class="v2-tweaks-fab" aria-label="Abrir Tweaks">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="Chrome.jsx"></script>
+  <script type="text/babel" src="Cashback.jsx"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{ "hero": "a" }/*EDITMODE-END*/;
+
+    function App() {
+      const [hero, setHero] = useState(TWEAK_DEFAULTS.hero);
+      const [tweaksOpen, setTweaksOpen] = useState(false);
+      const [tweaksEnabled, setTweaksEnabled] = useState(false);
+
+      useEffect(() => {
+        const onMsg = (e) => {
+          const d = e.data || {};
+          if (d.type === '__activate_edit_mode') { setTweaksEnabled(true); setTweaksOpen(true); }
+          else if (d.type === '__deactivate_edit_mode') { setTweaksEnabled(false); setTweaksOpen(false); }
+        };
+        window.addEventListener('message', onMsg);
+        window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+        return () => window.removeEventListener('message', onMsg);
+      }, []);
+
+      const persist = (edits) => window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+
+      useEffect(() => {
+        const fab = document.getElementById('tweaks-fab');
+        if (!fab) return;
+        fab.className = `v2-tweaks-fab ${tweaksEnabled && !tweaksOpen ? 'is-shown' : 'is-hidden'}`;
+        const on = () => setTweaksOpen(true);
+        fab.addEventListener('click', on);
+        return () => fab.removeEventListener('click', on);
+      }, [tweaksEnabled, tweaksOpen]);
+
+      const { SubHeader, SubFooter, CashbackHeroA, CashbackHeroB, CashbackHow, CashbackHighlight, CashbackCTA } = window;
+      const Hero = hero === 'b' ? CashbackHeroB : CashbackHeroA;
+
+      return (
+        <>
+          <SubHeader active="cashback" />
+          <main>
+            <Hero />
+            <CashbackHow />
+            <CashbackHighlight />
+            <CashbackCTA />
+          </main>
+          <SubFooter />
+
+          {tweaksEnabled && (
+            <div className={`v2-tweaks ${tweaksOpen ? 'is-open' : ''}`}>
+              <div className="v2-tweaks-head">
+                <h4 className="v2-tweaks-title"><span className="v2-tweaks-title-dot" />Tweaks</h4>
+                <button className="v2-tweaks-close" onClick={() => setTweaksOpen(false)} aria-label="Fechar">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+              </div>
+              <div className="v2-tweak">
+                <label className="v2-tweak-label">Hero</label>
+                <div className="v2-tweak-opts" style={{ gridTemplateColumns: 'repeat(2,1fr)' }}>
+                  {[['a','Editorial'],['b','Split + KPIs']].map(([k, label]) => (
+                    <button key={k} className={`v2-tweak-opt ${hero === k ? 'is-active' : ''}`}
+                      onClick={() => { setHero(k); persist({ hero: k }); }}>{label}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      );
+    }
+
+    function boot() { ReactDOM.createRoot(document.getElementById('root')).render(<App />); }
+    // Render after webfonts load so the first layout uses Baloo 2 metrics (prevents reflow overlap).
+    if (document.fonts && document.fonts.ready) {
+      Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1500))]).then(() => setTimeout(boot, 30));
+    } else {
+      setTimeout(boot, 120);
+    }
+  </script>
+</body>
+</html>

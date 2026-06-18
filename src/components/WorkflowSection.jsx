@@ -59,8 +59,8 @@ export default function WorkflowSection() {
           </p>
         </motion.div>
 
-        {/* Steps — desktop: horizontal row, mobile: 2-col grid */}
-        <div ref={ref} className="grid grid-cols-2 md:grid-cols-3 lg:flex lg:items-stretch gap-2">
+        {/* Steps — desktop: horizontal row w/ arrows, mobile: simple grid w/ rounded cards */}
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:flex lg:items-stretch gap-3 lg:gap-2">
           {steps.map((step, i) => {
             const Icon = step.icon
             const isLast = i === steps.length - 1
@@ -87,27 +87,24 @@ export default function WorkflowSection() {
                   delay: i * 0.25,
                 }}
               >
-                {/* Arrow card */}
+                {/* Card — clip-path arrow only on lg+, rounded card on mobile */}
                 <div
-                  className="relative h-full bg-ummix-red/15 hover:bg-ummix-red/25 border border-ummix-red/30 hover:border-ummix-red/60 transition-all duration-300 group cursor-default"
-                  style={{ clipPath }}
+                  className="relative h-full bg-ummix-red/15 hover:bg-ummix-red/25 border border-ummix-red/30 hover:border-ummix-red/60 transition-all duration-300 group cursor-default rounded-xl lg:rounded-none [clip-path:none] lg:[clip-path:var(--cp)]"
+                  style={{ '--cp': clipPath }}
                 >
-                  <div className="px-6 py-8 text-center flex flex-col items-center gap-3 h-full">
-                    {/* Step number */}
-                    <span className="text-xs font-bold text-ummix-red/60 tracking-widest uppercase">
+                  <div className="px-5 py-6 lg:px-6 lg:py-8 text-center flex flex-col items-center gap-3 lg:gap-3 h-full">
+                    <span className="text-xs lg:text-xs font-bold text-ummix-red/60 tracking-widest uppercase">
                       0{i + 1}
                     </span>
 
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-xl bg-ummix-red/20 flex items-center justify-center group-hover:bg-ummix-red/35 transition-colors">
-                      <Icon className="w-6 h-6 text-ummix-red" />
+                    <div className="w-12 h-12 lg:w-12 lg:h-12 rounded-xl bg-ummix-red/20 flex items-center justify-center group-hover:bg-ummix-red/35 transition-colors">
+                      <Icon className="w-6 h-6 lg:w-6 lg:h-6 text-ummix-red" />
                     </div>
 
-                    {/* Text */}
-                    <h3 className="text-sm font-bold text-white leading-snug">
+                    <h3 className="text-base font-bold text-white leading-snug lg:text-sm">
                       {step.title}
                     </h3>
-                    <p className="text-xs text-white/50 leading-relaxed">
+                    <p className="text-sm text-white/60 leading-relaxed lg:text-xs">
                       {step.description}
                     </p>
                   </div>
