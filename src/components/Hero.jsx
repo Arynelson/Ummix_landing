@@ -53,7 +53,7 @@ function AwardsCard() {
   }
 
   return (
-    <div ref={cardRef} className="inline-flex items-center gap-3 bg-white/10 backdrop-blur border border-white/25 rounded-full px-4 py-2">
+    <div ref={cardRef} className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur border border-white/25 rounded-2xl sm:rounded-full px-4 py-2">
       <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
         Prêmios e Certificações
       </span>
