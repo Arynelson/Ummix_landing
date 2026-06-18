@@ -71,7 +71,7 @@ const AWARDS = [
     src: '/assets/Selo_GO+E-commerce.png',
     alt: 'Certificação GO E-commerce',
     label: 'Certificação GO E-commerce',
-    href: 'https://ecommercegoias.net/',
+    href: 'https://comunicacao.ielgoias.com.br/go-ecommerce',
   },
 ]
 

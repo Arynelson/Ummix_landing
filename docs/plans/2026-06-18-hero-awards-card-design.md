@@ -20,7 +20,7 @@ Substituir os dois cards atuais por um único card contendo os 3 logos lado a la
 |---|------|-------|-------|------|
 | 1 | CNI/SEBRAE | `/assets/cni_premio_inovacao.jpg` | "Vencedor · Prêmio Nacional de Inovação · CNI/SEBRAE" | `https://www.premiodeinovacao.com.br/vencedores/` |
 | 2 | ABDI | `/assets/Logo_ABDI_Principal .png` | "Top 4 ideias mais inovadoras do Brasil · ABDI" | `https://curicaca.abdi.com.br/` |
-| 3 | GO E-commerce (novo) | `/assets/Selo_GO+E-commerce.png` | "Certificação GO E-commerce" | `https://ecommercegoias.net/` |
+| 3 | GO E-commerce (novo) | `/assets/Selo_GO+E-commerce.png` | "Certificação GO E-commerce" | `https://comunicacao.ielgoias.com.br/go-ecommerce` |
 
 Asset novo precisa ser copiado de `assets/Selo_GO+E-commerce.png` (raiz do repo) para `public/assets/Selo_GO+E-commerce.png` para ser servido pelo Vite.
 
