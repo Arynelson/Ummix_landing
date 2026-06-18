@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import BrowserFrame from './BrowserFrame'
 import { PLATFORM_SIGNUP, PLATFORM_LOGIN } from '../constants/urls'
@@ -29,18 +29,31 @@ const AWARDS = [
 
 function AwardsCard() {
   const [activeId, setActiveId] = useState(null)
+  const cardRef = useRef(null)
+
+  useEffect(() => {
+    if (!activeId) return
+    const handlePointerDown = (e) => {
+      if (cardRef.current && !cardRef.current.contains(e.target)) {
+        setActiveId(null)
+      }
+    }
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [activeId])
 
   const handleLogoClick = (e, award) => {
     // On touch devices there's no hover, so the first tap only reveals
     // the tooltip; a second tap on an already-active logo navigates.
     if (activeId !== award.id) {
       e.preventDefault()
+      e.stopPropagation()
       setActiveId(award.id)
     }
   }
 
   return (
-    <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur border border-white/25 rounded-full px-4 py-2">
+    <div ref={cardRef} className="inline-flex items-center gap-3 bg-white/10 backdrop-blur border border-white/25 rounded-full px-4 py-2">
       <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
         Prêmios e Certificações
       </span>
@@ -60,6 +73,7 @@ function AwardsCard() {
               onMouseEnter={() => setActiveId(award.id)}
               onMouseLeave={() => setActiveId((current) => (current === award.id ? null : current))}
               onClick={(e) => handleLogoClick(e, award)}
+              aria-label={award.label}
               className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-lg bg-white p-1.5 transition-transform hover:scale-105 cursor-pointer"
             >
               <img
