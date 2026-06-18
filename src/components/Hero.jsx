@@ -1,6 +1,79 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import BrowserFrame from './BrowserFrame'
 import { PLATFORM_SIGNUP, PLATFORM_LOGIN } from '../constants/urls'
+
+const AWARDS = [
+  {
+    id: 'cni',
+    src: '/assets/cni_premio_inovacao.jpg',
+    alt: 'Prêmio Nacional de Inovação',
+    label: 'Vencedor · Prêmio Nacional de Inovação · CNI/SEBRAE',
+    href: 'https://www.premiodeinovacao.com.br/vencedores/',
+  },
+  {
+    id: 'abdi',
+    src: '/assets/Logo_ABDI_Principal .png',
+    alt: 'ABDI - Desafio Nacional de Inovação',
+    label: 'Top 4 ideias mais inovadoras do Brasil · ABDI',
+    href: 'https://curicaca.abdi.com.br/',
+  },
+  {
+    id: 'go-ecommerce',
+    src: '/assets/Selo_GO+E-commerce.png',
+    alt: 'Certificação GO E-commerce',
+    label: 'Certificação GO E-commerce',
+    href: 'https://comunicacao.ielgoias.com.br/go-ecommerce',
+  },
+]
+
+function AwardsCard() {
+  const [activeId, setActiveId] = useState(null)
+
+  const handleLogoClick = (e, award) => {
+    // On touch devices there's no hover, so the first tap only reveals
+    // the tooltip; a second tap on an already-active logo navigates.
+    if (activeId !== award.id) {
+      e.preventDefault()
+      setActiveId(award.id)
+    }
+  }
+
+  return (
+    <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur border border-white/25 rounded-full px-4 py-2">
+      <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
+        Prêmios e Certificações
+      </span>
+      <div className="flex items-center gap-2">
+        {AWARDS.map((award) => (
+          <div key={award.id} className="relative">
+            {activeId === award.id && (
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[220px] px-3 py-2 rounded-lg bg-ummix-dark border border-white/15 text-[11px] leading-snug text-white text-center shadow-lg pointer-events-none z-20">
+                {award.label}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-ummix-dark border-r border-b border-white/15 rotate-45 -mt-1" />
+              </div>
+            )}
+            <a
+              href={award.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={() => setActiveId(award.id)}
+              onMouseLeave={() => setActiveId((current) => (current === award.id ? null : current))}
+              onClick={(e) => handleLogoClick(e, award)}
+              className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-lg bg-white p-1.5 transition-transform hover:scale-105 cursor-pointer"
+            >
+              <img
+                src={award.src}
+                alt={award.alt}
+                className="max-w-full max-h-full object-contain"
+              />
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function Hero() {
   return (
@@ -38,48 +111,12 @@ export default function Hero() {
 
             {/* Award badges */}
             <motion.div
-              className="flex gap-3 justify-center lg:justify-start mb-8"
+              className="flex justify-center lg:justify-start mb-8"
               initial={{ opacity: 0, y: -16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <a
-                href="https://www.premiodeinovacao.com.br/vencedores/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/25 rounded-full pl-4 pr-4 py-2 transition-all hover:scale-105 cursor-pointer"
-              >
-                <span className="text-3xl">🏆</span>
-                <span className="text-sm font-semibold text-white/90 leading-tight">
-                  Vencedor · Prêmio Nacional de Inovação
-                  <span className="text-white/55 font-normal"> · CNI/SEBRAE</span>
-                </span>
-                <img
-                  src="/assets/cni_premio_inovacao.jpg"
-                  alt="Prêmio Nacional de Inovação"
-                  className="h-10 w-10 rounded-full object-cover object-top"
-                />
-              </a>
-
-              <a
-                href="https://curicaca.abdi.com.br/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/25 rounded-full pl-4 pr-4 py-2 transition-all hover:scale-105 cursor-pointer"
-              >
-                <span className="text-3xl">🏅</span>
-                <span className="text-sm font-semibold text-white/90 leading-tight">
-                 Top 4 ideias mais inovadoras do Brasil
-                  <span className="text-white/55 font-normal"> · ABDI</span>
-                </span>
-                <img
-                  src="/assets/Logo_ABDI_Principal .png"
-                  alt="ABDI - Desafio Nacional de Inovação"
-                  className="h-10 w-auto max-w-10 rounded-full object-contain bg-white p-0.5"
-                />
-              </a>
-            
-             
+              <AwardsCard />
             </motion.div>
 
             <motion.h1
