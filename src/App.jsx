@@ -4,6 +4,7 @@ import VideoEmbed from './components/VideoEmbed'
 import CountersStrip from './components/CountersStrip'
 import WorkflowSection from './components/WorkflowSection'
 import Features from './components/Features'
+import CashbackBanner from './components/CashbackBanner'
 import Segmentation from './components/Segmentation'
 import Partners from './components/Partners'
 import Testimonials from './components/Testimonials'
@@ -21,6 +22,7 @@ export default function App() {
         <VideoEmbed />
         <WorkflowSection />
         <Features />
+        <CashbackBanner />
         <Segmentation />
         <Partners />
         <Testimonials />

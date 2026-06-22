@@ -61,9 +61,9 @@ function AwardsCard() {
         {AWARDS.map((award) => (
           <div key={award.id} className="relative">
             {activeId === award.id && (
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[220px] px-3 py-2 rounded-lg bg-ummix-dark border border-white/15 text-[11px] leading-snug text-white text-center shadow-lg pointer-events-none z-20">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max max-w-[220px] px-3 py-2 rounded-lg bg-ummix-dark border border-white/15 text-[11px] leading-snug text-white text-center shadow-lg pointer-events-none z-20">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-2 h-2 bg-ummix-dark border-l border-t border-white/15 rotate-45 -mb-1" />
                 {award.label}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-ummix-dark border-r border-b border-white/15 rotate-45 -mt-1" />
               </div>
             )}
             <a

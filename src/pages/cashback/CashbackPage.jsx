@@ -1,6 +1,6 @@
 import { SubHeader, SubFooter } from '../subpages/SubChrome'
 
-const CASHBACK_FORM_URL = '#'
+const CASHBACK_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeXwkuDIqiwtV0tCk1tN7LAbXWs9TySbv6h3O66xRXkxnoU3g/viewform'
 const CASHBACK_PLATFORM = 'Live'
 
 /* ---- Hero ---- */
@@ -45,12 +45,12 @@ function Hero() {
       <div className="relative z-10 max-w-[920px] mx-auto px-6 pt-44 pb-24 flex flex-col items-center text-center">
         <Eyebrow />
         <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
-          Invista em mídia e receba{' '}
-          <em className="not-italic text-ummix-red">3% de volta</em>.
+          Anuncie pela Ummix Ads e gere{' '}
+          <em className="not-italic text-ummix-red">até 3% de cashback</em>.
         </h1>
         <p className="text-[19px] leading-relaxed text-white/72 max-w-[560px] text-pretty">
-          O programa de cashback da Ummix Ads devolve parte do seu investimento em mídia
-          diretamente na sua conta. Cadastre-se, anuncie e acumule — é simples assim.
+          A cada contrato fechado, a Ummix Ads devolve parte do valor para quem
+          participou da negociação. Cadastre-se e comece a receber.
         </p>
         <HeroCTAs />
       </div>
@@ -114,7 +114,7 @@ function WhoIsEligible() {
             {[
               'O contrato esteja com o pagamento realizado integralmente até a data de vencimento.',
               'O participante possua cadastro ativo na Plataforma de Cashback da Ummix Ads.',
-              'Seja realizada a solicitação do crédito por meio do formulário específico de resgate.',
+              'Solicite o crédito pelo formulário de resgate. É o mesmo formulário que usamos para avaliar nosso atendimento.',
             ].map((rule, i) => (
               <li key={i} className="flex items-start gap-4">
                 <span className="mt-0.5 w-6 h-6 rounded-full bg-ummix-red/10 text-ummix-red text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
@@ -142,7 +142,7 @@ const STEPS = [
   },
   {
     n: '03', t: 'Solicitação',
-    d: 'O participante acessa a área de solicitação e informa os dados do contrato para solicitar o crédito.',
+    d: 'O participante preenche o formulário de solicitação com os dados do contrato. É por aí também que avaliamos nosso atendimento.',
     icon: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></>,
   },
   {
@@ -239,8 +239,9 @@ function CTA() {
           Ative seu cashback agora.
         </h2>
         <p className="text-lg text-white/70 mb-10 text-pretty">
-          Preencha o formulário de cashback da Ummix Ads e comece a acumular 3% sobre
-          todo o seu investimento em mídia.
+          Para receber seu cashback, preencha o formulário de solicitação. Ele serve
+          também para você avaliar nosso atendimento — sua opinião é o que usamos
+          para melhorar.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a
@@ -249,7 +250,7 @@ function CTA() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-ummix-red hover:bg-ummix-red-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:scale-105"
           >
-            Preencher formulário de cashback
+            Solicitar meu cashback
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
           <a
