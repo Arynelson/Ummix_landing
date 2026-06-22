@@ -28,7 +28,6 @@ export function SubHeader({ active }) {
         <nav className="hidden md:flex items-center gap-6 text-sm font-semibold">
           {[
             { href: '/', label: 'Início' },
-            { href: '/partner', label: 'Parceiros' },
             { href: '/cashback', label: 'Cashback' },
           ].map(({ href, label }) => {
             const isCurrent = active === href
@@ -68,7 +67,6 @@ export function SubFooter() {
         <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className="h-8 brightness-0 invert" />
         <nav className="flex flex-wrap justify-center gap-6 text-sm text-white/60">
           <a href="/" className="hover:text-white transition-colors">Início</a>
-          <a href="/partner" className="hover:text-white transition-colors">Parceiros</a>
           <a href="/cashback" className="hover:text-white transition-colors">Cashback</a>
           <a href="mailto:fale@ummix.com.br" className="hover:text-white transition-colors">Contato</a>
         </nav>

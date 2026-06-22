@@ -17,11 +17,28 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-3">
-        <a href="#" className="flex items-center gap-2 shrink-0">
+        <a href="/" className="flex items-center gap-2 shrink-0">
           <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-8 md:h-10 transition-all ${
             scrolled ? 'opacity-100' : 'brightness-0 invert'
           }`} />
         </a>
+
+        <nav className="hidden md:flex items-center gap-6 text-sm font-semibold">
+          {[
+            { href: '/', label: 'Início' },
+            { href: '/cashback', label: 'Cashback' },
+          ].map(({ href, label }) => (
+            <a
+              key={href}
+              href={href}
+              className={`transition-colors ${
+                scrolled ? 'text-ummix-dark hover:text-ummix-red' : 'text-white/80 hover:text-white'
+              }`}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
 
         <a
           href={PLATFORM_SIGNUP}

@@ -1,6 +1,6 @@
 import { SubHeader, SubFooter } from '../subpages/SubChrome'
+import { PLATFORM_SIGNUP } from '../../constants/urls'
 
-const CASHBACK_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeXwkuDIqiwtV0tCk1tN7LAbXWs9TySbv6h3O66xRXkxnoU3g/viewform'
 const CASHBACK_PLATFORM = 'Live'
 
 /* ---- Hero ---- */
@@ -114,7 +114,7 @@ function WhoIsEligible() {
             {[
               'O contrato esteja com o pagamento realizado integralmente até a data de vencimento.',
               'O participante possua cadastro ativo na Plataforma de Cashback da Ummix Ads.',
-              'Solicite o crédito pelo formulário de resgate. É o mesmo formulário que usamos para avaliar nosso atendimento.',
+              'Solicite o crédito direto na Plataforma de Cashback da Ummix Ads.',
             ].map((rule, i) => (
               <li key={i} className="flex items-start gap-4">
                 <span className="mt-0.5 w-6 h-6 rounded-full bg-ummix-red/10 text-ummix-red text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
@@ -142,7 +142,7 @@ const STEPS = [
   },
   {
     n: '03', t: 'Solicitação',
-    d: 'O participante preenche o formulário de solicitação com os dados do contrato. É por aí também que avaliamos nosso atendimento.',
+    d: 'O participante solicita o crédito direto na plataforma, informando os dados do contrato.',
     icon: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></>,
   },
   {
@@ -239,13 +239,12 @@ function CTA() {
           Ative seu cashback agora.
         </h2>
         <p className="text-lg text-white/70 mb-10 text-pretty">
-          Para receber seu cashback, preencha o formulário de solicitação. Ele serve
-          também para você avaliar nosso atendimento — sua opinião é o que usamos
-          para melhorar.
+          Acesse a Plataforma de Cashback da Ummix Ads, cadastre-se e solicite
+          o crédito do seu contrato em poucos passos.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a
-            href={CASHBACK_FORM_URL}
+            href={PLATFORM_SIGNUP}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-ummix-red hover:bg-ummix-red-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:scale-105"
