@@ -1,14 +1,17 @@
 import Header from './components/Header'
-import Hero from './components/Hero'
-import VideoEmbed from './components/VideoEmbed'
-import CountersStrip from './components/CountersStrip'
-import WorkflowSection from './components/WorkflowSection'
-import Features from './components/Features'
-import CashbackBanner from './components/CashbackBanner'
-import Segmentation from './components/Segmentation'
+import Hero from './components/home/Hero'
+import Metrics from './components/home/Metrics'
+import ClientView from './components/home/ClientView'
+import Backstage from './components/home/Backstage'
+import Method from './components/home/Method'
+import Eliminates from './components/home/Eliminates'
+import Deliverables from './components/home/Deliverables'
+import Segmentations from './components/home/Segmentations'
+import Results from './components/home/Results'
+import CashbackSection from './components/home/CashbackSection'
+import ForWhom from './components/home/ForWhom'
+import Contact from './components/home/Contact'
 import Partners from './components/Partners'
-import Testimonials from './components/Testimonials'
-import PlatformAccess from './components/PlatformAccess'
 import Footer from './components/Footer'
 import FloatingCTA from './components/FloatingCTA'
 
@@ -18,15 +21,18 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <CountersStrip />
-        <VideoEmbed />
-        <WorkflowSection />
-        <Features />
-        <CashbackBanner />
-        <Segmentation />
+        <Metrics />
+        <ClientView />
+        <Backstage />
+        <Method />
+        <Eliminates />
+        <Deliverables />
+        <Segmentations />
+        <Results />
+        <CashbackSection />
+        <ForWhom />
         <Partners />
-        <Testimonials />
-        <PlatformAccess />
+        <Contact />
       </main>
       <FloatingCTA />
       <Footer />
