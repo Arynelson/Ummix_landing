@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#1E1E1E"/><g transform="translate(100 100)"><circle r="44" fill="none" stroke="#9B191A" stroke-width="3"/><circle r="26" fill="#9B191A"/><text y="6" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="18" fill="#fff">U</text></g></svg>
+</template>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --red:#9B191A; --red-d:#7A1415; --red-g:rgba(155,25,26,.45);
+      --dark:#1E1E1E; --grafite:#2A2A2A; --gray:#F4F2F2; --gray-d:#333;
+      --white:#fff; --easeOut:cubic-bezier(0.16,1,0.3,1);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1E1E1E;background:#e7e5df;-webkit-font-smoothing:antialiased;}
+    h1,h2,h3,h4,h5,h6{font-family:'Baloo 2',system-ui,sans-serif;margin:0;letter-spacing:-.01em;}
+
+    /* Reveal strategy: content visible by default. JS arms elements that should
+       animate (only those below the fold and only when the page is visible).
+       This keeps content visible if JS fails, if the iframe is hidden during
+       load, or if the user is on a reduced-motion preference. */
+    .anim.armed{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(0.16,1,0.3,1),transform .9s cubic-bezier(0.16,1,0.3,1);}
+    .anim.armed.anim-scale{transform:scale(.86);transform-origin:center center;}
+    .anim.armed.anim-left{transform:translateX(-32px);}
+    .anim.armed.in{opacity:1;transform:none;}
+
+    /* SVG line draw — same opt-in pattern. Default = fully drawn. */
+    .draw-path.armed{stroke-dasharray:var(--len,2000);stroke-dashoffset:var(--len,2000);transition:stroke-dashoffset 2.6s cubic-bezier(0.16,1,0.3,1);}
+    .draw-path.armed.in{stroke-dashoffset:0;}
+
+    @media (prefers-reduced-motion: reduce){
+      .anim.armed,.draw-path.armed{transition:none;}
+    }
+
+    /* Radial pulse on center */
+    @keyframes redPulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(155,25,26,.55),0 0 40px rgba(155,25,26,.35);}
+      50%{box-shadow:0 0 0 22px rgba(155,25,26,0),0 0 70px rgba(155,25,26,.55);}
+    }
+    .pulse-ring{animation:redPulse 2.8s var(--easeOut) infinite;}
+
+    /* Marquee */
+    @keyframes marquee{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+    /* Counters underline shimmer */
+    @keyframes shimmer{from{background-position:200% 0} to{background-position:-200% 0}}
+
+    /* Hover lifts */
+    .lift{transition:transform .35s var(--easeOut), border-color .35s var(--easeOut), background .35s var(--easeOut);}
+    .lift:hover{transform:translateY(-4px);}
+
+    /* Number counter */
+    @keyframes blip{0%{opacity:.4}100%{opacity:1}}
+
+    /* Soft grain (B variant) */
+    .grain{position:absolute;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");}
+
+    /* === Orbit satellites (Bastidores) === */
+    @keyframes orbit-cw{from{transform:rotate(0deg) translateX(var(--r)) rotate(0deg);}to{transform:rotate(360deg) translateX(var(--r)) rotate(-360deg);}}
+    @keyframes orbit-ccw{from{transform:rotate(0deg) translateX(var(--r)) rotate(0deg);}to{transform:rotate(-360deg) translateX(var(--r)) rotate(360deg);}}
+    .orbit-track{position:absolute;top:50%;left:50%;width:0;height:0;}
+    .orbit-sat{position:absolute;top:-26px;left:-26px;width:52px;height:52px;border-radius:50%;background:#1E1E1E;border:1.5px solid var(--red);display:grid;place-items:center;color:#fff;box-shadow:0 0 24px rgba(155,25,26,.45);}
+    .ring-rotate{animation:spin 32s linear infinite;}
+    .ring-rotate.rev{animation:spin 48s linear infinite reverse;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* === Bastidores arc diagram ===
+       Dots emit from the center (SUA CAMPANHA), travel up to the arc, then around it.
+       Path: center → top of arc → curve to bottom. */
+    @keyframes arcDot{
+      0%{offset-distance:0%;opacity:0;transform:scale(.3);}
+      3%{opacity:.55;}
+      8%{opacity:1;transform:scale(1);}
+      94%{opacity:1;}
+      100%{offset-distance:100%;opacity:0;transform:scale(.7);}
+    }
+    .arc-dot{position:absolute;top:-7px;left:-7px;width:14px;height:14px;border-radius:50%;background:var(--red);box-shadow:0 0 14px var(--red),0 0 28px rgba(155,25,26,.6);offset-path:path('M 270.0 270.0 L 269.5 275.0 L 268.1 278.8 L 266.1 282.1 L 263.4 284.9 L 260.1 287.1 L 256.5 288.6 L 252.4 289.5 L 248.2 289.7 L 243.7 289.1 L 239.2 287.8 L 234.8 285.7 L 230.5 282.8 L 226.6 279.2 L 223.0 274.9 L 219.8 270.0 L 217.3 264.5 L 215.4 258.4 L 214.3 251.9 L 214.0 245.1 L 214.5 238.0 L 216.0 230.8 L 218.4 223.5 L 221.7 216.4 L 226.0 209.5 L 231.3 202.9 L 237.4 196.9 L 244.5 191.4 L 252.3 186.6 L 260.8 182.6 L 270.0 179.6 L 279.7 177.6 L 289.9 176.6 L 300.3 176.8 L 310.9 178.1 L 321.5 180.7 L 332.0 184.6 L 342.3 189.7 L 352.1 196.0 L 361.4 203.6 L 370.0 212.3 L 377.7 222.0 L 384.4 232.8 L 390.1 244.5 L 394.5 256.9 L 397.6 270.0 L 399.3 283.6 L 399.5 297.5 L 398.2 311.7 L 395.3 325.8 L 390.9 339.8 L 384.8 353.4 L 377.2 366.5 L 368.1 379.0 L 357.6 390.5 L 345.7 401.1 L 332.5 410.4 L 318.2 418.4 L 302.9 424.9 L 286.8 429.8 L 270.0 432.9 L 252.7 434.3 L 235.2 433.9 L 217.5 431.5 L 200.0 427.3 L 182.8 421.1 L 166.1 413.0 L 150.2 403.0 L 135.3 391.3 L 121.5 377.9 L 109.1 362.9 L 98.2 346.5 L 89.0 328.8 L 81.7 310.0 L 76.3 290.4 L 73.0 270.0 L 71.9 249.2 L 73.0 228.1 L 76.3 207.1 L 81.9 186.3 L 89.8 166.0 L 99.9 146.4 L 112.1 127.8 L 126.3 110.4 L 142.5 94.5 L 160.5 80.3 L 180.0 67.8 L 200.9 57.5 L 223.1 49.3 L 246.2 43.4 L 270.0 40.0 A 230 230 0 0 1 270 500');offset-rotate:0deg;animation:arcDot 6.5s cubic-bezier(0.4,0,0.6,1) infinite;}
+    .arc-dot.d2{animation-delay:-2.16s;}
+    .arc-dot.d3{animation-delay:-4.33s;}
+    @keyframes labelIn{from{opacity:0;transform:translateX(8px);}to{opacity:1;transform:none;}}
+    /* Default: labels visible. Only hide when the parent .anim wrapper is armed (off-screen at mount). */
+    .anim.armed .arc-label{opacity:0;}
+    .anim.armed.in .arc-label{animation:labelIn .55s cubic-bezier(0.16,1,0.3,1) both;}
+    .anim.in .arc-label:nth-child(1){animation-delay:.10s;}
+    .anim.in .arc-label:nth-child(2){animation-delay:.22s;}
+    .anim.in .arc-label:nth-child(3){animation-delay:.34s;}
+    .anim.in .arc-label:nth-child(4){animation-delay:.46s;}
+    .anim.in .arc-label:nth-child(5){animation-delay:.58s;}
+    .anim.in .arc-label:nth-child(6){animation-delay:.70s;}
+
+    /* === Method carousel === */
+    .method-stage{position:relative;}
+    .method-slide{position:absolute;inset:0;opacity:0;transform:translateY(16px);transition:opacity .55s var(--easeOut), transform .55s var(--easeOut);pointer-events:none;}
+    .method-slide.active{opacity:1;transform:none;pointer-events:auto;}
+    .method-chip{cursor:pointer;transition:all .35s var(--easeOut);}
+    .method-chip:hover{transform:translateY(-2px);}
+    .method-progress-fill{transform-origin:left center;transform:scaleX(0);transition:transform .12s linear;}
+
+    /* === Segment tabs === */
+    .seg-tab{cursor:pointer;transition:all .3s var(--easeOut);}
+    .seg-panel{display:none;}
+    .seg-panel.active{display:grid;}
+    @keyframes chipIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+    .seg-panel.active > *{animation:chipIn .5s var(--easeOut) both;}
+    .seg-panel.active > *:nth-child(1){animation-delay:.02s;}
+    .seg-panel.active > *:nth-child(2){animation-delay:.06s;}
+    .seg-panel.active > *:nth-child(3){animation-delay:.10s;}
+    .seg-panel.active > *:nth-child(4){animation-delay:.14s;}
+    .seg-panel.active > *:nth-child(5){animation-delay:.18s;}
+    .seg-panel.active > *:nth-child(6){animation-delay:.22s;}
+    .seg-panel.active > *:nth-child(7){animation-delay:.26s;}
+    .seg-panel.active > *:nth-child(8){animation-delay:.30s;}
+    .seg-panel.active > *:nth-child(9){animation-delay:.34s;}
+    .seg-panel.active > *:nth-child(10){animation-delay:.38s;}
+    .seg-panel.active > *:nth-child(11){animation-delay:.42s;}
+    .seg-panel.active > *:nth-child(12){animation-delay:.46s;}
+  </style>
+</helmet>
+
+<div style="width:100%;min-height:100vh;background:#fff;box-sizing:border-box;">
+      <div style="max-width:none;">
+
+        <!-- Header A -->
+        <header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #eee;">
+          <div style="max-width:1180px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;">
+            <img src="assets/logo_ummix_escura.png" alt="ummix" style="height:30px;width:auto;display:block;">
+            <nav style="display:flex;gap:32px;font:600 14px/1 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;">
+              <a href="#metodo" style="color:inherit;text-decoration:none;">Método</a>
+              <a href="#bastidores" style="color:inherit;text-decoration:none;">Bastidores</a>
+              <a href="#segmentacoes" style="color:inherit;text-decoration:none;">Segmentações</a>
+              <a href="#resultados" style="color:inherit;text-decoration:none;">Resultados</a>
+              <a href="#para-quem" style="color:inherit;text-decoration:none;">Para quem é</a>
+            </nav>
+            <a href="#contato" style="display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font:700 13px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.02em;padding:12px 22px;border-radius:9999px;text-decoration:none;box-shadow:0 8px 20px -8px var(--red-g);" class="lift">Falar com a Ummix
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </header>
+
+        <!-- Hero A -->
+        <section style="position:relative;padding:96px 64px 80px;background:#fff;overflow:hidden;">
+          <div style="position:absolute;top:-20%;right:-10%;width:520px;height:520px;background:radial-gradient(circle,rgba(155,25,26,.10),transparent 65%);pointer-events:none;"></div>
+          <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center;">
+            <div>
+              <div class="anim" style="display:inline-flex;align-items:center;gap:10px;background:rgba(155,25,26,.08);color:var(--red);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;border-radius:9999px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:var(--red);"></span>Ad-tech · Mídia OFF
+              </div>
+              <h1 class="anim" style="margin-top:24px;font-weight:900;font-size:68px;line-height:1;letter-spacing:-.025em;text-transform:uppercase;color:#1E1E1E;text-wrap:balance;">
+                Mídia inteligente nos veículos de <span style="color:var(--red);">massa</span>.
+              </h1>
+              <p class="anim" style="margin-top:24px;font-size:19px;line-height:1.55;color:#555;max-width:520px;text-wrap:pretty;">
+                Anuncie nas maiores emissoras e canais do país com a precisão do digital. Planejamento, negociação, execução, auditoria e resultados em uma operação única e integrada.
+              </p>
+              <div class="anim" style="margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;">
+                <a href="#metodo" style="display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font:700 14px/1 'Plus Jakarta Sans',sans-serif;padding:16px 28px;border-radius:9999px;text-decoration:none;box-shadow:0 12px 28px -10px var(--red-g);" class="lift">
+                  Conhecer o Método Ummix
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#contato" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#1E1E1E;font:700 14px/1 'Plus Jakarta Sans',sans-serif;padding:16px 28px;border-radius:9999px;text-decoration:none;border:1.5px solid #1E1E1E;" class="lift">
+                  Quero anunciar
+                </a>
+              </div>
+              <div class="anim" style="margin-top:48px;display:flex;gap:36px;font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#666;">
+                <div><div style="font-family:'Baloo 2';font-weight:900;font-size:26px;color:#1E1E1E;line-height:1;">+150</div>Veículos parceiros</div>
+                <div><div style="font-family:'Baloo 2';font-weight:900;font-size:26px;color:#1E1E1E;line-height:1;">10</div>Etapas estratégicas</div>
+                <div><div style="font-family:'Baloo 2';font-weight:900;font-size:26px;color:#1E1E1E;line-height:1;">+50</div>Atividades operacionais</div>
+              </div>
+            </div>
+            <!-- Hero visual: 5-step flow card -->
+            <div class="anim" style="position:relative;">
+              <div style="position:relative;background:#1E1E1E;border-radius:24px;padding:32px;color:#fff;box-shadow:0 28px 60px -20px rgba(0,0,0,.35);">
+                <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--red);">Da contratação à prestação de contas</div>
+                <div style="margin-top:16px;font-family:'Baloo 2';font-weight:800;font-size:24px;line-height:1.15;">Uma operação única e integrada.</div>
+                <div style="margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                  <!-- 5 micro icons -->
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.18);display:grid;place-items:center;color:var(--red);">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <div style="font:700 10px/1.1 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.8);text-align:center;">PLANEJAR</div>
+                  </div>
+                  <svg width="16" height="8" viewBox="0 0 16 8" style="color:rgba(255,255,255,.35);"><path d="M0 4h14M10 0l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.18);display:grid;place-items:center;color:var(--red);">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="2"/><circle cx="20" cy="21" r="2"/><path d="M5.67 6H23l-1.68 8.39a2 2 0 0 1-2 1.61H8.75a2 2 0 0 1-2-1.74L5.23 2.74A2 2 0 0 0 3.25 1H1"/></svg>
+                    </div>
+                    <div style="font:700 10px/1.1 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.8);text-align:center;">COMPRAR</div>
+                  </div>
+                  <svg width="16" height="8" viewBox="0 0 16 8" style="color:rgba(255,255,255,.35);"><path d="M0 4h14M10 0l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.18);display:grid;place-items:center;color:var(--red);">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
+                    </div>
+                    <div style="font:700 10px/1.1 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.8);text-align:center;">EXECUTAR</div>
+                  </div>
+                  <svg width="16" height="8" viewBox="0 0 16 8" style="color:rgba(255,255,255,.35);"><path d="M0 4h14M10 0l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.18);display:grid;place-items:center;color:var(--red);">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    </div>
+                    <div style="font:700 10px/1.1 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.8);text-align:center;">AUDITAR</div>
+                  </div>
+                  <svg width="16" height="8" viewBox="0 0 16 8" style="color:rgba(255,255,255,.35);"><path d="M0 4h14M10 0l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;">
+                    <div style="width:44px;height:44px;border-radius:12px;background:var(--red);display:grid;place-items:center;color:#fff;box-shadow:0 8px 20px -6px var(--red-g);">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+                    </div>
+                    <div style="font:700 10px/1.1 'Plus Jakarta Sans',sans-serif;color:#fff;text-align:center;">RESULTADOS</div>
+                  </div>
+                </div>
+                <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font:500 13px/1.5 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.7);">
+                  <span style="color:#fff;font-weight:700;">Método Ummix®</span> de Gestão de Campanhas — planejamento, negociação, execução, auditoria e resultados.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Métricas A -->
+        <section style="background:var(--gray);padding:48px 64px;">
+          <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;">
+            <div class="anim"><div data-count="500" style="font-family:'Baloo 2';font-weight:900;font-size:46px;line-height:1;color:#1E1E1E;letter-spacing:-.02em;">+500</div><div style="margin-top:8px;font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#555;">Anunciantes atendidos</div></div>
+            <div class="anim" style="transition-delay:.08s;"><div style="font-family:'Baloo 2';font-weight:900;font-size:46px;line-height:1;color:#1E1E1E;letter-spacing:-.02em;">3<span style="color:var(--red);">x</span></div><div style="margin-top:8px;font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#555;">ROI médio das campanhas</div></div>
+            <div class="anim" style="transition-delay:.16s;"><div style="font-family:'Baloo 2';font-weight:900;font-size:46px;line-height:1;color:#1E1E1E;letter-spacing:-.02em;">R$ 50M<span style="color:var(--red);">+</span></div><div style="margin-top:8px;font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#555;">Mídia gerenciada/ano</div></div>
+            <div class="anim" style="transition-delay:.24s;"><div style="font-family:'Baloo 2';font-weight:900;font-size:46px;line-height:1;color:#1E1E1E;letter-spacing:-.02em;">150<span style="color:var(--red);">+</span></div><div style="margin-top:8px;font:500 13px/1.4 'Plus Jakarta Sans',sans-serif;color:#555;">Veículos parceiros</div></div>
+          </div>
+        </section>
+
+        <!-- Painel 2: O que o cliente vê -->
+        <section style="background:#fff;padding:120px 64px;">
+          <div style="max-width:1180px;margin:0 auto;">
+            <div style="text-align:center;max-width:760px;margin:0 auto;">
+              <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">O que o cliente vê</div>
+              <h2 class="anim" style="margin-top:14px;font-weight:800;font-size:48px;line-height:1.05;letter-spacing:-.02em;color:#1E1E1E;">
+                <span style="color:var(--red);">Simples</span> para quem contrata.
+              </h2>
+              <p class="anim" style="margin-top:18px;font-size:17px;line-height:1.55;color:#555;">Toda a complexidade da mídia off, embrulhada em três entregáveis claros.</p>
+            </div>
+            <div style="margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+              <div class="anim lift" style="background:var(--gray);border-radius:24px;padding:48px 32px;text-align:center;border:1px solid transparent;">
+                <div style="width:72px;height:72px;margin:0 auto;border-radius:18px;background:rgba(155,25,26,.10);display:grid;place-items:center;color:var(--red);">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                </div>
+                <div style="margin-top:24px;font-family:'Baloo 2';font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase;color:#1E1E1E;">Uma única<br>campanha</div>
+              </div>
+              <div class="anim lift" style="background:var(--gray);border-radius:24px;padding:48px 32px;text-align:center;border:1px solid transparent;transition-delay:.08s;">
+                <div style="width:72px;height:72px;margin:0 auto;border-radius:18px;background:rgba(155,25,26,.10);display:grid;place-items:center;color:var(--red);">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 12l-3-3-4 4 4 4 3-3"/><path d="M14 6l3 3"/><path d="M18 4l3 3-7 7-3-3z"/><path d="M9 18l3 3 9-9-3-3"/></svg>
+                </div>
+                <div style="margin-top:24px;font-family:'Baloo 2';font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase;color:#1E1E1E;">Um único<br>contrato</div>
+              </div>
+              <div class="anim lift" style="background:var(--gray);border-radius:24px;padding:48px 32px;text-align:center;border:1px solid transparent;transition-delay:.16s;">
+                <div style="width:72px;height:72px;margin:0 auto;border-radius:18px;background:rgba(155,25,26,.10);display:grid;place-items:center;color:var(--red);">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="6"/><rect x="12" y="9" width="3" height="10"/><rect x="17" y="5" width="3" height="14"/></svg>
+                </div>
+                <div style="margin-top:24px;font-family:'Baloo 2';font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase;color:#1E1E1E;">Um único<br>relatório</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 3: Bastidores — arc diagram (referência card 3) -->
+        <section id="bastidores" style="background:var(--dark);color:#fff;padding:120px 64px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:1100px;height:900px;background:radial-gradient(ellipse,rgba(155,25,26,.18),transparent 60%);pointer-events:none;"></div>
+
+          <div style="max-width:1180px;margin:0 auto;position:relative;">
+            <!-- Top header (matches reference: heading is the section title; "complexo p/ executa" lands as a kicker at the bottom) -->
+            <div style="text-align:center;max-width:760px;margin:0 auto;">
+              <h2 class="anim" style="font-family:'Baloo 2';font-weight:900;font-size:54px;line-height:1;letter-spacing:-.02em;text-transform:uppercase;color:#fff;">
+                O que a Ummix faz <br><span style="color:var(--red);">nos bastidores</span>
+              </h2>
+            </div>
+
+            <!-- Diagram + stats -->
+            <div style="margin-top:72px;display:grid;grid-template-columns:.6fr 1fr;gap:64px;align-items:center;">
+
+              <!-- LEFT: 3 stats with icon + bold number + label (matches card 3 structure) -->
+              <div style="display:flex;flex-direction:column;gap:36px;">
+                <div class="anim" style="display:flex;align-items:center;gap:24px;">
+                  <div style="width:64px;height:64px;flex:none;border-radius:50%;border:1.5px solid rgba(155,25,26,.55);display:grid;place-items:center;color:var(--red);">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  </div>
+                  <div>
+                    <div style="display:flex;align-items:baseline;gap:14px;">
+                      <div style="font-family:'Baloo 2';font-weight:900;font-size:36px;line-height:1;color:#fff;letter-spacing:-.02em;">10</div>
+                      <div style="font-family:'Baloo 2';font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#fff;line-height:1.1;">Etapas<br>estratégicas</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="anim" style="display:flex;align-items:center;gap:24px;transition-delay:.08s;">
+                  <div style="width:64px;height:64px;flex:none;border-radius:50%;border:1.5px solid rgba(155,25,26,.55);display:grid;place-items:center;color:var(--red);">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 14h6"/><path d="M9 18h4"/></svg>
+                  </div>
+                  <div>
+                    <div style="display:flex;align-items:baseline;gap:14px;">
+                      <div style="font-family:'Baloo 2';font-weight:900;font-size:36px;line-height:1;color:#fff;letter-spacing:-.02em;">+50</div>
+                      <div style="font-family:'Baloo 2';font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#fff;line-height:1.1;">Atividades<br>operacionais</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="anim" style="display:flex;align-items:center;gap:24px;transition-delay:.16s;">
+                  <div style="width:64px;height:64px;flex:none;border-radius:50%;border:1.5px solid rgba(155,25,26,.55);display:grid;place-items:center;color:var(--red);">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                  </div>
+                  <div>
+                    <div style="display:flex;align-items:baseline;gap:14px;">
+                      <div style="font-family:'Baloo 2';font-weight:900;font-size:24px;line-height:1;color:#fff;letter-spacing:-.02em;text-transform:uppercase;">Múltiplas</div>
+                      <div style="font-family:'Baloo 2';font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#fff;line-height:1.1;">Validações</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT: arc diagram -->
+              <div class="anim" style="position:relative;width:100%;height:560px;">
+                <!-- The 540×540 stage sits flush-left; labels float to the right -->
+                <div style="position:absolute;top:50%;left:0;transform:translateY(-50%);width:540px;height:540px;">
+
+                  <!-- SVG: arc + animated dot path -->
+                  <svg viewBox="0 0 540 540" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="arcGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(155,25,26,.85)"/>
+                        <stop offset="50%" stop-color="rgba(155,25,26,.55)"/>
+                        <stop offset="100%" stop-color="rgba(155,25,26,.85)"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- ambient outer ring (faint) -->
+                    <circle cx="270" cy="270" r="248" fill="none" stroke="rgba(155,25,26,.10)" stroke-width="1"/>
+                    <!-- main right-half arc (top → bottom) -->
+                    <path d="M 270 40 A 230 230 0 0 1 270 500" fill="none" stroke="url(#arcGrad)" stroke-width="1.5"/>
+                    <!-- inner dashed ring around badge -->
+                    <circle cx="270" cy="270" r="148" fill="none" stroke="rgba(155,25,26,.35)" stroke-width="1" stroke-dasharray="3 6"/>
+                  </svg>
+
+                  <!-- Travelling dots along the arc (3 dots, staggered, communicates flow) -->
+                  <div class="arc-dot"></div>
+                  <div class="arc-dot d2"></div>
+                  <div class="arc-dot d3"></div>
+
+                  <!-- Center: SUA CAMPANHA badge -->
+                  <div class="pulse-ring" style="position:absolute;top:50%;left:270px;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#2A2A2A,#1A1A1A);border:1.5px solid var(--red);display:grid;place-items:center;z-index:3;">
+                    <div style="text-align:center;">
+                      <div style="font-family:'Baloo 2';font-weight:900;font-size:30px;line-height:.95;letter-spacing:.02em;text-transform:uppercase;color:#fff;">Sua<br>Campanha</div>
+                      <div style="margin:14px auto 0;width:36px;height:2px;background:var(--red);"></div>
+                    </div>
+                  </div>
+
+                  <!-- 6 labels -->
+              <div class="arc-label" style="position:absolute;left:318px;top:45px;transform:translate(0,-50%);display:flex;align-items:center;gap:14px;white-space:nowrap;">
+                <div style="position:relative;width:14px;height:14px;flex:none;">
+                  <div style="position:absolute;inset:0;border-radius:50%;background:var(--red);"></div>
+                  <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(155,25,26,.45);"></div>
+                </div>
+                <span style="font:700 13px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;">Negociação Inteligente</span>
+              </div>
+              <div class="arc-label" style="position:absolute;left:430px;top:105px;transform:translate(0,-50%);display:flex;align-items:center;gap:14px;white-space:nowrap;">
+                <div style="position:relative;width:14px;height:14px;flex:none;">
+                  <div style="position:absolute;inset:0;border-radius:50%;background:var(--red);"></div>
+                  <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(155,25,26,.45);"></div>
+                </div>
+                <span style="font:700 13px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;">Operação Especializada</span>
+              </div>
+              <div class="arc-label" style="position:absolute;left:493px;top:214px;transform:translate(0,-50%);display:flex;align-items:center;gap:14px;white-space:nowrap;">
+                <div style="position:relative;width:14px;height:14px;flex:none;">
+                  <div style="position:absolute;inset:0;border-radius:50%;background:var(--red);"></div>
+                  <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(155,25,26,.45);"></div>
+                </div>
+                <span style="font:700 13px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;">Monitoramento em Tempo Real</span>
+              </div>
+              <div class="arc-label" style="position:absolute;left:493px;top:326px;transform:translate(0,-50%);display:flex;align-items:center;gap:14px;white-space:nowrap;">
+                <div style="position:relative;width:14px;height:14px;flex:none;">
+                  <div style="position:absolute;inset:0;border-radius:50%;background:var(--red);"></div>
+                  <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(155,25,26,.45);"></div>
+                </div>
+                <span style="font:700 13px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;">Auditoria Independente</span>
+              </div>
+              <div class="arc-label" style="position:absolute;left:430px;top:435px;transform:translate(0,-50%);display:flex;align-items:center;gap:14px;white-space:nowrap;">
+                <div style="position:relative;width:14px;height:14px;flex:none;">
+                  <div style="position:absolute;inset:0;border-radius:50%;background:var(--red);"></div>
+                  <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(155,25,26,.45);"></div>
+                </div>
+                <span style="font:700 13px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;">Gestão Financeira</span>
+              </div>
+              <div class="arc-label" style="position:absolute;left:318px;top:495px;transform:translate(0,-50%);display:flex;align-items:center;gap:14px;white-space:nowrap;">
+                <div style="position:relative;width:14px;height:14px;flex:none;">
+                  <div style="position:absolute;inset:0;border-radius:50%;background:var(--red);"></div>
+                  <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(155,25,26,.45);"></div>
+                </div>
+                <span style="font:700 13px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;">Relatórios e Resultados</span>
+              </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom kicker (matches the reference: "COMPLEXO para quem executa." sits as the closing line) -->
+            <div class="anim" style="margin-top:48px;text-align:center;">
+              <div style="font-family:'Baloo 2';font-weight:900;font-size:32px;line-height:1.1;letter-spacing:.02em;text-transform:uppercase;color:#fff;">
+                <span style="color:var(--red);">Complexo</span> para quem executa.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 4: MÉTODO — carrossel animado das 10 etapas -->
+        <section id="metodo" style="background:var(--gray);padding:140px 64px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-100px;right:-100px;width:480px;height:480px;background:radial-gradient(circle,rgba(155,25,26,.08),transparent 65%);pointer-events:none;"></div>
+          <div style="max-width:1180px;margin:0 auto;position:relative;">
+            <div style="display:flex;align-items:end;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+              <div>
+                <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">O método</div>
+                <h2 class="anim" style="margin-top:14px;font-weight:900;font-size:64px;line-height:1;letter-spacing:-.025em;text-transform:uppercase;color:#1E1E1E;">
+                  Método <span style="color:var(--red);">Ummix®</span>
+                </h2>
+                <p class="anim" style="margin-top:18px;font-size:17px;line-height:1.55;color:#555;max-width:520px;">10 etapas, do briefing ao encerramento. Cada uma é uma promessa cumprida.</p>
+              </div>
+              <div class="anim" style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:#fff;border-radius:9999px;border:1px solid #eee;box-shadow:0 4px 12px -4px rgba(0,0,0,.08);">
+                <div style="display:flex;align-items:center;gap:8px;padding:0 8px;font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#666;"><span style="width:6px;height:6px;background:#16A34A;border-radius:50%;box-shadow:0 0 6px #16A34A;"></span> Auto-play</div>
+                <div style="width:1px;height:14px;background:#ddd;"></div>
+                <div style="display:flex;gap:6px;">
+                  <button data-method-prev style="border:none;width:32px;height:32px;border-radius:50%;background:#F4F2F2;cursor:pointer;display:grid;place-items:center;color:#1E1E1E;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+                  <button data-method-next style="border:none;width:32px;height:32px;border-radius:50%;background:var(--red);cursor:pointer;display:grid;place-items:center;color:#fff;box-shadow:0 6px 14px -6px var(--red-g);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage -->
+            <div class="anim" style="margin-top:64px;position:relative;background:#1E1E1E;color:#fff;border-radius:32px;padding:64px;min-height:480px;overflow:hidden;">
+              <div style="position:absolute;top:-100px;right:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(155,25,26,.30),transparent 65%);pointer-events:none;"></div>
+
+              <div class="method-stage" style="position:relative;min-height:320px;">
+
+                <div class="method-slide active" data-method-slide="0">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 01 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">01</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Validação Estratégica</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Conferência do contrato, investimentos, veículos e objetivos da campanha. Alinhamento total antes de qualquer execução.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Briefing · Contrato · KPIs
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 14l2 2 4-4"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="1">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 02 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">02</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Inteligência de Mídia</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Mapeamento de veículos, análise de inventário e custo por CPM. A base estratégica que define onde sua mensagem terá mais impacto.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Inventário · CPM · Mix de mídia
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="2">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 03 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">03</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Negociação e Reserva</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Negociação direta com veículos, reserva de espaços e garantia das melhores condições comerciais.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Veículos · Espaços · Condições
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17a3 3 0 0 0 4.24 0l3.54-3.54a3 3 0 0 0-4.24-4.24L13 11"/><path d="M13 7a3 3 0 0 0-4.24 0L5.22 10.54a3 3 0 0 0 4.24 4.24L11 13"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="3">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 04 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">04</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Gestão Operacional</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Emissão de PIs, distribuição de planejamentos e gestão de prazos. Cada detalhe operacional sob controle.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        PIs · Planejamentos · Prazos
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="4">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 05 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">05</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Gestão de Materiais</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Recebimento, conferência e aprovação de materiais. Produção sob demanda quando necessário.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Recebimento · Aprovação · Produção
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10 8 16 10 10 12 10 8" fill="currentColor"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="5">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 06 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">06</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Monitoramento e Auditoria</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Monitoramento em tempo real, auditoria das inserções e validação contínua das veiculações.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Tempo real · Auditoria · Validação
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="6">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 07 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">07</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Gestão Financeira</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Controle financeiro, repasses, cashback e conciliações com parceiros. Total transparência no dinheiro.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Repasses · Cashback · Conciliação
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="7">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 08 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">08</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Governança e Controle</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Gestão de contratos, acompanhamento por praça e indicadores de performance em todo o ecossistema.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Contratos · Praças · KPIs
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="8">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 09 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">09</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Relatórios e Resultados</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Consolidação de dados, auditoria final e entrega de relatórios com evidências comprobatórias.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Dados · Evidências · Insights
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="6"/><rect x="12" y="9" width="3" height="10"/><rect x="17" y="5" width="3" height="14"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="method-slide" data-method-slide="9">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;">
+                    <div>
+                      <div style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Etapa 10 de 10</div>
+                      <div style="margin-top:18px;display:flex;align-items:baseline;gap:20px;">
+                        <div style="font-family:'Baloo 2';font-weight:900;font-size:120px;line-height:.85;letter-spacing:-.04em;color:var(--red);">10</div>
+                        <h3 style="font-family:'Baloo 2';font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:balance;">Encerramento e Benefícios</h3>
+                      </div>
+                      <p style="margin:24px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,.72);max-width:520px;">Conferência final, liberação de cashback/BV e encerramento estratégico da campanha.</p>
+                      <div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:9999px;background:rgba(155,25,26,.18);border:1px solid rgba(155,25,26,.4);font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        Conferência · Cashback · BV
+                      </div>
+                    </div>
+                    <div style="position:relative;display:grid;place-items:center;height:280px;">
+                      <div style="position:absolute;inset:32px;border-radius:50%;border:1px dashed rgba(155,25,26,.4);"></div>
+                      <div style="position:absolute;inset:64px;border-radius:50%;border:1px dashed rgba(155,25,26,.25);"></div>
+                      <div style="position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3A1112,#1E1E1E);border:1.5px solid var(--red);display:grid;place-items:center;color:var(--red);box-shadow:0 0 40px rgba(155,25,26,.4);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="22" x2="4" y2="15"/><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- chips + progress -->
+              <div style="position:relative;margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,.08);">
+                <div data-method-chips style="display:grid;grid-template-columns:repeat(10,1fr);gap:8px;">
+
+                  <button class="method-chip active" data-method-chip="0" style="border:none;background:var(--red);color:#fff;padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid transparent;">01</button>
+                  <button class="method-chip" data-method-chip="1" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">02</button>
+                  <button class="method-chip" data-method-chip="2" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">03</button>
+                  <button class="method-chip" data-method-chip="3" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">04</button>
+                  <button class="method-chip" data-method-chip="4" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">05</button>
+                  <button class="method-chip" data-method-chip="5" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">06</button>
+                  <button class="method-chip" data-method-chip="6" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">07</button>
+                  <button class="method-chip" data-method-chip="7" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">08</button>
+                  <button class="method-chip" data-method-chip="8" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">09</button>
+                  <button class="method-chip" data-method-chip="9" style="border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);padding:12px 0;border-radius:12px;font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.02em;outline:1px solid rgba(255,255,255,.06);">10</button>
+                </div>
+                <div style="margin-top:14px;height:2px;background:rgba(255,255,255,.08);border-radius:9999px;overflow:hidden;">
+                  <div data-method-progress class="method-progress-fill" style="height:100%;background:linear-gradient(90deg,var(--red),#D02326);width:100%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 5: O que elimina -->
+        <section style="background:#fff;padding:120px 64px;">
+          <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center;">
+            <div>
+              <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">O que isso elimina</div>
+              <h2 class="anim" style="margin-top:14px;font-weight:800;font-size:42px;line-height:1.05;letter-spacing:-.02em;color:#1E1E1E;text-wrap:balance;">
+                Menos complexidade. <span style="color:var(--red);">Mais tempo</span> para o que importa.
+              </h2>
+              <p class="anim" style="margin-top:18px;font-size:16px;line-height:1.6;color:#555;">A Ummix absorve toda a operação da mídia off para que você foque em estratégia e resultado.</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="anim" style="display:flex;align-items:center;gap:18px;padding:18px 22px;background:var(--gray);border-radius:16px;border-left:3px solid var(--red);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B191A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div style="font:600 15px/1.4 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;">Negociar com dezenas de veículos</div>
+              </div>
+              <div class="anim" style="display:flex;align-items:center;gap:18px;padding:18px 22px;background:var(--gray);border-radius:16px;border-left:3px solid var(--red);transition-delay:.05s;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B191A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div style="font:600 15px/1.4 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;">Controlar entregas e prazos</div>
+              </div>
+              <div class="anim" style="display:flex;align-items:center;gap:18px;padding:18px 22px;background:var(--gray);border-radius:16px;border-left:3px solid var(--red);transition-delay:.10s;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B191A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div style="font:600 15px/1.4 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;">Conferir veiculações</div>
+              </div>
+              <div class="anim" style="display:flex;align-items:center;gap:18px;padding:18px 22px;background:var(--gray);border-radius:16px;border-left:3px solid var(--red);transition-delay:.15s;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B191A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div style="font:600 15px/1.4 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;">Gerenciar pagamentos e repasses</div>
+              </div>
+              <div class="anim" style="display:flex;align-items:center;gap:18px;padding:18px 22px;background:var(--gray);border-radius:16px;border-left:3px solid var(--red);transition-delay:.20s;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B191A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div style="font:600 15px/1.4 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;">Consolidar dados e relatórios</div>
+              </div>
+              <div class="anim" style="display:flex;align-items:center;gap:18px;padding:18px 22px;background:var(--gray);border-radius:16px;border-left:3px solid var(--red);transition-delay:.25s;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9B191A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div style="font:600 15px/1.4 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;">Acompanhar cashback e benefícios</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 6: O que a Ummix entrega -->
+        <section style="background:var(--dark);color:#fff;padding:120px 64px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:300px;background:radial-gradient(ellipse at top,rgba(155,25,26,.20),transparent 70%);"></div>
+          <div style="max-width:1180px;margin:0 auto;position:relative;">
+            <div style="text-align:center;max-width:760px;margin:0 auto;">
+              <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">O que a Ummix realmente entrega</div>
+              <h2 class="anim" style="margin-top:14px;font-weight:800;font-size:48px;line-height:1.05;letter-spacing:-.02em;">Uma operação completa,<br><span style="color:var(--red);">um único objetivo.</span></h2>
+            </div>
+            <div style="margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+              <!-- 6 deliverables -->
+              <div class="anim" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(155,25,26,.18);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="2"/><circle cx="20" cy="21" r="2"/><path d="M5.67 6H23l-1.68 8.39a2 2 0 0 1-2 1.61H8.75a2 2 0 0 1-2-1.74L5.23 2.74A2 2 0 0 0 3.25 1H1"/></svg></div>
+                <div style="margin-top:16px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#fff;">Compra inteligente</div>
+                <p style="margin:8px 0 0;font:500 14px/1.55 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.7);">Melhor eficiência para o investimento.</p>
+              </div>
+              <div class="anim" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;transition-delay:.05s;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(155,25,26,.18);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+                <div style="margin-top:16px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#fff;">Gestão operacional</div>
+                <p style="margin:8px 0 0;font:500 14px/1.55 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.7);">Execução precisa e centralizada.</p>
+              </div>
+              <div class="anim" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;transition-delay:.10s;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(155,25,26,.18);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                <div style="margin-top:16px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#fff;">Auditoria independente</div>
+                <p style="margin:8px 0 0;font:500 14px/1.55 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.7);">Transparência e segurança na entrega.</p>
+              </div>
+              <div class="anim" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;transition-delay:.15s;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(155,25,26,.18);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <div style="margin-top:16px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#fff;">Prestação de contas</div>
+                <p style="margin:8px 0 0;font:500 14px/1.55 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.7);">Relatórios completos e confiáveis.</p>
+              </div>
+              <div class="anim" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;transition-delay:.20s;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(155,25,26,.18);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                <div style="margin-top:16px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#fff;">Segurança financeira</div>
+                <p style="margin:8px 0 0;font:500 14px/1.55 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.7);">Controle, repasses e benefícios garantidos.</p>
+              </div>
+              <div class="anim" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;transition-delay:.25s;">
+                <div style="width:48px;height:48px;border-radius:12px;background:var(--red);color:#fff;display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                <div style="margin-top:16px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#fff;">Transparência total</div>
+                <p style="margin:8px 0 0;font:500 14px/1.55 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.7);">Você acompanha, a gente cuida do resto.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel novo: Segmentações disponíveis -->
+        <section id="segmentacoes" style="background:#fff;padding:120px 64px;position:relative;border-top:1px solid #f0eeec;">
+          <div style="max-width:1180px;margin:0 auto;">
+            <div style="text-align:center;max-width:760px;margin:0 auto;">
+              <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">A precisão do digital, na mídia OFF</div>
+              <h2 class="anim" style="margin-top:14px;font-weight:800;font-size:48px;line-height:1.05;letter-spacing:-.02em;color:#1E1E1E;">
+                Segmentações <span style="color:var(--red);">disponíveis</span>.
+              </h2>
+              <p class="anim" style="margin-top:18px;font-size:17px;line-height:1.55;color:#555;">Escolha o público certo. Atinja exatamente quem importa para sua campanha.</p>
+            </div>
+
+            <div class="anim" style="margin-top:56px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+              <button class="seg-tab" data-seg-tab="demo" style="border:none;padding:14px 26px;border-radius:9999px;background:var(--red);color:#fff;font:700 14px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.02em;cursor:pointer;box-shadow:0 8px 20px -8px var(--red-g);display:inline-flex;align-items:center;gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>
+                Demográfica
+              </button>
+              <button class="seg-tab" data-seg-tab="geo" style="border:1px solid #e5e3e0;padding:14px 26px;border-radius:9999px;background:#fff;color:#1E1E1E;font:700 14px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.02em;cursor:pointer;display:inline-flex;align-items:center;gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Geográfica
+              </button>
+              <button class="seg-tab" data-seg-tab="behav" style="border:1px solid #e5e3e0;padding:14px 26px;border-radius:9999px;background:#fff;color:#1E1E1E;font:700 14px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.02em;cursor:pointer;display:inline-flex;align-items:center;gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+                Comportamental
+              </button>
+            </div>
+
+            <div style="margin-top:48px;min-height:240px;">
+              <div class="seg-panel active" data-seg-panel="demo" style="grid-template-columns:repeat(4,1fr);gap:14px;">
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Idade
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Sexo
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Renda familiar
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Escolaridade
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Profissão
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Estado civil
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Tamanho da família
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Faixa etária
+          </div>
+              </div>
+              <div class="seg-panel" data-seg-panel="geo" style="grid-template-columns:repeat(4,1fr);gap:14px;">
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            País
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Região
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Estado
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Cidade
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Bairro
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            CEP
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Raio de alcance
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Pontos de interesse
+          </div>
+              </div>
+              <div class="seg-panel" data-seg-panel="behav" style="grid-template-columns:repeat(4,1fr);gap:14px;">
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Interesses
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Hábitos de consumo
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Estilo de vida
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Engajamento digital
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Histórico de compras
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Padrão de uso
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Eventos sazonais
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--gray);border-radius:14px;border:1px solid transparent;font:600 14px/1.3 'Plus Jakarta Sans',sans-serif;color:#1E1E1E;transition:all .3s var(--easeOut);cursor:default;" onmouseover="this.style.borderColor='rgba(155,25,26,.5)';this.style.background='#fff';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px -10px rgba(155,25,26,.3)';" onmouseout="this.style.borderColor='transparent';this.style.background='var(--gray)';this.style.transform='none';this.style.boxShadow='none';">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 3px rgba(155,25,26,.15);"></span>
+            Perfil socioemocional
+          </div>
+              </div>
+            </div>
+
+            <div class="anim" style="margin-top:48px;text-align:center;">
+              <div style="font:500 14px/1.5 'Plus Jakarta Sans',sans-serif;color:#888;">Cruzamos múltiplas dimensões para atingir o público exato da sua campanha.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 7: Resultados -->
+        <section id="resultados" style="background:#fff;padding:120px 64px;">
+          <div style="max-width:1180px;margin:0 auto;">
+            <div style="max-width:760px;">
+              <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Resultados que geram impacto</div>
+              <h2 class="anim" style="margin-top:14px;font-weight:800;font-size:48px;line-height:1.05;letter-spacing:-.02em;color:#1E1E1E;">Mais que entregar mídia — entregar <span style="color:var(--red);">resultado</span>.</h2>
+            </div>
+            <div style="margin-top:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+              <div class="anim" style="padding:32px;border-radius:18px;border:1px solid #eee;background:var(--gray);">
+                <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.10);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+                <div style="margin-top:18px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#1E1E1E;">Maior eficiência</div>
+                <p style="margin:8px 0 0;font:500 14px/1.5 'Plus Jakarta Sans',sans-serif;color:#666;">Melhores negociações e uso inteligente do investimento.</p>
+              </div>
+              <div class="anim" style="padding:32px;border-radius:18px;border:1px solid #eee;background:var(--gray);transition-delay:.05s;">
+                <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.10);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                <div style="margin-top:18px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#1E1E1E;">Segurança e confiança</div>
+                <p style="margin:8px 0 0;font:500 14px/1.5 'Plus Jakarta Sans',sans-serif;color:#666;">Processos auditados e dados validados em tempo real.</p>
+              </div>
+              <div class="anim" style="padding:32px;border-radius:18px;border:1px solid #eee;background:var(--gray);transition-delay:.10s;">
+                <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.10);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <div style="margin-top:18px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#1E1E1E;">Agilidade e foco</div>
+                <p style="margin:8px 0 0;font:500 14px/1.5 'Plus Jakarta Sans',sans-serif;color:#666;">Menos burocracia, mais tempo para estratégia.</p>
+              </div>
+              <div class="anim" style="padding:32px;border-radius:18px;border:1px solid #eee;background:var(--gray);transition-delay:.15s;">
+                <div style="width:44px;height:44px;border-radius:12px;background:rgba(155,25,26,.10);color:var(--red);display:grid;place-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v10l5 3"/></svg></div>
+                <div style="margin-top:18px;font-family:'Baloo 2';font-weight:800;font-size:18px;color:#1E1E1E;">Visibilidade e controle</div>
+                <p style="margin:8px 0 0;font:500 14px/1.5 'Plus Jakarta Sans',sans-serif;color:#666;">Informações claras para decisões mais assertivas.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 8: Para quem é -->
+        <section id="para-quem" style="background:var(--gray);padding:120px 64px;">
+          <div style="max-width:1180px;margin:0 auto;">
+            <div style="text-align:center;max-width:760px;margin:0 auto;">
+              <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Para quem é</div>
+              <h2 class="anim" style="margin-top:14px;font-weight:800;font-size:48px;line-height:1.05;letter-spacing:-.02em;color:#1E1E1E;">Um ecossistema conectado. <span style="color:var(--red);">Resultados reais.</span></h2>
+            </div>
+            <div style="margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+              <div class="anim lift" style="background:#fff;border-radius:20px;padding:36px;border:1px solid #eee;">
+                <div style="width:56px;height:56px;border-radius:14px;background:rgba(155,25,26,.10);color:var(--red);display:grid;place-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/></svg></div>
+                <div style="margin-top:20px;font-family:'Baloo 2';font-weight:800;font-size:22px;color:#1E1E1E;">Anunciantes</div>
+                <p style="margin:8px 0 0;font:500 15px/1.55 'Plus Jakarta Sans',sans-serif;color:#666;">Mais eficiência, transparência e resultados para sua marca.</p>
+              </div>
+              <div class="anim lift" style="background:#fff;border-radius:20px;padding:36px;border:1px solid #eee;transition-delay:.08s;">
+                <div style="width:56px;height:56px;border-radius:14px;background:rgba(155,25,26,.10);color:var(--red);display:grid;place-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div style="margin-top:20px;font-family:'Baloo 2';font-weight:800;font-size:22px;color:#1E1E1E;">Agências</div>
+                <p style="margin:8px 0 0;font:500 15px/1.55 'Plus Jakarta Sans',sans-serif;color:#666;">Um parceiro estratégico que cuida de toda a operação de mídia.</p>
+              </div>
+              <div class="anim lift" style="background:#fff;border-radius:20px;padding:36px;border:1px solid #eee;transition-delay:.16s;">
+                <div style="width:56px;height:56px;border-radius:14px;background:rgba(155,25,26,.10);color:var(--red);display:grid;place-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="11" x2="22" y2="11"/></svg></div>
+                <div style="margin-top:20px;font-family:'Baloo 2';font-weight:800;font-size:22px;color:#1E1E1E;">Veículos</div>
+                <p style="margin:8px 0 0;font:500 15px/1.55 'Plus Jakarta Sans',sans-serif;color:#666;">Relacionamento profissional, claro e de longo prazo.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Painel 9: Encerramento + Footer A -->
+        <section id="contato" style="background:var(--dark);color:#fff;padding:140px 64px 80px;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center bottom,rgba(155,25,26,.25),transparent 60%);"></div>
+          <div style="max-width:1180px;margin:0 auto;position:relative;text-align:center;">
+            <div class="anim" style="font:700 11px/1 'Plus Jakarta Sans',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);">Encerramento</div>
+            <h2 class="anim" style="margin-top:18px;font-family:'Baloo 2';font-weight:900;font-size:72px;line-height:.95;letter-spacing:-.025em;text-transform:uppercase;text-wrap:balance;">
+              A mídia é o que o <span style="color:var(--red);">cliente vê.</span>
+            </h2>
+            <p class="anim" style="margin-top:24px;font-size:20px;line-height:1.5;color:rgba(255,255,255,.75);max-width:680px;margin-left:auto;margin-right:auto;">O Método Ummix® é tudo o que acontece para garantir a entrega.</p>
+            <div class="anim" style="margin-top:40px;display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+              <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font:700 14px/1 'Plus Jakarta Sans',sans-serif;padding:18px 32px;border-radius:9999px;text-decoration:none;box-shadow:0 16px 32px -10px var(--red-g);" class="lift">
+                Falar com a Ummix
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font:700 14px/1 'Plus Jakarta Sans',sans-serif;padding:18px 32px;border-radius:9999px;text-decoration:none;border:1.5px solid rgba(255,255,255,.4);" class="lift">
+                Acessar a plataforma
+              </a>
+            </div>
+          </div>
+          <!-- footer -->
+          <div style="max-width:1180px;margin:96px auto 0;position:relative;padding-top:32px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;">
+            <img src="assets/logo_ummix_branca.png" alt="ummix" style="height:24px;">
+            <div style="font:500 12px/1 'Plus Jakarta Sans',sans-serif;color:rgba(255,255,255,.5);">Mídia OFF. Inteligência ON. © 2026 ummix</div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._observed = new WeakSet();
+    this._observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          this._observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+
+    const collectAll = () => {
+      const out = [];
+      try { document.querySelectorAll('.anim, .draw-path').forEach(el => out.push(el)); } catch(e){}
+      document.querySelectorAll('x-dc').forEach(h => {
+        if (h.shadowRoot) {
+          try { h.shadowRoot.querySelectorAll('.anim, .draw-path').forEach(el => out.push(el)); } catch(e){}
+        }
+      });
+      return out;
+    };
+
+    // Arm only elements that are currently BELOW the viewport. Above-fold/in-view
+    // elements stay visible immediately (no flash, no risk of staying invisible).
+    const armBelowFold = () => {
+      if (document.hidden) return;
+      const vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      collectAll().forEach(el => {
+        if (this._observed.has(el)) return;
+        const r = el.getBoundingClientRect();
+        if (r.top > vh * 0.85) {
+          this._observed.add(el);
+          el.classList.add('armed');
+          this._observer.observe(el);
+        } else {
+          // In-view at mount time — mark observed so we don't re-process, leave visible.
+          this._observed.add(el);
+        }
+      });
+    };
+
+    // Initial pass + a few re-ticks in case the template streams more nodes after mount.
+    armBelowFold();
+    let n = 0;
+    this._poll = setInterval(() => {
+      armBelowFold();
+      n++;
+      if (n > 12) clearInterval(this._poll);
+    }, 250);
+
+    // If the user tabs back, make sure we still arm any new nodes that were missed.
+    this._onVis = () => { if (!document.hidden) armBelowFold(); };
+    document.addEventListener('visibilitychange', this._onVis);
+
+    // Safety net: after 10s, anything armed-but-still-hidden gets force-revealed.
+    setTimeout(() => {
+      collectAll().forEach(el => {
+        if (el.classList.contains('armed') && !el.classList.contains('in')) {
+          el.classList.add('in');
+        }
+      });
+    }, 10000);
+
+    this._initMethodCarousel();
+    this._initSegmentTabs();
+  }
+
+  _initMethodCarousel() {
+    const slides = Array.from(document.querySelectorAll('[data-method-slide]'));
+    const chips  = Array.from(document.querySelectorAll('[data-method-chip]'));
+    const progress = document.querySelector('[data-method-progress]');
+    const stage = document.querySelector('.method-stage');
+    if (!slides.length || !chips.length) return;
+
+    // Ensure stage height matches tallest slide so it doesn't collapse with absolute children.
+    const setStageHeight = () => {
+      let max = 280;
+      slides.forEach(sl => {
+        sl.style.position = 'relative';
+        sl.style.opacity = '1';
+        sl.style.transform = 'none';
+        max = Math.max(max, sl.offsetHeight);
+      });
+      stage.style.minHeight = max + 'px';
+      slides.forEach((sl,i) => {
+        sl.style.position = 'absolute';
+        sl.style.opacity = '';
+        sl.style.transform = '';
+      });
+    };
+    // Run after fonts load so heights are accurate.
+    requestAnimationFrame(() => requestAnimationFrame(setStageHeight));
+    setTimeout(setStageHeight, 500);
+
+    let current = 0;
+    const DURATION = 5000;
+    let startTs = performance.now();
+    let paused = false;
+
+    const show = (idx) => {
+      current = ((idx % slides.length) + slides.length) % slides.length;
+      slides.forEach((sl,i) => sl.classList.toggle('active', i === current));
+      chips.forEach((c,i) => {
+        const active = i === current;
+        c.classList.toggle('active', active);
+        c.style.background = active ? 'var(--red)' : 'rgba(255,255,255,.05)';
+        c.style.color = active ? '#fff' : 'rgba(255,255,255,.55)';
+        c.style.outline = '1px solid ' + (active ? 'transparent' : 'rgba(255,255,255,.06)');
+      });
+      startTs = performance.now();
+    };
+
+    chips.forEach((c,i) => {
+      c.addEventListener('mouseenter', () => { if (!chips[i].classList.contains('active')) chips[i].style.background = 'rgba(155,25,26,.18)'; });
+      c.addEventListener('mouseleave', () => { if (!chips[i].classList.contains('active')) chips[i].style.background = 'rgba(255,255,255,.05)'; });
+      c.addEventListener('click', () => show(i));
+    });
+    const prevBtn = document.querySelector('[data-method-prev]');
+    const nextBtn = document.querySelector('[data-method-next]');
+    if (prevBtn) prevBtn.addEventListener('click', () => show(current - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => show(current + 1));
+
+    // Pause autoplay when section is not in viewport or user hovers.
+    const stageEl = document.getElementById('metodo');
+    if (stageEl) {
+      stageEl.addEventListener('mouseenter', () => paused = true);
+      stageEl.addEventListener('mouseleave', () => { paused = false; startTs = performance.now(); });
+    }
+    let inView = false;
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=>{ inView = e.isIntersecting; if (inView) startTs = performance.now(); }); }, { threshold: 0.25 });
+    if (stageEl) io.observe(stageEl);
+
+    const tick = (ts) => {
+      if (inView && !paused && !document.hidden) {
+        const t = (ts - startTs) / DURATION;
+        if (progress) progress.style.transform = 'scaleX(' + Math.min(1, t) + ')';
+        if (t >= 1) show(current + 1);
+      } else {
+        startTs = ts; // freeze
+      }
+      this._rafId = requestAnimationFrame(tick);
+    };
+    this._rafId = requestAnimationFrame(tick);
+  }
+
+  _initSegmentTabs() {
+    const tabs = Array.from(document.querySelectorAll('.seg-tab'));
+    const panels = Array.from(document.querySelectorAll('.seg-panel'));
+    if (!tabs.length) return;
+    tabs.forEach(t => {
+      t.addEventListener('click', () => {
+        const key = t.getAttribute('data-seg-tab');
+        tabs.forEach(x => {
+          const active = x === t;
+          x.style.background = active ? 'var(--red)' : '#fff';
+          x.style.color = active ? '#fff' : '#1E1E1E';
+          x.style.border = active ? 'none' : '1px solid #e5e3e0';
+          x.style.boxShadow = active ? '0 8px 20px -8px rgba(155,25,26,.45)' : 'none';
+          x.classList.toggle('active', active);
+        });
+        panels.forEach(p => {
+          const match = p.getAttribute('data-seg-panel') === key;
+          // Force reflow to restart animations
+          p.classList.remove('active');
+          if (match) {
+            void p.offsetWidth;
+            p.classList.add('active');
+          }
+        });
+      });
+    });
+  }
+  componentWillUnmount() {
+    if (this._poll) clearInterval(this._poll);
+    if (this._observer) this._observer.disconnect();
+    if (this._onVis) document.removeEventListener('visibilitychange', this._onVis);
+    if (this._rafId) cancelAnimationFrame(this._rafId);
+  }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
