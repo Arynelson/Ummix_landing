@@ -1,6 +1,5 @@
 import Header from './components/Header'
 import Hero from './components/home/Hero'
-import Metrics from './components/home/Metrics'
 import ClientView from './components/home/ClientView'
 import Backstage from './components/home/Backstage'
 import Method from './components/home/Method'
@@ -21,7 +20,6 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Metrics />
         <ClientView />
         <Backstage />
         <Method />
