@@ -51,8 +51,8 @@ function AwardsCard() {
   }
 
   return (
-    <div ref={cardRef} className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur border border-white/25 rounded-2xl sm:rounded-full px-4 py-2">
-      <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
+    <div ref={cardRef} className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white border border-ummix-dark/10 rounded-2xl sm:rounded-full px-4 py-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)]">
+      <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ummix-gray-dark/70 whitespace-nowrap">
         Prêmios e Certificações
       </span>
       <div className="flex items-center gap-2">
@@ -72,7 +72,7 @@ function AwardsCard() {
               onMouseLeave={() => setActiveId((current) => (current === award.id ? null : current))}
               onClick={(e) => handleLogoClick(e, award)}
               aria-label={award.label}
-              className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-lg bg-white p-1.5 transition-transform hover:scale-105 cursor-pointer"
+              className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-lg bg-ummix-gray p-1.5 transition-transform hover:scale-105 cursor-pointer"
             >
               <img
                 src={award.src}
@@ -256,10 +256,10 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right — 5-step flow visual card + floating awards */}
-        <div className="relative">
+        {/* Right — 5-step flow visual card + awards */}
+        <div>
           <FlowCard />
-          <div className="absolute -bottom-6 -left-6 hidden md:block">
+          <div className="mt-6 flex justify-center lg:justify-start">
             <AwardsCard />
           </div>
         </div>
