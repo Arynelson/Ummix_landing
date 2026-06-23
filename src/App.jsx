@@ -12,7 +12,6 @@ import ForWhom from './components/home/ForWhom'
 import Contact from './components/home/Contact'
 import Partners from './components/Partners'
 import Footer from './components/Footer'
-import FloatingCTA from './components/FloatingCTA'
 
 export default function App() {
   return (
@@ -32,7 +31,6 @@ export default function App() {
         <Partners />
         <Contact />
       </main>
-      <FloatingCTA />
       <Footer />
     </>
   )
