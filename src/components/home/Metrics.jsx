@@ -1,10 +1,10 @@
-import useAnimateOnScroll from '../../hooks/useAnimateOnScroll';
+import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
 
 const STATS = [
-  { value: '+500', label: 'Anunciantes atendidos' },
-  { value: '3x', label: 'ROI médio das campanhas' },
-  { value: 'R$50M+', label: 'Mídia gerenciada/ano' },
-  { value: '150+', label: 'Veículos parceiros' },
+  { id: 'anunciantes', value: '+500', label: 'Anunciantes atendidos' },
+  { id: 'roi', value: '3x', label: 'ROI médio das campanhas' },
+  { id: 'midia', value: 'R$50M+', label: 'Mídia gerenciada/ano' },
+  { id: 'veiculos', value: '150+', label: 'Veículos parceiros' },
 ];
 
 export default function Metrics() {
@@ -18,7 +18,7 @@ export default function Metrics() {
         className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 text-center md:grid-cols-4"
       >
         {STATS.map((stat) => (
-          <div key={stat.label} className="flex flex-col items-center gap-2">
+          <div key={stat.id} className="flex flex-col items-center gap-2">
             <span className="font-heading text-4xl font-bold text-ummix-red md:text-5xl">
               {stat.value}
             </span>
