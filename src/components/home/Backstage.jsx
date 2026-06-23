@@ -54,12 +54,12 @@ const STAT_ROWS = [
 ];
 
 const ARC_LABELS = [
-  { id: 'negociacao', text: 'Negociação Inteligente', left: 318, top: 45 },
-  { id: 'operacao', text: 'Operação Especializada', left: 430, top: 105 },
-  { id: 'monitoramento', text: 'Monitoramento em Tempo Real', left: 493, top: 214 },
-  { id: 'auditoria', text: 'Auditoria Independente', left: 493, top: 326 },
-  { id: 'financeira', text: 'Gestão Financeira', left: 430, top: 435 },
-  { id: 'relatorios', text: 'Relatórios e Resultados', left: 318, top: 495 },
+  { id: 'negociacao', text: 'Negociação Inteligente', left: 300, top: 45 },
+  { id: 'operacao', text: 'Operação Especializada', left: 340, top: 105 },
+  { id: 'monitoramento', text: 'Monitoramento em Tempo Real', left: 355, top: 214 },
+  { id: 'auditoria', text: 'Auditoria Independente', left: 355, top: 326 },
+  { id: 'financeira', text: 'Gestão Financeira', left: 340, top: 435 },
+  { id: 'relatorios', text: 'Relatórios e Resultados', left: 300, top: 495 },
 ];
 
 export default function Backstage() {
@@ -104,8 +104,8 @@ export default function Backstage() {
           </div>
 
           {/* RIGHT: arc diagram */}
-          <div className="relative h-[560px] w-full">
-            <div className="absolute left-0 top-1/2 h-[540px] w-[540px] -translate-y-1/2">
+          <div className="relative mx-auto h-105 w-100 max-w-full overflow-visible md:h-120 md:w-115">
+            <div className="absolute left-1/2 top-1/2 h-135 w-135 -translate-x-1/2 -translate-y-1/2 scale-[0.74] md:scale-[0.85]">
               <svg
                 viewBox="0 0 540 540"
                 className="absolute inset-0 h-full w-full overflow-visible"
