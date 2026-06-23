@@ -66,7 +66,7 @@ export default function Results() {
           {RESULTS.map((result) => (
             <div
               key={result.id}
-              className="rounded-2xl border border-ummix-gray-light bg-ummix-gray p-8"
+              className="rounded-2xl border border-[#eee] bg-ummix-gray p-8"
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-ummix-red/10 text-ummix-red">
                 {result.icon}
