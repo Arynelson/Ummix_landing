@@ -27,9 +27,34 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+@keyframes arcDot {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(.3); }
+  3% { opacity: .55; }
+  8% { opacity: 1; transform: scale(1); }
+  94% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; transform: scale(.7); }
+}
+.arc-dot {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-ummix-red);
+  box-shadow: 0 0 14px var(--color-ummix-red), 0 0 28px rgba(155,25,26,.6);
+  offset-path: path('M 270.0 270.0 L 269.5 275.0 L 268.1 278.8 L 266.1 282.1 L 263.4 284.9 L 260.1 287.1 L 256.5 288.6 L 252.4 289.5 L 248.2 289.7 L 243.7 289.1 L 239.2 287.8 L 234.8 285.7 L 230.5 282.8 L 226.6 279.2 L 223.0 274.9 L 219.8 270.0 L 217.3 264.5 L 215.4 258.4 L 214.3 251.9 L 214.0 245.1 L 214.5 238.0 L 216.0 230.8 L 218.4 223.5 L 221.7 216.4 L 226.0 209.5 L 231.3 202.9 L 237.4 196.9 L 244.5 191.4 L 252.3 186.6 L 260.8 182.6 L 270.0 179.6 L 279.7 177.6 L 289.9 176.6 L 300.3 176.8 L 310.9 178.1 L 321.5 180.7 L 332.0 184.6 L 342.3 189.7 L 352.1 196.0 L 361.4 203.6 L 370.0 212.3 L 377.7 222.0 L 384.4 232.8 L 390.1 244.5 L 394.5 256.9 L 397.6 270.0 L 399.3 283.6 L 399.5 297.5 L 398.2 311.7 L 395.3 325.8 L 390.9 339.8 L 384.8 353.4 L 377.2 366.5 L 368.1 379.0 L 357.6 390.5 L 345.7 401.1 L 332.5 410.4 L 318.2 418.4 L 302.9 424.9 L 286.8 429.8 L 270.0 432.9 L 252.7 434.3 L 235.2 433.9 L 217.5 431.5 L 200.0 427.3 L 182.8 421.1 L 166.1 413.0 L 150.2 403.0 L 135.3 391.3 L 121.5 377.9 L 109.1 362.9 L 98.2 346.5 L 89.0 328.8 L 81.7 310.0 L 76.3 290.4 L 73.0 270.0 L 71.9 249.2 L 73.0 228.1 L 76.3 207.1 L 81.9 186.3 L 89.8 166.0 L 99.9 146.4 L 112.1 127.8 L 126.3 110.4 L 142.5 94.5 L 160.5 80.3 L 180.0 67.8 L 200.9 57.5 L 223.1 49.3 L 246.2 43.4 L 270.0 40.0 A 230 230 0 0 1 270 500');
+  offset-rotate: 0deg;
+  animation: arcDot 6.5s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+.arc-dot.d2 { animation-delay: -2.16s; }
+.arc-dot.d3 { animation-delay: -4.33s; }
 @keyframes labelIn {
   from { opacity: 0; transform: translateX(8px); }
   to { opacity: 1; transform: none; }
+}
+.pulse-ring {
+  animation: redPulse 2.8s cubic-bezier(0.16,1,0.3,1) infinite;
 }
 @keyframes chipIn {
   from { opacity: 0; transform: translateY(10px); }
