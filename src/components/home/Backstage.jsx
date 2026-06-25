@@ -162,7 +162,7 @@ export default function Backstage() {
 
         <div className="mt-12 text-center">
           <div className="font-heading text-3xl font-black uppercase leading-tight tracking-wide text-white">
-            <span className="text-ummix-red">Complexo</span> para quem executa.
+            <span className="text-ummix-red">Complexo</span> para a Ummix. <span className="text-ummix-red">Simples</span> para você.
           </div>
         </div>
       </div>

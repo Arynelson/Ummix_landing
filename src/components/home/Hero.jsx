@@ -212,9 +212,9 @@ export default function Hero() {
         {/* Left — copy */}
         <div>
           <h1 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-ummix-dark text-balance">
-            MÍDIA OFF.
+            MÍDIA <span className="text-ummix-red">OFF</span>.
             <br />
-            INTELIGÊNCIA ON.
+            INTELIGÊNCIA <span className="text-ummix-red">DIGITAL</span>.
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-ummix-gray-dark max-w-xl leading-relaxed">
