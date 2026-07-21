@@ -15,7 +15,7 @@ const AWARDS = [
     src: '/assets/Logo_ABDI_Principal .png',
     alt: 'ABDI - Desafio Nacional de Inovação',
     label: 'Top 4 ideias mais inovadoras do Brasil · ABDI',
-    href: 'https://curicaca.abdi.com.br/',
+    href: 'https://prosas.com.br/editais/16002-desafio-de-inovacao-festival-curicaca?subdominio=prosas',
   },
   {
     id: 'go-ecommerce',
@@ -191,7 +191,7 @@ function FlowCard() {
         ))}
       </div>
       <div className="mt-8 pt-6 border-t border-white/10 text-sm leading-relaxed text-white/70">
-        <span className="text-white font-bold">Método Ummix®</span> de Gestão de Campanhas — planejamento, negociação, execução, auditoria e resultados.
+        <span className="text-white font-bold">Método Ummix®</span> de Gestão de Campanhas: planejamento, negociação, execução, auditoria e resultados.
       </div>
     </div>
   )

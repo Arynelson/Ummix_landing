@@ -6,7 +6,6 @@ import Method from './components/home/Method'
 import Eliminates from './components/home/Eliminates'
 import Deliverables from './components/home/Deliverables'
 import Segmentations from './components/home/Segmentations'
-import Results from './components/home/Results'
 import CashbackSection from './components/home/CashbackSection'
 import ForWhom from './components/home/ForWhom'
 import Contact from './components/home/Contact'
@@ -26,7 +25,6 @@ export default function App() {
         <Eliminates />
         <Deliverables />
         <Segmentations />
-        <Results />
         <CashbackSection />
         <ForWhom />
         <Partners />

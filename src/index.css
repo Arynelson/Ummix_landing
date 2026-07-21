@@ -83,6 +83,14 @@
     font-family: var(--font-family-heading);
   }
 
+  @media (min-width: 48rem) {
+    p {
+      hyphens: auto;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+
   :focus-visible {
     outline: 3px solid var(--ummix-red);
     outline-offset: 4px;

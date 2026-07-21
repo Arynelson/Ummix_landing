@@ -113,7 +113,7 @@ function Process() {
             Quatro passos para começar.
           </h2>
           <p className="text-lg text-ummix-gray-dark max-w-xl mx-auto text-pretty">
-            Um processo simples e transparente — da candidatura à primeira campanha no ar.
+            Um processo simples e transparente, da candidatura à primeira campanha no ar.
           </p>
         </div>
 
@@ -143,7 +143,7 @@ function Process() {
 
 /* ---- Partners grid ---- */
 const PARTNERS = [
-  { mark: 'NA', name: 'Nome da Agência', city: 'Goiânia · GO', desc: 'Breve descrição da agência parceira — especialidade e foco de atuação.' },
+  { mark: 'NA', name: 'Nome da Agência', city: 'Goiânia · GO', desc: 'Breve descrição da agência parceira: especialidade e foco de atuação.' },
   { mark: 'AG', name: 'Agência Exemplo', city: 'São Paulo · SP', desc: 'Performance e branding para marcas de varejo em todo o país.' },
   { mark: 'MK', name: 'Marca & Co.', city: 'Brasília · DF', desc: 'Comunicação integrada com forte atuação no setor público.' },
   { mark: 'PB', name: 'Publi Brasil', city: 'Curitiba · PR', desc: 'Mídia e criação para o agronegócio e indústria.' },

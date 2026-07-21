@@ -16,7 +16,7 @@ const AWARDS = [
     src: '/assets/Logo_ABDI_Principal .png',
     alt: 'ABDI - Desafio Nacional de Inovação',
     label: 'Top 4 ideias mais inovadoras do Brasil · ABDI',
-    href: 'https://curicaca.abdi.com.br/',
+    href: 'https://prosas.com.br/editais/16002-desafio-de-inovacao-festival-curicaca?subdominio=prosas',
   },
   {
     id: 'go-ecommerce',

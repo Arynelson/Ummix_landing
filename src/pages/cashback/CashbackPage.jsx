@@ -175,7 +175,7 @@ function HowItWorks() {
             Do cadastro ao resgate, em cinco passos.
           </h2>
           <p className="text-lg text-ummix-gray-dark max-w-xl mx-auto text-pretty">
-            O processo é simples e transparente — acompanhe cada etapa.
+            O processo é simples e transparente. Acompanhe cada etapa.
           </p>
         </div>
 
@@ -223,7 +223,7 @@ function Highlight() {
               Até 3% distribuídos por contrato.
             </h2>
             <p className="text-base leading-relaxed text-white/72 mb-6">
-              Contratante, veículo de mídia e agência — cada um recebe 1%. O cashback é creditado de forma transparente e tem validade de <strong className="text-white">90 dias</strong> após a disponibilização.
+              Contratante, veículo de mídia e agência recebem 1% cada. O cashback é creditado de forma transparente e tem validade de <strong className="text-white">90 dias</strong> após a disponibilização.
             </p>
             <div className="flex flex-wrap gap-3">
               {['Contratante: 1%', 'Veículo: 1%', 'Agência: 1%'].map((label) => (
