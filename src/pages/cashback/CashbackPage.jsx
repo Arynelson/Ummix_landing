@@ -1,7 +1,8 @@
-import { SubHeader, SubFooter } from '../subpages/SubChrome'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import ButtonLink from '../../components/ui/ButtonLink'
 import { PLATFORM_SIGNUP } from '../../constants/urls'
-
-const CASHBACK_PLATFORM = 'Live'
+import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 
 /* ---- Hero ---- */
 function Eyebrow() {
@@ -16,24 +17,27 @@ function Eyebrow() {
 function HeroCTAs() {
   return (
     <div className="flex flex-wrap gap-3 mt-9">
-      <a
-        href="#formulario"
-        className="inline-flex items-center gap-2 bg-ummix-red hover:bg-ummix-red-dark text-white font-semibold px-6 py-3 rounded-xl transition-all hover:scale-105"
+      <ButtonLink
+        href={PLATFORM_SIGNUP}
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        Quero meu cashback
+        Acessar plataforma de cashback
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <a
+      </ButtonLink>
+      <ButtonLink
         href="#como-funciona"
-        className="inline-flex items-center gap-2 border border-white/25 text-white/80 hover:text-white hover:border-white/50 font-semibold px-6 py-3 rounded-xl transition-all"
+        variant="outline-light"
       >
         Como funciona
-      </a>
+      </ButtonLink>
     </div>
   )
 }
 
 function Hero() {
+  const anim = useAnimateOnScroll()
+
   return (
     <section className="relative overflow-hidden bg-ummix-dark text-white">
       {/* Background glow */}
@@ -42,7 +46,7 @@ function Hero() {
         <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)', backgroundSize: '56px 56px', maskImage: 'radial-gradient(ellipse 80% 70% at 40% 40%, #000 35%, transparent 100%)'}} />
       </div>
 
-      <div className="relative z-10 max-w-[920px] mx-auto px-6 pt-44 pb-24 flex flex-col items-center text-center">
+      <div ref={anim.ref} style={anim.style} className="relative z-10 max-w-2xl mx-auto px-6 pt-44 pb-24 flex flex-col items-center text-center">
         <Eyebrow />
         <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
           Anuncie pela Ummix Ads e gere{' '}
@@ -78,9 +82,11 @@ const PARTICIPANTS = [
 ]
 
 function WhoIsEligible() {
+  const anim = useAnimateOnScroll()
+
   return (
-    <section className="bg-white py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-white py-24 md:py-32">
+      <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-14">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Elegibilidade</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
@@ -93,7 +99,7 @@ function WhoIsEligible() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
           {PARTICIPANTS.map((p) => (
-            <div key={p.t} className="rounded-3xl border border-black/8 p-10 bg-white hover:bg-ummix-gray transition-colors">
+            <div key={p.t} className="rounded-3xl border border-black/8 p-8 bg-white transition-all hover:-translate-y-1 hover:bg-ummix-gray">
               <div className="w-13 h-13 rounded-2xl bg-ummix-red/8 text-ummix-red flex items-center justify-center mb-5">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{p.icon}</svg>
               </div>
@@ -158,9 +164,11 @@ const STEPS = [
 ]
 
 function HowItWorks() {
+  const anim = useAnimateOnScroll()
+
   return (
-    <section id="como-funciona" className="bg-ummix-gray py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="como-funciona" className="bg-ummix-gray py-24 md:py-32">
+      <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-14">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Como funciona</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
@@ -198,10 +206,12 @@ function HowItWorks() {
 
 /* ---- Big 3% highlight ---- */
 function Highlight() {
+  const anim = useAnimateOnScroll()
+
   return (
-    <section className="bg-white py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-[960px] mx-auto bg-ummix-dark text-white rounded-3xl p-12 md:p-16 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-14 items-center relative overflow-hidden">
+    <section className="bg-white py-24 md:py-32">
+      <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto bg-ummix-dark text-white rounded-3xl p-12 md:p-16 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-14 items-center relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(560px 340px at 100% 0%, rgba(155,25,26,0.4), transparent 60%)'}} />
 
           <div className="relative z-10 font-heading font-extrabold leading-none tracking-tighter text-white flex items-start" style={{fontSize: 'clamp(80px, 12vw, 140px)', letterSpacing: '-0.05em'}}>
@@ -210,7 +220,7 @@ function Highlight() {
 
           <div className="relative z-10">
             <h2 className="font-heading font-extrabold text-[clamp(26px,3.2vw,38px)] tracking-tight leading-tight text-white text-balance mb-4">
-              Distribuídos entre os participantes do contrato.
+              Até 3% distribuídos por contrato.
             </h2>
             <p className="text-base leading-relaxed text-white/72 mb-6">
               Contratante, veículo de mídia e agência — cada um recebe 1%. O cashback é creditado de forma transparente e tem validade de <strong className="text-white">90 dias</strong> após a disponibilização.
@@ -232,9 +242,11 @@ function Highlight() {
 
 /* ---- CTA / Form ---- */
 function CTA() {
+  const anim = useAnimateOnScroll()
+
   return (
-    <section id="formulario" className="bg-ummix-dark text-white py-20 md:py-28">
-      <div className="max-w-3xl mx-auto px-6 text-center">
+    <section id="formulario" className="bg-ummix-dark text-white py-24 md:py-32">
+      <div ref={anim.ref} style={anim.style} className="max-w-3xl mx-auto px-6 text-center">
         <h2 className="font-heading font-extrabold text-[clamp(32px,4vw,52px)] tracking-tight leading-tight text-balance mb-5">
           Ative seu cashback agora.
         </h2>
@@ -243,21 +255,22 @@ function CTA() {
           o crédito do seu contrato em poucos passos.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <a
+          <ButtonLink
             href={PLATFORM_SIGNUP}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-ummix-red hover:bg-ummix-red-dark text-white font-semibold px-8 py-4 rounded-xl transition-all hover:scale-105"
+            size="lg"
           >
             Solicitar meu cashback
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-          <a
+          </ButtonLink>
+          <ButtonLink
             href="#como-funciona"
-            className="inline-flex items-center gap-2 border border-white/25 text-white/80 hover:text-white hover:border-white/50 font-semibold px-8 py-4 rounded-xl transition-all"
+            size="lg"
+            variant="outline-light"
           >
             Rever como funciona
-          </a>
+          </ButtonLink>
         </div>
         <p className="mt-8 text-sm text-white/40">
           Dúvidas sobre o programa?{' '}
@@ -273,7 +286,7 @@ function CTA() {
 export default function CashbackPage() {
   return (
     <>
-      <SubHeader active="/cashback" />
+      <Header active="/cashback" />
       <main>
         <Hero />
         <WhoIsEligible />
@@ -281,7 +294,7 @@ export default function CashbackPage() {
         <Highlight />
         <CTA />
       </main>
-      <SubFooter />
+      <Footer />
     </>
   )
 }

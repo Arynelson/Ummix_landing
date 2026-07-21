@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
+import ButtonLink from '../ui/ButtonLink'
 
 const AWARDS = [
   {
@@ -218,26 +219,25 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-ummix-gray-dark max-w-xl leading-relaxed">
-            Anuncie em centenas de rádios e TVs. Filtre por localização,
-            renda e comportamento, e veja o que cada veiculação gera.
+            Você escolhe o público, a região e o investimento. A Ummix seleciona
+            os veículos de mídia e os horários para a sua campanha.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3.5">
-            <a
+            <ButtonLink
               href="#metodo"
-              className="inline-flex items-center gap-2.5 bg-ummix-red text-white font-bold text-sm px-7 py-4 rounded-full shadow-[0_12px_28px_-10px_rgba(155,25,26,0.6)] transition-transform hover:scale-105"
             >
               Conhecer o Método Ummix
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-            </a>
-            <a
+            </ButtonLink>
+            <ButtonLink
               href="#contato"
-              className="inline-flex items-center gap-2.5 bg-transparent text-ummix-dark font-bold text-sm px-7 py-4 rounded-full border-[1.5px] border-ummix-dark transition-transform hover:scale-105"
+              variant="outline-dark"
             >
               Quero anunciar
-            </a>
+            </ButtonLink>
           </div>
 
           <div className="mt-12 flex gap-9 text-[13px] font-medium text-ummix-gray-dark">

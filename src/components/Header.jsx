@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { PLATFORM_SIGNUP } from '../constants/urls'
 
-export default function Header() {
+export default function Header({ active }) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -27,17 +27,22 @@ export default function Header() {
           {[
             { href: '/', label: 'Início' },
             { href: '/cashback', label: 'Cashback' },
-          ].map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className={`transition-colors ${
-                scrolled ? 'text-ummix-dark hover:text-ummix-red' : 'text-white/80 hover:text-white'
-              }`}
-            >
-              {label}
-            </a>
-          ))}
+          ].map(({ href, label }) => {
+            const isCurrent = active === href
+            return (
+              <a
+                key={href}
+                href={href}
+                className={`transition-colors ${
+                  isCurrent
+                    ? scrolled ? 'text-ummix-red' : 'text-white underline underline-offset-4 decoration-ummix-red'
+                    : scrolled ? 'text-ummix-dark hover:text-ummix-red' : 'text-white/80 hover:text-white'
+                }`}
+              >
+                {label}
+              </a>
+            )
+          })}
         </nav>
 
         <a

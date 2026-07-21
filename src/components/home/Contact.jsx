@@ -1,5 +1,6 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
 import { PLATFORM_SIGNUP } from '../../constants/urls';
+import ButtonLink from '../ui/ButtonLink';
 
 export default function Contact() {
   const anim = useAnimateOnScroll();
@@ -32,9 +33,9 @@ export default function Contact() {
         </p>
 
         <div className="mt-10 inline-flex flex-wrap justify-center gap-3.5">
-          <a
+          <ButtonLink
             href="mailto:fale@ummix.com.br"
-            className="inline-flex items-center gap-2.5 rounded-full bg-ummix-red px-8 py-4.5 font-sans text-sm font-bold text-white shadow-[0_16px_32px_-10px_rgba(155,25,26,0.6)] transition-transform hover:scale-[1.03]"
+            size="lg"
           >
             Falar com a Ummix
             <svg
@@ -50,15 +51,16 @@ export default function Contact() {
             >
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>
-          </a>
-          <a
+          </ButtonLink>
+          <ButtonLink
             href={PLATFORM_SIGNUP}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 rounded-full border-[1.5px] border-white/40 px-8 py-4.5 font-sans text-sm font-bold text-white transition-transform hover:scale-[1.03]"
+            size="lg"
+            variant="outline-light"
           >
             Acessar a plataforma
-          </a>
+          </ButtonLink>
         </div>
       </div>
     </section>

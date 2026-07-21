@@ -1,4 +1,5 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import ButtonLink from '../ui/ButtonLink';
 
 export default function CashbackSection() {
   const anim = useAnimateOnScroll();
@@ -21,12 +22,13 @@ export default function CashbackSection() {
         <p className="mt-5 font-sans text-lg font-medium leading-relaxed text-white/70">
           Contratante, veículo e agência ficam com sua parte. Você só precisa fechar o contrato com a gente.
         </p>
-        <a
+        <ButtonLink
           href="/cashback.html"
-          className="mt-10 inline-block rounded-full bg-ummix-red px-10 py-4 text-base font-bold text-white shadow-lg transition-all hover:scale-105 hover:bg-ummix-red-dark"
+          className="mt-10"
+          size="xl"
         >
           Conhecer o cashback
-        </a>
+        </ButtonLink>
       </div>
     </section>
   );

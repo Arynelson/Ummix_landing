@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  --ummix-red: #9b191a;
+  --ummix-red-dark: #7a1415;
+  --ummix-dark: #1e1e1e;
+  --ummix-gray: #f4f2f2;
+  --ummix-gray-dark: #333333;
+  --ummix-radius-control: 9999px;
+  --ummix-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @theme {
   --color-ummix-red: #9b191a;
   --color-ummix-red-dark: #7a1415;
