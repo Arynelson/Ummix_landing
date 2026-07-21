@@ -184,7 +184,7 @@ function HowItWorks() {
             <div
               key={s.n}
               className={`relative p-8 bg-white hover:bg-white/80 transition-colors group ${
-                i < STEPS.length - 1 ? 'border-r border-black/8' : ''
+                i < STEPS.length - 1 ? 'lg:border-r lg:border-black/8' : ''
               }`}
             >
               <div className="inline-flex items-center gap-2 text-ummix-red text-xs font-bold tracking-widest uppercase mb-6">
@@ -287,7 +287,8 @@ export default function CashbackPage() {
   return (
     <>
       <Header active="/cashback" />
-      <main>
+      <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
+      <main id="main-content" tabIndex="-1">
         <Hero />
         <WhoIsEligible />
         <HowItWorks />

@@ -17,7 +17,8 @@ export default function App() {
   return (
     <>
       <Header />
-      <main>
+      <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
+      <main id="main-content" tabIndex="-1">
         <Hero />
         <ClientView />
         <Backstage />
