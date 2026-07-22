@@ -1,7 +1,7 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import ButtonLink from '../../components/ui/ButtonLink'
-import { CONTACT_EMAIL, PLATFORM_SIGNUP } from '../../constants/urls'
+import { PLATFORM_SIGNUP } from '../../constants/urls'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 
 /* ---- Hero ---- */
@@ -49,8 +49,7 @@ function Hero() {
       <div ref={anim.ref} style={anim.style} className="relative z-10 max-w-2xl mx-auto px-6 pt-44 pb-24 flex flex-col items-center text-center">
         <Eyebrow />
         <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
-          Anuncie pela Ummix Ads e gere{' '}
-          <em className="not-italic text-ummix-red">até 3% de cashback</em>.
+          Anuncie e ganhe <em className="not-italic text-ummix-red">até 3% de cashback</em>.
         </h1>
         <p className="text-[19px] leading-relaxed text-white/72 max-w-[560px] text-pretty">
           A cada contrato fechado, a Ummix Ads devolve parte do valor para quem
@@ -70,13 +69,13 @@ const PARTICIPANTS = [
     icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></>,
   },
   {
-    t: 'Veículo de mídia',
+    t: 'Mídia',
     d: 'O veículo que assina o PI, quando aplicável à negociação.',
     icon: <><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></>,
   },
   {
-    t: 'Agência / Intermediador',
-    d: 'Gestor de tráfego ou intermediador responsável pela contratação.',
+    t: 'Agência / Agência Digital / Gestor de Tráfego',
+    d: 'Gestor ou intermediador responsável pela contratação.',
     icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></>,
   },
 ]
@@ -245,39 +244,12 @@ function CTA() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section id="formulario" className="bg-ummix-dark text-white py-24 md:py-32">
-      <div ref={anim.ref} style={anim.style} className="max-w-3xl mx-auto px-6 text-center">
-        <h2 className="font-heading font-extrabold text-[clamp(32px,4vw,52px)] tracking-tight leading-tight text-balance mb-5">
-          Ative seu cashback agora.
-        </h2>
-        <p className="text-lg text-white/70 mb-10 text-pretty">
-          Acesse a Plataforma de Cashback da Ummix Ads, cadastre-se e solicite
-          o crédito do seu contrato em poucos passos.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <ButtonLink
-            href={PLATFORM_SIGNUP}
-            target="_blank"
-            rel="noopener noreferrer"
-            size="lg"
-          >
-            Solicitar meu cashback
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </ButtonLink>
-          <ButtonLink
-            href="#como-funciona"
-            size="lg"
-            variant="outline-light"
-          >
-            Rever como funciona
-          </ButtonLink>
-        </div>
-        <p className="mt-8 text-sm text-white/40">
-          Dúvidas sobre o programa?{' '}
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-white/60 hover:text-white underline transition-colors">
-            {CONTACT_EMAIL}
-          </a>
-        </p>
+    <section id="formulario" className="bg-ummix-dark text-white py-12 md:py-16">
+      <div ref={anim.ref} style={anim.style} className="mx-auto flex max-w-3xl justify-center px-6">
+        <h2 className="sr-only">Solicitar cashback</h2>
+        <ButtonLink href={PLATFORM_SIGNUP} target="_blank" rel="noopener noreferrer" size="lg">
+          Solicitar meu cashback
+        </ButtonLink>
       </div>
     </section>
   )
