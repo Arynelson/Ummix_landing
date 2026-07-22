@@ -41,6 +41,44 @@ const AUDIENCES = [
       </svg>
     ),
   },
+  {
+    id: 'poder-publico',
+    title: 'Poder Público',
+    description: 'Comunicação institucional planejada para cada região e público.',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <path d="M3 21h18" />
+        <path d="M5 21V10h14v11" />
+        <path d="M12 3l9 5H3l9-5z" />
+        <path d="M9 14h6" />
+      </svg>
+    ),
+  },
+  {
+    id: 'musica',
+    title: 'Bandas, cantores, duplas e escritórios musicais',
+    description: 'Divulgação de lançamentos, shows e projetos para públicos locais.',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <path d="M9 18V5l10-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="16" cy="16" r="3" />
+      </svg>
+    ),
+  },
+  {
+    id: 'agencias-digitais',
+    title: 'Agências Digitais e Gestores de Tráfego',
+    description: 'Mídia offline para complementar estratégias e campanhas digitais.',
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <path d="M4 19V5" />
+        <path d="M4 19h16" />
+        <path d="m7 15 4-4 3 2 5-6" />
+        <path d="M16 7h3v3" />
+      </svg>
+    ),
+  },
 ];
 
 export default function ForWhom() {
@@ -58,7 +96,7 @@ export default function ForWhom() {
             <span className="text-ummix-red">Resultados reais.</span>
           </h2>
         </div>
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {AUDIENCES.map((audience) => (
             <div
               key={audience.id}

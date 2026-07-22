@@ -1,7 +1,7 @@
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import ButtonLink from '../../components/ui/ButtonLink'
-import { PLATFORM_SIGNUP } from '../../constants/urls'
+import { CONTACT_EMAIL, PLATFORM_SIGNUP } from '../../constants/urls'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 
 /* ---- Hero ---- */
@@ -274,8 +274,8 @@ function CTA() {
         </div>
         <p className="mt-8 text-sm text-white/40">
           Dúvidas sobre o programa?{' '}
-          <a href="mailto:fale@ummix.com.br" className="text-white/60 hover:text-white underline transition-colors">
-            fale@ummix.com.br
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-white/60 hover:text-white underline transition-colors">
+            {CONTACT_EMAIL}
           </a>
         </p>
       </div>

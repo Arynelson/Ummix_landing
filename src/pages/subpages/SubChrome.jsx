@@ -68,7 +68,7 @@ export function SubFooter() {
         <nav className="flex flex-wrap justify-center gap-6 text-sm text-white/60">
           <a href="/" className="hover:text-white transition-colors">Início</a>
           <a href="/cashback" className="hover:text-white transition-colors">Cashback</a>
-          <a href="mailto:fale@ummix.com.br" className="hover:text-white transition-colors">Contato</a>
+          <a href="mailto:falecoma@ummix.com.br" className="hover:text-white transition-colors">Contato</a>
         </nav>
         <p className="text-sm text-white/40">
           &copy; {new Date().getFullYear()} Ummix Ads · Todos os direitos reservados

@@ -48,7 +48,6 @@ const clients = [
   { name: 'Inovatech',        src: '/assets/partners/inovatech.png' },
   { name: 'Jasper',           src: '/assets/partners/jasper.png' },
   { name: 'Loja das Tendas',  src: '/assets/partners/loja_das_tendas.png' },
-  { name: 'Lopes',            src: '/assets/partners/lopes.png' },
   { name: 'Nova Casa',        src: '/assets/partners/nova_casa.png' },
   { name: 'Paeze',            src: '/assets/partners/paeze.png' },
   { name: 'PedeMenu',         src: '/assets/partners/pedemenu.png' },
@@ -100,7 +99,7 @@ export default function Partners() {
         {/* Vehicles */}
         <div ref={animVehicles.ref} style={animVehicles.style} className="mb-16">
           <h2 className="text-2xl md:text-3xl font-bold text-ummix-dark text-center mb-10">
-            Veículos com histórico de mídia pela Ummix
+            Veículos com histórico de mídia gerenciada pela Ummix
           </h2>
           <Marquee items={vehicles} speed={45} />
         </div>
@@ -108,7 +107,7 @@ export default function Partners() {
         {/* Clients */}
         <div ref={animClients.ref} style={animClients.style}>
           <h2 className="text-2xl md:text-3xl font-bold text-ummix-dark text-center mb-10">
-            Anunciantes que confiam na Ummix
+            Anunciantes e parceiros que confiam na Ummix
           </h2>
           <Marquee items={clients} reverse speed={50} />
         </div>
