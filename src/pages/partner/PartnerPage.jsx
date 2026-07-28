@@ -148,28 +148,20 @@ const PARTNERS = [
     id: 'opis',
     mark: 'OP!S',
     name: 'OP!S Publicidade',
-    legalName: 'OPIS! COMUNICACAO INTEGRADA LTDA',
-    cnpj: '18.129.997/0001-40',
     links: [
       { label: 'opisagencia.com.br', href: 'https://opisagencia.com.br/', external: true },
       { label: '@opispublicidade', href: 'https://www.instagram.com/opispublicidade/', external: true },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/company/opisagencia/', external: true },
-      { label: 'samuel@opispublicidade.com', href: 'mailto:samuel@opispublicidade.com' },
-      { label: '(62) 98145-8871', href: 'tel:+5562981458871' },
     ],
   },
   {
     id: 'oqi',
     mark: 'OQI',
     name: 'OQI',
-    legalName: 'CAROLINE ALVARES DA SILVEIRA - ME',
-    cnpj: '60.227.401/0001-00',
     links: [
       { label: 'agenciaoqi.com', href: 'http://agenciaoqi.com', external: true },
       { label: '@agenciaoqi', href: 'https://www.instagram.com/agenciaoqi/', external: true },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/company/oqi-ag%C3%AAncia-que-cria-impacto-positivo/', external: true },
-      { label: 'contato@agenciaoqi.com', href: 'mailto:contato@agenciaoqi.com' },
-      { label: '(62) 98218-2848', href: 'tel:+5562982182848' },
     ],
   },
 ]
@@ -213,23 +205,6 @@ function PartnersGrid() {
                   </h3>
                 </div>
               </div>
-
-              <dl className="relative mt-7 border-t border-ummix-dark/10 pt-6">
-                <div>
-                  <dt className="font-sans text-[11px] font-bold uppercase tracking-[0.16em] text-ummix-gray-dark">
-                    Razão social
-                  </dt>
-                  <dd className="mt-1 font-sans text-sm font-semibold leading-relaxed text-ummix-dark">
-                    {partner.legalName}
-                  </dd>
-                </div>
-                <div className="mt-4">
-                  <dt className="font-sans text-[11px] font-bold uppercase tracking-[0.16em] text-ummix-gray-dark">
-                    CNPJ
-                  </dt>
-                  <dd className="mt-1 font-sans text-sm font-semibold text-ummix-dark">{partner.cnpj}</dd>
-                </div>
-              </dl>
 
               <div className="relative mt-7 flex flex-wrap gap-2.5 border-t border-ummix-dark/10 pt-6">
                 {partner.links.map((link) => (
