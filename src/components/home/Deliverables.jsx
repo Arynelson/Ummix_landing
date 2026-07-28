@@ -56,7 +56,7 @@ export default function Deliverables() {
   const anim = useAnimateOnScroll();
 
   return (
-    <section className="relative overflow-hidden bg-ummix-dark px-6 py-24 text-white md:px-16 md:py-32">
+    <section className="relative overflow-hidden bg-ummix-dark px-6 py-20 text-white md:px-16 md:py-28">
       <div
         className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[900px] -translate-x-1/2"
         style={{ background: 'radial-gradient(ellipse at top, rgba(155,25,26,.20), transparent 70%)' }}
@@ -74,7 +74,7 @@ export default function Deliverables() {
           </h2>
         </div>
 
-        <div className="mt-18 grid grid-cols-1 gap-5 md:mt-20 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-4 md:mt-14 md:grid-cols-2 md:gap-5 lg:grid-cols-4">
           {DELIVERABLES.map((item) => (
             <div
               key={item.id}

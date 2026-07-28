@@ -16,18 +16,21 @@ function Eyebrow() {
 
 function HeroCTAs() {
   return (
-    <div className="flex flex-wrap gap-3 mt-9">
+    <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
       <ButtonLink
         href={PLATFORM_SIGNUP}
         target="_blank"
         rel="noopener noreferrer"
+        className="w-full sm:w-auto"
       >
-        Acessar plataforma de cashback
+        <span className="sm:hidden">Acessar plataforma</span>
+        <span className="hidden sm:inline">Acessar plataforma de cashback</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </ButtonLink>
       <ButtonLink
         href="#como-funciona"
         variant="outline-light"
+        className="w-full sm:w-auto"
       >
         Como funciona
       </ButtonLink>
@@ -46,12 +49,12 @@ function Hero() {
         <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)', backgroundSize: '56px 56px', maskImage: 'radial-gradient(ellipse 80% 70% at 40% 40%, #000 35%, transparent 100%)'}} />
       </div>
 
-      <div ref={anim.ref} style={anim.style} className="relative z-10 max-w-2xl mx-auto px-6 pt-44 pb-24 flex flex-col items-center text-center">
+      <div ref={anim.ref} style={anim.style} className="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-6 pb-20 pt-36 text-center md:pb-24 md:pt-40">
         <Eyebrow />
         <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
           Anuncie e ganhe <em className="not-italic text-ummix-red">até 3% de cashback</em>.
         </h1>
-        <p className="text-[19px] leading-relaxed text-white/72 max-w-[560px] text-pretty">
+        <p className="section-subtitle max-w-[560px] text-[18px] leading-relaxed text-white/75 sm:text-[19px]">
           A cada contrato fechado, a Ummix Ads devolve parte do valor para quem
           participou da negociação. Cadastre-se e comece a receber.
         </p>
@@ -84,21 +87,21 @@ function WhoIsEligible() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section className="bg-white py-24 md:py-32">
+    <section className="bg-white py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <div className="mb-10 text-center md:mb-12">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Elegibilidade</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
             Quem tem direito ao cashback?
           </h2>
-          <p className="text-lg text-ummix-gray-dark max-w-xl mx-auto text-pretty">
+          <p className="section-subtitle text-lg text-ummix-gray-dark">
             Cada participante elegível recebe <strong>1% de cashback</strong>, totalizando até <strong>3% distribuídos por contrato</strong>.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+        <div className="mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
           {PARTICIPANTS.map((p) => (
-            <div key={p.t} className="rounded-3xl border border-black/8 p-8 bg-white transition-all hover:-translate-y-1 hover:bg-ummix-gray">
+            <div key={p.t} className="rounded-3xl border border-black/8 bg-white p-6 transition-all hover:-translate-y-1 hover:bg-ummix-gray md:p-8">
               <div className="w-13 h-13 rounded-2xl bg-ummix-red/8 text-ummix-red flex items-center justify-center mb-5">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{p.icon}</svg>
               </div>
@@ -113,7 +116,7 @@ function WhoIsEligible() {
         </div>
 
         {/* Rules */}
-        <div className="max-w-3xl mx-auto rounded-3xl border border-black/8 p-10 bg-ummix-gray">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-black/8 bg-ummix-gray p-6 sm:p-8 md:p-10">
           <h3 className="font-heading font-bold text-xl tracking-tight text-ummix-dark mb-6">Regras para receber o cashback</h3>
           <ul className="space-y-4">
             {[
@@ -166,24 +169,24 @@ function HowItWorks() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section id="como-funciona" className="bg-ummix-gray py-24 md:py-32">
+    <section id="como-funciona" className="bg-ummix-gray py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <div className="mb-10 text-center md:mb-12">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Como funciona</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
             Do cadastro ao resgate, em cinco passos.
           </h2>
-          <p className="text-lg text-ummix-gray-dark max-w-xl mx-auto text-pretty">
+          <p className="section-subtitle text-lg text-ummix-gray-dark">
             O processo é simples e transparente. Acompanhe cada etapa.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 rounded-3xl overflow-hidden border border-black/8">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-black/8 bg-black/8 sm:grid-cols-2 lg:grid-cols-5">
           {STEPS.map((s, i) => (
             <div
               key={s.n}
-              className={`relative p-8 bg-white hover:bg-white/80 transition-colors group ${
-                i < STEPS.length - 1 ? 'lg:border-r lg:border-black/8' : ''
+              className={`group relative bg-white p-6 transition-colors hover:bg-white/80 md:p-8 ${
+                i === STEPS.length - 1 ? 'sm:col-span-2 lg:col-span-1' : ''
               }`}
             >
               <div className="inline-flex items-center gap-2 text-ummix-red text-xs font-bold tracking-widest uppercase mb-6">
@@ -208,9 +211,9 @@ function Highlight() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section className="bg-white py-24 md:py-32">
+    <section className="bg-white py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
-        <div className="max-w-5xl mx-auto bg-ummix-dark text-white rounded-3xl p-12 md:p-16 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-14 items-center relative overflow-hidden">
+        <div className="relative mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 overflow-hidden rounded-3xl bg-ummix-dark p-6 text-white sm:p-8 md:grid-cols-[auto_1fr] md:gap-12 md:p-12 lg:p-14">
           <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(560px 340px at 100% 0%, rgba(155,25,26,0.4), transparent 60%)'}} />
 
           <div className="relative z-10 font-heading font-extrabold leading-none tracking-tighter text-white flex items-start" style={{fontSize: 'clamp(80px, 12vw, 140px)', letterSpacing: '-0.05em'}}>
@@ -221,7 +224,7 @@ function Highlight() {
             <h2 className="font-heading font-extrabold text-[clamp(26px,3.2vw,38px)] tracking-tight leading-tight text-white text-balance mb-4">
               Até 3% distribuídos por contrato.
             </h2>
-            <p className="text-base leading-relaxed text-white/72 mb-6">
+            <p className="copy-justify mb-6 text-base leading-relaxed text-white/75">
               Contratante, veículo de mídia e agência recebem 1% cada. O cashback é creditado de forma transparente e tem validade de <strong className="text-white">90 dias</strong> após a disponibilização.
             </p>
             <div className="flex flex-wrap gap-3">

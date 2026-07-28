@@ -16,17 +16,17 @@ function Eyebrow() {
 
 function HeroCTAs() {
   return (
-    <div className="flex flex-wrap gap-3 mt-9">
+    <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       <a
         href="#candidatura"
-        className="inline-flex items-center gap-2 bg-ummix-red hover:bg-ummix-red-dark text-white font-semibold px-6 py-3 rounded-xl transition-all hover:scale-105"
+        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-ummix-red px-6 py-3 font-semibold text-white transition-all hover:scale-105 hover:bg-ummix-red-dark sm:w-auto"
       >
         Quero ser partner
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
       <a
         href="#processo"
-        className="inline-flex items-center gap-2 border border-white/25 text-white/80 hover:text-white hover:border-white/50 font-semibold px-6 py-3 rounded-xl transition-all"
+        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/25 px-6 py-3 font-semibold text-white/80 transition-all hover:border-white/50 hover:text-white sm:w-auto"
       >
         Como funciona
       </a>
@@ -56,12 +56,12 @@ function KpiPanel() {
   return (
     <div className="grid gap-3">
       {kpis.map((k, i) => (
-        <div key={i} className="bg-ummix-gray text-ummix-dark rounded-2xl p-6 flex items-center gap-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)]">
+        <div key={i} className="flex items-center gap-4 rounded-2xl bg-ummix-gray p-5 text-ummix-dark shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] sm:p-6">
           <div className="w-11 h-11 rounded-xl bg-ummix-red/10 text-ummix-red flex items-center justify-center shrink-0">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{k.icon}</svg>
           </div>
           <div>
-            <div className={`font-heading font-extrabold text-[26px] leading-none tracking-tight ${k.highlight ? 'text-ummix-red' : ''}`}>{k.value}</div>
+            <div className={`font-heading text-[22px] font-extrabold leading-none tracking-tight sm:text-[26px] ${k.highlight ? 'text-ummix-red' : ''}`}>{k.value}</div>
             <div className="text-[13px] text-ummix-gray-dark mt-1">{k.label}</div>
           </div>
         </div>
@@ -78,14 +78,14 @@ function Hero() {
         <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)', backgroundSize: '56px 56px', maskImage: 'radial-gradient(ellipse 80% 70% at 40% 40%, #000 35%, transparent 100%)'}} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-44 pb-24 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-16 items-center">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-20 pt-36 md:pb-24 md:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         <div>
           <Eyebrow />
           <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
             Tenha agora acesso à{' '}
             <em className="not-italic text-ummix-red">mídia de massa orientada a dados</em>.
           </h1>
-          <p className="text-[19px] leading-relaxed text-white/72 max-w-[560px] text-pretty">
+          <p className="copy-justify max-w-[560px] text-[18px] leading-relaxed text-white/75 sm:text-[19px]">
             Some a estratégia da sua empresa à inteligência de veiculação da Ummix em rádio, TV e mídia
             exterior. Amplie suas entregas e crie uma nova fonte de receita para o seu negócio.
           </p>
@@ -107,9 +107,9 @@ const PROCESS = [
 
 function Process() {
   return (
-    <section id="processo" className="bg-ummix-gray py-20 md:py-28">
+    <section id="processo" className="bg-ummix-gray py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <div className="mb-10 text-center md:mb-12">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Como virar parceiro</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
             Quatro passos para começar.
@@ -123,7 +123,7 @@ function Process() {
           {PROCESS.map((s, i) => (
             <div
               key={i}
-              className="relative bg-white rounded-2xl p-8 border border-black/6 hover:-translate-y-1 hover:border-ummix-red/22 hover:shadow-[0_20px_50px_-22px_rgba(155,25,26,0.2)] transition-all duration-300 group"
+              className="group relative rounded-2xl border border-black/6 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ummix-red/22 hover:shadow-[0_20px_50px_-22px_rgba(155,25,26,0.2)] md:p-8"
             >
               <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-heading font-extrabold text-lg text-white mb-6 transition-colors duration-300 ${i === 0 ? 'bg-ummix-red' : 'bg-ummix-dark group-hover:bg-ummix-red'}`}>
                 {i + 1}
@@ -169,9 +169,9 @@ const PARTNERS = [
 
 function PartnersGrid() {
   return (
-    <section id="parceiros" className="bg-white py-20 md:py-28">
+    <section id="parceiros" className="bg-white py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <div className="mb-10 text-center md:mb-12">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Partners Ummix</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
             Empresas que já operam com a Ummix.
@@ -185,7 +185,7 @@ function PartnersGrid() {
           {PARTNERS.map((partner) => (
             <article
               key={partner.id}
-              className="relative overflow-hidden rounded-3xl border border-black/8 bg-ummix-gray p-7 transition-all duration-300 hover:-translate-y-1 hover:border-ummix-red/25 hover:shadow-[0_24px_60px_-30px_rgba(30,30,30,0.45)] md:p-9"
+              className="relative overflow-hidden rounded-3xl border border-black/8 bg-ummix-gray p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ummix-red/25 hover:shadow-[0_24px_60px_-30px_rgba(30,30,30,0.45)] sm:p-7 md:p-8"
             >
               <div
                 className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full"
@@ -214,7 +214,7 @@ function PartnersGrid() {
                     href={link.href}
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="inline-flex min-h-10 max-w-full items-center gap-2 rounded-full border border-ummix-dark/12 bg-white px-4 py-2 font-sans text-xs font-bold text-ummix-dark transition-colors hover:border-ummix-red/35 hover:text-ummix-red"
+                    className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-ummix-dark/12 bg-white px-4 py-2 font-sans text-xs font-bold text-ummix-dark transition-colors hover:border-ummix-red/35 hover:text-ummix-red"
                   >
                     <span className="break-all">{link.label}</span>
                     <svg className="shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -260,7 +260,7 @@ function PartnerForm() {
   }
 
   return (
-    <section id="candidatura" className="bg-ummix-gray py-20 md:py-28">
+    <section id="candidatura" className="bg-ummix-gray py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="relative mx-auto grid max-w-[1080px] grid-cols-1 items-center gap-10 overflow-hidden rounded-3xl bg-ummix-dark p-6 text-white sm:p-8 md:grid-cols-[0.9fr_1.1fr] md:gap-14 md:p-14">
           <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(600px 360px at 0% 0%, rgba(155,25,26,0.32), transparent 62%)'}} />

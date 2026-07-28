@@ -33,9 +33,9 @@ export default function Header({ active, surface = 'overlay' }) {
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-3">
-        <a href="/" className="flex items-center gap-2 shrink-0">
-          <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-8 md:h-10 transition-all ${
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-4 md:px-6">
+        <a href="/" className="flex min-h-11 shrink-0 items-center">
+          <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-auto w-[118px] transition-all sm:w-[150px] md:h-10 md:w-auto ${
             usesDarkInk ? 'opacity-100' : 'brightness-0 invert'
           }`} />
         </a>
@@ -64,9 +64,9 @@ export default function Header({ active, surface = 'overlay' }) {
           href={PLATFORM_SIGNUP}
           target="_blank"
           rel="noopener noreferrer"
-          className="min-h-11 bg-ummix-red hover:bg-ummix-red-dark text-white px-3 py-2 md:px-6 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 whitespace-nowrap"
+          className="inline-flex min-h-11 items-center whitespace-nowrap rounded-lg bg-ummix-red px-3 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-ummix-red-dark md:px-6 md:py-2.5 md:text-sm"
         >
-          <span className="sm:hidden">Acessar plataforma</span>
+          <span className="sm:hidden">Plataforma</span>
           <span className="hidden sm:inline">Plataforma Ummix Ads</span>
         </a>
 
@@ -89,7 +89,7 @@ export default function Header({ active, surface = 'overlay' }) {
       <nav
         id="mobile-navigation"
         aria-label="Navegação móvel"
-        className={`absolute left-4 right-4 top-full mt-2 overflow-hidden rounded-2xl bg-white p-2 shadow-xl transition-all md:hidden ${
+        className={`absolute left-3 right-3 top-full mt-2 overflow-hidden rounded-2xl bg-white p-2 shadow-xl transition-all sm:left-4 sm:right-4 md:hidden ${
           menuOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
         }`}
       >

@@ -83,17 +83,25 @@
     font-family: var(--font-family-heading);
   }
 
-  @media (min-width: 48rem) {
-    p {
-      hyphens: auto;
-      text-align: justify;
-      text-justify: inter-word;
-    }
-  }
-
   :focus-visible {
     outline: 3px solid var(--ummix-red);
     outline-offset: 4px;
+  }
+}
+
+.section-subtitle {
+  margin-inline: auto;
+  max-width: 36rem;
+  text-align: center;
+  text-wrap: pretty;
+  hyphens: none;
+}
+
+@media (min-width: 48rem) {
+  .copy-justify {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
   }
 }
 

@@ -43,7 +43,7 @@ export default function ClientView() {
   const anim = useAnimateOnScroll();
 
   return (
-    <section className="bg-white py-24 md:py-30">
+    <section className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <div
@@ -56,16 +56,16 @@ export default function ClientView() {
           <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
             <span className="text-ummix-red">Simples</span> para quem contrata.
           </h2>
-          <p className="mt-4 font-sans text-base leading-relaxed text-ummix-gray-dark md:text-lg">
+          <p className="section-subtitle mt-4 font-sans text-base leading-relaxed text-ummix-gray-dark md:text-lg">
             Toda a complexidade da mídia off, embrulhada em três entregáveis claros.
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-5 md:mt-14 md:grid-cols-3 md:gap-6">
           {CARDS.map((card) => (
             <div
               key={card.id}
-              className="rounded-3xl border border-transparent bg-ummix-gray p-8 text-center md:p-12"
+              className="rounded-3xl border border-transparent bg-ummix-gray p-7 text-center md:p-9"
             >
               <div className="mx-auto flex h-18 w-18 items-center justify-center rounded-2xl bg-ummix-red/10 text-ummix-red">
                 {card.icon}

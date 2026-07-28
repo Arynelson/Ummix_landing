@@ -72,7 +72,7 @@ export default function Segmentations() {
   const activeTabData = TABS.find((tab) => tab.id === activeTab);
 
   return (
-    <section id="segmentacoes" className="relative border-t border-[#f0eeec] bg-ummix-gray px-6 py-24 md:px-16 md:py-32">
+    <section id="segmentacoes" className="relative border-t border-[#f0eeec] bg-ummix-gray px-6 py-20 md:px-16 md:py-24">
       <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <div className="font-sans text-[11px] font-bold uppercase leading-none tracking-[.22em] text-ummix-red">
@@ -81,12 +81,12 @@ export default function Segmentations() {
           <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
             Segmentações <span className="text-ummix-red">disponíveis</span>.
           </h2>
-          <p className="mt-4.5 text-[17px] leading-relaxed text-[#555]">
+          <p className="section-subtitle mt-4 text-[17px] leading-relaxed text-[#555]">
             Escolha o público certo. Atinja exatamente quem importa para sua campanha.
           </p>
         </div>
 
-        <div role="tablist" aria-label="Tipos de segmentação" className="mt-14 flex flex-wrap justify-center gap-2.5">
+        <div role="tablist" aria-label="Tipos de segmentação" className="mt-10 flex flex-wrap justify-center gap-2.5 md:mt-12">
           {TABS.map((tab) => {
             const isActive = tab.id === activeTab;
             return (
@@ -110,7 +110,7 @@ export default function Segmentations() {
           })}
         </div>
 
-        <div className="relative mt-12 min-h-[240px]">
+        <div className="relative mt-10 min-h-[240px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTabData.id}
@@ -141,7 +141,7 @@ export default function Segmentations() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-12 text-center font-sans text-sm font-medium text-[#888]">
+        <div className="mt-8 text-center font-sans text-sm font-medium text-[#666] md:mt-10">
           Cruzamos múltiplas dimensões para atingir o público exato da sua campanha.
         </div>
       </div>

@@ -85,7 +85,7 @@ export default function ForWhom() {
   const anim = useAnimateOnScroll();
 
   return (
-    <section className="bg-ummix-gray py-24 md:py-[120px]">
+    <section className="bg-ummix-gray py-20 md:py-24">
       <div ref={anim.ref} style={anim.style} className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <div className="font-body text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red">
@@ -96,11 +96,11 @@ export default function ForWhom() {
             <span className="text-ummix-red">Resultados reais.</span>
           </h2>
         </div>
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-5 md:mt-14 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
           {AUDIENCES.map((audience) => (
             <div
               key={audience.id}
-              className="rounded-[20px] border border-[#eee] bg-white p-9"
+              className="rounded-[20px] border border-[#eee] bg-white p-7 md:p-8"
             >
               <div className="grid h-14 w-14 place-items-center rounded-2xl bg-ummix-red/10 text-ummix-red">
                 {audience.icon}

@@ -48,7 +48,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contato" className="relative overflow-hidden bg-ummix-dark px-6 py-28 text-white md:px-16 md:py-36">
+    <section id="contato" className="relative overflow-hidden bg-ummix-dark px-6 py-16 text-white md:px-16 md:py-20">
       <div
         className="pointer-events-none absolute inset-0"
         style={{ background: 'radial-gradient(ellipse at center bottom, rgba(155,25,26,.25), transparent 60%)' }}
@@ -70,12 +70,12 @@ export default function Contact() {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[70] grid place-items-center bg-black/65 px-4 py-6" role="presentation" onMouseDown={() => setIsOpen(false)}>
+        <div className="fixed inset-0 z-70 grid place-items-center overflow-y-auto bg-black/65 px-4 py-4 sm:py-6" role="presentation" onMouseDown={() => setIsOpen(false)}>
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-form-title"
-            className="relative w-full max-w-xl rounded-3xl bg-white p-6 text-ummix-dark shadow-2xl md:p-9"
+            className="relative max-h-[calc(100dvh-2rem)] w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-5 text-ummix-dark shadow-2xl sm:p-6 md:p-9"
             onMouseDown={(event) => event.stopPropagation()}
           >
             <button
@@ -102,7 +102,7 @@ export default function Contact() {
                 <p className="mt-2 text-sm text-ummix-gray-dark">Obrigado pelo contato. Em breve, falaremos com você.</p>
               </div>
             ) : (
-              <form className="mt-8 space-y-5" onSubmit={submitForm}>
+              <form className="mt-6 space-y-4 sm:mt-8 sm:space-y-5" onSubmit={submitForm}>
                 <div>
                   <label htmlFor="contact-name" className="mb-2 block text-sm font-bold">Nome*</label>
                   <input id="contact-name" name="name" value={form.name} onChange={updateField} required autoComplete="name" className="min-h-12 w-full rounded-xl border border-ummix-dark/20 px-4 text-base" />
@@ -117,7 +117,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <label htmlFor="contact-message" className="mb-2 block text-sm font-bold">Mensagem</label>
-                  <textarea id="contact-message" name="message" value={form.message} onChange={updateField} rows="4" className="w-full rounded-xl border border-ummix-dark/20 px-4 py-3 text-base" />
+                  <textarea id="contact-message" name="message" value={form.message} onChange={updateField} rows="3" className="w-full rounded-xl border border-ummix-dark/20 px-4 py-3 text-base" />
                 </div>
                 {status === 'error' && <p className="text-sm font-semibold text-ummix-red" role="alert">Não foi possível enviar agora. Tente novamente em alguns instantes.</p>}
                 <button type="submit" disabled={status === 'submitting'} className="inline-flex min-h-12 items-center justify-center rounded-full bg-ummix-red px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-70">

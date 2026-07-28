@@ -12,9 +12,9 @@ export default function Eliminates() {
   const anim = useAnimateOnScroll();
 
   return (
-    <section className="bg-white py-24 md:py-30">
+    <section className="bg-white py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-[1fr_1.2fr] md:gap-20">
+        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16">
           <div>
             <div className="font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red">
               O que isso elimina
@@ -22,7 +22,7 @@ export default function Eliminates() {
             <h2 className="mt-3.5 text-balance font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
               Menos complexidade. <span className="text-ummix-red">Mais tempo</span> para o que importa.
             </h2>
-            <p className="mt-4 font-sans text-base leading-relaxed text-ummix-gray-dark">
+            <p className="copy-justify mt-4 font-sans text-base leading-relaxed text-ummix-gray-dark">
               A Ummix absorve toda a operação da mídia off para que você foque em estratégia e resultado.
             </p>
           </div>

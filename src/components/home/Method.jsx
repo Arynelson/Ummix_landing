@@ -170,7 +170,7 @@ export default function Method() {
   const slide = SLIDES[activeSlide];
 
   return (
-    <section id="metodo" className="relative overflow-hidden bg-ummix-gray px-6 py-24 md:px-16 md:py-36">
+    <section id="metodo" className="relative overflow-hidden bg-ummix-gray px-6 py-20 md:px-16 md:py-28">
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-[480px] w-[480px] rounded-full"
         style={{ background: 'radial-gradient(circle, rgba(155,25,26,.08), transparent 65%)' }}
@@ -207,7 +207,7 @@ export default function Method() {
                 type="button"
                 onClick={goPrev}
                 aria-label="Etapa anterior"
-                className="grid h-8 w-8 place-items-center rounded-full border-none bg-ummix-gray text-ummix-dark"
+                className="grid h-11 w-11 place-items-center rounded-full border-none bg-ummix-gray text-ummix-dark"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6" />
@@ -217,7 +217,7 @@ export default function Method() {
                 type="button"
                 onClick={goNext}
                 aria-label="Próxima etapa"
-                className="grid h-8 w-8 place-items-center rounded-full border-none bg-ummix-red text-white shadow-[0_6px_14px_-6px_rgba(155,25,26,.7)]"
+                className="grid h-11 w-11 place-items-center rounded-full border-none bg-ummix-red text-white shadow-[0_6px_14px_-6px_rgba(155,25,26,.7)]"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 18l6-6-6-6" />
@@ -228,13 +228,13 @@ export default function Method() {
         </div>
 
         {/* Stage */}
-        <div className="relative mt-16 overflow-hidden rounded-[32px] bg-ummix-dark p-10 text-white md:p-16">
+        <div className="relative mt-12 overflow-hidden rounded-[28px] bg-ummix-dark p-6 text-white sm:p-8 md:mt-14 md:rounded-[32px] md:p-12 lg:p-16">
           <div
             className="pointer-events-none absolute -right-24 -top-24 h-[480px] w-[480px] rounded-full"
             style={{ background: 'radial-gradient(circle, rgba(155,25,26,.30), transparent 65%)' }}
           />
 
-          <div className="relative min-h-[320px]">
+          <div className="relative min-h-[280px] md:min-h-[320px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={slide.id}
@@ -242,22 +242,22 @@ export default function Method() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="grid items-center gap-12 md:grid-cols-[1.4fr_1fr]"
+                className="grid min-w-0 items-center gap-12 md:grid-cols-[1.4fr_1fr]"
               >
-                <div>
+                <div className="min-w-0">
                   <div className="font-sans text-[11px] font-bold uppercase leading-none tracking-[.22em] text-ummix-red">
                     {`Etapa ${String(activeSlide + 1).padStart(2, '0')} de ${TOTAL_SLIDES}`}
                   </div>
-                  <div className="mt-4.5 flex items-baseline gap-5">
-                    <div className="font-heading text-[90px] font-black leading-[.85] tracking-tight text-ummix-red md:text-[120px]">
+                  <div className="mt-4 flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-baseline sm:gap-5">
+                    <div className="shrink-0 font-heading text-[64px] font-black leading-[.85] tracking-tight text-ummix-red sm:text-[82px] md:text-[120px]">
                       {String(activeSlide + 1).padStart(2, '0')}
                     </div>
-                    <h3 className="m-0 text-balance font-heading text-3xl font-extrabold leading-none tracking-tight text-white md:text-4xl">
+                    <h3 className="m-0 min-w-0 break-words text-balance font-heading text-3xl font-extrabold leading-none tracking-tight text-white md:text-4xl">
                       {slide.title}
                     </h3>
                   </div>
                   <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-white/72">{slide.description}</p>
-                  <div className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-ummix-red/40 bg-ummix-red/[.18] px-4.5 py-2.5 font-sans text-[11px] font-bold uppercase leading-none tracking-[.16em] text-white">
+                  <div className="mt-6 flex w-fit max-w-full flex-wrap items-center gap-2.5 rounded-2xl border border-ummix-red/40 bg-ummix-red/[.18] px-4 py-3 font-sans text-[11px] font-bold uppercase leading-snug tracking-[.14em] text-white sm:rounded-full">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
@@ -280,8 +280,8 @@ export default function Method() {
           </div>
 
           {/* chips + progress */}
-          <div className="relative mt-12 border-t border-white/10 pt-7">
-            <div className="grid grid-cols-5 gap-2 md:grid-cols-10">
+          <div className="relative mt-10 border-t border-white/10 pt-6 md:mt-12 md:pt-7">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 md:grid-cols-10">
               {SLIDES.map((s, index) => (
                 <button
                   key={s.id}
@@ -289,7 +289,7 @@ export default function Method() {
                   onClick={() => goToSlide(index)}
                   aria-label={`Ir para etapa ${index + 1}`}
                   aria-current={index === activeSlide}
-                  className={`rounded-xl border-none py-3 font-heading text-sm font-extrabold tracking-wide ${
+                  className={`min-h-11 rounded-xl border-none px-2 py-3 font-heading text-sm font-extrabold tracking-wide ${
                     index === activeSlide
                       ? 'bg-ummix-red text-white'
                       : 'bg-white/5 text-white/55 outline outline-1 outline-white/[.06]'

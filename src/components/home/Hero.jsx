@@ -156,14 +156,34 @@ function FlowArrow() {
 
 function FlowCard() {
   return (
-    <div className="relative bg-ummix-dark rounded-3xl p-8 text-white shadow-2xl">
+    <div className="relative rounded-3xl bg-ummix-dark p-6 text-white shadow-2xl sm:p-8">
       <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-ummix-red">
         Da contratação à prestação de contas
       </div>
       <div className="mt-4 font-heading font-extrabold text-2xl leading-tight">
         Uma operação única e integrada.
       </div>
-      <div className="mt-7 flex items-center justify-between gap-2">
+      <div className="mt-6 grid gap-2 sm:hidden">
+        {FLOW_STEPS.map((step, index) => (
+          <div
+            key={step.id}
+            className={`flex min-h-11 items-center gap-3 rounded-xl px-3 py-2 ${
+              step.active ? 'bg-ummix-red text-white' : 'bg-white/5 text-white/80'
+            }`}
+          >
+            <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${
+              step.active ? 'bg-white/14 text-white' : 'bg-ummix-red/18 text-ummix-red'
+            }`}>
+              {step.icon}
+            </div>
+            <span className="font-sans text-xs font-bold uppercase tracking-wide">{step.label}</span>
+            <span className="ml-auto font-heading text-sm font-extrabold text-white/45">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-7 hidden items-center justify-between gap-2 sm:flex">
         {FLOW_STEPS.map((step, i) => (
           <div key={step.id} className="flex items-center gap-2">
             <div className="flex flex-col items-center gap-2.5">
@@ -190,7 +210,7 @@ function FlowCard() {
           </div>
         ))}
       </div>
-      <div className="mt-8 pt-6 border-t border-white/10 text-sm leading-relaxed text-white/70">
+      <div className="mt-7 border-t border-white/10 pt-5 text-sm leading-relaxed text-white/70 sm:mt-8 sm:pt-6">
         <span className="text-white font-bold">Método Ummix®</span> de Gestão de Campanhas: planejamento, negociação, execução, auditoria e resultados.
       </div>
     </div>
@@ -208,7 +228,7 @@ export default function Hero() {
           background: 'radial-gradient(circle, rgba(155,25,26,0.10), transparent 65%)',
         }}
       />
-      <div ref={anim.ref} style={anim.style} className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
+      <div ref={anim.ref} style={anim.style} className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
 
         {/* Left — copy */}
         <div>
@@ -218,14 +238,15 @@ export default function Hero() {
             INTELIGÊNCIA <span className="text-ummix-red">DIGITAL</span>.
           </h1>
 
-          <p className="mt-6 text-lg md:text-xl text-ummix-gray-dark max-w-xl leading-relaxed">
+          <p className="copy-justify mt-6 max-w-xl text-lg leading-relaxed text-ummix-gray-dark md:text-xl">
             Você escolhe o público, a região e o investimento. A Ummix seleciona
             os veículos de mídia e os horários para a sua campanha.
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-3.5">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <ButtonLink
               href="#metodo"
+              className="w-full sm:w-auto"
             >
               Conhecer o Método Ummix
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -235,12 +256,13 @@ export default function Hero() {
             <ButtonLink
               href="#contato"
               variant="outline-dark"
+              className="w-full sm:w-auto"
             >
               Quero anunciar
             </ButtonLink>
           </div>
 
-          <div className="mt-12 flex gap-9 text-[13px] font-medium text-ummix-gray-dark">
+          <div className="mt-10 grid grid-cols-3 gap-3 text-[11px] font-medium leading-snug text-ummix-gray-dark sm:gap-8 sm:text-[13px]">
             <div>
               <div className="font-heading font-black text-2xl text-ummix-dark leading-none">+150</div>
               Veículos parceiros

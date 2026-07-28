@@ -68,7 +68,7 @@ export default function Backstage() {
   return (
     <section
       id="bastidores"
-      className="relative overflow-hidden bg-ummix-dark px-6 py-24 text-white md:px-16 md:py-32"
+      className="relative overflow-hidden bg-ummix-dark px-6 py-20 text-white md:px-16 md:py-28"
     >
       <div
         className="pointer-events-none absolute -top-[20%] left-1/2 h-[900px] w-[1100px] -translate-x-1/2"
@@ -83,15 +83,15 @@ export default function Backstage() {
           </h2>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 items-center gap-12 md:mt-20 md:grid-cols-[0.6fr_1fr] md:gap-16">
+        <div className="mt-12 grid grid-cols-1 items-center gap-10 md:mt-16 xl:grid-cols-[0.55fr_1fr] xl:gap-16">
           {/* LEFT: stat rows */}
-          <div className="flex flex-col gap-9">
+          <div className="grid gap-4 sm:grid-cols-3 xl:flex xl:flex-col xl:gap-9">
             {STAT_ROWS.map((row) => (
-              <div key={row.id} className="flex items-center gap-6">
-                <div className="grid h-16 w-16 flex-none place-items-center rounded-full border-[1.5px] border-ummix-red/55 text-ummix-red">
+              <div key={row.id} className="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/3 p-4 xl:gap-6 xl:rounded-none xl:border-0 xl:bg-transparent xl:p-0">
+                <div className="grid h-14 w-14 flex-none place-items-center rounded-full border-[1.5px] border-ummix-red/55 text-ummix-red xl:h-16 xl:w-16">
                   {row.icon}
                 </div>
-                <div className="flex items-baseline gap-3.5">
+                <div className="flex flex-col items-start gap-1 xl:flex-row xl:items-baseline xl:gap-3">
                   <div className={`font-heading font-black leading-none tracking-tight text-white ${row.valueSize ?? 'text-4xl'}`}>
                     {row.value}
                   </div>
@@ -103,9 +103,33 @@ export default function Backstage() {
             ))}
           </div>
 
-          {/* RIGHT: arc diagram */}
-          <div className="relative h-[560px] w-full overflow-x-auto overflow-y-hidden md:overflow-visible">
-            <div className="absolute left-1/2 top-1/2 h-135 w-135 -translate-x-1/2 -translate-y-1/2 md:left-0 md:translate-x-0">
+          {/* Mobile and tablet: compact diagram that preserves the same information. */}
+          <div className="rounded-3xl border border-white/10 bg-white/3 p-5 sm:p-7 xl:hidden">
+            <div
+              className="mx-auto grid h-40 w-40 place-items-center rounded-full border-[1.5px] border-ummix-red text-center shadow-[0_0_40px_rgba(155,25,26,.35)] sm:h-44 sm:w-44"
+              style={{ background: 'radial-gradient(circle at 30% 30%, #2A2A2A, #1A1A1A)' }}
+            >
+              <div className="font-heading text-2xl font-black uppercase leading-none tracking-wide text-white">
+                Sua
+                <br />
+                Campanha
+              </div>
+            </div>
+            <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+              {ARC_LABELS.map((label) => (
+                <div key={label.id} className="flex min-h-11 items-center gap-3 rounded-xl bg-white/5 px-4 py-2.5">
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-ummix-red shadow-[0_0_0_4px_rgba(155,25,26,.16)]" />
+                  <span className="font-sans text-xs font-bold uppercase leading-snug tracking-wide text-white">
+                    {label.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: full animated arc diagram. */}
+          <div className="relative hidden h-[560px] w-full xl:block">
+            <div className="absolute left-0 top-1/2 h-135 w-135 -translate-y-1/2">
               <svg
                 viewBox="0 0 540 540"
                 className="absolute inset-0 h-full w-full overflow-visible"
@@ -128,7 +152,7 @@ export default function Backstage() {
               <div className="arc-dot d3" />
 
               <div
-                className="pulse-ring absolute left-[270px] top-1/2 z-[3] grid h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-[1.5px] border-ummix-red"
+                className="pulse-ring absolute left-[270px] top-1/2 z-3 grid h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-[1.5px] border-ummix-red"
                 style={{ background: 'radial-gradient(circle at 30% 30%, #2A2A2A, #1A1A1A)' }}
               >
                 <div className="text-center">
@@ -160,7 +184,7 @@ export default function Backstage() {
           </div>
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-10 text-center md:mt-12">
           <div className="text-balance font-heading text-3xl font-black leading-tight tracking-tight text-white">
             A Ummix simplifica o <span className="text-ummix-red">complexo</span> e centraliza tudo para você.
           </div>
