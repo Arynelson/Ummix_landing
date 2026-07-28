@@ -88,7 +88,7 @@ export default function Deliverables() {
                 {item.icon}
               </div>
               <div className="mt-4 font-heading text-lg font-extrabold text-white">{item.title}</div>
-              <p className="mt-2 font-sans text-sm font-medium leading-relaxed text-white/70">
+              <p className="mt-2 text-left font-sans text-sm font-medium leading-relaxed text-white/70">
                 {item.description}
               </p>
             </div>

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { PLATFORM_SIGNUP } from '../constants/urls'
 
-export default function Header({ active }) {
+export default function Header({ active, surface = 'overlay' }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const usesDarkInk = scrolled || surface === 'light'
   const navigationItems = [
     { href: '/', label: 'Início' },
     { href: '/cashback', label: 'Cashback' },
@@ -26,13 +27,15 @@ export default function Header({ active }) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur shadow-md py-3' : 'bg-transparent py-5'
+        usesDarkInk
+          ? `bg-white/95 backdrop-blur ${scrolled ? 'shadow-md py-3' : 'py-5'}`
+          : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-3">
         <a href="/" className="flex items-center gap-2 shrink-0">
           <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-8 md:h-10 transition-all ${
-            scrolled ? 'opacity-100' : 'brightness-0 invert'
+            usesDarkInk ? 'opacity-100' : 'brightness-0 invert'
           }`} />
         </a>
 
@@ -46,8 +49,8 @@ export default function Header({ active }) {
                 aria-current={isCurrent ? 'page' : undefined}
                 className={`transition-colors ${
                   isCurrent
-                    ? scrolled ? 'text-ummix-red' : 'text-white underline underline-offset-4 decoration-ummix-red'
-                    : scrolled ? 'text-ummix-dark hover:text-ummix-red' : 'text-white/80 hover:text-white'
+                  ? usesDarkInk ? 'text-ummix-red' : 'text-white underline underline-offset-4 decoration-ummix-red'
+                    : usesDarkInk ? 'text-ummix-dark hover:text-ummix-red' : 'text-white/80 hover:text-white'
                 }`}
               >
                 {label}
@@ -69,7 +72,7 @@ export default function Header({ active }) {
         <button
           type="button"
           className={`grid h-11 w-11 place-items-center rounded-lg border md:hidden ${
-            scrolled ? 'border-ummix-dark/20 text-ummix-dark' : 'border-white/30 text-white'
+            usesDarkInk ? 'border-ummix-dark/20 text-ummix-dark' : 'border-white/30 text-white'
           }`}
           aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={menuOpen}
