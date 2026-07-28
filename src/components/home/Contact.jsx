@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { CONTACT_FORM_CC_EMAIL, CONTACT_FORM_ENDPOINT } from '../../constants/urls';
+import { CONTACT_FORM_CC_EMAIL } from '../../constants/urls';
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { submitForm as sendForm } from '../../services/formSubmit';
 
 const INITIAL_FORM = {
   name: '',
@@ -33,20 +34,11 @@ export default function Contact() {
     setStatus('submitting');
 
     try {
-      const response = await fetch(CONTACT_FORM_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          ...form,
-          _subject: 'Novo contato pelo site da Ummix',
-          _cc: CONTACT_FORM_CC_EMAIL,
-        }),
+      await sendForm({
+        ...form,
+        _subject: 'Novo contato pelo site da Ummix',
+        _cc: CONTACT_FORM_CC_EMAIL,
       });
-
-      if (!response.ok) throw new Error('Não foi possível enviar o formulário.');
 
       setStatus('success');
       setForm(INITIAL_FORM);

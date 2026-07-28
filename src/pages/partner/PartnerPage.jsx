@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import { CONTACT_FORM_CC_EMAIL, CONTACT_FORM_ENDPOINT } from '../../constants/urls'
+import { CONTACT_FORM_CC_EMAIL } from '../../constants/urls'
+import { submitForm as sendForm } from '../../services/formSubmit'
 
 /* ---- Hero ---- */
 function Eyebrow() {
@@ -242,23 +243,14 @@ function PartnerForm() {
     const formData = new FormData(formElement)
 
     try {
-      const response = await fetch(CONTACT_FORM_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          nome: formData.get('nome'),
-          email: formData.get('email'),
-          empresa: formData.get('empresa'),
-          telefone: formData.get('telefone'),
-          _subject: 'Nova candidatura ao Programa de Parcerias da Ummix',
-          _cc: CONTACT_FORM_CC_EMAIL,
-        }),
+      await sendForm({
+        nome: formData.get('nome'),
+        email: formData.get('email'),
+        empresa: formData.get('empresa'),
+        telefone: formData.get('telefone'),
+        _subject: 'Nova candidatura ao Programa de Parcerias da Ummix',
+        _cc: CONTACT_FORM_CC_EMAIL,
       })
-
-      if (!response.ok) throw new Error('Não foi possível enviar a candidatura.')
 
       formElement.reset()
       setStatus('success')
