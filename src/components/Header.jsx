@@ -8,6 +8,7 @@ export default function Header({ active, surface = 'overlay' }) {
   const navigationItems = [
     { href: '/', label: 'Início' },
     { href: '/cashback', label: 'Cashback' },
+    { href: '/partner', label: 'Partners' },
   ]
 
   useEffect(() => {
