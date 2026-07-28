@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CONTACT_FORM_ENDPOINT } from '../../constants/urls';
+import { CONTACT_FORM_CC_EMAIL, CONTACT_FORM_ENDPOINT } from '../../constants/urls';
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
 
 const INITIAL_FORM = {
@@ -42,6 +42,7 @@ export default function Contact() {
         body: JSON.stringify({
           ...form,
           _subject: 'Novo contato pelo site da Ummix',
+          _cc: CONTACT_FORM_CC_EMAIL,
         }),
       });
 

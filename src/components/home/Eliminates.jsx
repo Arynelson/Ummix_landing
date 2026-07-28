@@ -4,9 +4,8 @@ const ITEMS = [
   { id: 'negociar', label: 'Negociar com dezenas de veículos' },
   { id: 'entregas', label: 'Controlar entregas e prazos' },
   { id: 'veiculacoes', label: 'Conferir veiculações' },
-  { id: 'pagamentos', label: 'Gerenciar pagamentos e repasses' },
+  { id: 'pagamentos', label: 'Gerenciar pagamentos' },
   { id: 'dados', label: 'Consolidar dados e relatórios' },
-  { id: 'cashback', label: 'Acompanhar cashback e benefícios' },
 ];
 
 export default function Eliminates() {
@@ -32,7 +31,7 @@ export default function Eliminates() {
             {ITEMS.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center gap-4.5 rounded-2xl border-l-3 border-ummix-red bg-ummix-gray px-5.5 py-4.5"
+                className="flex items-center gap-4.5 rounded-2xl border border-ummix-red/15 bg-ummix-gray px-5.5 py-4.5"
               >
                 <svg
                   width="22"

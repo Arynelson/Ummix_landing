@@ -50,31 +50,6 @@ const DELIVERABLES = [
       </svg>
     ),
   },
-  {
-    id: 'seguranca-financeira',
-    title: 'Segurança financeira',
-    description: 'Controle, repasses e benefícios garantidos.',
-    highlight: false,
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <rect x="3" y="11" width="18" height="11" rx="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      </svg>
-    ),
-  },
-  {
-    id: 'transparencia-total',
-    title: 'Transparência total',
-    description: 'Você acompanha, a gente cuida do resto.',
-    highlight: false,
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="6" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
-  },
 ];
 
 export default function Deliverables() {
@@ -99,7 +74,7 @@ export default function Deliverables() {
           </h2>
         </div>
 
-        <div className="mt-18 grid grid-cols-1 gap-5 md:mt-20 md:grid-cols-3">
+        <div className="mt-18 grid grid-cols-1 gap-5 md:mt-20 md:grid-cols-2 lg:grid-cols-4">
           {DELIVERABLES.map((item) => (
             <div
               key={item.id}

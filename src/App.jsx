@@ -19,12 +19,12 @@ export default function App() {
       <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
       <main id="main-content" tabIndex="-1">
         <Hero />
+        <Segmentations />
         <ClientView />
         <Backstage />
         <Method />
         <Eliminates />
         <Deliverables />
-        <Segmentations />
         <CashbackSection />
         <ForWhom />
         <Partners />

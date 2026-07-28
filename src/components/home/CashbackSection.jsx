@@ -17,10 +17,10 @@ export default function CashbackSection() {
           Cashback Ummix
         </div>
         <h2 className="mt-3.5 font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl">
-          Toda campanha fechada pela Ummix Ads gera até <span className="text-ummix-red">3% de cashback</span>
+          Campanhas orientadas por audiência real e inteligência de dados.
         </h2>
         <p className="mt-5 font-sans text-lg font-medium leading-relaxed text-white/70">
-          Contratante, veículo e agência ficam com sua parte. Você só precisa fechar o contrato com a gente.
+          Até 3% de cashback é apenas um dos benefícios.
         </p>
         <ButtonLink
           href="/cashback.html"

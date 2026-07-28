@@ -72,7 +72,7 @@ export default function Segmentations() {
   const activeTabData = TABS.find((tab) => tab.id === activeTab);
 
   return (
-    <section id="segmentacoes" className="relative border-t border-[#f0eeec] bg-white px-6 py-24 md:px-16 md:py-32">
+    <section id="segmentacoes" className="relative border-t border-[#f0eeec] bg-ummix-gray px-6 py-24 md:px-16 md:py-32">
       <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <div className="font-sans text-[11px] font-bold uppercase leading-none tracking-[.22em] text-ummix-red">
@@ -127,7 +127,7 @@ export default function Segmentations() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, ease: 'easeOut', delay: index * 0.04 }}
-                  className="flex items-center gap-3.5 rounded-2xl border border-transparent bg-ummix-gray px-5.5 py-4.5 font-sans text-sm font-semibold text-ummix-dark transition-all duration-300 hover:-translate-y-0.5 hover:border-ummix-red/50 hover:bg-white hover:shadow-[0_8px_20px_-10px_rgba(155,25,26,.3)]"
+                  className="flex items-center gap-3.5 rounded-2xl border border-transparent bg-white px-5.5 py-4.5 font-sans text-sm font-semibold text-ummix-dark transition-all duration-300 hover:-translate-y-0.5 hover:border-ummix-red/50 hover:shadow-[0_8px_20px_-10px_rgba(155,25,26,.3)]"
                 >
                   <span
                     className="h-2 w-2 flex-none rounded-full bg-ummix-red"
