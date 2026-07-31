@@ -7,6 +7,7 @@ export default function Header({ active, surface = 'overlay' }) {
   const usesDarkInk = scrolled || surface === 'light'
   const navigationItems = [
     { href: '/', label: 'Início' },
+    { href: '/investidores', label: 'Investidores' },
     { href: '/cashback', label: 'Cashback' },
     { href: '/partner', label: 'Partners' },
   ]
@@ -40,7 +41,7 @@ export default function Header({ active, surface = 'overlay' }) {
           }`} />
         </a>
 
-        <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-4 text-sm font-semibold lg:gap-6">
           {navigationItems.map(({ href, label }) => {
             const isCurrent = active === href
             return (

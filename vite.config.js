@@ -11,6 +11,7 @@ export default defineConfig({
         main:     resolve(__dirname, 'index.html'),
         cashback: resolve(__dirname, 'cashback.html'),
         partner:  resolve(__dirname, 'partner.html'),
+        investors: resolve(__dirname, 'investidores.html'),
       },
     },
   },
