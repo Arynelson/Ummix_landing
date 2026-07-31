@@ -30,17 +30,7 @@ const leadership = [
 ]
 
 const ecosystem = [
-  'AM Comercial',
-  'Construjá',
-  'Diferpan',
-  'Famastil',
-  'Foxlux',
-  'Grupo LLE',
   'Grupo Vellore',
-  'Comercial Maia',
-  'MAS Distribuidora',
-  'Nova Casa',
-  'Tambasa Atacadistas',
   'WorkinTech',
 ]
 
@@ -189,7 +179,7 @@ function Impact() {
       <div className="investors-impact__lines" aria-hidden="true" />
       <div className="investors-shell investors-impact__content">
         <span>Juntas, movimentam mais de</span>
-        <strong>R$ 10 bilhões</strong>
+        <strong>R$ 100 milhões</strong>
         <b>por ano</b>
       </div>
     </section>
