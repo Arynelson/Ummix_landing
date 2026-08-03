@@ -653,3 +653,133 @@
 @keyframes investor-spin {
   to { rotate: 1turn; }
 }
+
+/* Quem Somos: hero editorial and ecosystem profiles. */
+.investors-hero {
+  min-height: auto;
+  padding-block: clamp(9rem, 18vw, 13rem) clamp(5rem, 10vw, 8rem);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(155, 25, 26, 0.28), transparent 32%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 52%),
+    var(--investors-black);
+}
+
+.investors-hero__layout {
+  display: block;
+  max-width: 760px;
+}
+
+.investors-hero__copy > p {
+  max-width: 43rem;
+  text-align: justify;
+}
+
+.investors-ecosystem__intro {
+  max-width: 42rem;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.75;
+  text-align: justify;
+}
+
+.vellore-group {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid rgba(197, 34, 36, 0.42);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(155, 25, 26, 0.22), transparent 36%),
+    linear-gradient(145deg, rgba(155, 25, 26, 0.16), rgba(16, 16, 16, 0.92));
+}
+
+.vellore-group__copy h3,
+.workintech-card h3 {
+  max-width: 18ch;
+  margin-top: 0.9rem;
+  color: #fff;
+  font-family: var(--font-family-heading);
+  font-size: clamp(1.65rem, 1.25rem + 1.2vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.vellore-group__copy p,
+.workintech-card p {
+  max-width: 42rem;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.75;
+  text-align: justify;
+}
+
+.investors-ecosystem__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.ecosystem-company {
+  min-height: 4.6rem;
+  background: #fff;
+  padding: 0.8rem;
+  color: #181818;
+  font-size: 0.86rem;
+}
+
+.ecosystem-company img {
+  display: block;
+  width: auto;
+  max-width: 90%;
+  height: 2.5rem;
+  object-fit: contain;
+}
+
+.workintech-card {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.5rem;
+  background: #101010;
+}
+
+.workintech-card__brand {
+  display: grid;
+  min-height: 8rem;
+  place-items: center;
+  border-radius: 1rem;
+  background: #f4f2f2;
+  padding: 1.5rem;
+}
+
+.workintech-card__brand img {
+  display: block;
+  width: auto;
+  max-width: min(16rem, 90%);
+  max-height: 4.5rem;
+  object-fit: contain;
+}
+
+@media (min-width: 48rem) {
+  .vellore-group {
+    grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
+  }
+
+  .investors-ecosystem__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .workintech-card {
+    grid-template-columns: minmax(13rem, 0.55fr) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+@media (min-width: 64rem) {
+  .investors-ecosystem__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

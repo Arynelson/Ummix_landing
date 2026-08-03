@@ -165,6 +165,16 @@ const PARTNERS = [
       { label: 'LinkedIn', href: 'https://www.linkedin.com/company/oqi-ag%C3%AAncia-que-cria-impacto-positivo/', external: true },
     ],
   },
+  {
+    id: 'nurion',
+    mark: 'NUR',
+    name: 'Nurion',
+    links: [
+      { label: 'nurionhubcrm.vercel.app', href: 'https://nurionhubcrm.vercel.app/', external: true },
+      { label: '@nurionhub', href: 'https://www.instagram.com/nurionhub/', external: true },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/cris-roiz-consultoria-de-neg-cios-e-log-stica-para-sa-de/', external: true },
+    ],
+  },
 ]
 
 function PartnersGrid() {
@@ -181,7 +191,7 @@ function PartnersGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PARTNERS.map((partner) => (
             <article
               key={partner.id}

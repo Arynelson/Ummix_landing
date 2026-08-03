@@ -7,7 +7,7 @@ export default function Header({ active, surface = 'overlay' }) {
   const usesDarkInk = scrolled || surface === 'light'
   const navigationItems = [
     { href: '/', label: 'Início' },
-    { href: '/investidores', label: 'Investidores' },
+    { href: '/investidores', label: 'Quem Somos' },
     { href: '/cashback', label: 'Cashback' },
     { href: '/partner', label: 'Partners' },
   ]
