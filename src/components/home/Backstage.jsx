@@ -1,4 +1,6 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 const STAT_ROWS = [
   {
@@ -63,6 +65,8 @@ const ARC_LABELS = [
 ];
 
 export default function Backstage() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].backstage;
   const anim = useAnimateOnScroll();
 
   return (
@@ -78,25 +82,25 @@ export default function Backstage() {
       <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-heading text-4xl font-black uppercase leading-none tracking-tight text-white md:text-5xl">
-            O que a Ummix faz <br />
-            <span className="text-ummix-red">nos bastidores</span>
+            {copy.title} <br />
+            <span className="text-ummix-red">{copy.accent}</span>
           </h2>
         </div>
 
         <div className="mt-12 grid grid-cols-1 items-center gap-10 md:mt-16 xl:grid-cols-[0.55fr_1fr] xl:gap-16">
           {/* LEFT: stat rows */}
           <div className="grid gap-4 sm:grid-cols-3 xl:flex xl:flex-col xl:gap-9">
-            {STAT_ROWS.map((row) => (
+            {STAT_ROWS.map((row, index) => (
               <div key={row.id} className="flex items-center gap-4 rounded-2xl border border-white/8 bg-white/3 p-4 xl:gap-6 xl:rounded-none xl:border-0 xl:bg-transparent xl:p-0">
                 <div className="grid h-14 w-14 flex-none place-items-center rounded-full border-[1.5px] border-ummix-red/55 text-ummix-red xl:h-16 xl:w-16">
                   {row.icon}
                 </div>
                 <div className="flex flex-col items-start gap-1 xl:flex-row xl:items-baseline xl:gap-3">
                   <div className={`font-heading font-black leading-none tracking-tight text-white ${row.valueSize ?? 'text-4xl'}`}>
-                    {row.value}
+                    {copy.statsValues[index]}
                   </div>
                   <div className="font-heading text-[15px] font-bold uppercase leading-tight tracking-wide text-white">
-                    {row.label}
+                    {copy.stats[index]}
                   </div>
                 </div>
               </div>
@@ -110,17 +114,15 @@ export default function Backstage() {
               style={{ background: 'radial-gradient(circle at 30% 30%, #2A2A2A, #1A1A1A)' }}
             >
               <div className="font-heading text-2xl font-black uppercase leading-none tracking-wide text-white">
-                Sua
-                <br />
-                Campanha
+                {copy.campaign}
               </div>
             </div>
             <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
-              {ARC_LABELS.map((label) => (
+              {ARC_LABELS.map((label, index) => (
                 <div key={label.id} className="flex min-h-11 items-center gap-3 rounded-xl bg-white/5 px-4 py-2.5">
                   <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-ummix-red shadow-[0_0_0_4px_rgba(155,25,26,.16)]" />
                   <span className="font-sans text-xs font-bold uppercase leading-snug tracking-wide text-white">
-                    {label.text}
+                    {copy.labels[index]}
                   </span>
                 </div>
               ))}
@@ -157,15 +159,13 @@ export default function Backstage() {
               >
                 <div className="text-center">
                   <div className="font-heading text-[30px] font-black uppercase leading-[.95] tracking-wide text-white">
-                    Sua
-                    <br />
-                    Campanha
+                    {copy.campaign}
                   </div>
                   <div className="mx-auto mt-3.5 h-0.5 w-9 bg-ummix-red" />
                 </div>
               </div>
 
-              {ARC_LABELS.map((label) => (
+              {ARC_LABELS.map((label, index) => (
                 <div
                   key={label.id}
                   className="arc-label absolute flex items-center gap-3.5 whitespace-nowrap"
@@ -176,7 +176,7 @@ export default function Backstage() {
                     <div className="absolute -inset-1.5 rounded-full border border-ummix-red/45" />
                   </div>
                   <span className="font-sans text-[13px] font-bold uppercase leading-tight tracking-wide text-white">
-                    {label.text}
+                    {copy.labels[index]}
                   </span>
                 </div>
               ))}
@@ -186,7 +186,7 @@ export default function Backstage() {
 
         <div className="mt-10 text-center md:mt-12">
           <div className="text-balance font-heading text-3xl font-black leading-tight tracking-tight text-white">
-            A Ummix simplifica o <span className="text-ummix-red">complexo</span> e centraliza tudo para você.
+            {copy.closing} <span className="text-ummix-red">{copy.closingAccent}</span> {copy.closingRest}
           </div>
         </div>
       </div>

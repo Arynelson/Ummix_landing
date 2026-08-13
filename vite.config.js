@@ -5,6 +5,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  cacheDir: '.vite',
   build: {
     rollupOptions: {
       input: {
@@ -12,6 +13,9 @@ export default defineConfig({
         cashback: resolve(__dirname, 'cashback.html'),
         partner:  resolve(__dirname, 'partner.html'),
         investors: resolve(__dirname, 'investidores.html'),
+        english: resolve(__dirname, 'en/index.html'),
+        englishCashback: resolve(__dirname, 'en/cashback.html'),
+        englishPartner: resolve(__dirname, 'en/partner.html'),
       },
     },
   },

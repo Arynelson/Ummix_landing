@@ -1,4 +1,6 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 const AUDIENCES = [
   {
@@ -82,6 +84,8 @@ const AUDIENCES = [
 ];
 
 export default function ForWhom() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].forWhom;
   const anim = useAnimateOnScroll();
 
   return (
@@ -89,15 +93,15 @@ export default function ForWhom() {
       <div ref={anim.ref} style={anim.style} className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <div className="font-body text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red">
-            Para quem é
+            {copy.kicker}
           </div>
           <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-[1.05] tracking-tight text-ummix-dark md:text-5xl">
-            Um ecossistema conectado.{' '}
-            <span className="text-ummix-red">Resultados reais.</span>
+            {copy.title}{' '}
+            <span className="text-ummix-red">{copy.accent}</span>
           </h2>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-5 md:mt-14 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
-          {AUDIENCES.map((audience) => (
+          {AUDIENCES.map((audience, index) => (
             <div
               key={audience.id}
               className="rounded-[20px] border border-[#eee] bg-white p-7 md:p-8"
@@ -106,10 +110,10 @@ export default function ForWhom() {
                 {audience.icon}
               </div>
               <div className="mt-5 font-heading text-[22px] font-extrabold text-ummix-dark">
-                {audience.title}
+                {copy.audiences[index][0]}
               </div>
               <p className="mt-2 font-body text-[15px] font-medium leading-[1.55] text-[#666]">
-                {audience.description}
+                {copy.audiences[index][1]}
               </p>
             </div>
           ))}

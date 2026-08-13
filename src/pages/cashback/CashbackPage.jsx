@@ -3,18 +3,25 @@ import Footer from '../../components/Footer'
 import ButtonLink from '../../components/ui/ButtonLink'
 import { PLATFORM_SIGNUP } from '../../constants/urls'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
+import { useLocale } from '../../LocaleProvider.jsx'
+import { LABELS } from '../../i18n-labels.js'
+import { CASHBACK_COPY } from '../../cashback-copy.js'
 
 /* ---- Hero ---- */
 function Eyebrow() {
+  const { locale } = useLocale()
+  const copy = CASHBACK_COPY[locale]
   return (
     <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-ummix-red mb-7">
       <span className="w-2 h-2 rounded-full bg-ummix-red shadow-[0_0_0_4px_rgba(155,25,26,0.15)]" />
-      Programa de Cashback Ummix Ads
+      {copy.eyebrow}
     </span>
   )
 }
 
 function HeroCTAs() {
+  const { locale } = useLocale()
+  const copy = CASHBACK_COPY[locale]
   return (
     <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
       <ButtonLink
@@ -23,8 +30,8 @@ function HeroCTAs() {
         rel="noopener noreferrer"
         className="w-full sm:w-auto"
       >
-        <span className="sm:hidden">Acessar plataforma</span>
-        <span className="hidden sm:inline">Acessar plataforma de cashback</span>
+        <span className="sm:hidden">{copy.platformShort}</span>
+        <span className="hidden sm:inline">{copy.platformLong}</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </ButtonLink>
       <ButtonLink
@@ -32,13 +39,15 @@ function HeroCTAs() {
         variant="outline-light"
         className="w-full sm:w-auto"
       >
-        Como funciona
+        {copy.howItWorks}
       </ButtonLink>
     </div>
   )
 }
 
 function Hero() {
+  const { locale } = useLocale()
+  const copy = CASHBACK_COPY[locale]
   const anim = useAnimateOnScroll()
 
   return (
@@ -52,11 +61,10 @@ function Hero() {
       <div ref={anim.ref} style={anim.style} className="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-6 pb-20 pt-36 text-center md:pb-24 md:pt-40">
         <Eyebrow />
         <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
-          Anuncie e ganhe <em className="not-italic text-ummix-red">até 3% de cashback</em>.
+          {copy.heroTitle} <em className="not-italic text-ummix-red">{copy.heroAccent}</em>.
         </h1>
         <p className="section-subtitle max-w-[560px] text-[18px] leading-relaxed text-white/75 sm:text-[19px]">
-          A cada contrato fechado, a Ummix Ads devolve parte do valor para quem
-          participou da negociação. Cadastre-se e comece a receber.
+          {copy.heroDescription}
         </p>
         <HeroCTAs />
       </div>
@@ -84,32 +92,34 @@ const PARTICIPANTS = [
 ]
 
 function WhoIsEligible() {
+  const { locale } = useLocale()
+  const copy = CASHBACK_COPY[locale]
   const anim = useAnimateOnScroll()
 
   return (
     <section className="bg-white py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
-          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Elegibilidade</span>
+          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.eligibility}</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
-            Quem tem direito ao cashback?
+            {copy.eligibilityTitle}
           </h2>
           <p className="section-subtitle text-lg text-ummix-gray-dark">
-            Cada participante elegível recebe <strong>1% de cashback</strong>, totalizando até <strong>3% distribuídos por contrato</strong>.
+            {copy.eligibilityDescription}
           </p>
         </div>
 
         <div className="mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
-          {PARTICIPANTS.map((p) => (
+          {PARTICIPANTS.map((p, index) => (
             <div key={p.t} className="rounded-3xl border border-black/8 bg-white p-6 transition-all hover:-translate-y-1 hover:bg-ummix-gray md:p-8">
               <div className="w-13 h-13 rounded-2xl bg-ummix-red/8 text-ummix-red flex items-center justify-center mb-5">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{p.icon}</svg>
               </div>
-              <h3 className="font-heading font-bold text-[19px] tracking-tight text-ummix-dark mb-2">{p.t}</h3>
-              <p className="text-sm leading-relaxed text-ummix-gray-dark">{p.d}</p>
+              <h3 className="font-heading font-bold text-[19px] tracking-tight text-ummix-dark mb-2">{copy.participants[index][0]}</h3>
+              <p className="text-sm leading-relaxed text-ummix-gray-dark">{copy.participants[index][1]}</p>
               <div className="mt-5 inline-flex items-center gap-2 text-ummix-red text-sm font-bold">
                 <span className="w-2 h-2 rounded-full bg-ummix-red" />
-                1% de cashback
+                {copy.eachCashback}
               </div>
             </div>
           ))}
@@ -117,13 +127,9 @@ function WhoIsEligible() {
 
         {/* Rules */}
         <div className="mx-auto max-w-3xl rounded-3xl border border-black/8 bg-ummix-gray p-6 sm:p-8 md:p-10">
-          <h3 className="font-heading font-bold text-xl tracking-tight text-ummix-dark mb-6">Regras para receber o cashback</h3>
+          <h3 className="font-heading font-bold text-xl tracking-tight text-ummix-dark mb-6">{copy.rulesTitle}</h3>
           <ul className="space-y-4">
-            {[
-              'O contrato esteja com o pagamento realizado integralmente até a data de vencimento.',
-              'O participante possua cadastro ativo na Plataforma de Cashback da Ummix Ads.',
-              'Solicite o crédito direto na Plataforma de Cashback da Ummix Ads.',
-            ].map((rule, i) => (
+            {copy.rules.map((rule, i) => (
               <li key={i} className="flex items-start gap-4">
                 <span className="mt-0.5 w-6 h-6 rounded-full bg-ummix-red/10 text-ummix-red text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
                 <p className="text-sm leading-relaxed text-ummix-gray-dark">{rule}</p>
@@ -166,18 +172,20 @@ const STEPS = [
 ]
 
 function HowItWorks() {
+  const { locale } = useLocale()
+  const copy = CASHBACK_COPY[locale]
   const anim = useAnimateOnScroll()
 
   return (
     <section id="como-funciona" className="bg-ummix-gray py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
-          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">Como funciona</span>
+          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.howKicker}</span>
           <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
-            Do cadastro ao resgate, em cinco passos.
+            {copy.howTitle}
           </h2>
           <p className="section-subtitle text-lg text-ummix-gray-dark">
-            O processo é simples e transparente. Acompanhe cada etapa.
+            {copy.howDescription}
           </p>
         </div>
 
@@ -191,13 +199,13 @@ function HowItWorks() {
             >
               <div className="inline-flex items-center gap-2 text-ummix-red text-xs font-bold tracking-widest uppercase mb-6">
                 <span className="w-2 h-2 rounded-full bg-ummix-red shadow-[0_0_0_4px_rgba(155,25,26,0.15)]" />
-                PASSO {s.n}
+                {copy.stepLabel} {s.n}
               </div>
               <div className="w-11 h-11 rounded-2xl bg-ummix-red/8 text-ummix-red flex items-center justify-center mb-5">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{s.icon}</svg>
               </div>
-              <h3 className="font-heading font-bold text-[17px] tracking-tight text-ummix-dark mb-2">{s.t}</h3>
-              <p className="text-sm leading-relaxed text-ummix-gray-dark">{s.d}</p>
+              <h3 className="font-heading font-bold text-[17px] tracking-tight text-ummix-dark mb-2">{copy.steps[i][0]}</h3>
+              <p className="text-sm leading-relaxed text-ummix-gray-dark">{copy.steps[i][1]}</p>
             </div>
           ))}
         </div>
@@ -208,6 +216,8 @@ function HowItWorks() {
 
 /* ---- Big 3% highlight ---- */
 function Highlight() {
+  const { locale } = useLocale()
+  const copy = CASHBACK_COPY[locale]
   const anim = useAnimateOnScroll()
 
   return (
@@ -222,13 +232,13 @@ function Highlight() {
 
           <div className="relative z-10">
             <h2 className="font-heading font-extrabold text-[clamp(26px,3.2vw,38px)] tracking-tight leading-tight text-white text-balance mb-4">
-              Até 3% distribuídos por contrato.
+              {copy.highlightTitle}
             </h2>
             <p className="copy-justify mb-6 text-base leading-relaxed text-white/75">
-              Contratante, veículo de mídia e agência recebem 1% cada. O cashback é creditado de forma transparente e tem validade de <strong className="text-white">90 dias</strong> após a disponibilização.
+              {copy.highlightDescription}
             </p>
             <div className="flex flex-wrap gap-3">
-              {['Contratante: 1%', 'Veículo: 1%', 'Agência: 1%'].map((label) => (
+              {copy.split.map((label) => (
                 <span key={label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/6 border border-white/14 text-sm text-white/85">
                   <span className="w-2 h-2 rounded-full bg-ummix-red" />
                   {label}
@@ -244,14 +254,16 @@ function Highlight() {
 
 /* ---- CTA / Form ---- */
 function CTA() {
+  const { locale } = useLocale()
+  const copy = CASHBACK_COPY[locale]
   const anim = useAnimateOnScroll()
 
   return (
     <section id="formulario" className="bg-ummix-dark text-white py-12 md:py-16">
       <div ref={anim.ref} style={anim.style} className="mx-auto flex max-w-3xl justify-center px-6">
-        <h2 className="sr-only">Solicitar cashback</h2>
+        <h2 className="sr-only">{copy.ctaTitle}</h2>
         <ButtonLink href={PLATFORM_SIGNUP} target="_blank" rel="noopener noreferrer" size="lg">
-          Solicitar meu cashback
+          {copy.cta}
         </ButtonLink>
       </div>
     </section>
@@ -259,10 +271,12 @@ function CTA() {
 }
 
 export default function CashbackPage() {
+  const { locale } = useLocale()
+  const labels = LABELS[locale]
   return (
     <>
       <Header active="/cashback" />
-      <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
+      <a className="skip-link" href="#main-content">{labels.skipToContent}</a>
       <main id="main-content" tabIndex="-1">
         <Hero />
         <WhoIsEligible />

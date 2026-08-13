@@ -1,4 +1,6 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 const ITEMS = [
   { id: 'negociar', label: 'Negociar com dezenas de veículos' },
@@ -9,6 +11,8 @@ const ITEMS = [
 ];
 
 export default function Eliminates() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].eliminates;
   const anim = useAnimateOnScroll();
 
   return (
@@ -17,18 +21,18 @@ export default function Eliminates() {
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16">
           <div>
             <div className="font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red">
-              O que isso elimina
+              {copy.kicker}
             </div>
             <h2 className="mt-3.5 text-balance font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
-              Menos complexidade. <span className="text-ummix-red">Mais tempo</span> para o que importa.
+              {copy.title} <span className="text-ummix-red">{copy.accent}</span> {copy.titleRest}
             </h2>
             <p className="copy-justify mt-4 font-sans text-base leading-relaxed text-ummix-gray-dark">
-              A Ummix absorve toda a operação da mídia off para que você foque em estratégia e resultado.
+              {copy.description}
             </p>
           </div>
 
           <div className="flex flex-col gap-3.5">
-            {ITEMS.map((item) => (
+            {ITEMS.map((item, index) => (
               <div
                 key={item.id}
                 className="flex items-center gap-4.5 rounded-2xl border border-ummix-red/15 bg-ummix-gray px-5.5 py-4.5"
@@ -50,7 +54,7 @@ export default function Eliminates() {
                   <line x1="9" y1="9" x2="15" y2="15" />
                 </svg>
                 <div className="font-sans text-[15px] font-semibold leading-snug text-ummix-dark">
-                  {item.label}
+                  {copy.items[index]}
                 </div>
               </div>
             ))}

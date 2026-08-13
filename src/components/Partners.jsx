@@ -1,4 +1,6 @@
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll'
+import { useLocale } from '../LocaleProvider.jsx'
+import { HOME_COPY } from '../home-copy.js'
 
 const vehicles = [
   { name: 'TV Anhanguera',  src: '/assets/canais/tv_anhanguera.png' },
@@ -89,6 +91,8 @@ function Marquee({ items, reverse = false, speed = 35 }) {
 }
 
 export default function Partners() {
+  const { locale } = useLocale()
+  const copy = HOME_COPY[locale].partners
   const animVehicles = useAnimateOnScroll()
   const animClients  = useAnimateOnScroll()
 
@@ -99,7 +103,7 @@ export default function Partners() {
         {/* Vehicles */}
         <div ref={animVehicles.ref} style={animVehicles.style} className="mb-12 md:mb-14">
           <h2 className="mb-8 text-center text-2xl font-bold text-ummix-dark md:text-3xl">
-            Veículos com histórico de mídia gerenciada pela Ummix
+            {copy.vehicles}
           </h2>
           <Marquee items={vehicles} speed={45} />
         </div>
@@ -107,7 +111,7 @@ export default function Partners() {
         {/* Clients */}
         <div ref={animClients.ref} style={animClients.style}>
           <h2 className="mb-8 text-center text-2xl font-bold text-ummix-dark md:text-3xl">
-            Anunciantes e parceiros que confiam na Ummix
+            {copy.clients}
           </h2>
           <Marquee items={clients} reverse speed={50} />
         </div>

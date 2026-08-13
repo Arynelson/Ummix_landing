@@ -1,7 +1,12 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
 import ButtonLink from '../ui/ButtonLink';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { getLocalizedPath } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 export default function CashbackSection() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].cashbackSection;
   const anim = useAnimateOnScroll();
 
   return (
@@ -14,20 +19,20 @@ export default function CashbackSection() {
 
       <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-2xl text-center">
         <div className="font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red">
-          Cashback Ummix
+          {copy.kicker}
         </div>
         <h2 className="mt-3.5 font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl">
-          Campanhas orientadas por audiência real e inteligência de dados.
+          {copy.title}
         </h2>
         <p className="section-subtitle mt-4 font-sans text-lg font-medium leading-relaxed text-white/75">
-          Até 3% de cashback é apenas um dos benefícios.
+          {copy.description}
         </p>
         <ButtonLink
-          href="/cashback.html"
+          href={getLocalizedPath(locale, '/cashback')}
           className="mt-8"
           size="xl"
         >
-          Conhecer o cashback
+          {copy.cta}
         </ButtonLink>
       </div>
     </section>

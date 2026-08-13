@@ -1,32 +1,31 @@
 import { useEffect, useRef, useState } from 'react'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 import ButtonLink from '../ui/ButtonLink'
+import { useLocale } from '../../LocaleProvider.jsx'
+import { HOME_COPY } from '../../home-copy.js'
 
-const AWARDS = [
+const AWARD_ASSETS = [
   {
     id: 'cni',
     src: '/assets/cni_premio_inovacao.jpg',
-    alt: 'Prêmio Nacional de Inovação',
-    label: 'Vencedor · Prêmio Nacional de Inovação · CNI/SEBRAE',
+    alt: 'National Innovation Award',
     href: 'https://www.premiodeinovacao.com.br/vencedores/',
   },
   {
     id: 'abdi',
     src: '/assets/Logo_ABDI_Principal .png',
-    alt: 'ABDI - Desafio Nacional de Inovação',
-    label: 'Top 4 ideias mais inovadoras do Brasil · ABDI',
+    alt: 'ABDI - National Innovation Challenge',
     href: 'https://prosas.com.br/editais/16002-desafio-de-inovacao-festival-curicaca?subdominio=prosas',
   },
   {
     id: 'go-ecommerce',
     src: '/assets/Selo_GO+E-commerce.png',
-    alt: 'Certificação GO E-commerce',
-    label: 'Certificação GO E-commerce',
+    alt: 'GO E-commerce Certification',
     href: 'https://comunicacao.ielgoias.com.br/go-ecommerce',
   },
 ]
 
-function AwardsCard() {
+function AwardsCard({ copy }) {
   const [activeId, setActiveId] = useState(null)
   const cardRef = useRef(null)
 
@@ -54,15 +53,17 @@ function AwardsCard() {
   return (
     <div ref={cardRef} className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white border border-ummix-dark/10 rounded-2xl sm:rounded-full px-4 py-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)]">
       <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ummix-gray-dark/70 whitespace-nowrap">
-        Prêmios e Certificações
+        {copy.awards}
       </span>
       <div className="flex items-center gap-2">
-        {AWARDS.map((award) => (
+        {AWARD_ASSETS.map((award, index) => {
+          const label = [copy.awardCni, copy.awardAbdi, copy.awardGo][index]
+          return (
           <div key={award.id} className="relative">
             {activeId === award.id && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max max-w-[220px] px-3 py-2 rounded-lg bg-ummix-dark border border-white/15 text-[11px] leading-snug text-white text-center shadow-lg pointer-events-none z-20">
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-2 h-2 bg-ummix-dark border-l border-t border-white/15 rotate-45 -mb-1" />
-                {award.label}
+                {label}
               </div>
             )}
             <a
@@ -72,7 +73,7 @@ function AwardsCard() {
               onMouseEnter={() => setActiveId(award.id)}
               onMouseLeave={() => setActiveId((current) => (current === award.id ? null : current))}
               onClick={(e) => handleLogoClick(e, award)}
-              aria-label={award.label}
+              aria-label={label}
               className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-lg bg-ummix-gray p-1.5 transition-transform hover:scale-105 cursor-pointer"
             >
               <img
@@ -82,7 +83,8 @@ function AwardsCard() {
               />
             </a>
           </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
@@ -154,14 +156,14 @@ function FlowArrow() {
   )
 }
 
-function FlowCard() {
+function FlowCard({ copy }) {
   return (
     <div className="relative rounded-3xl bg-ummix-dark p-6 text-white shadow-2xl sm:p-8">
       <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-ummix-red">
-        Da contratação à prestação de contas
+        {copy.flowKicker}
       </div>
       <div className="mt-4 font-heading font-extrabold text-2xl leading-tight">
-        Uma operação única e integrada.
+        {copy.flowTitle}
       </div>
       <div className="mt-6 grid gap-2 sm:hidden">
         {FLOW_STEPS.map((step, index) => (
@@ -176,7 +178,7 @@ function FlowCard() {
             }`}>
               {step.icon}
             </div>
-            <span className="font-sans text-xs font-bold uppercase tracking-wide">{step.label}</span>
+            <span className="font-sans text-xs font-bold uppercase tracking-wide">{copy.flowLabels[index]}</span>
             <span className="ml-auto font-heading text-sm font-extrabold text-white/45">
               {String(index + 1).padStart(2, '0')}
             </span>
@@ -203,7 +205,7 @@ function FlowCard() {
                     : 'text-[10px] font-bold leading-none text-white/80 text-center'
                 }
               >
-                {step.label}
+                {copy.flowLabels[i]}
               </div>
             </div>
             {i < FLOW_STEPS.length - 1 && <FlowArrow />}
@@ -211,13 +213,15 @@ function FlowCard() {
         ))}
       </div>
       <div className="mt-7 border-t border-white/10 pt-5 text-sm leading-relaxed text-white/70 sm:mt-8 sm:pt-6">
-        <span className="text-white font-bold">Método Ummix®</span> de Gestão de Campanhas: planejamento, negociação, execução, auditoria e resultados.
+        <span className="text-white font-bold">{copy.flowDescription}</span>
       </div>
     </div>
   )
 }
 
 export default function Hero() {
+  const { locale } = useLocale()
+  const copy = HOME_COPY[locale].hero
   const anim = useAnimateOnScroll()
 
   return (
@@ -233,14 +237,13 @@ export default function Hero() {
         {/* Left — copy */}
         <div>
           <h1 className="font-heading font-black text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-ummix-dark text-balance">
-            MÍDIA <span className="text-ummix-red">OFF</span>.
+            {copy.headingLineOne} <span className="text-ummix-red">{copy.headingAccentOne}</span>.
             <br />
-            INTELIGÊNCIA <span className="text-ummix-red">DIGITAL</span>.
+            {copy.headingLineTwo} <span className="text-ummix-red">{copy.headingAccentTwo}</span>.
           </h1>
 
           <p className="copy-justify mt-6 max-w-xl text-lg leading-relaxed text-ummix-gray-dark md:text-xl">
-            Você escolhe o público, a região e o investimento. A Ummix seleciona
-            os veículos de mídia e os horários para a sua campanha.
+            {copy.description}
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -248,7 +251,7 @@ export default function Hero() {
               href="#metodo"
               className="w-full sm:w-auto"
             >
-              Conhecer o Método Ummix
+              {copy.primaryCta}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
@@ -258,31 +261,31 @@ export default function Hero() {
               variant="outline-dark"
               className="w-full sm:w-auto"
             >
-              Quero anunciar
+              {copy.secondaryCta}
             </ButtonLink>
           </div>
 
           <div className="mt-10 grid grid-cols-3 gap-3 text-[11px] font-medium leading-snug text-ummix-gray-dark sm:gap-8 sm:text-[13px]">
             <div>
               <div className="font-heading font-black text-2xl text-ummix-dark leading-none">+150</div>
-              Veículos parceiros
+              {copy.stats[0]}
             </div>
             <div>
               <div className="font-heading font-black text-2xl text-ummix-dark leading-none">10</div>
-              Etapas estratégicas
+              {copy.stats[1]}
             </div>
             <div>
               <div className="font-heading font-black text-2xl text-ummix-dark leading-none">+50</div>
-              Atividades operacionais
+              {copy.stats[2]}
             </div>
           </div>
         </div>
 
         {/* Right — 5-step flow visual card + awards */}
         <div>
-          <FlowCard />
+          <FlowCard copy={copy} />
           <div className="mt-6 flex justify-center lg:justify-start">
-            <AwardsCard />
+            <AwardsCard copy={copy} />
           </div>
         </div>
 

@@ -1,4 +1,6 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 const CARDS = [
   {
@@ -40,6 +42,8 @@ const CARDS = [
 ];
 
 export default function ClientView() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].clientView;
   const anim = useAnimateOnScroll();
 
   return (
@@ -51,18 +55,18 @@ export default function ClientView() {
             style={anim.style}
             className="font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red"
           >
-            O que o cliente vê
+            {copy.kicker}
           </div>
           <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
-            <span className="text-ummix-red">Simples</span> para quem contrata.
+            <span className="text-ummix-red">{copy.titleAccent}</span> {copy.titleRest}
           </h2>
           <p className="section-subtitle mt-4 font-sans text-base leading-relaxed text-ummix-gray-dark md:text-lg">
-            Toda a complexidade da mídia off, embrulhada em três entregáveis claros.
+            {copy.description}
           </p>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-5 md:mt-14 md:grid-cols-3 md:gap-6">
-          {CARDS.map((card) => (
+          {CARDS.map((card, index) => (
             <div
               key={card.id}
               className="rounded-3xl border border-transparent bg-ummix-gray p-7 text-center md:p-9"
@@ -71,7 +75,7 @@ export default function ClientView() {
                 {card.icon}
               </div>
               <div className="mt-6 font-heading text-lg font-extrabold uppercase tracking-wide text-ummix-dark">
-                {card.label}
+                {copy.cards[index]}
               </div>
             </div>
           ))}

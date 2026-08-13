@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 const TABS = [
   {
@@ -66,6 +68,8 @@ const TABS = [
 ];
 
 export default function Segmentations() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].segmentations;
   const anim = useAnimateOnScroll();
   const [activeTab, setActiveTab] = useState('demografica');
 
@@ -76,19 +80,20 @@ export default function Segmentations() {
       <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <div className="font-sans text-[11px] font-bold uppercase leading-none tracking-[.22em] text-ummix-red">
-            A precisão do digital, na mídia OFF
+            {copy.kicker}
           </div>
           <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
-            Segmentações <span className="text-ummix-red">disponíveis</span>.
+            {copy.title} <span className="text-ummix-red">{copy.titleAccent}</span>.
           </h2>
           <p className="section-subtitle mt-4 text-[17px] leading-relaxed text-[#555]">
-            Escolha o público certo. Atinja exatamente quem importa para sua campanha.
+            {copy.description}
           </p>
         </div>
 
-        <div role="tablist" aria-label="Tipos de segmentação" className="mt-10 flex flex-wrap justify-center gap-2.5 md:mt-12">
+        <div role="tablist" aria-label={copy.tabLabel} className="mt-10 flex flex-wrap justify-center gap-2.5 md:mt-12">
           {TABS.map((tab) => {
             const isActive = tab.id === activeTab;
+            const tabCopy = copy.tabs[tab.id];
             return (
               <button
                 key={tab.id}
@@ -104,7 +109,7 @@ export default function Segmentations() {
                 }`}
               >
                 {tab.icon}
-                {tab.label}
+                {tabCopy.label}
               </button>
             );
           })}
@@ -134,7 +139,7 @@ export default function Segmentations() {
                     style={{ boxShadow: '0 0 0 3px rgba(155,25,26,.15)' }}
                     aria-hidden="true"
                   />
-                  {attribute.label}
+                  {copy.tabs[activeTabData.id].attributes[index]}
                 </motion.div>
               ))}
             </motion.div>
@@ -142,7 +147,7 @@ export default function Segmentations() {
         </div>
 
         <div className="mt-8 text-center font-sans text-sm font-medium text-[#666] md:mt-10">
-          Cruzamos múltiplas dimensões para atingir o público exato da sua campanha.
+          {copy.footer}
         </div>
       </div>
     </section>

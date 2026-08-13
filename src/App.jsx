@@ -11,12 +11,17 @@ import ForWhom from './components/home/ForWhom'
 import Contact from './components/home/Contact'
 import Partners from './components/Partners'
 import Footer from './components/Footer'
+import { useLocale } from './LocaleProvider.jsx'
+import { LABELS } from './i18n-labels.js'
 
 export default function App() {
+  const { locale } = useLocale()
+  const labels = LABELS[locale]
+
   return (
     <>
       <Header active="/" surface="light" />
-      <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
+      <a className="skip-link" href="#main-content">{labels.skipToContent}</a>
       <main id="main-content" tabIndex="-1">
         <Hero />
         <Segmentations />

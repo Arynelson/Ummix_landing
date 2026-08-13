@@ -1,4 +1,6 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 const DELIVERABLES = [
   {
@@ -53,6 +55,8 @@ const DELIVERABLES = [
 ];
 
 export default function Deliverables() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].deliverables;
   const anim = useAnimateOnScroll();
 
   return (
@@ -65,17 +69,17 @@ export default function Deliverables() {
       <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <div className="font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red">
-            O que a Ummix realmente entrega
+            {copy.kicker}
           </div>
           <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl">
-            Uma operação completa,
+            {copy.title}
             <br />
-            <span className="text-ummix-red">um único objetivo.</span>
+            <span className="text-ummix-red">{copy.accent}</span>
           </h2>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-4 md:mt-14 md:grid-cols-2 md:gap-5 lg:grid-cols-4">
-          {DELIVERABLES.map((item) => (
+          {DELIVERABLES.map((item, index) => (
             <div
               key={item.id}
               className="rounded-[18px] border border-white/[0.08] bg-white/[0.03] p-7"
@@ -87,9 +91,9 @@ export default function Deliverables() {
               >
                 {item.icon}
               </div>
-              <div className="mt-4 font-heading text-lg font-extrabold text-white">{item.title}</div>
+              <div className="mt-4 font-heading text-lg font-extrabold text-white">{copy.items[index][0]}</div>
               <p className="mt-2 text-left font-sans text-sm font-medium leading-relaxed text-white/70">
-                {item.description}
+                {copy.items[index][1]}
               </p>
             </div>
           ))}

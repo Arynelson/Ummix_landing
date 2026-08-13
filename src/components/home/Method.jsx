@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
+import { useLocale } from '../../LocaleProvider.jsx';
+import { HOME_COPY } from '../../home-copy.js';
 
 const AUTOPLAY_INTERVAL = 5000;
 
@@ -138,6 +140,8 @@ const SLIDES = [
 const TOTAL_SLIDES = SLIDES.length;
 
 export default function Method() {
+  const { locale } = useLocale();
+  const copy = HOME_COPY[locale].method;
   const anim = useAnimateOnScroll();
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -180,13 +184,13 @@ export default function Method() {
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
             <div className="font-sans text-[11px] font-bold uppercase leading-none tracking-[.22em] text-ummix-red">
-              O método
+              {copy.kicker}
             </div>
             <h2 className="mt-3.5 font-heading text-5xl font-black uppercase leading-none tracking-tight text-ummix-dark md:text-6xl">
-              Método <span className="text-ummix-red">Ummix®</span>
+              {copy.title} <span className="text-ummix-red">Ummix®</span>
             </h2>
             <p className="mt-4 max-w-lg text-[17px] leading-relaxed text-[#555]">
-              10 etapas, do briefing ao encerramento. Cada uma é uma promessa cumprida.
+              {copy.description}
             </p>
           </div>
 
@@ -199,14 +203,14 @@ export default function Method() {
                   boxShadow: isPlaying ? '0 0 6px #16A34A' : 'none',
                 }}
               />
-              Auto-play
+              {copy.autoplay}
             </div>
             <div className="h-3.5 w-px bg-[#ddd]" />
             <div className="flex gap-1.5">
               <button
                 type="button"
                 onClick={goPrev}
-                aria-label="Etapa anterior"
+                aria-label={copy.previous}
                 className="grid h-11 w-11 place-items-center rounded-full border-none bg-ummix-gray text-ummix-dark"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -216,7 +220,7 @@ export default function Method() {
               <button
                 type="button"
                 onClick={goNext}
-                aria-label="Próxima etapa"
+                aria-label={copy.next}
                 className="grid h-11 w-11 place-items-center rounded-full border-none bg-ummix-red text-white shadow-[0_6px_14px_-6px_rgba(155,25,26,.7)]"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -246,22 +250,22 @@ export default function Method() {
               >
                 <div className="min-w-0">
                   <div className="font-sans text-[11px] font-bold uppercase leading-none tracking-[.22em] text-ummix-red">
-                    {`Etapa ${String(activeSlide + 1).padStart(2, '0')} de ${TOTAL_SLIDES}`}
+                    {`${copy.step} ${String(activeSlide + 1).padStart(2, '0')} ${copy.of} ${TOTAL_SLIDES}`}
                   </div>
                   <div className="mt-4 flex min-w-0 flex-col items-start gap-2 sm:flex-row sm:items-baseline sm:gap-5">
                     <div className="shrink-0 font-heading text-[64px] font-black leading-[.85] tracking-tight text-ummix-red sm:text-[82px] md:text-[120px]">
                       {String(activeSlide + 1).padStart(2, '0')}
                     </div>
                     <h3 className="m-0 min-w-0 break-words text-balance font-heading text-3xl font-extrabold leading-none tracking-tight text-white md:text-4xl">
-                      {slide.title}
+                      {copy.steps[activeSlide][0]}
                     </h3>
                   </div>
-                  <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-white/72">{slide.description}</p>
+                  <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-white/72">{copy.steps[activeSlide][1]}</p>
                   <div className="mt-6 flex w-fit max-w-full flex-wrap items-center gap-2.5 rounded-2xl border border-ummix-red/40 bg-ummix-red/[.18] px-4 py-3 font-sans text-[11px] font-bold uppercase leading-snug tracking-[.14em] text-white sm:rounded-full">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    {slide.tag}
+                    {copy.steps[activeSlide][2]}
                   </div>
                 </div>
 
@@ -287,7 +291,7 @@ export default function Method() {
                   key={s.id}
                   type="button"
                   onClick={() => goToSlide(index)}
-                  aria-label={`Ir para etapa ${index + 1}`}
+                  aria-label={`${copy.goTo} ${index + 1}`}
                   aria-current={index === activeSlide}
                   className={`min-h-11 rounded-xl border-none px-2 py-3 font-heading text-sm font-extrabold tracking-wide ${
                     index === activeSlide
