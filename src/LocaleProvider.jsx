@@ -16,7 +16,7 @@ function localeFromPath(pathname) {
 }
 
 function isPortuguesePagePath(pathname) {
-  return /^\/(cashback|partner)(?:\.html)?\/?$/.test(pathname)
+  return /^\/(cashback|partner|monetize)(?:\.html)?\/?$/.test(pathname)
 }
 
 function localeFromCountry(country) {

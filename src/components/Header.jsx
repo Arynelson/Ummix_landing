@@ -13,6 +13,7 @@ export default function Header({ active, surface = 'overlay' }) {
     { href: '/', active: '/', label: labels.home },
     { href: '/cashback', active: '/cashback', label: labels.cashback },
     { href: '/partner', active: '/partner', label: labels.partners },
+    { href: '/monetize', active: '/monetize', label: labels.monetize },
   ]
 
   useEffect(() => {
