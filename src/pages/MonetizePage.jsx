@@ -128,6 +128,10 @@ function Process({ copy }) {
           <p className="monetize-section-note">Como funciona</p>
           <h2 id="process-title">{copy.processTitle}</h2>
           <p>{copy.processDescription}</p>
+          <a className="monetize-button monetize-button--dark monetize-process__cta" href="#cadastro">
+            {copy.processCta}
+            <ArrowIcon />
+          </a>
         </div>
         <ol className="monetize-process__list">
           {copy.steps.map(([title, description], index) => (

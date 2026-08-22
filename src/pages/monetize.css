@@ -530,6 +530,10 @@
   text-wrap: pretty;
 }
 
+.monetize-process__cta {
+  margin-top: 1.75rem;
+}
+
 .monetize-process__list {
   display: grid;
   margin: 0;
