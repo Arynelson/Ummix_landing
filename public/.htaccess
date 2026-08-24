@@ -6,6 +6,8 @@ RewriteRule ^cashback/?$ /cashback.html [L]
 RewriteRule ^partner/?$  /partner.html  [L]
 RewriteRule ^en/?$ /en/index.html [L]
 RewriteRule ^en/cashback/?$ /en/cashback.html [L]
+RewriteRule ^monetize/?$ /monetize.html [L]
+RewriteRule ^en/monetize/?$ /en/monetize.html [L]
 RewriteRule ^en/partner/?$  /en/partner.html [L]
 
 # SPA fallback para a landing principal

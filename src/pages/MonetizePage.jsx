@@ -298,7 +298,7 @@ function MonetizeForm({ copy }) {
           </div>
           <div className="monetize-field monetize-field--full">
             <FieldLabel htmlFor="monetize-site" label={copy.fields.site} />
-            <input id="monetize-site" name="site" type="url" placeholder={copy.placeholders.site} autoComplete="url" required />
+            <input id="monetize-site" name="site" type="text" inputMode="url" placeholder={copy.placeholders.site} autoComplete="url" spellCheck="false" required />
           </div>
         </div>
       </fieldset>
