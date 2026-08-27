@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import Hero from './components/home/Hero'
+import AwardsSection from './components/home/AwardsSection'
 import ClientView from './components/home/ClientView'
 import Backstage from './components/home/Backstage'
 import Method from './components/home/Method'
@@ -24,6 +25,7 @@ export default function App() {
       <a className="skip-link" href="#main-content">{labels.skipToContent}</a>
       <main id="main-content" tabIndex="-1">
         <Hero />
+        <AwardsSection />
         <Segmentations />
         <ClientView />
         <Backstage />

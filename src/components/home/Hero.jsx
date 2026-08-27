@@ -1,91 +1,50 @@
-import { useEffect, useRef, useState } from 'react'
+import { useLocale } from '../../LocaleProvider.jsx'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 import ButtonLink from '../ui/ButtonLink'
-import { useLocale } from '../../LocaleProvider.jsx'
 import { HOME_COPY } from '../../home-copy.js'
-
-const AWARD_ASSETS = [
-  {
-    id: 'cni',
-    src: '/assets/cni_premio_inovacao.jpg',
-    alt: 'National Innovation Award',
-    href: 'https://www.premiodeinovacao.com.br/vencedores/',
-  },
-  {
-    id: 'abdi',
-    src: '/assets/Logo_ABDI_Principal .png',
-    alt: 'ABDI - National Innovation Challenge',
-    href: 'https://prosas.com.br/editais/16002-desafio-de-inovacao-festival-curicaca?subdominio=prosas',
-  },
-  {
-    id: 'go-ecommerce',
-    src: '/assets/Selo_GO+E-commerce.png',
-    alt: 'GO E-commerce Certification',
-    href: 'https://comunicacao.ielgoias.com.br/go-ecommerce',
-  },
-]
+import { AWARD_ASSETS } from './awards-data.js'
 
 function AwardsCard({ copy }) {
-  const [activeId, setActiveId] = useState(null)
-  const cardRef = useRef(null)
-
-  useEffect(() => {
-    if (!activeId) return
-    const handlePointerDown = (e) => {
-      if (cardRef.current && !cardRef.current.contains(e.target)) {
-        setActiveId(null)
-      }
-    }
-    document.addEventListener('pointerdown', handlePointerDown)
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [activeId])
-
-  const handleLogoClick = (e, award) => {
-    // On touch devices there's no hover, so the first tap only reveals
-    // the tooltip; a second tap on an already-active logo navigates.
-    if (activeId !== award.id) {
-      e.preventDefault()
-      e.stopPropagation()
-      setActiveId(award.id)
-    }
-  }
+  const { locale } = useLocale()
 
   return (
-    <div ref={cardRef} className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white border border-ummix-dark/10 rounded-2xl sm:rounded-full px-4 py-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)]">
-      <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-ummix-gray-dark/70 whitespace-nowrap">
-        {copy.awards}
-      </span>
+    <div className="inline-flex max-w-full flex-col items-center gap-3 rounded-2xl border border-ummix-dark/10 bg-white px-3 py-3 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)] sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3 sm:px-4">
       <div className="flex items-center gap-2">
-        {AWARD_ASSETS.map((award, index) => {
-          const label = [copy.awardCni, copy.awardAbdi, copy.awardGo][index]
-          return (
-          <div key={award.id} className="relative">
-            {activeId === award.id && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max max-w-[220px] px-3 py-2 rounded-lg bg-ummix-dark border border-white/15 text-[11px] leading-snug text-white text-center shadow-lg pointer-events-none z-20">
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-2 h-2 bg-ummix-dark border-l border-t border-white/15 rotate-45 -mb-1" />
-                {label}
-              </div>
-            )}
-            <a
-              href={award.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={() => setActiveId(award.id)}
-              onMouseLeave={() => setActiveId((current) => (current === award.id ? null : current))}
-              onClick={(e) => handleLogoClick(e, award)}
-              aria-label={label}
-              className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-lg bg-ummix-gray p-1.5 transition-transform hover:scale-105 cursor-pointer"
-            >
-              <img
-                src={award.src}
-                alt={award.alt}
-                className="max-w-full max-h-full object-contain"
-              />
-            </a>
-          </div>
-          )
-        })}
+        <span className="whitespace-nowrap text-[10px] font-bold uppercase tracking-widest text-ummix-gray-dark/70 md:text-xs">
+          {copy.awards}
+        </span>
+        <div className="flex items-center gap-2">
+          {AWARD_ASSETS.map((award, index) => {
+            const label = [copy.awardCni, copy.awardAbdi, copy.awardGo][index]
+            return (
+            <div key={award.id} className="relative">
+              <a
+                href={award.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-ummix-gray p-1.5 transition-transform hover:scale-105 md:h-14 md:w-14"
+              >
+                <img
+                  src={award.src}
+                  alt={award.alt[locale]}
+                  width="56"
+                  height="56"
+                  className="max-h-full max-w-full object-contain"
+                />
+              </a>
+            </div>
+            )
+          })}
+        </div>
       </div>
+      <a
+        href="#premios"
+        className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-ummix-red/20 bg-ummix-red/5 px-3 py-2 text-xs font-bold text-ummix-red transition-colors hover:bg-ummix-red hover:text-white"
+      >
+        {copy.awardsCta}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+      </a>
     </div>
   )
 }

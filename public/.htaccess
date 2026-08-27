@@ -1,6 +1,21 @@
 Options -MultiViews
 RewriteEngine On
 
+# Cache policy for the static Vite build.
+# HTML must be revalidated after a deployment because it contains the
+# fingerprinted asset names. Fingerprinted assets can be cached for one year.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:html?)$">
+    Header always set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
+
+  <FilesMatch "\.(?:js|mjs|css|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|otf)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
 # Subpages: /cashback e /partner sem extensão .html
 RewriteRule ^cashback/?$ /cashback.html [L]
 RewriteRule ^partner/?$  /partner.html  [L]

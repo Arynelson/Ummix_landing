@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import { CONTACT_FORM_CC_EMAIL } from '../../constants/urls'
+import { CONTACT_EMAIL, CONTACT_FORM_CC_EMAILS } from '../../constants/urls'
 import { submitForm as sendForm } from '../../services/formSubmit'
 import { useLocale } from '../../LocaleProvider.jsx'
 import { LABELS } from '../../i18n-labels.js'
@@ -32,10 +32,10 @@ function HeroCTAs() {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
       <a
-        href="#processo"
+        href="#parceiros"
         className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/25 px-6 py-3 font-semibold text-white/80 transition-all hover:border-white/50 hover:text-white sm:w-auto"
       >
-        {copy.howItWorks}
+        {copy.meetPartners}
       </a>
     </div>
   )
@@ -107,6 +107,52 @@ function Hero() {
   )
 }
 
+/* ---- Audience paths ---- */
+function AudiencePaths() {
+  const { locale } = useLocale()
+  const copy = PARTNER_COPY[locale]
+
+  return (
+    <section id="caminhos" aria-labelledby="partner-paths-title" className="scroll-mt-28 bg-white py-16 md:py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mb-10 max-w-2xl md:mb-12">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-ummix-red">{copy.pathsKicker}</p>
+          <h2 id="partner-paths-title" className="font-heading text-[clamp(32px,4vw,52px)] font-extrabold leading-[1.02] tracking-tight text-ummix-dark text-balance">
+            {copy.pathsTitle}
+          </h2>
+          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-ummix-gray-dark md:text-lg">
+            {copy.pathsDescription}
+          </p>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2">
+          <a href="#candidatura" className="group relative flex min-h-64 flex-col overflow-hidden rounded-3xl bg-ummix-dark p-7 text-white transition-transform duration-300 hover:-translate-y-1 md:p-9">
+            <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-ummix-red/30 blur-3xl" aria-hidden="true" />
+            <p className="relative text-xs font-bold uppercase tracking-[0.16em] text-ummix-red">{copy.pathJoinEyebrow}</p>
+            <h3 className="relative mt-4 font-heading text-3xl font-extrabold tracking-tight md:text-4xl">{copy.pathJoinTitle}</h3>
+            <p className="relative mt-3 max-w-md text-base leading-relaxed text-white/70">{copy.pathJoinDescription}</p>
+            <span className="relative mt-auto inline-flex min-h-11 items-center gap-2 pt-8 text-sm font-bold text-white transition-colors group-hover:text-ummix-red">
+              {copy.pathJoinCta}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+            </span>
+          </a>
+
+          <a href="#parceiros" className="group relative flex min-h-64 flex-col overflow-hidden rounded-3xl border border-ummix-dark/10 bg-ummix-gray p-7 text-ummix-dark transition-transform duration-300 hover:-translate-y-1 hover:border-ummix-red/25 md:p-9">
+            <div className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full bg-ummix-red/10 blur-3xl" aria-hidden="true" />
+            <p className="relative text-xs font-bold uppercase tracking-[0.16em] text-ummix-red">{copy.pathFindEyebrow}</p>
+            <h3 className="relative mt-4 font-heading text-3xl font-extrabold tracking-tight md:text-4xl">{copy.pathFindTitle}</h3>
+            <p className="relative mt-3 max-w-md text-base leading-relaxed text-ummix-gray-dark">{copy.pathFindDescription}</p>
+            <span className="relative mt-auto inline-flex min-h-11 items-center gap-2 pt-8 text-sm font-bold text-ummix-dark transition-colors group-hover:text-ummix-red">
+              {copy.pathFindCta}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ---- Process ---- */
 const PROCESS = [
   { t: 'Candidatura', d: 'Você preenche o formulário de interesse e nosso time avalia o perfil da sua empresa.' },
@@ -119,7 +165,7 @@ function Process() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
   return (
-    <section id="processo" className="bg-ummix-gray py-18 md:py-24">
+    <section id="processo" className="scroll-mt-28 bg-ummix-gray py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.processKicker}</span>
@@ -172,7 +218,7 @@ const PARTNERS = [
     mark: 'OQI',
     name: 'OQI',
     links: [
-      { label: 'agenciaoqi.com', href: 'http://agenciaoqi.com', external: true },
+      { label: 'agenciaoqi.com', href: 'https://agenciaoqi.com/', external: true },
       { label: '@agenciaoqi', href: 'https://www.instagram.com/agenciaoqi/', external: true },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/company/oqi-ag%C3%AAncia-que-cria-impacto-positivo/', external: true },
     ],
@@ -193,11 +239,11 @@ function PartnersGrid() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
   return (
-    <section id="parceiros" className="bg-white py-18 md:py-24">
+    <section id="parceiros" aria-labelledby="partners-title" className="scroll-mt-28 bg-white py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
           <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.partnersKicker}</span>
-          <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
+          <h2 id="partners-title" className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
             {copy.partnersTitle}
           </h2>
           <p className="mx-auto max-w-xl text-center text-lg text-ummix-gray-dark text-pretty [hyphens:none]">
@@ -231,24 +277,42 @@ function PartnersGrid() {
                 </div>
               </div>
 
-              <div className="relative mt-7 flex flex-wrap gap-2.5 border-t border-ummix-dark/10 pt-6">
-                {partner.links.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target={link.external ? '_blank' : undefined}
-                    rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-ummix-dark/12 bg-white px-4 py-2 font-sans text-xs font-bold text-ummix-dark transition-colors hover:border-ummix-red/35 hover:text-ummix-red"
-                  >
-                    <span className="break-all">{link.label}</span>
-                    <svg className="shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M7 17L17 7M7 7h10v10" />
-                    </svg>
-                  </a>
-                ))}
+              <div className="relative mt-7 border-t border-ummix-dark/10 pt-6">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-ummix-gray-dark">{copy.partnerContactLabel}</p>
+                <div className="flex flex-wrap gap-2.5">
+                  {partner.links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
+                      className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-ummix-dark/12 bg-white px-4 py-2 font-sans text-xs font-bold text-ummix-dark transition-colors hover:border-ummix-red/35 hover:text-ummix-red"
+                    >
+                      <span className="break-all">{link.label}</span>
+                      <svg className="shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="mt-10 flex flex-col gap-5 rounded-3xl border border-ummix-red/20 bg-ummix-red/5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-ummix-red">{copy.partnerFallbackKicker}</p>
+            <h3 className="mt-2 font-heading text-2xl font-extrabold tracking-tight text-ummix-dark md:text-3xl">{copy.partnerFallbackTitle}</h3>
+            <p className="mt-3 text-base leading-relaxed text-ummix-gray-dark">{copy.partnerFallbackDescription}</p>
+          </div>
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(copy.partnerFallbackSubject)}`}
+            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-ummix-red px-5 py-3 text-sm font-bold text-white transition-all hover:scale-[1.02] hover:bg-ummix-red-dark"
+          >
+            {copy.partnerFallbackCta}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -275,7 +339,7 @@ function PartnerForm() {
         empresa: formData.get('empresa'),
         telefone: formData.get('telefone'),
         _subject: copy.subject,
-        _cc: CONTACT_FORM_CC_EMAIL,
+        _cc: CONTACT_FORM_CC_EMAILS,
       })
 
       formElement.reset()
@@ -286,7 +350,7 @@ function PartnerForm() {
   }
 
   return (
-    <section id="candidatura" className="bg-ummix-gray py-18 md:py-24">
+    <section id="candidatura" className="scroll-mt-28 bg-ummix-gray py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="relative mx-auto grid max-w-[1080px] grid-cols-1 items-center gap-10 overflow-hidden rounded-3xl bg-ummix-dark p-6 text-white sm:p-8 md:grid-cols-[0.9fr_1.1fr] md:gap-14 md:p-14">
           <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(600px 360px at 0% 0%, rgba(155,25,26,0.32), transparent 62%)'}} />
@@ -371,6 +435,7 @@ export default function PartnerPage() {
       <a className="skip-link" href="#main-content">{labels.skipToContent}</a>
       <main id="main-content" tabIndex="-1">
         <Hero />
+        <AudiencePaths />
         <Process />
         <PartnersGrid />
         <PartnerForm />

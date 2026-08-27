@@ -53,7 +53,7 @@ export const MONETIZE_COPY = {
     formTitle: 'Quer transformar seu streaming em receita?',
     formDescription: 'Cadastre seu veículo para participar da nova frente de monetização digital da Ummix Ads. Nossa equipe entrará em contato para conhecer sua operação, apresentar o modelo e realizar a integração.',
     formSteps: [
-      ['Conhecemos sua operação', 'Entendemos o veículo, o streaming atual e sua audiência digital.'],
+      ['Conhecemos sua operação', 'Entendemos o veículo, sua presença digital e, se houver, o streaming atual.'],
       ['Apresentamos o modelo', 'Explicamos a integração, o pré-roll e a participação na receita.'],
       ['Avaliamos os próximos passos', 'Nossa equipe combina com você o caminho para colocar o projeto no ar.'],
     ],
@@ -61,7 +61,7 @@ export const MONETIZE_COPY = {
     sections: {
       vehicle: 'Dados do veículo',
       responsible: 'Responsável',
-      streaming: 'Streaming atual',
+      streaming: 'Streaming atual (se houver)',
       consent: 'Consentimento',
     },
     fields: {
@@ -76,6 +76,7 @@ export const MONETIZE_COPY = {
       role: 'Cargo / função',
       whatsapp: 'WhatsApp',
       email: 'E-mail',
+      hasStreaming: 'Sua empresa disponibiliza sua programação por streaming atualmente?',
       streamType: 'Tipo de streaming',
       streamLink: 'Link atual do streaming',
       provider: 'Qual empresa fornece atualmente seu streaming?',
@@ -177,7 +178,7 @@ export const MONETIZE_COPY = {
     formTitle: 'Ready to turn your streaming into revenue?',
     formDescription: 'Register your outlet to join Ummix Ads’ new digital monetization initiative. Our team will learn about your operation, present the model and assess the integration.',
     formSteps: [
-      ['We learn about your operation', 'We understand the outlet, current streaming setup and digital audience.'],
+      ['We learn about your operation', 'We understand the outlet, its digital presence and, if applicable, its current streaming.'],
       ['We present the model', 'We explain the integration, pre-roll and revenue share.'],
       ['We assess next steps', 'Our team agrees with you on the path to bring the project live.'],
     ],
@@ -185,7 +186,7 @@ export const MONETIZE_COPY = {
     sections: {
       vehicle: 'Outlet details',
       responsible: 'Contact person',
-      streaming: 'Current streaming',
+      streaming: 'Current streaming (if any)',
       consent: 'Consent',
     },
     fields: {
@@ -200,6 +201,7 @@ export const MONETIZE_COPY = {
       role: 'Role / position',
       whatsapp: 'WhatsApp',
       email: 'Email',
+      hasStreaming: 'Does your company currently offer streaming?',
       streamType: 'Streaming type',
       streamLink: 'Current streaming link',
       provider: 'Which company currently provides your streaming?',

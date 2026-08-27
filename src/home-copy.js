@@ -2,6 +2,7 @@ export const HOME_COPY = {
   pt: {
     hero: {
       awards: 'Prêmios e Certificações',
+      awardsCta: 'Ver todos os prêmios',
       awardCni: 'Vencedor · Prêmio Nacional de Inovação · CNI/SEBRAE',
       awardAbdi: 'Top 4 ideias mais inovadoras do Brasil · ABDI',
       awardGo: 'Certificação GO E-commerce',
@@ -17,6 +18,19 @@ export const HOME_COPY = {
       primaryCta: 'Conhecer o Método Ummix',
       secondaryCta: 'Quero anunciar',
       stats: ['Veículos parceiros', 'Etapas estratégicas', 'Atividades operacionais'],
+    },
+    awardsSection: {
+      kicker: 'Prêmios e certificações',
+      title: 'Reconhecimentos que reforçam',
+      accent: 'a nossa jornada.',
+      description: 'Reconhecimentos que registram diferentes momentos da trajetória da Ummix e reforçam nosso compromisso com inovação e inteligência na mídia offline.',
+      cta: 'Falar com a Ummix',
+      viewSource: 'Ver reconhecimento',
+      items: [
+        ['CNI / SEBRAE', 'Prêmio Nacional de Inovação', 'Vencedora · Prêmio Nacional de Inovação · CNI/SEBRAE'],
+        ['ABDI', 'Desafio de Inovação', 'Top 4 ideias mais inovadoras do Brasil · ABDI'],
+        ['GO E-commerce', 'Certificação', 'Certificação GO E-commerce'],
+      ],
     },
     clientView: {
       kicker: 'O que o cliente vê',
@@ -134,6 +148,7 @@ export const HOME_COPY = {
   en: {
     hero: {
       awards: 'Awards & Certifications',
+      awardsCta: 'See all awards',
       awardCni: 'Winner · National Innovation Award · CNI/SEBRAE',
       awardAbdi: 'Top 4 most innovative ideas in Brazil · ABDI',
       awardGo: 'GO E-commerce Certification',
@@ -149,6 +164,19 @@ export const HOME_COPY = {
       primaryCta: 'Discover the Ummix Method',
       secondaryCta: 'I want to advertise',
       stats: ['Partner media outlets', 'Strategic stages', 'Operational activities'],
+    },
+    awardsSection: {
+      kicker: 'Awards & certifications',
+      title: 'Recognition that reflects',
+      accent: 'our journey.',
+      description: 'Recognition across different moments of Ummix’s journey, reflecting our commitment to innovation and intelligence in offline media.',
+      cta: 'Talk to Ummix',
+      viewSource: 'View recognition',
+      items: [
+        ['CNI / SEBRAE', 'National Innovation Award', 'Winner · National Innovation Award · CNI/SEBRAE'],
+        ['ABDI', 'Innovation Challenge', 'Top 4 most innovative ideas in Brazil · ABDI'],
+        ['GO E-commerce', 'Certification', 'GO E-commerce Certification'],
+      ],
     },
     clientView: {
       kicker: 'What the client sees',

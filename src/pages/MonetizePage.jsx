@@ -228,7 +228,16 @@ function formatPhone(value) {
 
 function MonetizeForm({ copy }) {
   const [status, setStatus] = useState('idle')
+  const [hasStreaming, setHasStreaming] = useState('')
   const [audienceKnown, setAudienceKnown] = useState('')
+
+  const handleStreamingChange = (event) => {
+    const value = event.currentTarget.value
+    setHasStreaming(value)
+    if (value !== copy.yes) {
+      setAudienceKnown('')
+    }
+  }
 
   const onSubmit = async (event) => {
     event.preventDefault()
@@ -245,6 +254,7 @@ function MonetizeForm({ copy }) {
         origem: 'monetize',
       })
       formElement.reset()
+      setHasStreaming('')
       setAudienceKnown('')
       setStatus('success')
     } catch {
@@ -329,41 +339,56 @@ function MonetizeForm({ copy }) {
         <legend>{copy.sections.streaming}</legend>
         <div className="monetize-form-grid">
           <div className="monetize-field monetize-field--full">
-            <span className="monetize-field__label" id="monetize-stream-type-label">{copy.fields.streamType}<span aria-hidden="true">*</span></span>
-            <ChoiceGroup name="tipoStreaming" options={copy.streamTypes} required labelledBy="monetize-stream-type-label" />
-          </div>
-          <div className="monetize-field monetize-field--full">
-            <FieldLabel htmlFor="monetize-stream-link" label={copy.fields.streamLink} />
-            <input id="monetize-stream-link" name="linkStreaming" type="url" placeholder={copy.placeholders.streamLink} required />
-          </div>
-          <div className="monetize-field monetize-field--full">
-            <FieldLabel htmlFor="monetize-provider" label={copy.fields.provider} required={false} />
-            <input id="monetize-provider" name="fornecedorStreaming" type="text" placeholder={copy.placeholders.provider} />
-          </div>
-          <div className="monetize-field monetize-field--full">
-            <FieldLabel htmlFor="monetize-monthly-cost" label={copy.fields.monthlyCost} />
-            <select id="monetize-monthly-cost" name="custoStreaming" defaultValue="" required>
-              <option value="" disabled>{copy.chooseOption}</option>
-              {copy.costOptions.map((option) => <option value={option} key={option}>{option}</option>)}
-            </select>
-          </div>
-          <div className="monetize-field monetize-field--full">
-            <span className="monetize-field__label" id="monetize-audience-known-label">{copy.fields.knowsAudience}<span aria-hidden="true">*</span></span>
+            <span className="monetize-field__label" id="monetize-has-streaming-label">{copy.fields.hasStreaming}<span aria-hidden="true">*</span></span>
             <ChoiceGroup
-              name="conheceAudiencia"
+              name="possuiStreaming"
               options={[copy.yes, copy.no]}
-              value={audienceKnown}
-              onChange={(event) => setAudienceKnown(event.currentTarget.value)}
+              value={hasStreaming}
+              onChange={handleStreamingChange}
               required
-              labelledBy="monetize-audience-known-label"
+              labelledBy="monetize-has-streaming-label"
             />
           </div>
-          {audienceKnown === copy.yes ? (
-            <div className="monetize-field monetize-field--full monetize-audience-field">
-              <FieldLabel htmlFor="monetize-monthly-audience" label={copy.fields.monthlyAudience} />
-              <input id="monetize-monthly-audience" name="audienciaMensal" type="number" min="0" inputMode="numeric" placeholder={copy.placeholders.monthlyAudience} required />
-              <p>{copy.audienceHint}</p>
-            </div>
+          {hasStreaming === copy.yes ? (
+            <>
+              <div className="monetize-field monetize-field--full">
+                <span className="monetize-field__label" id="monetize-stream-type-label">{copy.fields.streamType}<span aria-hidden="true">*</span></span>
+                <ChoiceGroup name="tipoStreaming" options={copy.streamTypes} required labelledBy="monetize-stream-type-label" />
+              </div>
+              <div className="monetize-field monetize-field--full">
+                <FieldLabel htmlFor="monetize-stream-link" label={copy.fields.streamLink} />
+                <input id="monetize-stream-link" name="linkStreaming" type="url" placeholder={copy.placeholders.streamLink} required />
+              </div>
+              <div className="monetize-field monetize-field--full">
+                <FieldLabel htmlFor="monetize-provider" label={copy.fields.provider} required={false} />
+                <input id="monetize-provider" name="fornecedorStreaming" type="text" placeholder={copy.placeholders.provider} />
+              </div>
+              <div className="monetize-field monetize-field--full">
+                <FieldLabel htmlFor="monetize-monthly-cost" label={copy.fields.monthlyCost} />
+                <select id="monetize-monthly-cost" name="custoStreaming" defaultValue="" required>
+                  <option value="" disabled>{copy.chooseOption}</option>
+                  {copy.costOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+                </select>
+              </div>
+              <div className="monetize-field monetize-field--full">
+                <span className="monetize-field__label" id="monetize-audience-known-label">{copy.fields.knowsAudience}<span aria-hidden="true">*</span></span>
+                <ChoiceGroup
+                  name="conheceAudiencia"
+                  options={[copy.yes, copy.no]}
+                  value={audienceKnown}
+                  onChange={(event) => setAudienceKnown(event.currentTarget.value)}
+                  required
+                  labelledBy="monetize-audience-known-label"
+                />
+              </div>
+              {audienceKnown === copy.yes ? (
+                <div className="monetize-field monetize-field--full monetize-audience-field">
+                  <FieldLabel htmlFor="monetize-monthly-audience" label={copy.fields.monthlyAudience} />
+                  <input id="monetize-monthly-audience" name="audienciaMensal" type="number" min="0" inputMode="numeric" placeholder={copy.placeholders.monthlyAudience} required />
+                  <p>{copy.audienceHint}</p>
+                </div>
+              ) : null}
+            </>
           ) : null}
         </div>
       </fieldset>

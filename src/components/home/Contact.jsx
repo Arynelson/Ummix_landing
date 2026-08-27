@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CONTACT_FORM_CC_EMAIL } from '../../constants/urls';
+import { CONTACT_FORM_CC_EMAILS } from '../../constants/urls';
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
 import { submitForm as sendForm } from '../../services/formSubmit';
 import { useLocale } from '../../LocaleProvider.jsx';
@@ -41,7 +41,7 @@ export default function Contact() {
       await sendForm({
         ...form,
         _subject: copy.subject,
-        _cc: CONTACT_FORM_CC_EMAIL,
+        _cc: CONTACT_FORM_CC_EMAILS,
       });
 
       setStatus('success');
