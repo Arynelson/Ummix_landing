@@ -21,11 +21,10 @@ export default function App() {
 
   return (
     <>
-      <Header active="/" surface="light" />
+        <Header active="/" surface="light" />
       <a className="skip-link" href="#main-content">{labels.skipToContent}</a>
       <main id="main-content" tabIndex="-1">
         <Hero />
-        <AwardsSection />
         <Segmentations />
         <ClientView />
         <Backstage />
@@ -33,6 +32,7 @@ export default function App() {
         <Eliminates />
         <Deliverables />
         <CashbackSection />
+        <AwardsSection />
         <ForWhom />
         <Partners />
         <Contact />

@@ -1,11 +1,7 @@
 export const HOME_COPY = {
   pt: {
     hero: {
-      awards: 'Prêmios e Certificações',
-      awardsCta: 'Ver todos os prêmios',
-      awardCni: 'Vencedor · Prêmio Nacional de Inovação · CNI/SEBRAE',
-      awardAbdi: 'Top 4 ideias mais inovadoras do Brasil · ABDI',
-      awardGo: 'Certificação GO E-commerce',
+      awardsCta: 'Prêmios e Certificações',
       flowLabels: ['PLANEJAR', 'COMPRAR', 'EXECUTAR', 'AUDITAR', 'RESULTADOS'],
       flowKicker: 'Da contratação à prestação de contas',
       flowTitle: 'Uma operação única e integrada.',
@@ -26,10 +22,12 @@ export const HOME_COPY = {
       description: 'Reconhecimentos que registram diferentes momentos da trajetória da Ummix e reforçam nosso compromisso com inovação e inteligência na mídia offline.',
       cta: 'Falar com a Ummix',
       viewSource: 'Ver reconhecimento',
+      qualification: 'Qualificação registrada',
       items: [
         ['CNI / SEBRAE', 'Prêmio Nacional de Inovação', 'Vencedora · Prêmio Nacional de Inovação · CNI/SEBRAE'],
         ['ABDI', 'Desafio de Inovação', 'Top 4 ideias mais inovadoras do Brasil · ABDI'],
         ['GO E-commerce', 'Certificação', 'Certificação GO E-commerce'],
+        ['FINEP', 'Prêmio Mulheres Inovadoras', 'Qualificada para o Prêmio Mulheres Inovadoras da FINEP'],
       ],
     },
     clientView: {
@@ -147,11 +145,7 @@ export const HOME_COPY = {
   },
   en: {
     hero: {
-      awards: 'Awards & Certifications',
-      awardsCta: 'See all awards',
-      awardCni: 'Winner · National Innovation Award · CNI/SEBRAE',
-      awardAbdi: 'Top 4 most innovative ideas in Brazil · ABDI',
-      awardGo: 'GO E-commerce Certification',
+      awardsCta: 'Awards & Certifications',
       flowLabels: ['PLAN', 'BUY', 'EXECUTE', 'AUDIT', 'RESULTS'],
       flowKicker: 'From contracting to accountability',
       flowTitle: 'One integrated operation.',
@@ -172,10 +166,12 @@ export const HOME_COPY = {
       description: 'Recognition across different moments of Ummix’s journey, reflecting our commitment to innovation and intelligence in offline media.',
       cta: 'Talk to Ummix',
       viewSource: 'View recognition',
+      qualification: 'Qualification recorded',
       items: [
         ['CNI / SEBRAE', 'National Innovation Award', 'Winner · National Innovation Award · CNI/SEBRAE'],
         ['ABDI', 'Innovation Challenge', 'Top 4 most innovative ideas in Brazil · ABDI'],
         ['GO E-commerce', 'Certification', 'GO E-commerce Certification'],
+        ['FINEP', 'Women Innovators Award', 'Qualified for the FINEP Women Innovators Award'],
       ],
     },
     clientView: {

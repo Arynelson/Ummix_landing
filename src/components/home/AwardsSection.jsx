@@ -16,18 +16,18 @@ export default function AwardsSection() {
   const copy = HOME_COPY[locale].awardsSection
 
   return (
-    <section id="premios" aria-labelledby="awards-title" className="scroll-mt-28 relative overflow-hidden bg-ummix-dark px-6 py-20 text-white md:px-16 md:py-24">
+    <section id="premios" aria-labelledby="awards-title" className="scroll-mt-28 relative overflow-hidden bg-white px-6 py-20 text-ummix-dark md:px-16 md:py-24">
       <div className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-ummix-red/25 blur-3xl" aria-hidden="true" />
       <div className="pointer-events-none absolute -bottom-48 right-0 h-[28rem] w-[28rem] rounded-full bg-ummix-red/10 blur-3xl" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-end lg:gap-16">
         <div className="max-w-xl">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-ummix-red">{copy.kicker}</p>
-          <h2 id="awards-title" className="max-w-lg font-heading text-[clamp(34px,4.2vw,58px)] font-extrabold leading-[0.98] tracking-tight text-balance">
+          <h2 id="awards-title" className="max-w-lg font-heading text-[clamp(34px,4.2vw,58px)] font-extrabold leading-[0.98] tracking-tight text-ummix-dark text-balance">
             {copy.title}{' '}
             <span className="text-ummix-red">{copy.accent}</span>
           </h2>
-          <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-white/70 md:text-lg">
+          <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-ummix-gray-dark md:text-lg">
             {copy.description}
           </p>
           <ButtonLink href="#contato" size="md" className="mt-8">
@@ -36,22 +36,34 @@ export default function AwardsSection() {
           </ButtonLink>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {AWARD_ASSETS.map((award, index) => {
             const item = copy.items[index]
             return (
-              <article key={award.id} className="group flex h-full flex-col rounded-3xl bg-white p-4 text-ummix-dark shadow-[0_24px_70px_-34px_rgba(0,0,0,0.8)] transition-transform duration-300 hover:-translate-y-1 sm:p-5">
-                <div className="flex min-h-32 items-center justify-center rounded-2xl bg-ummix-gray p-5 sm:min-h-36">
-                  <img src={award.src} alt={award.alt[locale]} width="240" height="120" className="max-h-24 max-w-full object-contain" loading="lazy" />
+              <article key={award.id} className="group flex h-full flex-col rounded-3xl border border-ummix-dark/10 bg-ummix-gray p-4 text-ummix-dark shadow-[0_24px_70px_-34px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:-translate-y-1 sm:p-5">
+                <div className="flex min-h-32 items-center justify-center rounded-2xl bg-white p-5 sm:min-h-36">
+                  {award.src ? (
+                    <img src={award.src} alt={award.alt[locale]} width="240" height="120" className="max-h-24 max-w-full object-contain" loading="lazy" />
+                  ) : (
+                    <span className="font-heading text-3xl font-extrabold tracking-tight text-ummix-dark" aria-label={award.alt[locale]}>
+                      {award.mark}
+                    </span>
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col px-1 pb-1 pt-5 sm:px-2 sm:pt-6">
                   <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-ummix-red">{item[0]}</p>
                   <h3 className="mt-2 font-heading text-2xl font-extrabold leading-tight tracking-tight text-balance">{item[1]}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-ummix-gray-dark">{item[2]}</p>
-                  <a href={award.href} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex min-h-11 items-center gap-1.5 self-start rounded-full px-2 text-xs font-bold text-ummix-dark transition-colors hover:text-ummix-red">
-                    {copy.viewSource}
-                    <ArrowIcon />
-                  </a>
+                  {award.href ? (
+                    <a href={award.href} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex min-h-11 items-center gap-1.5 self-start rounded-full px-2 text-xs font-bold text-ummix-dark transition-colors hover:text-ummix-red">
+                      {copy.viewSource}
+                      <ArrowIcon />
+                    </a>
+                  ) : (
+                    <span className="mt-6 inline-flex min-h-11 items-center px-2 text-xs font-bold text-ummix-gray-dark">
+                      {copy.qualification}
+                    </span>
+                  )}
                 </div>
               </article>
             )

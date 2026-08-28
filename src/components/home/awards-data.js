@@ -26,4 +26,14 @@ export const AWARD_ASSETS = [
     },
     href: 'https://comunicacao.ielgoias.com.br/go-ecommerce',
   },
+  {
+    id: 'finep',
+    src: null,
+    mark: 'FINEP',
+    alt: {
+      pt: 'FINEP · Prêmio Mulheres Inovadoras',
+      en: 'FINEP · Women Innovators Award',
+    },
+    href: null,
+  },
 ]

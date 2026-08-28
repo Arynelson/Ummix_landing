@@ -2,50 +2,16 @@ import { useLocale } from '../../LocaleProvider.jsx'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 import ButtonLink from '../ui/ButtonLink'
 import { HOME_COPY } from '../../home-copy.js'
-import { AWARD_ASSETS } from './awards-data.js'
 
 function AwardsCard({ copy }) {
-  const { locale } = useLocale()
-
   return (
-    <div className="inline-flex max-w-full flex-col items-center gap-3 rounded-2xl border border-ummix-dark/10 bg-white px-3 py-3 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.12)] sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3 sm:px-4">
-      <div className="flex items-center gap-2">
-        <span className="whitespace-nowrap text-[10px] font-bold uppercase tracking-widest text-ummix-gray-dark/70 md:text-xs">
-          {copy.awards}
-        </span>
-        <div className="flex items-center gap-2">
-          {AWARD_ASSETS.map((award, index) => {
-            const label = [copy.awardCni, copy.awardAbdi, copy.awardGo][index]
-            return (
-            <div key={award.id} className="relative">
-              <a
-                href={award.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-ummix-gray p-1.5 transition-transform hover:scale-105 md:h-14 md:w-14"
-              >
-                <img
-                  src={award.src}
-                  alt={award.alt[locale]}
-                  width="56"
-                  height="56"
-                  className="max-h-full max-w-full object-contain"
-                />
-              </a>
-            </div>
-            )
-          })}
-        </div>
-      </div>
-      <a
+    <ButtonLink
         href="#premios"
-        className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-ummix-red/20 bg-ummix-red/5 px-3 py-2 text-xs font-bold text-ummix-red transition-colors hover:bg-ummix-red hover:text-white"
+        size="md"
+        className="w-full sm:w-auto"
       >
         {copy.awardsCta}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-      </a>
-    </div>
+      </ButtonLink>
   )
 }
 
