@@ -8,7 +8,7 @@ function AwardsCard({ copy }) {
     <ButtonLink
         href="#premios"
         size="md"
-        className="w-full sm:w-auto"
+        className="w-fit max-w-full"
       >
         {copy.awardsCta}
       </ButtonLink>
@@ -209,7 +209,7 @@ export default function Hero() {
         {/* Right — 5-step flow visual card + awards */}
         <div>
           <FlowCard copy={copy} />
-          <div className="mt-6 flex justify-center lg:justify-start">
+          <div className="mt-6 flex justify-center">
             <AwardsCard copy={copy} />
           </div>
         </div>

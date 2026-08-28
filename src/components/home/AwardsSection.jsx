@@ -20,7 +20,7 @@ export default function AwardsSection() {
       <div className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-ummix-red/25 blur-3xl" aria-hidden="true" />
       <div className="pointer-events-none absolute -bottom-48 right-0 h-[28rem] w-[28rem] rounded-full bg-ummix-red/10 blur-3xl" aria-hidden="true" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-end lg:gap-16">
+      <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-16">
         <div className="max-w-xl">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-ummix-red">{copy.kicker}</p>
           <h2 id="awards-title" className="max-w-lg font-heading text-[clamp(34px,4.2vw,58px)] font-extrabold leading-[0.98] tracking-tight text-ummix-dark text-balance">
