@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { CONTACT_FORM_CC_EMAILS } from '../../constants/urls';
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
 import { submitForm as sendForm } from '../../services/formSubmit';
+import { pushDataLayerEvent } from '../../services/analytics';
 import { useLocale } from '../../LocaleProvider.jsx';
 import { HOME_COPY } from '../../home-copy.js';
 
@@ -44,6 +45,11 @@ export default function Contact() {
         _cc: CONTACT_FORM_CC_EMAILS,
       });
 
+      pushDataLayerEvent('ummix_lead_submitted', {
+        form_name: 'contact',
+        page_type: 'home',
+        language: locale === 'pt' ? 'pt-BR' : locale,
+      });
       setStatus('success');
       setForm(INITIAL_FORM);
     } catch {

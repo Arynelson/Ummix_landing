@@ -5,6 +5,7 @@ import { CONTACT_FORM_CC_EMAIL } from '../constants/urls'
 import { useLocale } from '../LocaleProvider.jsx'
 import { LABELS } from '../i18n-labels.js'
 import { submitForm as sendForm } from '../services/formSubmit'
+import { pushDataLayerEvent } from '../services/analytics'
 import { MONETIZE_COPY } from '../monetize-copy.js'
 
 function ArrowIcon() {
@@ -226,7 +227,7 @@ function formatPhone(value) {
     .replace(/(\d{4})(\d{1,4})$/, '$1-$2')
 }
 
-function MonetizeForm({ copy }) {
+function MonetizeForm({ copy, locale }) {
   const [status, setStatus] = useState('idle')
   const [hasStreaming, setHasStreaming] = useState('')
   const [audienceKnown, setAudienceKnown] = useState('')
@@ -252,6 +253,11 @@ function MonetizeForm({ copy }) {
         _subject: copy.subject,
         _cc: CONTACT_FORM_CC_EMAIL,
         origem: 'monetize',
+      })
+      pushDataLayerEvent('ummix_lead_submitted', {
+        form_name: 'monetize',
+        page_type: 'monetize',
+        language: locale === 'pt' ? 'pt-BR' : locale,
       })
       formElement.reset()
       setHasStreaming('')
@@ -410,7 +416,7 @@ function MonetizeForm({ copy }) {
   )
 }
 
-function Registration({ copy }) {
+function Registration({ copy, locale }) {
   return (
     <section id="cadastro" className="monetize-section monetize-registration" aria-labelledby="registration-title">
       <div className="monetize-container monetize-registration__layout">
@@ -428,7 +434,7 @@ function Registration({ copy }) {
           </ol>
           <p className="monetize-registration__privacy">{copy.privacyNote}</p>
         </div>
-        <MonetizeForm copy={copy} />
+        <MonetizeForm copy={copy} locale={locale} />
       </div>
     </section>
   )
@@ -448,7 +454,7 @@ export default function MonetizePage() {
         <Proposal copy={copy} />
         <Process copy={copy} />
         <Proof copy={copy} />
-        <Registration copy={copy} />
+        <Registration copy={copy} locale={locale} />
       </main>
       <Footer />
     </div>

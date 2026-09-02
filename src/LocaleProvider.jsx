@@ -3,20 +3,23 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 export const LOCALES = {
   pt: { code: 'pt-BR', label: 'Português', shortLabel: 'PT' },
   en: { code: 'en', label: 'English', shortLabel: 'EN' },
+  es: { code: 'es', label: 'Español', shortLabel: 'ES' },
 }
 
 const STORAGE_KEY = 'ummix-locale'
 
 function normalizeLocale(value) {
-  return value === 'en' ? 'en' : value === 'pt' ? 'pt' : null
+  return value === 'en' || value === 'es' ? value : value === 'pt' ? 'pt' : null
 }
 
 function localeFromPath(pathname) {
-  return pathname === '/en' || pathname.startsWith('/en/') ? 'en' : null
+  if (pathname === '/en' || pathname.startsWith('/en/')) return 'en'
+  if (pathname === '/es' || pathname.startsWith('/es/')) return 'es'
+  return null
 }
 
 function isPortuguesePagePath(pathname) {
-  return /^\/(cashback|partner|monetize)(?:\.html)?\/?$/.test(pathname)
+  return /^\/(cashback|partner|monetize|investidores)(?:\.html)?\/?$/.test(pathname)
 }
 
 function localeFromCountry(country) {
@@ -63,13 +66,15 @@ export function getInitialLocale() {
 
 export function getLocalizedPath(locale, pathname = window.location.pathname) {
   const normalizedLocale = normalizeLocale(locale) ?? 'pt'
-  const withoutEnglishPrefix = pathname.replace(/^\/en(?=\/|$)/, '') || '/'
+  const withoutLocalePrefix = pathname.replace(/^\/(?:en|es)(?=\/|$)/, '') || '/'
 
-  if (normalizedLocale === 'en') {
-    return withoutEnglishPrefix === '/' ? '/en/' : `/en${withoutEnglishPrefix}`
+  if (normalizedLocale !== 'pt') {
+    return withoutLocalePrefix === '/'
+      ? '/' + normalizedLocale + '/'
+      : '/' + normalizedLocale + withoutLocalePrefix
   }
 
-  return withoutEnglishPrefix
+  return withoutLocalePrefix
 }
 
 const LocaleContext = createContext(null)

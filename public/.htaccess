@@ -24,6 +24,12 @@ RewriteRule ^en/cashback/?$ /en/cashback.html [L]
 RewriteRule ^monetize/?$ /monetize.html [L]
 RewriteRule ^en/monetize/?$ /en/monetize.html [L]
 RewriteRule ^en/partner/?$  /en/partner.html [L]
+RewriteRule ^en/investidores/?$ /en/investidores.html [L]
+RewriteRule ^es/?$ /es/index.html [L]
+RewriteRule ^es/cashback/?$ /es/cashback.html [L]
+RewriteRule ^es/partner/?$ /es/partner.html [L]
+RewriteRule ^es/monetize/?$ /es/monetize.html [L]
+RewriteRule ^es/investidores/?$ /es/investidores.html [L]
 
 # SPA fallback para a landing principal
 RewriteCond %{REQUEST_FILENAME} !-f

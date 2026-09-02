@@ -5,6 +5,7 @@ export const AWARD_ASSETS = [
     alt: {
       pt: 'Prêmio Nacional de Inovação · CNI/SEBRAE',
       en: 'National Innovation Award · CNI/SEBRAE',
+      es: 'Premio Nacional de Innovación · CNI/SEBRAE',
     },
     href: 'https://www.premiodeinovacao.com.br/vencedores/',
   },
@@ -14,6 +15,7 @@ export const AWARD_ASSETS = [
     alt: {
       pt: 'ABDI · Desafio de Inovação',
       en: 'ABDI · Innovation Challenge',
+      es: 'ABDI · Desafío de Innovación',
     },
     href: 'https://prosas.com.br/editais/16002-desafio-de-inovacao-festival-curicaca?subdominio=prosas',
   },
@@ -23,6 +25,7 @@ export const AWARD_ASSETS = [
     alt: {
       pt: 'Selo GO E-commerce',
       en: 'GO E-commerce Certification',
+      es: 'Certificación GO E-commerce',
     },
     href: 'https://comunicacao.ielgoias.com.br/go-ecommerce',
   },
@@ -33,6 +36,7 @@ export const AWARD_ASSETS = [
     alt: {
       pt: 'FINEP · Prêmio Mulheres Inovadoras',
       en: 'FINEP · Women Innovators Award',
+      es: 'FINEP · Premio Mujeres Innovadoras',
     },
     href: null,
   },

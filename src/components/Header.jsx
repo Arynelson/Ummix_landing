@@ -41,16 +41,20 @@ export default function Header({ active, surface = 'overlay' }) {
       <span className={`px-2 text-[10px] font-bold uppercase tracking-wider ${usesDarkInk ? 'text-ummix-gray-dark' : 'text-white/65'}`}>
         {labels.language}
       </span>
-      {['pt', 'en'].map((option) => {
+      {['pt', 'en', 'es'].map((option) => {
         const selected = locale === option
-        const optionLabel = option === 'pt' ? labels.switchToPortuguese : labels.switchToEnglish
+        const optionLabel = {
+          pt: labels.switchToPortuguese,
+          en: labels.switchToEnglish,
+          es: labels.switchToSpanish,
+        }[option]
         return (
           <a
             key={option}
             href={getLocalizedPath(option)}
             aria-label={optionLabel}
             aria-current={selected ? 'page' : undefined}
-            lang={option === 'pt' ? 'pt-BR' : 'en'}
+            lang={option === 'pt' ? 'pt-BR' : option}
             onClick={(event) => {
               if (selected) event.preventDefault()
               rememberLocale(option)

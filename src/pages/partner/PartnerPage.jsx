@@ -3,6 +3,7 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import { CONTACT_EMAIL, CONTACT_FORM_CC_EMAILS } from '../../constants/urls'
 import { submitForm as sendForm } from '../../services/formSubmit'
+import { pushDataLayerEvent } from '../../services/analytics'
 import { useLocale } from '../../LocaleProvider.jsx'
 import { LABELS } from '../../i18n-labels.js'
 import { PARTNER_COPY } from '../../partner-copy.js'
@@ -342,6 +343,11 @@ function PartnerForm() {
         _cc: CONTACT_FORM_CC_EMAILS,
       })
 
+      pushDataLayerEvent('ummix_lead_submitted', {
+        form_name: 'partner',
+        page_type: 'partner',
+        language: locale === 'pt' ? 'pt-BR' : locale,
+      })
       formElement.reset()
       setStatus('success')
     } catch {
