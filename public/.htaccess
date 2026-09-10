@@ -16,20 +16,23 @@ RewriteEngine On
   </FilesMatch>
 </IfModule>
 
-# Subpages: /cashback e /partner sem extensão .html
+# Subpages sem extensão .html
 RewriteRule ^cashback/?$ /cashback.html [L]
 RewriteRule ^partner/?$  /partner.html  [L]
+RewriteRule ^premios/?$ /premios.html [L]
 RewriteRule ^en/?$ /en/index.html [L]
 RewriteRule ^en/cashback/?$ /en/cashback.html [L]
 RewriteRule ^monetize/?$ /monetize.html [L]
 RewriteRule ^en/monetize/?$ /en/monetize.html [L]
 RewriteRule ^en/partner/?$  /en/partner.html [L]
 RewriteRule ^en/investidores/?$ /en/investidores.html [L]
+RewriteRule ^en/premios/?$ /en/premios.html [L]
 RewriteRule ^es/?$ /es/index.html [L]
 RewriteRule ^es/cashback/?$ /es/cashback.html [L]
 RewriteRule ^es/partner/?$ /es/partner.html [L]
 RewriteRule ^es/monetize/?$ /es/monetize.html [L]
 RewriteRule ^es/investidores/?$ /es/investidores.html [L]
+RewriteRule ^es/premios/?$ /es/premios.html [L]
 
 # SPA fallback para a landing principal
 RewriteCond %{REQUEST_FILENAME} !-f

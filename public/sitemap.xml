@@ -27,6 +27,12 @@
   </url>
 
   <url>
+    <loc>https://www.ummix.com.br/premios</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.ummix.com.br/en/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -46,6 +52,12 @@
 
   <url>
     <loc>https://www.ummix.com.br/en/monetize</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ummix.com.br/en/premios</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -76,6 +88,12 @@
 
   <url>
     <loc>https://www.ummix.com.br/es/monetize</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ummix.com.br/es/premios</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

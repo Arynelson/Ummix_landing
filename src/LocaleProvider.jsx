@@ -19,7 +19,7 @@ function localeFromPath(pathname) {
 }
 
 function isPortuguesePagePath(pathname) {
-  return /^\/(cashback|partner|monetize|investidores)(?:\.html)?\/?$/.test(pathname)
+  return /^\/(cashback|partner|monetize|investidores|premios)(?:\.html)?\/?$/.test(pathname)
 }
 
 function localeFromCountry(country) {

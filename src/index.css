@@ -70,6 +70,14 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
+@keyframes awardsLinkIn {
+  from { transform: translateY(8px); }
+  to { transform: translateY(0); }
+}
+.awards-hero-link {
+  animation: awardsLinkIn 600ms var(--ummix-ease-out) both;
+  animation-delay: calc(var(--i, 0) * 100ms);
+}
 
 @layer base {
   html {
@@ -129,5 +137,8 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .awards-hero-link {
+    animation: none !important;
   }
 }

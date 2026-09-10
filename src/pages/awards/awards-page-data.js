@@ -1,0 +1,267 @@
+export const AWARDS_PAGE_DATA = {
+  awards: [
+    {
+      id: 'indtechs',
+      name: 'Desafio INDTECHS 2026',
+      state: 'GO',
+      status: 'firstPlace',
+      category: null,
+      organizer: 'CDTI/FIEG',
+    },
+    {
+      id: 'curicaca',
+      name: 'Desafio Nacional de Inovação Curicaca (ABDI) 2025',
+      state: 'DF',
+      status: 'fourthPlace',
+      category: {
+        pt: 'Validação - Transformação Digital na Indústria e Cadeias Produtivas',
+        en: 'Validation - Digital Transformation in Industry and Production Chains',
+        es: 'Validación - Transformación Digital en la Industria y las Cadenas Productivas',
+      },
+      organizer: 'ABDI',
+    },
+    {
+      id: 'mulheres-inovadoras',
+      name: 'Mulheres Inovadoras 2026',
+      state: 'DF',
+      status: 'firstPlace',
+      category: {
+        pt: 'Região Centro-Oeste - Tração ou Escala',
+        en: 'Central-West Region - Traction or Scale',
+        es: 'Región Centro-Oeste - Tracción o Escala',
+      },
+      organizer: 'FINEP',
+    },
+    {
+      id: 'brasil-criativo',
+      name: 'Prêmio Brasil Criativo 2026',
+      state: 'SP',
+      status: 'finalist',
+      category: {
+        pt: 'Tecnologia',
+        en: 'Technology',
+        es: 'Tecnología',
+      },
+      organizer: 'World Creativity Organization/Ministério da Cultura',
+    },
+    {
+      id: 'catalisa',
+      name: 'Prêmio Catalisa 2026',
+      state: 'GO',
+      status: null,
+      category: {
+        pt: 'Líderes que Transformam',
+        en: 'Leaders Who Transform',
+        es: 'Líderes que Transforman',
+      },
+      organizer: 'FAJE Goiás',
+    },
+    {
+      id: 'premio-nacional-inovacao',
+      name: 'Prêmio Nacional de Inovação 2026',
+      state: 'SP',
+      status: 'firstPlace',
+      category: {
+        pt: 'Digitalização de Negócios - Pequeno Negócio',
+        en: 'Business Digitalization - Small Business',
+        es: 'Digitalización de Negocios - Pequeña Empresa',
+      },
+      organizer: 'CNI/SEBRAE',
+    },
+  ],
+  members: [
+    {
+      id: 'akcit',
+      name: 'AKCIT (Centro de Competência EMBRAPII em Tecnologias Imersivas)',
+      state: 'GO',
+    },
+    {
+      id: 'anamid',
+      name: 'AnaMid (Associação Nacional do Mercado e Indústria Digital)',
+      state: 'SP',
+    },
+    {
+      id: 'hub-cerrado',
+      name: 'Hub Cerrado',
+      state: 'GO',
+    },
+  ],
+  events: [
+    {
+      id: 'ace-summit',
+      name: 'Ace Summit 2025',
+      state: 'SP',
+      organizer: 'Ace Ventures',
+    },
+    {
+      id: 'ali-produtividade',
+      name: 'ALI Produtividade',
+      state: 'GO',
+      organizer: 'Sebrae Goiás',
+    },
+    {
+      id: 'capital-empreendedor',
+      name: 'Capital Empreendedor 2025',
+      state: 'GO',
+      organizer: 'Sebrae Goiás',
+    },
+    {
+      id: 'esx-innovation',
+      name: 'ESX Innovation Experience 2025',
+      state: 'ES',
+      organizer: 'Sebrae Espírito Santo',
+    },
+    {
+      id: 'go-ecommerce',
+      name: 'GO+ E-Commerce IEL',
+      state: 'GO',
+      organizer: 'IEL Goiás/ABDI/MDIC',
+    },
+    {
+      id: 'hacktown',
+      name: 'HackTown SRS 2025/2026',
+      state: 'MG',
+      organizer: 'Hacktown/Ministério da Cultura',
+    },
+    {
+      id: 'neon',
+      name: 'NEON 2025',
+      state: 'PI',
+      organizer: 'Sebrae Piauí',
+    },
+    {
+      id: 'startup-day-goiania',
+      name: 'Startup Day Goiânia 2025/2026',
+      state: 'GO',
+      organizer: 'Sebrae Goiás',
+    },
+    {
+      id: 'web-summit-brasil',
+      name: 'Missão Empresarial para Web Summit Brasil 2025',
+      state: 'RJ',
+      organizer: 'Sebrae Goiás',
+    },
+  ],
+}
+
+export const AWARDS_PAGE_COPY = {
+  pt: {
+    eyebrow: 'Prêmios e certificações',
+    title: 'Uma trajetória reconhecida e presente.',
+    description: 'Conheça os prêmios que recebemos, as entidades das quais somos membros e os eventos em que fomos selecionados para apresentar e participar.',
+    pageNavLabel: 'Nesta página',
+    navigation: {
+      awards: 'Prêmios e reconhecimentos',
+      members: 'Entidades membro',
+      events: 'Eventos selecionados',
+    },
+    navigationKicker: 'Explore nossa trajetória',
+    awardsSection: {
+      eyebrow: 'Prêmios e reconhecimentos',
+      title: 'Resultados que ajudam a contar a nossa história.',
+      description: 'Cada reconhecimento reforça nosso compromisso com inovação, tecnologia e impacto no mercado.',
+      fields: { state: 'Estado', status: 'Status', category: 'Categoria', organizer: 'Realizador' },
+      statuses: { firstPlace: '1º lugar', fourthPlace: '4º lugar', finalist: 'Finalista' },
+      empty: 'Não informado',
+    },
+    membersSection: {
+      eyebrow: 'Membros',
+      title: 'Conectados ao ecossistema de inovação.',
+      description: 'Também fazemos parte de entidades que aproximam tecnologia, negócios e transformação.',
+      state: 'Estado',
+    },
+    eventsSection: {
+      eyebrow: 'Eventos selecionados',
+      title: 'Presentes onde novas ideias ganham espaço.',
+      description: 'Confira os eventos para os quais a Ummix foi selecionada a apresentar e participar.',
+      fields: { state: 'Estado', organizer: 'Realizador' },
+    },
+    cta: {
+      eyebrow: 'Próximo passo',
+      title: 'Vamos transformar ideias em presença?',
+      description: 'Fale com a Ummix para descobrir como transformar estratégia em mídia.',
+      label: 'Falar com a Ummix',
+    },
+  },
+  en: {
+    eyebrow: 'Awards & certifications',
+    title: 'Recognition that reflects our journey.',
+    description: "Explore the awards we've received, the organizations we're members of, and the events where we were selected to present and participate.",
+    pageNavLabel: 'On this page',
+    navigation: {
+      awards: 'Awards & recognition',
+      members: 'Member organizations',
+      events: 'Selected events',
+    },
+    navigationKicker: 'Explore our journey',
+    awardsSection: {
+      eyebrow: 'Awards & recognition',
+      title: 'Results that help tell our story.',
+      description: 'Each recognition reinforces our commitment to innovation, technology, and market impact.',
+      fields: { state: 'State', status: 'Status', category: 'Category', organizer: 'Organizer' },
+      statuses: { firstPlace: '1st place', fourthPlace: '4th place', finalist: 'Finalist' },
+      empty: 'Not provided',
+    },
+    membersSection: {
+      eyebrow: 'Members',
+      title: 'Connected to the innovation ecosystem.',
+      description: 'We are also part of organizations that bring technology, business, and transformation closer together.',
+      state: 'State',
+    },
+    eventsSection: {
+      eyebrow: 'Selected events',
+      title: 'Present where new ideas find room to grow.',
+      description: 'See the events where Ummix was selected to present and participate.',
+      fields: { state: 'State', organizer: 'Organizer' },
+    },
+    cta: {
+      eyebrow: 'Next step',
+      title: 'Ready to turn ideas into presence?',
+      description: 'Talk to Ummix and discover how to turn strategy into media.',
+      label: "Let's talk",
+    },
+  },
+  es: {
+    eyebrow: 'Premios y certificaciones',
+    title: 'Reconocimientos que acompañan nuestra trayectoria.',
+    description: 'Conoce los premios que hemos recibido, las entidades de las que somos miembros y los eventos en los que fuimos seleccionados para presentar y participar.',
+    pageNavLabel: 'En esta página',
+    navigation: {
+      awards: 'Premios y reconocimientos',
+      members: 'Entidades miembro',
+      events: 'Eventos seleccionados',
+    },
+    navigationKicker: 'Explora nuestra trayectoria',
+    awardsSection: {
+      eyebrow: 'Premios y reconocimientos',
+      title: 'Resultados que cuentan nuestra historia.',
+      description: 'Cada reconocimiento refuerza nuestro compromiso con la innovación, la tecnología y el impacto en el mercado.',
+      fields: { state: 'Estado', status: 'Distinción', category: 'Categoría', organizer: 'Organizador' },
+      statuses: { firstPlace: '1.er lugar', fourthPlace: '4.º lugar', finalist: 'Finalista' },
+      empty: 'No informado',
+    },
+    membersSection: {
+      eyebrow: 'Miembros',
+      title: 'Conectados al ecosistema de innovación.',
+      description: 'También formamos parte de entidades que acercan la tecnología, los negocios y la transformación.',
+      state: 'Estado',
+    },
+    eventsSection: {
+      eyebrow: 'Eventos seleccionados',
+      title: 'Presentes donde las nuevas ideas encuentran espacio.',
+      description: 'Conoce los eventos en los que Ummix fue seleccionada para presentar y participar.',
+      fields: { state: 'Estado', organizer: 'Organizador' },
+    },
+    cta: {
+      eyebrow: 'Siguiente paso',
+      title: '¿Transformamos ideas en presencia?',
+      description: 'Habla con Ummix para descubrir cómo transformar estrategia en medios.',
+      label: 'Hablemos',
+    },
+  },
+}
+
+export function localizedValue(value, locale) {
+  if (!value || typeof value !== 'object') return value
+  return value[locale] ?? value.pt
+}

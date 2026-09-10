@@ -1,6 +1,5 @@
 import Header from './components/Header'
 import Hero from './components/home/Hero'
-import AwardsSection from './components/home/AwardsSection'
 import ClientView from './components/home/ClientView'
 import Backstage from './components/home/Backstage'
 import Method from './components/home/Method'
@@ -32,7 +31,6 @@ export default function App() {
         <Eliminates />
         <Deliverables />
         <CashbackSection />
-        <AwardsSection />
         <ForWhom />
         <Partners />
         <Contact />

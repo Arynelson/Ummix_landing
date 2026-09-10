@@ -1,12 +1,12 @@
-import { useLocale } from '../../LocaleProvider.jsx'
+import { getLocalizedPath, useLocale } from '../../LocaleProvider.jsx'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 import ButtonLink from '../ui/ButtonLink'
 import { HOME_COPY } from '../../home-copy.js'
 
-function AwardsCard({ copy }) {
+function AwardsCard({ copy, locale }) {
   return (
     <ButtonLink
-        href="#premios"
+        href={getLocalizedPath(locale, '/premios')}
         size="md"
         className="w-fit max-w-full"
       >
@@ -210,7 +210,7 @@ export default function Hero() {
         <div>
           <FlowCard copy={copy} />
           <div className="mt-6 flex justify-center">
-            <AwardsCard copy={copy} />
+            <AwardsCard copy={copy} locale={locale} />
           </div>
         </div>
 
