@@ -643,11 +643,6 @@
   transition: transform 180ms ease-out, box-shadow 180ms ease-out;
 }
 
-.campaign-lp__workflow-card:hover {
-  box-shadow: 0 1.4rem 2.5rem -2rem rgba(30, 30, 30, 0.45);
-  transform: translateY(-3px);
-}
-
 .campaign-lp__workflow-media {
   display: grid;
   aspect-ratio: 4 / 3;
@@ -663,12 +658,13 @@
   height: 100%;
   padding: 0.55rem;
   object-fit: contain;
-  transition: transform 260ms ease-out;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .campaign-lp__workflow-media:hover img {
-    transform: scale(1.1);
+  .campaign-lp__workflow-card:hover {
+    z-index: 2;
+    box-shadow: 0 1.4rem 2.5rem -2rem rgba(30, 30, 30, 0.45);
+    transform: translateY(-3px) scale(1.03);
   }
 }
 
