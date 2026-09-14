@@ -356,6 +356,74 @@
   font: 400 1rem/1.85 var(--font-family-body);
 }
 
+.campaign-lp__faq {
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  background: #fff;
+}
+
+.campaign-lp__faq-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(3rem, 9vw, 9rem);
+}
+
+.campaign-lp__faq-heading h2 {
+  max-width: 12ch;
+  margin: 1rem 0 0;
+  font: 800 clamp(2.4rem, 4.5vw, 4.15rem)/0.98 var(--font-family-heading);
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.campaign-lp__faq-heading > p:not(.campaign-lp__eyebrow) {
+  max-width: 25rem;
+  margin: 1.5rem 0 0;
+  color: var(--campaign-muted);
+  font: 400 1rem/1.8 var(--font-family-body);
+}
+
+.campaign-lp__faq-list {
+  border-top: 1px solid var(--campaign-line);
+}
+
+.campaign-lp__faq-list details {
+  border-bottom: 1px solid var(--campaign-line);
+}
+
+.campaign-lp__faq-list summary {
+  position: relative;
+  padding: 1.35rem 2.5rem 1.35rem 0;
+  color: var(--campaign-ink);
+  cursor: pointer;
+  font: 800 1rem/1.35 var(--font-family-body);
+  list-style: none;
+}
+
+.campaign-lp__faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.campaign-lp__faq-list summary::after {
+  position: absolute;
+  top: 1.25rem;
+  right: 0;
+  color: var(--campaign-red);
+  content: "+";
+  font: 400 1.5rem/1 var(--font-family-body);
+}
+
+.campaign-lp__faq-list details[open] summary::after {
+  content: "−";
+}
+
+.campaign-lp__faq-list details p {
+  max-width: 36rem;
+  margin: -0.35rem 0 1.35rem;
+  color: var(--campaign-muted);
+  font: 400 0.9rem/1.7 var(--font-family-body);
+}
+
 .campaign-lp__steps {
   padding: clamp(4.5rem, 9vw, 7rem) 0;
   background: var(--campaign-soft);
@@ -617,7 +685,7 @@
 
   .campaign-lp__hero-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1rem;
     padding-bottom: 5.5rem;
   }
 
@@ -639,7 +707,8 @@
   }
 
   .campaign-lp__intro-grid,
-  .campaign-lp__benefits-grid {
+  .campaign-lp__benefits-grid,
+  .campaign-lp__faq-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -673,20 +742,31 @@
   }
 
   .campaign-lp__hero-copy {
-    padding-top: 2rem;
+    padding-top: 1rem;
   }
 
   .campaign-lp__hero h1 {
-    margin-top: 1rem;
-    font-size: clamp(3.1rem, 16vw, 4.5rem);
+    max-width: 14ch;
+    margin: 0.75rem 0 1rem;
+    font-size: clamp(2.6rem, 12vw, 3.6rem);
+    line-height: 0.94;
   }
 
   .campaign-lp__hero-description {
-    font-size: 0.94rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
   }
 
   .campaign-lp__cta {
     width: 100%;
+  }
+
+  .campaign-lp__cta--primary {
+    margin-top: 1.25rem;
+  }
+
+  .campaign-lp__helper {
+    margin-top: 0.65rem;
   }
 
   .campaign-lp__visual-card {
@@ -704,6 +784,7 @@
   .campaign-lp__intro h2,
   .campaign-lp__section-heading h2,
   .campaign-lp__benefits h2,
+  .campaign-lp__faq-heading h2,
   .campaign-lp__final-cta h2 {
     font-size: 2.7rem;
   }
