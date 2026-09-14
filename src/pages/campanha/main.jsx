@@ -238,12 +238,12 @@ function CampaignPage() {
           <Header />
 
           <div className="campaign-lp__hero-copy">
-            <p className="campaign-lp__eyebrow">MÍDIA OFFLINE COM A SIMPLICIDADE DO DIGITAL</p>
+            <p className="campaign-lp__eyebrow">PUBLICIDADE EM RÁDIO E TV</p>
             <h1>
-              Anuncie onde seu cliente está. <span>Venda mais.</span>
+              Anuncie em rádio e TV com a <span>simplicidade do digital.</span>
             </h1>
             <p className="campaign-lp__hero-description">
-              Planeje e ative sua publicidade em rádio, TV e mídia offline com a simplicidade do digital. Escolha seu objetivo, público e região em uma única plataforma orientada por dados.
+              Planeje e ative sua publicidade em rádio e TV com a simplicidade do digital. Escolha seu objetivo, público e região em uma única plataforma orientada por dados.
             </p>
             <CampaignCta placement="hero" signupUrl={signupUrl}>
               Simular minha campanha grátis
@@ -290,6 +290,41 @@ function CampaignPage() {
       </section>
 
       <main id="campaign-main">
+        <section className="campaign-lp__audience" aria-labelledby="audience-title">
+          <div className="campaign-lp__shell">
+            <div className="campaign-lp__audience-heading">
+              <div>
+                <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">PARA QUEM É A UMMIX</p>
+                <h2 id="audience-title">Mídia offline para quem precisa crescer e vender.</h2>
+              </div>
+              <p>A Ummix ajuda agências e empresas a transformar objetivos comerciais em planos de rádio e TV com mais clareza, mesmo quando o investimento é enxuto.</p>
+            </div>
+
+            <div className="campaign-lp__audience-grid">
+              <article className="campaign-lp__audience-card campaign-lp__audience-card--featured">
+                <span className="campaign-lp__audience-kicker">PARA AGÊNCIAS</span>
+                <h3>Melhore o planejamento e entregue mais resultado aos seus clientes.</h3>
+                <p>Crie planos de rádio e TV com agilidade, segmentação e clareza para apresentar decisões mais seguras.</p>
+                <ul>
+                  <li><CheckIcon /> Planejamento mais rápido</li>
+                  <li><CheckIcon /> Público e região sob controle</li>
+                  <li><CheckIcon /> Mais clareza para defender o investimento</li>
+                </ul>
+              </article>
+              <article className="campaign-lp__audience-card">
+                <span className="campaign-lp__audience-kicker">PARA PEQUENAS E MÉDIAS EMPRESAS</span>
+                <h3>Fortaleça sua marca e venda mais com ações do tamanho do seu negócio.</h3>
+                <p>Divulgue um produto, lance uma promoção ou aumente sua presença local com investimento controlado e público bem definido.</p>
+                <ul>
+                  <li><CheckIcon /> Ações pequenas com baixo investimento</li>
+                  <li><CheckIcon /> Segmentação por cidade e público-alvo</li>
+                  <li><CheckIcon /> Planejamento para rádio e TV</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section className="campaign-lp__intro" aria-labelledby="intro-title">
           <div className="campaign-lp__shell campaign-lp__intro-grid">
             <div>
@@ -299,31 +334,72 @@ function CampaignPage() {
             <p>
               Quando público, região e investimento não estão alinhados, fica mais difícil saber se a publicidade está trabalhando a favor do negócio. A Ummix organiza esse caminho para você decidir com mais contexto e segurança.
             </p>
-            <a
-              className="campaign-lp__simulation-callout"
-              href={signupUrl}
-              data-analytics-id="lp_campanha_simulation_cta"
-              onClick={() => trackCtaClick({
-                placement: 'simulation',
-                buttonText: 'Simular minha campanha grátis',
-                signupUrl,
-              })}
-            >
-              <span className="campaign-lp__simulation-badge">03<small>MIN</small></span>
-              <div>
-                <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">SIMULAÇÃO GRATUITA</p>
-                <strong>Acesse a plataforma e simule sua publicidade em 3 minutos.</strong>
-                <p>É gratuito: teste públicos e formatos antes de avançar para a contratação.</p>
-              </div>
-              <span className="campaign-lp__simulation-action">
-                <span>Simular minha campanha grátis</span>
-                <ArrowIcon />
-              </span>
-            </a>
           </div>
         </section>
 
-        <section className="campaign-lp__steps" id="como-funciona" aria-labelledby="steps-title">
+        <section className="campaign-lp__workflow" id="como-funciona" aria-labelledby="workflow-title">
+          <div className="campaign-lp__shell">
+            <div className="campaign-lp__workflow-heading">
+              <div>
+                <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">COMO FUNCIONA NA PRÁTICA</p>
+                <h2 id="workflow-title">Da ideia ao plano de mídia em quatro passos.</h2>
+              </div>
+              <p>Escolha o objetivo, defina o público e revise sua publicidade antes de avançar.</p>
+            </div>
+
+            <div className="campaign-lp__workflow-grid">
+              <article className="campaign-lp__workflow-card">
+                <div className="campaign-lp__workflow-media">
+                  <img src="/assets/step_by_01.png" alt="Tela para escolher o objetivo e o meio de comunicação, rádio ou TV." loading="lazy" />
+                </div>
+                <div className="campaign-lp__workflow-meta">
+                  <span>01</span>
+                  <h3>Comece pelo objetivo e pelo canal</h3>
+                  <p>Defina o resultado que busca e escolha se sua publicidade será veiculada em rádio, TV ou nos dois.</p>
+                </div>
+              </article>
+              <article className="campaign-lp__workflow-card">
+                <div className="campaign-lp__workflow-media">
+                  <img src="/assets/step_by_02.png" alt="Tela para escolher o formato e a duração da publicidade." loading="lazy" />
+                </div>
+                <div className="campaign-lp__workflow-meta">
+                  <span>02</span>
+                  <h3>Escolha o formato e a duração</h3>
+                  <p>Defina o formato da sua propaganda e por quanto tempo ela ficará no ar.</p>
+                </div>
+              </article>
+              <article className="campaign-lp__workflow-card">
+                <div className="campaign-lp__workflow-media">
+                  <img src="/assets/step_by_03.png" alt="Tela para escolher a cidade, o público-alvo e o tamanho da ação." loading="lazy" />
+                </div>
+                <div className="campaign-lp__workflow-meta">
+                  <span>03</span>
+                  <h3>Encontre o público e dimensione</h3>
+                  <p>Escolha a cidade, o público-alvo e o tamanho da ação de acordo com seu objetivo e investimento.</p>
+                </div>
+              </article>
+              <article className="campaign-lp__workflow-card">
+                <div className="campaign-lp__workflow-media">
+                  <img src="/assets/step_by_04.png" alt="Tela com o resumo da publicidade para aprovação." loading="lazy" />
+                </div>
+                <div className="campaign-lp__workflow-meta">
+                  <span>04</span>
+                  <h3>Revise antes de aprovar</h3>
+                  <p>Confira o resumo da publicidade, ajuste o que precisar e avance com mais segurança.</p>
+                </div>
+              </article>
+            </div>
+
+            <div className="campaign-lp__workflow-cta">
+              <p><strong>Planeje sua publicidade em poucos minutos.</strong> Comece grátis e descubra como rádio e TV podem trabalhar para o seu negócio.</p>
+              <CampaignCta placement="workflow" signupUrl={signupUrl}>
+                Simular minha campanha grátis
+              </CampaignCta>
+            </div>
+          </div>
+        </section>
+
+        <section className="campaign-lp__steps" id="como-avanca" aria-labelledby="steps-title">
           <div className="campaign-lp__shell">
             <div className="campaign-lp__section-heading">
               <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">COMO VOCÊ AVANÇA</p>
@@ -406,6 +482,15 @@ function CampaignPage() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="campaign-lp__shell campaign-lp__benefits-cta">
+            <div>
+              <p className="campaign-lp__eyebrow">COMECE COM MAIS CLAREZA</p>
+              <p>Veja quanto pode investir, quem alcançar e quais formatos fazem sentido para o seu objetivo.</p>
+            </div>
+            <CampaignCta placement="benefits" signupUrl={signupUrl}>
+              Simular minha campanha grátis
+            </CampaignCta>
           </div>
         </section>
 
