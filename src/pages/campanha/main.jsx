@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useRef } from 'react'
+import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import '../../index.css'
 import './campanha.css'
@@ -7,6 +7,32 @@ import { pushDataLayerEvent } from '../../services/analytics'
 const SIGNUP_URL = 'https://app.ummix.com.br/signup/cliente'
 const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid']
 const SCROLL_THRESHOLDS = [25, 50, 75, 90]
+const HERO_SLIDES = [
+  {
+    id: 'planning',
+    label: 'PLANEJAMENTO',
+    step: '01 / 03',
+    src: '/assets/platform-preview-campanha.png',
+    alt: 'Tela de planejamento de mídia da plataforma Ummix Ads',
+    footer: 'Comece com mais clareza.',
+  },
+  {
+    id: 'dashboard',
+    label: 'ACOMPANHAMENTO',
+    step: '02 / 03',
+    src: '/assets/platform-preview-dashboard.png',
+    alt: 'Painel de acompanhamento de mídia da plataforma Ummix Ads',
+    footer: 'Acompanhe o que importa.',
+  },
+  {
+    id: 'overview',
+    label: 'VISÃO DA MÍDIA',
+    step: '03 / 03',
+    src: '/assets/platform-preview-resumo.png',
+    alt: 'Visão geral de uma ação de mídia na plataforma Ummix Ads',
+    footer: 'Decida com mais contexto.',
+  },
+]
 
 function getSignupUrl() {
   if (typeof window === 'undefined') return SIGNUP_URL
@@ -35,6 +61,78 @@ function CheckIcon() {
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="m5 12 4.2 4.2L19 6.5" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  )
+}
+
+function CampaignVisualCarousel() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const slide = HERO_SLIDES[activeSlide]
+
+  useEffect(() => {
+    if (isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+
+    const intervalId = window.setInterval(() => {
+      setActiveSlide((currentSlide) => (currentSlide + 1) % HERO_SLIDES.length)
+    }, 5600)
+
+    return () => window.clearInterval(intervalId)
+  }, [isPaused])
+
+  function showSlide(index) {
+    setActiveSlide((index + HERO_SLIDES.length) % HERO_SLIDES.length)
+  }
+
+  function handleBlur(event) {
+    if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false)
+  }
+
+  return (
+    <div
+      className="campaign-lp__visual"
+      role="region"
+      aria-roledescription="carrossel"
+      aria-label="Prévia da plataforma Ummix Ads"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={handleBlur}
+    >
+      <div className="campaign-lp__visual-glow" />
+      <div className="campaign-lp__visual-card">
+        <div className="campaign-lp__visual-topline" aria-live="polite">
+          <span>{slide.label}</span>
+          <span>{slide.step}</span>
+        </div>
+        <img key={slide.id} src={slide.src} alt={slide.alt} />
+        <div className="campaign-lp__visual-footer">
+          <span>{slide.footer}</span>
+          <span aria-hidden="true">↗</span>
+        </div>
+        <div className="campaign-lp__visual-controls">
+          <div className="campaign-lp__visual-dots" role="group" aria-label="Selecionar prévia">
+            {HERO_SLIDES.map((item, index) => (
+              <button
+                key={item.id}
+                className={'campaign-lp__visual-dot' + (index === activeSlide ? ' campaign-lp__visual-dot--active' : '')}
+                type="button"
+                aria-label={'Mostrar ' + item.label.toLowerCase()}
+                aria-pressed={index === activeSlide}
+                onClick={() => showSlide(index)}
+              />
+            ))}
+          </div>
+          <div className="campaign-lp__visual-arrows">
+            <button type="button" aria-label="Imagem anterior" onClick={() => showSlide(activeSlide - 1)}>←</button>
+            <button type="button" aria-label="Próxima imagem" onClick={() => showSlide(activeSlide + 1)}>→</button>
+          </div>
+        </div>
+      </div>
+      <div className="campaign-lp__floating-note">
+        <span className="campaign-lp__floating-dot" />
+        <span>Seu próximo passo começa aqui</span>
+      </div>
+    </div>
   )
 }
 
@@ -123,37 +221,20 @@ function CampaignPage() {
           <Header />
 
           <div className="campaign-lp__hero-copy">
-            <p className="campaign-lp__eyebrow">MÍDIA OFFLINE PARA OBJETIVOS DE NEGÓCIO</p>
+            <p className="campaign-lp__eyebrow">PARA VENDER MAIS E FORTALECER SUA MARCA</p>
             <h1>
               Anuncie onde seu cliente está. <span>Venda mais.</span>
             </h1>
             <p className="campaign-lp__hero-description">
-              Direcione sua verba para o público e a região certos, fortaleça sua marca e planeje sua presença em TV e rádio com mais clareza.
+              Use sua verba de publicidade para falar com o público que mais importa para o seu negócio — em rádio e TV.
             </p>
             <CampaignCta placement="hero" signupUrl={signupUrl}>
-              Quero anunciar onde meu cliente está
+              Acessar e simular gratuitamente
             </CampaignCta>
             <p className="campaign-lp__helper">Crie seu acesso e veja o próximo passo na plataforma Ummix Ads.</p>
           </div>
 
-          <div className="campaign-lp__visual" aria-label="Prévia da criação de uma campanha na plataforma Ummix Ads">
-            <div className="campaign-lp__visual-glow" />
-            <div className="campaign-lp__visual-card">
-              <div className="campaign-lp__visual-topline">
-                <span>CRIAR CAMPANHA</span>
-                <span>01 / 04</span>
-              </div>
-              <img src="/assets/platform-preview-campanha.png" alt="Tela de criação de campanha da plataforma Ummix Ads" />
-              <div className="campaign-lp__visual-footer">
-                <span>Planeje com mais clareza.</span>
-                <span aria-hidden="true">↗</span>
-              </div>
-            </div>
-            <div className="campaign-lp__floating-note">
-              <span className="campaign-lp__floating-dot" />
-              <span>Seu próximo passo começa aqui</span>
-            </div>
-          </div>
+          <CampaignVisualCarousel />
         </div>
 
         <a className="campaign-lp__scroll-link" href="#como-funciona">
@@ -170,8 +251,16 @@ function CampaignPage() {
               <h2 id="intro-title">Você investe para vender. Sua mídia precisa acompanhar esse objetivo.</h2>
             </div>
             <p>
-              Quando público, região e investimento não estão alinhados, fica mais difícil saber se a publicidade está trabalhando a favor do negócio. A Ummix organiza esse caminho para você avançar com mais contexto e segurança.
+              Quando público, região e investimento não estão alinhados, fica mais difícil saber se a publicidade está trabalhando a favor do negócio. A Ummix organiza esse caminho para você decidir com mais contexto e segurança.
             </p>
+            <div className="campaign-lp__simulation-callout">
+              <span className="campaign-lp__simulation-badge">03<small>MIN</small></span>
+              <div>
+                <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">SIMULAÇÃO GRATUITA</p>
+                <strong>Acesse a plataforma e simule sua publicidade em 3 minutos.</strong>
+                <p>É gratuito: teste públicos e formatos antes de avançar para a contratação.</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -179,27 +268,27 @@ function CampaignPage() {
           <div className="campaign-lp__shell">
             <div className="campaign-lp__section-heading">
               <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">COMO VOCÊ AVANÇA</p>
-              <h2 id="steps-title">Do seu objetivo comercial a uma decisão de mídia mais clara.</h2>
+              <h2 id="steps-title">Do seu objetivo comercial a uma publicidade simples, prática e focada no público certo.</h2>
             </div>
 
             <div className="campaign-lp__step-grid">
               <article className="campaign-lp__step-card">
                 <span className="campaign-lp__step-number">01</span>
                 <div className="campaign-lp__step-icon"><span>U</span></div>
-                <h3>Comece pelo que você quer alcançar</h3>
-                <p>Venda, atraia clientes ou fortaleça sua marca. O objetivo dá direção para a campanha.</p>
+                <h3>Defina o que você quer conquistar</h3>
+                <p>Venda mais, atraia clientes ou fortaleça sua marca. O objetivo dá direção para sua publicidade.</p>
               </article>
               <article className="campaign-lp__step-card campaign-lp__step-card--featured">
                 <span className="campaign-lp__step-number">02</span>
                 <div className="campaign-lp__step-icon"><span>→</span></div>
-                <h3>Direcione sua mídia</h3>
-                <p>Organize público, região e investimento para anunciar com mais foco em TV e rádio.</p>
+                <h3>Encontre quem precisa ouvir sua mensagem</h3>
+                <p>Escolha público, região e investimento para comunicar com mais foco em TV e rádio.</p>
               </article>
               <article className="campaign-lp__step-card">
                 <span className="campaign-lp__step-number">03</span>
                 <div className="campaign-lp__step-icon"><span>✓</span></div>
-                <h3>Avance sabendo o próximo passo</h3>
-                <p>Conduza seu planejamento com as informações que ajudam a tomar decisões mais seguras.</p>
+                <h3>Avance quando fizer sentido</h3>
+                <p>Simule possibilidades, teste formatos e siga para a contratação quando estiver seguro.</p>
               </article>
             </div>
           </div>
@@ -209,12 +298,12 @@ function CampaignPage() {
           <div className="campaign-lp__shell campaign-lp__benefits-grid">
             <div className="campaign-lp__benefits-copy">
               <p className="campaign-lp__eyebrow">O QUE MUDA PARA O SEU NEGÓCIO</p>
-              <h2 id="benefits-title">Sua verba merece uma estratégia à altura do seu objetivo.</h2>
+              <h2 id="benefits-title">Fortaleça sua marca. Crie mais oportunidades de venda.</h2>
               <p>
-                Transforme uma decisão difícil em um caminho mais claro para a sua próxima campanha.
+                Direcione sua mensagem para quem importa e tome decisões de mídia com mais clareza antes de investir.
               </p>
               <CampaignCta placement="benefits" signupUrl={signupUrl}>
-                Quero anunciar onde meu cliente está
+                Acessar e simular gratuitamente
               </CampaignCta>
             </div>
 
@@ -222,22 +311,22 @@ function CampaignPage() {
               <div className="campaign-lp__benefit">
                 <div className="campaign-lp__benefit-mark"><CheckIcon /></div>
                 <div>
-                  <h3>Mais clareza para investir</h3>
-                  <p>Entenda o que sua campanha precisa considerar antes de escolher onde anunciar.</p>
+                  <h3>Invista com mais confiança</h3>
+                  <p>Saiba quem você quer alcançar e onde sua mensagem pode fazer mais sentido.</p>
                 </div>
               </div>
               <div className="campaign-lp__benefit">
                 <div className="campaign-lp__benefit-mark"><CheckIcon /></div>
                 <div>
-                  <h3>Publicidade com mais foco</h3>
-                  <p>Direcione sua mensagem para públicos e regiões que fazem sentido para o seu negócio.</p>
+                  <h3>Fale com o público certo</h3>
+                  <p>Ajuste público e região para aumentar a relevância da sua comunicação.</p>
                 </div>
               </div>
               <div className="campaign-lp__benefit">
                 <div className="campaign-lp__benefit-mark"><CheckIcon /></div>
                 <div>
-                  <h3>Marca forte, vendas no radar</h3>
-                  <p>Construa presença e mantenha seu objetivo comercial no centro do planejamento.</p>
+                  <h3>Mais presença, mais oportunidades</h3>
+                  <p>Construa sua marca enquanto mantém o objetivo comercial no centro da publicidade.</p>
                 </div>
               </div>
             </div>
@@ -248,18 +337,18 @@ function CampaignPage() {
           <div className="campaign-lp__shell campaign-lp__faq-grid">
             <div className="campaign-lp__faq-heading">
               <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">AINDA TEM DÚVIDAS?</p>
-              <h2 id="faq-title">Tudo mais claro antes de você começar.</h2>
+              <h2 id="faq-title">Tudo mais claro para você começar.</h2>
               <p>O cadastro é o primeiro passo para conhecer o fluxo de planejamento da Ummix Ads.</p>
             </div>
 
             <div className="campaign-lp__faq-list">
               <details open>
-                <summary>Preciso ter uma campanha pronta para começar?</summary>
-                <p>Não. O cadastro é o primeiro passo para organizar o objetivo e as informações da sua campanha dentro da plataforma.</p>
+                <summary>Preciso ter um plano de mídia pronto para começar?</summary>
+                <p>Não, você pode se cadastrar e simular quantas campanhas desejar, testar diferentes públicos-alvo e formatos e só depois que tiver certeza pode avançar a contratação.</p>
               </details>
               <details>
                 <summary>A Ummix ajuda apenas com televisão?</summary>
-                <p>A Ummix organiza campanhas em TV e rádio, com uma visão mais clara de público, região e investimento.</p>
+                <p>A Ummix organiza sua publicidade em TV e rádio, com uma visão mais clara de público, região e investimento.</p>
               </details>
               <details>
                 <summary>Como a Ummix ajuda a direcionar minha verba?</summary>
@@ -267,11 +356,11 @@ function CampaignPage() {
               </details>
               <details>
                 <summary>O cadastro já significa que estou contratando uma campanha?</summary>
-                <p>O botão leva você ao cadastro de cliente. A partir daí, você acessa a plataforma e conhece as próximas etapas do planejamento.</p>
+                <p>Não, você pode se cadastrar e simular quantas campanhas desejar, testar diferentes públicos-alvo e formatos e só depois que tiver certeza pode avançar a contratação.</p>
               </details>
               <details>
                 <summary>Quanto custa anunciar?</summary>
-                <p>O investimento depende do objetivo, da região, do período e dos meios escolhidos para a campanha. O cadastro é o ponto de partida para organizar essas informações.</p>
+                <p>O investimento depende do objetivo, do tamanho do seu público, de quantas vezes ele será impactado e dos filtros escolhidos para a campanha. Acesse nossa plataforma e faça uma simulação gratuita.</p>
               </details>
             </div>
           </div>
@@ -283,9 +372,9 @@ function CampaignPage() {
           <div className="campaign-lp__shell campaign-lp__final-content">
             <p className="campaign-lp__eyebrow">COLOQUE SUA MÍDIA PARA TRABALHAR PELO SEU OBJETIVO</p>
             <h2 id="final-cta-title">Pronto para anunciar com mais clareza e buscar mais resultado?</h2>
-            <p>Crie seu acesso de cliente e dê o primeiro passo para planejar sua próxima campanha.</p>
+            <p>Crie seu acesso de cliente e dê o primeiro passo para planejar sua publicidade.</p>
             <CampaignCta placement="final" signupUrl={signupUrl}>
-              Quero anunciar onde meu cliente está
+              Acessar e simular gratuitamente
             </CampaignCta>
           </div>
         </section>

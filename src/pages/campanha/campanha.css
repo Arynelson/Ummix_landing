@@ -38,7 +38,7 @@
 
 .campaign-lp__hero {
   position: relative;
-  min-height: 740px;
+  min-height: 700px;
   overflow: hidden;
   background:
     radial-gradient(circle at 78% 38%, rgba(237, 52, 54, 0.2), transparent 28rem),
@@ -80,7 +80,7 @@
   align-items: center;
   gap: clamp(3rem, 8vw, 7rem);
   width: min(1160px, calc(100% - 3rem));
-  min-height: 740px;
+  min-height: 700px;
   margin-inline: auto;
 }
 
@@ -125,7 +125,7 @@
 .campaign-lp__hero-copy {
   align-self: center;
   max-width: 37rem;
-  padding-block: 1rem 5rem;
+  padding-block: 1rem 2rem;
 }
 
 .campaign-lp__eyebrow {
@@ -151,10 +151,10 @@
 }
 
 .campaign-lp__hero h1 {
-  max-width: 10ch;
+  max-width: 13ch;
   margin: 1.2rem 0 1.5rem;
   color: #fff;
-  font: 800 clamp(3.7rem, 7.1vw, 6rem)/0.92 var(--font-family-heading);
+  font: 800 clamp(3.4rem, 6.2vw, 5.2rem)/0.92 var(--font-family-heading);
   letter-spacing: -0.055em;
   text-wrap: balance;
 }
@@ -264,6 +264,7 @@
   width: 100%;
   height: auto;
   border-block: 1px solid #e9e7e5;
+  animation: campaign-lp__visual-fade 260ms ease-out;
 }
 
 .campaign-lp__visual-footer {
@@ -275,6 +276,76 @@
 .campaign-lp__visual-footer span:last-child {
   color: var(--campaign-red);
   font-size: 1.1rem;
+}
+
+.campaign-lp__visual-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.25rem 0.9rem;
+  background: #fff;
+}
+
+.campaign-lp__visual-dots,
+.campaign-lp__visual-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.campaign-lp__visual-dot,
+.campaign-lp__visual-arrows button {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #77716e;
+  cursor: pointer;
+}
+
+.campaign-lp__visual-dot {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.campaign-lp__visual-dot::after {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: #d5d0cd;
+  content: "";
+  transition: transform 180ms ease-out, background 180ms ease-out;
+}
+
+.campaign-lp__visual-dot--active::after {
+  transform: scaleX(1.7);
+  background: var(--campaign-red);
+}
+
+.campaign-lp__visual-arrows button {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid #e3dfdc;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+  transition: border-color 180ms ease-out, background 180ms ease-out, color 180ms ease-out;
+}
+
+.campaign-lp__visual-arrows button:hover,
+.campaign-lp__visual-arrows button:focus-visible {
+  border-color: var(--campaign-red);
+  background: #fff3f2;
+  color: var(--campaign-red);
+  outline: none;
+}
+
+@keyframes campaign-lp__visual-fade {
+  from { opacity: 0.55; }
+  to { opacity: 1; }
 }
 
 .campaign-lp__floating-note {
@@ -356,6 +427,54 @@
   font: 400 1rem/1.85 var(--font-family-body);
 }
 
+.campaign-lp__simulation-callout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1.2rem;
+  grid-column: 1 / -1;
+  margin-top: 2.8rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid rgba(155, 25, 26, 0.2);
+  border-radius: 1.25rem;
+  background: #fff8f7;
+}
+
+.campaign-lp__simulation-badge {
+  display: grid;
+  width: 4.2rem;
+  height: 4.2rem;
+  place-items: center;
+  border-radius: 1rem;
+  background: var(--campaign-red);
+  color: #fff;
+  font: 800 1.35rem/0.9 var(--font-family-heading);
+}
+
+.campaign-lp__simulation-badge small {
+  display: block;
+  margin-top: 0.25rem;
+  font: 800 0.55rem/1 var(--font-family-body);
+  letter-spacing: 0.12em;
+}
+
+.campaign-lp__simulation-callout .campaign-lp__eyebrow {
+  margin-bottom: 0.45rem;
+}
+
+.campaign-lp__simulation-callout strong {
+  display: block;
+  color: var(--campaign-ink);
+  font: 800 clamp(1.1rem, 1.7vw, 1.45rem)/1.2 var(--font-family-heading);
+  letter-spacing: -0.02em;
+}
+
+.campaign-lp__simulation-callout p:last-child {
+  margin: 0.45rem 0 0;
+  color: var(--campaign-muted);
+  font: 400 0.84rem/1.5 var(--font-family-body);
+}
+
 .campaign-lp__faq {
   padding: clamp(5rem, 10vw, 8rem) 0;
   background: #fff;
@@ -430,16 +549,12 @@
 }
 
 .campaign-lp__section-heading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 2rem;
   margin-bottom: 3.4rem;
 }
 
 .campaign-lp__section-heading h2 {
-  max-width: 12ch;
-  margin-right: auto;
+  max-width: 16ch;
+  margin-top: 1rem;
 }
 
 .campaign-lp__step-grid {
