@@ -15,6 +15,7 @@ export default defineConfig({
         monetize: resolve(__dirname, 'monetize.html'),
         investors: resolve(__dirname, 'investidores.html'),
         awards: resolve(__dirname, 'premios.html'),
+        campaignLanding: resolve(__dirname, 'lp/campanha.html'),
         english: resolve(__dirname, 'en/index.html'),
         englishCashback: resolve(__dirname, 'en/cashback.html'),
         englishPartner: resolve(__dirname, 'en/partner.html'),
