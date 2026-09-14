@@ -238,17 +238,17 @@ function CampaignPage() {
           <Header />
 
           <div className="campaign-lp__hero-copy">
-            <p className="campaign-lp__eyebrow">PARA VENDER MAIS E FORTALECER SUA MARCA</p>
+            <p className="campaign-lp__eyebrow">MÍDIA OFFLINE COM A SIMPLICIDADE DO DIGITAL</p>
             <h1>
               Anuncie onde seu cliente está. <span>Venda mais.</span>
             </h1>
             <p className="campaign-lp__hero-description">
-              Use sua verba de publicidade para falar com o público que mais importa para o seu negócio — em rádio e TV.
+              Planeje e ative sua publicidade em rádio, TV e mídia offline com a simplicidade do digital. Escolha seu objetivo, público e região em uma única plataforma orientada por dados.
             </p>
             <CampaignCta placement="hero" signupUrl={signupUrl}>
-              Acessar e simular gratuitamente
+              Simular minha campanha grátis
             </CampaignCta>
-            <p className="campaign-lp__helper">Crie seu acesso e veja o próximo passo na plataforma Ummix Ads.</p>
+            <p className="campaign-lp__helper">Crie seu acesso e simule seu plano em poucos minutos.</p>
           </div>
 
           <CampaignVisualCarousel />
@@ -258,6 +258,35 @@ function CampaignPage() {
           <span>Veja como funciona</span>
           <span aria-hidden="true">↓</span>
         </a>
+      </section>
+
+      <section className="campaign-lp__proof" aria-labelledby="proof-title">
+        <div className="campaign-lp__shell">
+          <div className="campaign-lp__proof-heading">
+            <div>
+              <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">RESULTADOS REAIS OBSERVADOS</p>
+              <h2 id="proof-title">Eficiência que aparece nos números.</h2>
+            </div>
+              <p>Resultados consolidados de campanhas realizadas para clientes Ummix.</p>
+          </div>
+
+          <div className="campaign-lp__proof-grid">
+            <article className="campaign-lp__proof-card">
+              <strong>Até 80%</strong>
+              <span>menos custo por mil impressões</span>
+            </article>
+            <article className="campaign-lp__proof-card">
+              <strong>Até 12x</strong>
+              <span>mais impressões para o público-alvo com o mesmo investimento</span>
+            </article>
+            <article className="campaign-lp__proof-card">
+              <strong>Até 90%</strong>
+              <span>menos custo por lead</span>
+            </article>
+          </div>
+
+          <p className="campaign-lp__proof-note">Resultados observados em campanhas realizadas. Os números variam conforme objetivo, público-alvo, região, frequência, canal e formato.</p>
+        </div>
       </section>
 
       <main id="campaign-main">
@@ -276,7 +305,7 @@ function CampaignPage() {
               data-analytics-id="lp_campanha_simulation_cta"
               onClick={() => trackCtaClick({
                 placement: 'simulation',
-                buttonText: 'Acessar e simular gratuitamente',
+                buttonText: 'Simular minha campanha grátis',
                 signupUrl,
               })}
             >
@@ -287,7 +316,7 @@ function CampaignPage() {
                 <p>É gratuito: teste públicos e formatos antes de avançar para a contratação.</p>
               </div>
               <span className="campaign-lp__simulation-action">
-                <span>Acessar e simular gratuitamente</span>
+                <span>Simular minha campanha grátis</span>
                 <ArrowIcon />
               </span>
             </a>
@@ -327,36 +356,53 @@ function CampaignPage() {
         <section className="campaign-lp__benefits" aria-labelledby="benefits-title">
           <div className="campaign-lp__shell campaign-lp__benefits-grid">
             <div className="campaign-lp__benefits-copy">
-              <p className="campaign-lp__eyebrow">O QUE MUDA PARA O SEU NEGÓCIO</p>
-              <h2 id="benefits-title">Fortaleça sua marca. Crie mais oportunidades de venda.</h2>
+              <p className="campaign-lp__eyebrow">PUBLICIDADE NÃO PRECISA SER COMPLICADA</p>
+              <h2 id="benefits-title">Transforme mídia em demanda para o seu negócio.</h2>
               <p>
-                Direcione sua mensagem para quem importa e tome decisões de mídia com mais clareza antes de investir.
+                Use rádio, TV e mídia offline para ampliar alcance, gerar lembrança e criar novas oportunidades comerciais.
               </p>
-              <CampaignCta placement="benefits" signupUrl={signupUrl}>
-                Acessar e simular gratuitamente
-              </CampaignCta>
+              <div className="campaign-lp__benefit-list">
+                <div className="campaign-lp__benefit">
+                  <h3>Escolha o canal com mais critério</h3>
+                  <p>Compare rádio, TV e mídia offline de acordo com seu objetivo, público e região.</p>
+                </div>
+                <div className="campaign-lp__benefit">
+                  <h3>Planeje a cobertura antes de investir</h3>
+                  <p>Entenda onde sua mensagem pode chegar e reduza decisões baseadas apenas em percepção.</p>
+                </div>
+                <div className="campaign-lp__benefit">
+                  <h3>Tenha clareza sobre o investimento</h3>
+                  <p>A plataforma guia os primeiros passos para você montar um plano inicial em poucos minutos e ajustar suas escolhas antes de contratar.</p>
+                </div>
+              </div>
             </div>
 
-            <div className="campaign-lp__benefit-list">
-              <div className="campaign-lp__benefit">
-                <div className="campaign-lp__benefit-mark"><CheckIcon /></div>
-                <div>
-                  <h3>Invista com mais confiança</h3>
-                  <p>Saiba quem você quer alcançar e onde sua mensagem pode fazer mais sentido.</p>
+            <div className="campaign-lp__practical-panel">
+              <p className="campaign-lp__eyebrow">NA PRÁTICA</p>
+              <div className="campaign-lp__practical-list">
+                <div className="campaign-lp__practical-card">
+                  <span className="campaign-lp__practical-number">1</span>
+                  <div>
+                    <h3>Objetivo comercial</h3>
+                    <p>Vendas, marca, lançamento ou tráfego</p>
+                  </div>
+                  <CheckIcon />
                 </div>
-              </div>
-              <div className="campaign-lp__benefit">
-                <div className="campaign-lp__benefit-mark"><CheckIcon /></div>
-                <div>
-                  <h3>Fale com o público certo</h3>
-                  <p>Ajuste público e região para aumentar a relevância da sua comunicação.</p>
+                <div className="campaign-lp__practical-card">
+                  <span className="campaign-lp__practical-number">2</span>
+                  <div>
+                    <h3>Público e região</h3>
+                    <p>Quem você quer atingir e onde</p>
+                  </div>
+                  <CheckIcon />
                 </div>
-              </div>
-              <div className="campaign-lp__benefit">
-                <div className="campaign-lp__benefit-mark"><CheckIcon /></div>
-                <div>
-                  <h3>Mais presença, mais oportunidades</h3>
-                  <p>Construa sua marca enquanto mantém o objetivo comercial no centro da publicidade.</p>
+                <div className="campaign-lp__practical-card">
+                  <span className="campaign-lp__practical-number">3</span>
+                  <div>
+                    <h3>Plano inicial</h3>
+                    <p>Oportunidades organizadas para avançar</p>
+                  </div>
+                  <CheckIcon />
                 </div>
               </div>
             </div>
@@ -404,7 +450,7 @@ function CampaignPage() {
             <h2 id="final-cta-title">Pronto para anunciar com mais clareza e buscar mais resultado?</h2>
             <p>Crie seu acesso de cliente e dê o primeiro passo para planejar sua publicidade.</p>
             <CampaignCta placement="final" signupUrl={signupUrl}>
-              Acessar e simular gratuitamente
+              Simular minha campanha grátis
             </CampaignCta>
           </div>
         </section>
