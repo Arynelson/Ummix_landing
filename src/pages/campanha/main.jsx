@@ -67,14 +67,17 @@ function CheckIcon() {
 function CampaignVisualCarousel() {
   const [activeSlide, setActiveSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const slide = HERO_SLIDES[activeSlide]
+  const visibleSlides = HERO_SLIDES.map((item, index) => ({
+    item,
+    offset: (index - activeSlide + HERO_SLIDES.length) % HERO_SLIDES.length,
+  }))
 
   useEffect(() => {
     if (isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
 
     const intervalId = window.setInterval(() => {
       setActiveSlide((currentSlide) => (currentSlide + 1) % HERO_SLIDES.length)
-    }, 5600)
+    }, 3000)
 
     return () => window.clearInterval(intervalId)
   }, [isPaused])
@@ -99,34 +102,44 @@ function CampaignVisualCarousel() {
       onBlur={handleBlur}
     >
       <div className="campaign-lp__visual-glow" />
-      <div className="campaign-lp__visual-card">
-        <div className="campaign-lp__visual-topline" aria-live="polite">
-          <span>{slide.label}</span>
-          <span>{slide.step}</span>
-        </div>
-        <img key={slide.id} src={slide.src} alt={slide.alt} />
-        <div className="campaign-lp__visual-footer">
-          <span>{slide.footer}</span>
-          <span aria-hidden="true">↗</span>
-        </div>
-        <div className="campaign-lp__visual-controls">
-          <div className="campaign-lp__visual-dots" role="group" aria-label="Selecionar prévia">
-            {HERO_SLIDES.map((item, index) => (
-              <button
-                key={item.id}
-                className={'campaign-lp__visual-dot' + (index === activeSlide ? ' campaign-lp__visual-dot--active' : '')}
-                type="button"
-                aria-label={'Mostrar ' + item.label.toLowerCase()}
-                aria-pressed={index === activeSlide}
-                onClick={() => showSlide(index)}
-              />
-            ))}
-          </div>
-          <div className="campaign-lp__visual-arrows">
-            <button type="button" aria-label="Imagem anterior" onClick={() => showSlide(activeSlide - 1)}>←</button>
-            <button type="button" aria-label="Próxima imagem" onClick={() => showSlide(activeSlide + 1)}>→</button>
-          </div>
-        </div>
+      <div className="campaign-lp__visual-stack">
+        {visibleSlides.map(({ item, offset }) => (
+          <article
+            key={item.id}
+            className={'campaign-lp__visual-card campaign-lp__visual-card--offset-' + offset + (offset === 0 ? ' campaign-lp__visual-card--active' : '')}
+            aria-hidden={offset === 0 ? undefined : 'true'}
+          >
+            <div className="campaign-lp__visual-topline" aria-live={offset === 0 ? 'polite' : undefined}>
+              <span>{item.label}</span>
+              <span>{item.step}</span>
+            </div>
+            <img src={item.src} alt={offset === 0 ? item.alt : ''} />
+            <div className="campaign-lp__visual-footer">
+              <span>{item.footer}</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+            {offset === 0 && (
+              <div className="campaign-lp__visual-controls">
+                <div className="campaign-lp__visual-dots" role="group" aria-label="Selecionar prévia">
+                  {HERO_SLIDES.map((slideItem, index) => (
+                    <button
+                      key={slideItem.id}
+                      className={'campaign-lp__visual-dot' + (index === activeSlide ? ' campaign-lp__visual-dot--active' : '')}
+                      type="button"
+                      aria-label={'Mostrar ' + slideItem.label.toLowerCase()}
+                      aria-pressed={index === activeSlide}
+                      onClick={() => showSlide(index)}
+                    />
+                  ))}
+                </div>
+                <div className="campaign-lp__visual-arrows">
+                  <button type="button" aria-label="Imagem anterior" onClick={() => showSlide(activeSlide - 1)}>←</button>
+                  <button type="button" aria-label="Próxima imagem" onClick={() => showSlide(activeSlide + 1)}>→</button>
+                </div>
+              </div>
+            )}
+          </article>
+        ))}
       </div>
       <div className="campaign-lp__floating-note">
         <span className="campaign-lp__floating-dot" />
@@ -136,16 +149,20 @@ function CampaignVisualCarousel() {
   )
 }
 
+function trackCtaClick({ placement, buttonText, signupUrl }) {
+  pushDataLayerEvent('button_click', {
+    button_id: 'lp_campanha_' + placement + '_cta',
+    button_text: buttonText,
+    destination_url: signupUrl,
+    page_path: window.location.pathname,
+    page_type: 'lp_campanha',
+    placement,
+  })
+}
+
 function CampaignCta({ placement, children, signupUrl }) {
   function handleClick() {
-    pushDataLayerEvent('button_click', {
-      button_id: 'lp_campanha_' + placement + '_cta',
-      button_text: children,
-      destination_url: signupUrl,
-      page_path: window.location.pathname,
-      page_type: 'lp_campanha',
-      placement,
-    })
+    trackCtaClick({ placement, buttonText: children, signupUrl })
   }
 
   return (
@@ -253,14 +270,27 @@ function CampaignPage() {
             <p>
               Quando público, região e investimento não estão alinhados, fica mais difícil saber se a publicidade está trabalhando a favor do negócio. A Ummix organiza esse caminho para você decidir com mais contexto e segurança.
             </p>
-            <div className="campaign-lp__simulation-callout">
+            <a
+              className="campaign-lp__simulation-callout"
+              href={signupUrl}
+              data-analytics-id="lp_campanha_simulation_cta"
+              onClick={() => trackCtaClick({
+                placement: 'simulation',
+                buttonText: 'Acessar e simular gratuitamente',
+                signupUrl,
+              })}
+            >
               <span className="campaign-lp__simulation-badge">03<small>MIN</small></span>
               <div>
                 <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">SIMULAÇÃO GRATUITA</p>
                 <strong>Acesse a plataforma e simule sua publicidade em 3 minutos.</strong>
                 <p>É gratuito: teste públicos e formatos antes de avançar para a contratação.</p>
               </div>
-            </div>
+              <span className="campaign-lp__simulation-action">
+                <span>Acessar e simular gratuitamente</span>
+                <ArrowIcon />
+              </span>
+            </a>
           </div>
         </section>
 
