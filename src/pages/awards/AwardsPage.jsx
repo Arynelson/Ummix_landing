@@ -111,23 +111,23 @@ function CompactAwardCard({ award, locale, copy, index }) {
   const category = localizedValue(award.category, locale)
 
   return (
-    <article className="group relative flex min-h-[17rem] flex-col overflow-hidden rounded-3xl border border-ummix-dark/10 bg-white p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-ummix-red/35 hover:shadow-[0_20px_48px_-32px_rgba(30,30,30,0.55)] md:p-7">
+    <article className="group relative flex min-h-[14rem] flex-col overflow-hidden rounded-3xl border border-ummix-dark/10 bg-white p-5 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-ummix-red/35 hover:shadow-[0_20px_48px_-32px_rgba(30,30,30,0.55)] md:p-6">
       <span className="absolute inset-x-6 top-0 h-px origin-left scale-x-[0.6] bg-ummix-red/35 transition-transform duration-300 group-hover:scale-x-100" aria-hidden="true" />
       <div className="flex items-center justify-between gap-4">
         <span className="font-heading text-4xl font-black leading-none text-ummix-red/25">{String(index).padStart(2, '0')}</span>
         <div className="flex items-center gap-3">
           {award.image ? (
-            <span className="grid h-10 w-16 place-items-center overflow-hidden rounded-lg border border-white/10 bg-ummix-dark p-1.5" aria-hidden="true">
+            <span className="grid h-16 w-28 shrink-0 place-items-center overflow-hidden rounded-2xl border border-white/10 bg-ummix-dark p-2 shadow-[0_12px_24px_-18px_rgba(30,30,30,0.8)]" aria-hidden="true">
               <img src={award.image} alt="" className="h-full w-full object-contain" />
             </span>
           ) : null}
           <StatusBadge status={award.status} copy={copy.awardsSection} />
         </div>
       </div>
-      <h3 className="mt-8 max-w-xl font-heading text-xl font-extrabold leading-tight text-ummix-dark md:text-2xl">
+      <h3 className="mt-5 max-w-xl font-heading text-xl font-extrabold leading-tight text-ummix-dark md:text-2xl">
         {award.name}
       </h3>
-      <dl className="mt-auto grid gap-x-6 gap-y-5 pt-8 sm:grid-cols-2">
+      <dl className="mt-5 grid gap-x-6 gap-y-3 pt-0 sm:grid-cols-2">
         <Meta label={copy.awardsSection.fields.state} value={award.state} />
         <Meta label={copy.awardsSection.fields.status} value={copy.awardsSection.statuses[award.status]} />
         <Meta label={copy.awardsSection.fields.category} value={category} wide />
