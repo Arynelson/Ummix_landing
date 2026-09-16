@@ -5,7 +5,18 @@ import './campanha.css'
 import { pushDataLayerEvent } from '../../services/analytics'
 
 const SIGNUP_URL = 'https://app.ummix.com.br/signup/cliente'
-const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid']
+const ATTRIBUTION_KEYS = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_content',
+  'utm_term',
+  'utm_matchtype',
+  'utm_network',
+  'utm_device',
+  'gclid',
+  'fbclid',
+]
 const SCROLL_THRESHOLDS = [25, 50, 75, 90]
 const HERO_SLIDES = [
   {
