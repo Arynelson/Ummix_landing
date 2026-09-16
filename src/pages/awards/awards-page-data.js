@@ -43,6 +43,7 @@ export const AWARDS_PAGE_DATA = {
         es: 'Tecnología',
       },
       organizer: 'World Creativity Organization/Ministério da Cultura',
+      image: '/assets/awards/premio-brasil-criativo.png',
     },
     {
       id: 'catalisa',
@@ -55,6 +56,7 @@ export const AWARDS_PAGE_DATA = {
         es: 'Líderes que Transforman',
       },
       organizer: 'FAJE Goiás',
+      image: '/assets/awards/catalisa-2026.png',
     },
     {
       id: 'premio-nacional-inovacao',

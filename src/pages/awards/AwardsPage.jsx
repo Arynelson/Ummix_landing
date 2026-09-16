@@ -115,7 +115,14 @@ function CompactAwardCard({ award, locale, copy, index }) {
       <span className="absolute inset-x-6 top-0 h-px origin-left scale-x-[0.6] bg-ummix-red/35 transition-transform duration-300 group-hover:scale-x-100" aria-hidden="true" />
       <div className="flex items-center justify-between gap-4">
         <span className="font-heading text-4xl font-black leading-none text-ummix-red/25">{String(index).padStart(2, '0')}</span>
-        <StatusBadge status={award.status} copy={copy.awardsSection} />
+        <div className="flex items-center gap-3">
+          {award.image ? (
+            <span className="grid h-10 w-16 place-items-center overflow-hidden rounded-lg border border-white/10 bg-ummix-dark p-1.5" aria-hidden="true">
+              <img src={award.image} alt="" className="h-full w-full object-contain" />
+            </span>
+          ) : null}
+          <StatusBadge status={award.status} copy={copy.awardsSection} />
+        </div>
       </div>
       <h3 className="mt-8 max-w-xl font-heading text-xl font-extrabold leading-tight text-ummix-dark md:text-2xl">
         {award.name}
@@ -291,7 +298,7 @@ function HeroNavigation({ copy }) {
             key={item.href}
             href={item.href}
             style={{ '--i': index }}
-            className="awards-hero-link group relative flex min-h-44 flex-col justify-between overflow-hidden bg-white/[0.035] p-5 transition-colors duration-300 hover:bg-ummix-red/90 md:p-6"
+            className="awards-hero-link group relative flex min-h-28 flex-col justify-between overflow-hidden bg-white/[0.035] p-5 transition-colors duration-300 hover:bg-ummix-red/90 md:min-h-32 md:p-6"
           >
             <span className="absolute inset-x-5 top-0 h-px origin-left scale-x-0 bg-ummix-red transition-transform duration-300 group-hover:scale-x-100" aria-hidden="true" />
             <span className="flex items-center justify-between gap-4">
