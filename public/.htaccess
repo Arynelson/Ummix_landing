@@ -5,16 +5,25 @@ RewriteEngine On
 # HTML must be revalidated after a deployment because it contains the
 # fingerprinted asset names. Fingerprinted assets can be cached for one year.
 <IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
   <FilesMatch "\.(?:html?)$">
     Header always set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
     Header always set Pragma "no-cache"
     Header always set Expires "0"
   </FilesMatch>
 
-  <FilesMatch "\.(?:js|mjs|css|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|otf)$">
+  # Only fingerprinted Vite assets receive long-lived immutable caching.
+  # Stable public files such as og-image.png and favicon.svg must revalidate.
+  <FilesMatch "-[A-Za-z0-9_-]{8,}\.(?:js|mjs|css|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|otf)$">
     Header always set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 </IfModule>
+
+# Assets fingerprinted by Vite must be served as files. If one is missing,
+# return a real asset error instead of the landing HTML fallback.
+RewriteRule ^assets/ - [L]
 
 # Subpages sem extensão .html
 RewriteRule ^cashback/?$ /cashback.html [L]
@@ -23,6 +32,7 @@ RewriteRule ^premios/?$ /premios.html [L]
 RewriteRule ^en/?$ /en/index.html [L]
 RewriteRule ^en/cashback/?$ /en/cashback.html [L]
 RewriteRule ^monetize/?$ /monetize.html [L]
+RewriteRule ^investidores/?$ /investidores.html [L]
 RewriteRule ^en/monetize/?$ /en/monetize.html [L]
 RewriteRule ^en/partner/?$  /en/partner.html [L]
 RewriteRule ^en/investidores/?$ /en/investidores.html [L]
@@ -35,7 +45,4 @@ RewriteRule ^es/monetize/?$ /es/monetize.html [L]
 RewriteRule ^es/investidores/?$ /es/investidores.html [L]
 RewriteRule ^es/premios/?$ /es/premios.html [L]
 
-# SPA fallback para a landing principal
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [QSA,L]
+# This is a Vite multi-page site: unknown routes and missing assets must 404.

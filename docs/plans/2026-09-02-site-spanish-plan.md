@@ -21,6 +21,8 @@ O plano cobre o seletor de idioma, conteúdo, páginas públicas, roteamento, SE
 - Mantido o contrato de formulários e corrigido o idioma enviado nos eventos de contato para `es`.
 - Adicionado `scripts/verify-spanish-routes.mjs` para validar chaves, rotas e metadata.
 - QA local: build de produção aprovado; verificação de rotas aprovada; cinco páginas espanholas testadas em 25 combinações de viewport sem overflow horizontal.
+- Diagnóstico adicional de produção em `/partner`: o HTML público referencia `main-3FDmHDeG.js`, mas o host responde `200 text/html` (`index.html`) para esse asset; foi adicionada a proteção `RewriteRule ^assets/ - [L]` e o verificador `verify:build-assets`.
+- Hardening do hosting concluído: rota PT de `/investidores` explicitada, fallback SPA genérico removido, cache `immutable` restringido a fingerprints e headers `nosniff`/`Referrer-Policy` adicionados.
 - Pendências de release: revisão nativa do espanhol, validação em homologação/Locaweb e publicação.
 
 Critério central: uma URL com prefixo explícito deve determinar o idioma. Portanto, páginas em /es/ devem permanecer em espanhol independentemente de localStorage, idioma do navegador ou parâmetro legado lang.
