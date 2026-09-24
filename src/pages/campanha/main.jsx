@@ -2,9 +2,11 @@ import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import '../../index.css'
 import './campanha.css'
+import { CAMPAIGN_LEAD_FORM_ENDPOINT } from '../../constants/urls'
 import { pushDataLayerEvent } from '../../services/analytics'
+import { submitForm } from '../../services/formSubmit'
 
-const SIGNUP_URL = 'https://app.ummix.com.br/signup/cliente'
+const LEAD_FORM_ANCHOR = '#cadastro-lead'
 const ATTRIBUTION_KEYS = [
   'utm_source',
   'utm_medium',
@@ -18,6 +20,12 @@ const ATTRIBUTION_KEYS = [
   'fbclid',
 ]
 const SCROLL_THRESHOLDS = [25, 50, 75, 90]
+const INITIAL_LEAD_FORM = {
+  name: '',
+  email: '',
+  phone: '',
+  already_advertised_radio_tv: '',
+}
 const HERO_SLIDES = [
   {
     id: 'planning',
@@ -45,18 +53,16 @@ const HERO_SLIDES = [
   },
 ]
 
-function getSignupUrl() {
-  if (typeof window === 'undefined') return SIGNUP_URL
+function getAttributionParameters() {
+  if (typeof window === 'undefined') return {}
 
   const sourceParams = new URLSearchParams(window.location.search)
-  const destination = new URL(SIGNUP_URL)
 
-  ATTRIBUTION_KEYS.forEach((key) => {
+  return ATTRIBUTION_KEYS.reduce((parameters, key) => {
     const value = sourceParams.get(key)
-    if (value) destination.searchParams.set(key, value)
-  })
-
-  return destination.toString()
+    if (value) parameters[key] = value
+    return parameters
+  }, {})
 }
 
 function ArrowIcon() {
@@ -160,32 +166,131 @@ function CampaignVisualCarousel() {
   )
 }
 
-function trackCtaClick({ placement, buttonText, signupUrl }) {
+function trackCtaClick({ placement, buttonText }) {
   pushDataLayerEvent('button_click', {
     button_id: 'lp_campanha_' + placement + '_cta',
     button_text: buttonText,
-    destination_url: signupUrl,
+    destination_url: window.location.pathname + LEAD_FORM_ANCHOR,
     page_path: window.location.pathname,
     page_type: 'lp_campanha',
     placement,
   })
 }
 
-function CampaignCta({ placement, children, signupUrl }) {
+function CampaignCta({ placement, children }) {
   function handleClick() {
-    trackCtaClick({ placement, buttonText: children, signupUrl })
+    trackCtaClick({ placement, buttonText: children })
   }
 
   return (
     <a
       className="campaign-lp__cta campaign-lp__cta--primary"
-      href={signupUrl}
+      href={LEAD_FORM_ANCHOR}
       data-analytics-id={'lp_campanha_' + placement + '_cta'}
       onClick={handleClick}
     >
       <span>{children}</span>
       <ArrowIcon />
     </a>
+  )
+}
+
+function CampaignLeadForm() {
+  const [form, setForm] = useState(INITIAL_LEAD_FORM)
+  const [status, setStatus] = useState('idle')
+
+  function updateField(event) {
+    const { name, value } = event.target
+    setForm((current) => ({ ...current, [name]: value }))
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    if (status === 'submitting') return
+
+    setStatus('submitting')
+
+    try {
+      const attribution = getAttributionParameters()
+
+      await submitForm({
+        ...form,
+        ...attribution,
+        _subject: 'Novo lead da landing page de campanha',
+        _template: 'table',
+        _captcha: 'false',
+      }, CAMPAIGN_LEAD_FORM_ENDPOINT)
+
+      pushDataLayerEvent('ummix_lead_submitted', {
+        ...attribution,
+        form_name: 'campaign_lead',
+        page_path: window.location.pathname,
+        page_type: 'lp_campanha',
+      })
+      setStatus('success')
+      setForm(INITIAL_LEAD_FORM)
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  return (
+    <section className="campaign-lp__lead-capture" id="cadastro-lead" aria-labelledby="lead-capture-title">
+      <div className="campaign-lp__shell campaign-lp__lead-grid">
+        <div className="campaign-lp__lead-heading">
+          <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">FALE COM A UMMIX</p>
+          <h2 id="lead-capture-title">Vamos encontrar o melhor caminho para sua publicidade.</h2>
+          <p>Deixe seus dados e conte se você já anunciou em rádio e TV. Nossa equipe entende seu momento e orienta os próximos passos.</p>
+        </div>
+
+        <div className="campaign-lp__lead-form-card">
+          {status === 'success' ? (
+            <div className="campaign-lp__lead-success" role="status" aria-live="polite">
+              <span className="campaign-lp__lead-success-icon"><CheckIcon /></span>
+              <h3>Recebemos seus dados.</h3>
+              <p>Obrigado pelo interesse. A equipe da Ummix entrará em contato em breve.</p>
+            </div>
+          ) : (
+            <form className="campaign-lp__lead-form" onSubmit={handleSubmit}>
+              <div className="campaign-lp__lead-fields">
+                <div className="campaign-lp__lead-field">
+                  <label htmlFor="campaign-lead-name">Nome</label>
+                  <input id="campaign-lead-name" name="name" value={form.name} onChange={updateField} autoComplete="name" required />
+                </div>
+                <div className="campaign-lp__lead-field">
+                  <label htmlFor="campaign-lead-email">E-mail</label>
+                  <input id="campaign-lead-email" name="email" value={form.email} onChange={updateField} type="email" autoComplete="email" required />
+                </div>
+                <div className="campaign-lp__lead-field">
+                  <label htmlFor="campaign-lead-phone">Telefone</label>
+                  <input id="campaign-lead-phone" name="phone" value={form.phone} onChange={updateField} type="tel" autoComplete="tel" required />
+                </div>
+                <div className="campaign-lp__lead-field">
+                  <label htmlFor="campaign-lead-advertised">Você já anunciou em rádio e TV?</label>
+                  <select id="campaign-lead-advertised" name="already_advertised_radio_tv" value={form.already_advertised_radio_tv} onChange={updateField} required>
+                    <option value="" disabled>Selecione uma opção</option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                  </select>
+                </div>
+              </div>
+
+              {status === 'error' && (
+                <p className="campaign-lp__lead-status campaign-lp__lead-status--error" role="alert">
+                  Não foi possível enviar seus dados agora. Tente novamente em instantes.
+                </p>
+              )}
+
+              <button className="campaign-lp__lead-submit" type="submit" disabled={status === 'submitting'}>
+                {status === 'submitting' ? 'Enviando seus dados...' : 'Quero falar com a Ummix'}
+                <ArrowIcon />
+              </button>
+              <p className="campaign-lp__lead-note">Seus dados serão usados apenas para este contato.</p>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -203,7 +308,6 @@ function Header() {
 }
 
 function CampaignPage() {
-  const signupUrl = getSignupUrl()
   const trackedScroll = useRef(new Set())
 
   useEffect(() => {
@@ -256,10 +360,10 @@ function CampaignPage() {
             <p className="campaign-lp__hero-description">
               Planeje e ative sua publicidade em rádio e TV com a simplicidade do digital. Escolha seu objetivo, público e região em uma única plataforma orientada por dados.
             </p>
-            <CampaignCta placement="hero" signupUrl={signupUrl}>
-              Simular minha campanha grátis
+            <CampaignCta placement="hero">
+              Quero planejar minha publicidade
             </CampaignCta>
-            <p className="campaign-lp__helper">Crie seu acesso e simule seu plano em poucos minutos.</p>
+            <p className="campaign-lp__helper">Deixe seus dados e receba orientação para anunciar em rádio e TV.</p>
           </div>
 
           <CampaignVisualCarousel />
@@ -402,9 +506,9 @@ function CampaignPage() {
             </div>
 
             <div className="campaign-lp__workflow-cta">
-              <p><strong>Planeje sua publicidade em poucos minutos.</strong> Comece grátis e descubra como rádio e TV podem trabalhar para o seu negócio.</p>
-              <CampaignCta placement="workflow" signupUrl={signupUrl}>
-                Simular minha campanha grátis
+              <p><strong>Planeje sua publicidade com mais clareza.</strong> Conte seu objetivo e descubra como rádio e TV podem trabalhar para o seu negócio.</p>
+              <CampaignCta placement="workflow">
+                Quero planejar minha publicidade
               </CampaignCta>
             </div>
           </div>
@@ -497,10 +601,10 @@ function CampaignPage() {
           <div className="campaign-lp__shell campaign-lp__benefits-cta">
             <div>
               <p className="campaign-lp__eyebrow">COMECE COM MAIS CLAREZA</p>
-              <p>Veja quanto pode investir, quem alcançar e quais formatos fazem sentido para o seu objetivo.</p>
+               <p>Conte seu objetivo, sua região e o público que deseja alcançar. A Ummix ajuda a definir o próximo passo.</p>
             </div>
-            <CampaignCta placement="benefits" signupUrl={signupUrl}>
-              Simular minha campanha grátis
+            <CampaignCta placement="benefits">
+              Quero planejar minha publicidade
             </CampaignCta>
           </div>
         </section>
@@ -510,13 +614,13 @@ function CampaignPage() {
             <div className="campaign-lp__faq-heading">
               <p className="campaign-lp__eyebrow campaign-lp__eyebrow--dark">AINDA TEM DÚVIDAS?</p>
               <h2 id="faq-title">Tudo mais claro para você começar.</h2>
-              <p>O cadastro é o primeiro passo para conhecer o fluxo de planejamento da Ummix Ads.</p>
+               <p>O formulário é o primeiro passo para conhecer as possibilidades de planejamento da Ummix Ads.</p>
             </div>
 
             <div className="campaign-lp__faq-list">
               <details open>
                 <summary>Preciso ter um plano de mídia pronto para começar?</summary>
-                <p>Não, você pode se cadastrar e simular quantas campanhas desejar, testar diferentes públicos-alvo e formatos e só depois que tiver certeza pode avançar a contratação.</p>
+                <p>Não. Você pode conversar com a Ummix, entender as possibilidades e só avançar quando fizer sentido para o seu negócio.</p>
               </details>
               <details>
                 <summary>A Ummix ajuda apenas com televisão?</summary>
@@ -528,11 +632,11 @@ function CampaignPage() {
               </details>
               <details>
                 <summary>O cadastro já significa que estou contratando uma campanha?</summary>
-                <p>Não, você pode se cadastrar e simular quantas campanhas desejar, testar diferentes públicos-alvo e formatos e só depois que tiver certeza pode avançar a contratação.</p>
+                <p>Não. O formulário é apenas o primeiro contato. Você pode avaliar diferentes públicos e formatos e só avançar quando tiver certeza.</p>
               </details>
               <details>
                 <summary>Quanto custa anunciar?</summary>
-                <p>O investimento depende do objetivo, do tamanho do seu público, de quantas vezes ele será impactado e dos filtros escolhidos para a campanha. Acesse nossa plataforma e faça uma simulação gratuita.</p>
+                <p>O investimento depende do objetivo, do tamanho do seu público, da frequência de impacto e dos filtros escolhidos. Fale com a Ummix para entender as possibilidades para o seu negócio.</p>
               </details>
             </div>
           </div>
@@ -544,12 +648,14 @@ function CampaignPage() {
           <div className="campaign-lp__shell campaign-lp__final-content">
             <p className="campaign-lp__eyebrow">COLOQUE SUA MÍDIA PARA TRABALHAR PELO SEU OBJETIVO</p>
             <h2 id="final-cta-title">Pronto para anunciar com mais clareza e buscar mais resultado?</h2>
-            <p>Crie seu acesso de cliente e dê o primeiro passo para planejar sua publicidade.</p>
-            <CampaignCta placement="final" signupUrl={signupUrl}>
-              Simular minha campanha grátis
+            <p>Deixe seus dados e dê o primeiro passo para planejar sua publicidade em rádio e TV.</p>
+            <CampaignCta placement="final">
+              Quero planejar minha publicidade
             </CampaignCta>
           </div>
         </section>
+
+        <CampaignLeadForm />
       </main>
 
       <footer className="campaign-lp__footer">

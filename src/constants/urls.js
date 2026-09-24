@@ -7,3 +7,4 @@ export const CONTACT_FORM_CC_EMAIL = CONTACT_EMAIL
 export const CONTACT_FORM_BACKUP_EMAIL = 'bruno.araujo@ummix.com.br'
 export const CONTACT_FORM_CC_EMAILS = [CONTACT_FORM_CC_EMAIL, CONTACT_FORM_BACKUP_EMAIL].join(',')
 export const CONTACT_FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_FORM_EMAIL}`
+export const CAMPAIGN_LEAD_FORM_ENDPOINT = 'https://formsubmit.co/ajax/midiaummix@googlegroups.com'

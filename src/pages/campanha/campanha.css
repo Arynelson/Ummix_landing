@@ -1003,6 +1003,157 @@
   margin-top: 0;
 }
 
+.campaign-lp__lead-capture {
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  background: var(--campaign-soft);
+}
+
+.campaign-lp__lead-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(3rem, 8vw, 7rem);
+}
+
+.campaign-lp__lead-heading h2 {
+  max-width: 11ch;
+  margin: 1rem 0 0;
+  font: 800 clamp(2.6rem, 4.8vw, 4.4rem)/0.96 var(--font-family-heading);
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.campaign-lp__lead-heading > p:not(.campaign-lp__eyebrow) {
+  max-width: 27rem;
+  margin: 1.5rem 0 0;
+  color: var(--campaign-muted);
+  font: 400 1rem/1.8 var(--font-family-body);
+}
+
+.campaign-lp__lead-form-card {
+  padding: clamp(1.4rem, 4vw, 2.35rem);
+  border: 1px solid var(--campaign-line);
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1.5rem 3rem -2.2rem rgba(30, 30, 30, 0.42);
+}
+
+.campaign-lp__lead-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.campaign-lp__lead-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.campaign-lp__lead-field label {
+  color: var(--campaign-ink);
+  font: 800 0.78rem/1.25 var(--font-family-body);
+}
+
+.campaign-lp__lead-field input,
+.campaign-lp__lead-field select {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #d8d2ce;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: var(--campaign-ink);
+  font: 400 0.92rem/1.35 var(--font-family-body);
+}
+
+.campaign-lp__lead-field input:focus,
+.campaign-lp__lead-field select:focus {
+  border-color: var(--campaign-red-dark);
+  outline: 3px solid rgba(155, 25, 26, 0.14);
+  outline-offset: 1px;
+}
+
+.campaign-lp__lead-status {
+  margin: 1rem 0 0;
+  font: 600 0.82rem/1.5 var(--font-family-body);
+}
+
+.campaign-lp__lead-status--error {
+  color: var(--campaign-red-dark);
+}
+
+.campaign-lp__lead-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  min-height: 3.6rem;
+  margin-top: 1.4rem;
+  padding: 0.95rem 1.45rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--campaign-red);
+  box-shadow: 0 1rem 2.2rem -1rem rgba(237, 52, 54, 0.65);
+  color: #fff;
+  cursor: pointer;
+  font: 800 0.9rem/1 var(--font-family-body);
+  transition: transform 180ms ease-out, background 180ms ease-out, box-shadow 180ms ease-out;
+}
+
+.campaign-lp__lead-submit:hover:not(:disabled) {
+  background: #f24648;
+  box-shadow: 0 1.2rem 2.5rem -1rem rgba(237, 52, 54, 0.85);
+  transform: translateY(-2px);
+}
+
+.campaign-lp__lead-submit:focus-visible {
+  outline: 3px solid rgba(155, 25, 26, 0.28);
+  outline-offset: 3px;
+}
+
+.campaign-lp__lead-submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.campaign-lp__lead-note {
+  margin: 0.8rem 0 0;
+  color: var(--campaign-muted);
+  font: 400 0.72rem/1.4 var(--font-family-body);
+  text-align: center;
+}
+
+.campaign-lp__lead-success {
+  min-height: 19rem;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+}
+
+.campaign-lp__lead-success-icon {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  place-items: center;
+  border-radius: 1rem;
+  background: #fff0ef;
+  color: var(--campaign-red-dark);
+}
+
+.campaign-lp__lead-success h3 {
+  margin: 1.2rem 0 0;
+  font: 800 1.65rem/1.05 var(--font-family-heading);
+  letter-spacing: -0.03em;
+}
+
+.campaign-lp__lead-success p {
+  max-width: 24rem;
+  margin: 0.7rem 0 0;
+  color: var(--campaign-muted);
+  font: 400 0.95rem/1.65 var(--font-family-body);
+}
+
 .campaign-lp__final-cta {
   position: relative;
   overflow: hidden;
@@ -1134,6 +1285,7 @@
   .campaign-lp__audience-heading,
   .campaign-lp__workflow-heading,
   .campaign-lp__benefits-grid,
+  .campaign-lp__lead-grid,
   .campaign-lp__faq-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1252,6 +1404,7 @@
   .campaign-lp__proof-heading h2,
   .campaign-lp__section-heading h2,
   .campaign-lp__benefits h2,
+  .campaign-lp__lead-heading h2,
   .campaign-lp__faq-heading h2,
   .campaign-lp__final-cta h2 {
     font-size: 2.7rem;
@@ -1301,6 +1454,10 @@
 
   .campaign-lp__step-icon {
     margin-bottom: 2.5rem;
+  }
+
+  .campaign-lp__lead-fields {
+    grid-template-columns: 1fr;
   }
 
   .campaign-lp__footer-inner {

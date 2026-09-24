@@ -10,8 +10,8 @@ function isRejectedSubmission(result) {
     || /unable to submit/i.test(message)
 }
 
-export async function submitForm(payload) {
-  const response = await fetch(CONTACT_FORM_ENDPOINT, {
+export async function submitForm(payload, endpoint = CONTACT_FORM_ENDPOINT) {
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
