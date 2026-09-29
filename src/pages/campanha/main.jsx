@@ -2,9 +2,7 @@ import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import '../../index.css'
 import './campanha.css'
-import { CAMPAIGN_LEAD_FORM_ENDPOINT } from '../../constants/urls'
 import { pushDataLayerEvent } from '../../services/analytics'
-import { submitForm } from '../../services/formSubmit'
 
 const LEAD_FORM_ANCHOR = '#cadastro-lead'
 const ATTRIBUTION_KEYS = [
@@ -198,6 +196,8 @@ function CampaignCta({ placement, children }) {
 function CampaignLeadForm() {
   const [form, setForm] = useState(INITIAL_LEAD_FORM)
   const [status, setStatus] = useState('idle')
+  const [notificationFailed, setNotificationFailed] = useState(false)
+  const submissionInProgress = useRef(false)
 
   function updateField(event) {
     const { name, value } = event.target
@@ -206,31 +206,58 @@ function CampaignLeadForm() {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    if (status === 'submitting') return
+    if (submissionInProgress.current) return
 
+    submissionInProgress.current = true
     setStatus('submitting')
+    setNotificationFailed(false)
 
     try {
       const attribution = getAttributionParameters()
+      const honeypot = event.currentTarget.elements.namedItem('website')?.value ?? ''
+      const registrationResponse = await fetch('/api/pre-registration.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: form.name,
+          email: form.email,
+          phone: form.phone,
+          advertisedRadioTv: form.already_advertised_radio_tv === 'sim',
+          website: honeypot,
+          attribution,
+        }),
+      })
+      const registrationResult = await registrationResponse.json().catch(() => null)
 
-      await submitForm({
-        ...form,
-        ...attribution,
-        _subject: 'Novo lead da landing page de campanha',
-        _template: 'table',
-        _captcha: 'false',
-      }, CAMPAIGN_LEAD_FORM_ENDPOINT)
+      if (!registrationResponse.ok || registrationResult?.success !== true) {
+        throw new Error('Não foi possível registrar seus dados.')
+      }
 
+      if (registrationResult.accepted === false) {
+        setStatus('success')
+        setForm(INITIAL_LEAD_FORM)
+        return
+      }
+
+      setNotificationFailed(registrationResult.notificationSent !== true)
       pushDataLayerEvent('ummix_lead_submitted', {
         ...attribution,
         form_name: 'campaign_lead',
+        lead_created: registrationResult.created,
+        notification_sent: registrationResult.notificationSent === true,
         page_path: window.location.pathname,
         page_type: 'lp_campanha',
       })
+
       setStatus('success')
       setForm(INITIAL_LEAD_FORM)
     } catch {
       setStatus('error')
+    } finally {
+      submissionInProgress.current = false
     }
   }
 
@@ -248,10 +275,17 @@ function CampaignLeadForm() {
             <div className="campaign-lp__lead-success" role="status" aria-live="polite">
               <span className="campaign-lp__lead-success-icon"><CheckIcon /></span>
               <h3>Recebemos seus dados.</h3>
-              <p>Obrigado pelo interesse. A equipe da Ummix entrará em contato em breve.</p>
+              <p>{notificationFailed
+                ? 'Seus dados foram registrados, mas não conseguimos confirmar o aviso por e-mail à equipe. Você não precisa preencher novamente.'
+                : 'Obrigado pelo interesse. A equipe da Ummix entrará em contato em breve.'}
+              </p>
             </div>
           ) : (
             <form className="campaign-lp__lead-form" onSubmit={handleSubmit}>
+              <div className="campaign-lp__honeypot" aria-hidden="true">
+                <label htmlFor="campaign-lead-website">Deixe este campo vazio</label>
+                <input id="campaign-lead-website" name="website" type="text" tabIndex="-1" autoComplete="off" />
+              </div>
               <div className="campaign-lp__lead-fields">
                 <div className="campaign-lp__lead-field">
                   <label htmlFor="campaign-lead-name">Nome</label>
