@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import { CONTACT_EMAIL, CONTACT_FORM_CC_EMAILS } from '../../constants/urls'
+import { CONTACT_EMAIL } from '../../constants/urls'
 import { submitForm as sendForm } from '../../services/formSubmit'
 import { pushDataLayerEvent } from '../../services/analytics'
 import { useLocale } from '../../LocaleProvider.jsx'
@@ -339,8 +339,7 @@ function PartnerForm() {
         email: formData.get('email'),
         empresa: formData.get('empresa'),
         telefone: formData.get('telefone'),
-        _subject: copy.subject,
-        _cc: CONTACT_FORM_CC_EMAILS,
+        _form_type: 'partner',
       })
 
       pushDataLayerEvent('ummix_lead_submitted', {

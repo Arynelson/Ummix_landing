@@ -1,0 +1,19 @@
+# Ummix
+
+> Plataforma ad-tech para anunciar em TV e rádio com segmentação e mensuração de performance, como no digital.
+
+A Ummix é uma startup brasileira vencedora do Prêmio Nacional de Inovação (CNI/SEBRAE) e eleita top 4 ideias mais inovadoras do Brasil pela ABDI. Permite que anunciantes comprem mídia em TV, rádio e veículos offline com dados de segmentação por localização, renda, comportamento e perfil socioeconômico — e meçam resultados em tempo real.
+
+## Plataforma
+
+- [App Ummix](https://app.ummix.com.br): plataforma self-service de compra e gestão de campanhas em mídia offline
+
+## Seções do site
+
+- [Soluções](https://www.ummix.com.br/#solucoes): diferenciais e funcionalidades da plataforma
+- [Segmentações](https://www.ummix.com.br/#segmentacoes): critérios de segmentação disponíveis (geográfico, demográfico, comportamental, intenções, opinião)
+- [Veículos](https://www.ummix.com.br/#veiculos): emissoras parceiras (TV Anhanguera, CBN, Band News, Jovem Pan, Antena 1 e +200 outros)
+
+## Contato
+
+- tecnologia@ummix.com.br

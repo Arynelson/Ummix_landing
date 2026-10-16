@@ -4,8 +4,6 @@ declare(strict_types=1);
 const UMMIX_MAX_REQUEST_BYTES = 8192;
 const UMMIX_RATE_LIMIT_WINDOW_SECONDS = 600;
 const UMMIX_RATE_LIMIT_MAX_REQUESTS = 8;
-const UMMIX_PRE_REGISTRATION_URL = 'https://app.ummix.com.br/api/integrations/pre-registrations';
-const UMMIX_FORMSUBMIT_URL = 'https://formsubmit.co/ajax/tecnologia@ummix.com.br';
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
@@ -37,10 +35,6 @@ function ummixCampaignNormalizePhone($value)
         return null;
     }
 
-    if ((strlen($digits) === 12 || strlen($digits) === 13) && substr($digits, 0, 2) === '55') {
-        $digits = substr($digits, 2);
-    }
-
     if (strlen($digits) === 11) {
         return '(' . substr($digits, 0, 2) . ') ' . substr($digits, 2, 5) . '-' . substr($digits, 7, 4);
     }
@@ -52,53 +46,55 @@ function ummixCampaignNormalizePhone($value)
     return null;
 }
 
-function ummixCampaignLoadServiceToken()
-{
-    $token = getenv('UMMIX_PRE_REGISTRATION_SERVICE_TOKEN');
-
-    if (!is_string($token) || trim($token) === '') {
-        $documentRoot = isset($_SERVER['DOCUMENT_ROOT']) ? rtrim((string) $_SERVER['DOCUMENT_ROOT'], '/\\') : '';
-        if ($documentRoot !== '') {
-            $privateConfigPath = dirname($documentRoot) . DIRECTORY_SEPARATOR . 'ummix-pre-registration-secrets.php';
-            if (is_file($privateConfigPath) && is_readable($privateConfigPath)) {
-                try {
-                    $privateConfig = require $privateConfigPath;
-                } catch (Throwable $error) {
-                    $privateConfig = null;
-                }
-
-                if (is_array($privateConfig) && isset($privateConfig['service_token'])) {
-                    $token = $privateConfig['service_token'];
-                }
-            }
-        }
-    }
-
-    return is_string($token) ? trim($token) : '';
-}
-
-function ummixCampaignConsumeRateLimit($token)
+function ummixCampaignConsumeRateLimit()
 {
     $remoteAddress = isset($_SERVER['REMOTE_ADDR']) ? (string) $_SERVER['REMOTE_ADDR'] : '';
     if (filter_var($remoteAddress, FILTER_VALIDATE_IP) === false) {
+        error_log('[ummix-pre-registration][rate_limit] client_address_unavailable');
         return null;
     }
 
-    $temporaryRoot = rtrim(sys_get_temp_dir(), '/\\');
+    $temporaryRoots = [];
+    $configuredTemporaryRoot = ini_get('upload_tmp_dir');
+    if (is_string($configuredTemporaryRoot) && $configuredTemporaryRoot !== '') {
+        $temporaryRoots[] = $configuredTemporaryRoot;
+    }
+    $documentRoot = isset($_SERVER['DOCUMENT_ROOT']) ? rtrim((string) $_SERVER['DOCUMENT_ROOT'], '/\\') : '';
+    if ($documentRoot !== '') {
+        $temporaryRoots[] = dirname($documentRoot) . DIRECTORY_SEPARATOR . 'tmp';
+    }
+
+    $systemTemporaryRoot = sys_get_temp_dir();
+    if (is_string($systemTemporaryRoot) && $systemTemporaryRoot !== '') {
+        $temporaryRoots[] = $systemTemporaryRoot;
+    }
+
+    $temporaryRoot = null;
+    foreach ($temporaryRoots as $candidate) {
+        if (is_dir($candidate) && is_writable($candidate)) {
+            $temporaryRoot = rtrim($candidate, '/\\');
+            break;
+        }
+    }
+
+    if ($temporaryRoot === null) {
+        error_log('[ummix-pre-registration][rate_limit] writable_temp_directory_unavailable');
+        return null;
+    }
+
     $directory = $temporaryRoot . DIRECTORY_SEPARATOR . 'ummix-lead-rate-' . substr(hash('sha256', __DIR__), 0, 16);
-
     if (!is_dir($directory) && !@mkdir($directory, 0700, true) && !is_dir($directory)) {
+        error_log('[ummix-pre-registration][rate_limit] storage_directory_unavailable');
         return null;
     }
 
-    @chmod($directory, 0700);
-    $key = hash_hmac('sha256', $remoteAddress, $token);
-    $path = $directory . DIRECTORY_SEPARATOR . $key . '.json';
+    $path = $directory . DIRECTORY_SEPARATOR . hash('sha256', $remoteAddress) . '.json';
     $handle = @fopen($path, 'c+');
     if ($handle === false || !flock($handle, LOCK_EX)) {
         if (is_resource($handle)) {
             fclose($handle);
         }
+        error_log('[ummix-pre-registration][rate_limit] storage_lock_failed');
         return null;
     }
 
@@ -134,76 +130,15 @@ function ummixCampaignConsumeRateLimit($token)
     $truncated = ftruncate($handle, 0);
     $written = $encodedRecord === false ? false : fwrite($handle, $encodedRecord);
     $flushed = fflush($handle);
-    @chmod($path, 0600);
     flock($handle, LOCK_UN);
     fclose($handle);
 
     if (!$truncated || $written === false || !$flushed || $written !== strlen($encodedRecord)) {
+        error_log('[ummix-pre-registration][rate_limit] storage_write_failed');
         return null;
     }
 
     return ['limited' => false, 'retry_after' => 0];
-}
-
-function ummixCampaignPostJson($url, $body, $headers, $timeout = 12)
-{
-    if (!function_exists('curl_init')) {
-        return null;
-    }
-
-    $curl = curl_init($url);
-    if ($curl === false) {
-        return null;
-    }
-
-    $optionsSet = curl_setopt_array($curl, [
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $body,
-        CURLOPT_HTTPHEADER => array_merge([
-            'Content-Type: application/json',
-            'Accept: application/json',
-        ], $headers),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CONNECTTIMEOUT => 5,
-        CURLOPT_TIMEOUT => (int) $timeout,
-        CURLOPT_FOLLOWLOCATION => false,
-        CURLOPT_SSL_VERIFYPEER => true,
-        CURLOPT_SSL_VERIFYHOST => 2,
-    ]);
-
-    if (!$optionsSet) {
-        curl_close($curl);
-        return null;
-    }
-
-    $responseBody = curl_exec($curl);
-    $responseStatus = (int) curl_getinfo($curl, CURLINFO_HTTP_CODE);
-    curl_close($curl);
-
-    if (!is_string($responseBody)) {
-        return null;
-    }
-
-    return ['status' => $responseStatus, 'body' => $responseBody];
-}
-
-function ummixCampaignNotificationAccepted($response)
-{
-    if (!is_array($response) || !in_array($response['status'], [200, 201], true)) {
-        return false;
-    }
-
-    $body = json_decode($response['body'], true);
-    if (!is_array($body)) {
-        return false;
-    }
-
-    $success = $body['success'] ?? null;
-    $message = isset($body['message']) && is_string($body['message']) ? $body['message'] : '';
-
-    return $success !== false
-        && $success !== 'false'
-        && preg_match('/activation|unable to submit/i', $message) !== 1;
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
@@ -241,7 +176,7 @@ if (!is_string($honeypot)) {
     ummixCampaignRespond(400, ['success' => false, 'message' => 'Dados do formulário inválidos.']);
 }
 if (trim($honeypot) !== '') {
-    ummixCampaignRespond(200, ['success' => true, 'accepted' => false, 'notificationSent' => false]);
+    ummixCampaignRespond(200, ['success' => true, 'accepted' => false, 'emailAccepted' => false]);
 }
 
 $fullName = isset($input['fullName']) && is_string($input['fullName']) ? trim($input['fullName']) : '';
@@ -263,16 +198,14 @@ if (
     ummixCampaignRespond(422, ['success' => false, 'message' => 'Confira os campos e tente novamente.']);
 }
 
-$serviceToken = ummixCampaignLoadServiceToken();
-if ($serviceToken === '') {
-    ummixCampaignRespond(503, ['success' => false, 'message' => 'Serviço temporariamente indisponível.']);
-}
-
-$rateLimit = ummixCampaignConsumeRateLimit($serviceToken);
+$rateLimit = ummixCampaignConsumeRateLimit();
 if ($rateLimit === null) {
-    ummixCampaignRespond(503, ['success' => false, 'message' => 'Serviço temporariamente indisponível.']);
-}
-if ($rateLimit['limited']) {
+    ummixCampaignRespond(503, [
+        'success' => false,
+        'code' => 'rate_limit_unavailable',
+        'message' => 'Serviço temporariamente indisponível.',
+    ]);
+}if ($rateLimit['limited']) {
     header('Retry-After: ' . (int) $rateLimit['retry_after']);
     ummixCampaignRespond(429, ['success' => false, 'message' => 'Muitas tentativas. Aguarde alguns minutos e tente novamente.']);
 }
@@ -300,57 +233,121 @@ foreach ($attributionKeys as $key) {
     }
 }
 
-$registrationBody = json_encode([
-    'fullName' => $fullName,
-    'email' => $email,
-    'phone' => $phone,
-    'advertisedRadioTv' => $advertisedRadioTv,
-    'source' => 'lp/campanha',
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-
-if ($registrationBody === false) {
-    ummixCampaignRespond(400, ['success' => false, 'message' => 'Dados do formulário inválidos.']);
-}
-
-$registrationResponse = ummixCampaignPostJson(
-    UMMIX_PRE_REGISTRATION_URL,
-    $registrationBody,
-    ['X-Service-Token: ' . $serviceToken]
-);
-
-if (!is_array($registrationResponse) || !in_array($registrationResponse['status'], [200, 201], true)) {
-    ummixCampaignRespond(502, ['success' => false, 'message' => 'Não foi possível registrar seus dados agora.']);
-}
-
-$registrationData = json_decode($registrationResponse['body'], true);
-$created = is_array($registrationData) && isset($registrationData['created']) && is_bool($registrationData['created'])
-    ? $registrationData['created']
-    : null;
-
-$notificationPayload = [
-    'name' => $fullName,
-    'email' => $email,
-    'phone' => $phone,
-    'already_advertised_radio_tv' => $advertisedRadioTv ? 'sim' : 'nao',
-    '_subject' => 'Novo lead da landing page de campanha',
-    '_template' => 'table',
-    '_captcha' => 'false',
-    '_cc' => 'midiaummix@googlegroups.com',
-    '_url' => 'https://ummix.com.br/lp/campanha',
+$messageLines = [
+    'Novo lead recebido pela landing page /lp/campanha',
+    '',
+    'Nome: ' . $fullName,
+    'E-mail: ' . $email,
+    'Telefone: ' . $phone,
+    'Já anunciou em rádio e TV?: ' . ($advertisedRadioTv ? 'Sim' : 'Não'),
 ];
-foreach ($attribution as $key => $value) {
-    $notificationPayload[$key] = $value;
+if (count($attribution) > 0) {
+    $messageLines[] = '';
+    $messageLines[] = 'Atribuição da visita:';
+    foreach ($attribution as $key => $value) {
+        $messageLines[] = $key . ': ' . $value;
+    }
+}
+$message = implode("\r\n", $messageLines);
+
+$emailHeaders = [
+    'MIME-Version: 1.1',
+    'Content-Type: text/plain; charset=UTF-8',
+    'From: tecnologia@ummix.com.br',
+    'Return-Path: tecnologia@ummix.com.br',
+    'Reply-To: ' . $email,
+    'Cc: midiaummix@googlegroups.com',
+];
+$isWindowsRuntime = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+$headerLineEnding = $isWindowsRuntime ? "\r\n" : "\n";
+$headerString = implode($headerLineEnding, $emailHeaders);
+
+$emailAccepted = false;
+$deliveryFailureCode = function_exists('mail') ? 'email_rejected' : 'mail_unavailable';
+
+if (function_exists('mail')) {
+    if ($isWindowsRuntime) {
+        $emailAccepted = @mail(
+            'tecnologia@ummix.com.br',
+            'Novo lead - Landing page de campanha Ummix',
+            $message,
+            $headerString
+        );
+    } else {
+        $emailAccepted = @mail(
+            'tecnologia@ummix.com.br',
+            'Novo lead - Landing page de campanha Ummix',
+            $message,
+            $headerString,
+            '-rtecnologia@ummix.com.br'
+        );
+    }
 }
 
-$notificationBody = json_encode($notificationPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-$notificationResponse = $notificationBody === false
-    ? null
-    : ummixCampaignPostJson(UMMIX_FORMSUBMIT_URL, $notificationBody, [], 10);
-$notificationSent = ummixCampaignNotificationAccepted($notificationResponse);
+if ($emailAccepted !== true && !$isWindowsRuntime) {
+    $sendmailPath = trim((string) ini_get('sendmail_path'));
+    $sendmailParts = $sendmailPath === '' ? [] : preg_split('/\s+/', $sendmailPath);
+    $sendmailBinary = is_array($sendmailParts) && isset($sendmailParts[0])
+        ? $sendmailParts[0]
+        : '';
 
+    if (!function_exists('proc_open')) {
+        $deliveryFailureCode = 'sendmail_process_unavailable';
+    } elseif ($sendmailBinary === '') {
+        $deliveryFailureCode = 'sendmail_not_configured';
+    } else {
+        $descriptors = [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ];
+        $process = @proc_open(
+            [$sendmailBinary, '-t', '-i', '-f', 'tecnologia@ummix.com.br'],
+            $descriptors,
+            $pipes
+        );
+
+        if (!is_resource($process)) {
+            $deliveryFailureCode = 'sendmail_start_failed';
+        } else {
+            $sendmailBody = str_replace(["\r\n", "\r"], "\n", $message);
+            $sendmailLines = array_merge(
+                [
+                    'To: tecnologia@ummix.com.br',
+                    'Subject: Novo lead - Landing page de campanha Ummix',
+                ],
+                $emailHeaders,
+                ['', $sendmailBody, '']
+            );
+            $sendmailPayload = implode("\n", $sendmailLines);
+            $bytesWritten = fwrite($pipes[0], $sendmailPayload);
+            fclose($pipes[0]);
+            stream_get_contents($pipes[1]);
+            fclose($pipes[1]);
+            stream_get_contents($pipes[2]);
+            fclose($pipes[2]);
+            $processExitCode = proc_close($process);
+            $emailAccepted = $processExitCode === 0
+                && is_int($bytesWritten)
+                && $bytesWritten === strlen($sendmailPayload);
+
+            if (!$emailAccepted) {
+                $deliveryFailureCode = 'sendmail_rejected';
+            }
+        }
+    }
+}
+
+if ($emailAccepted !== true) {
+    error_log('[ummix-pre-registration][email] delivery_failed_' . $deliveryFailureCode);
+    ummixCampaignRespond(503, [
+        'success' => false,
+        'code' => $deliveryFailureCode,
+        'message' => 'Não foi possível enviar seus dados agora.',
+    ]);
+}
 ummixCampaignRespond(200, [
     'success' => true,
     'accepted' => true,
-    'created' => $created,
-    'notificationSent' => $notificationSent,
+    'emailAccepted' => true,
 ]);

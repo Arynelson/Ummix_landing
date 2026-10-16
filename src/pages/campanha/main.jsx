@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import '../../index.css'
 import './campanha.css'
 import { pushDataLayerEvent } from '../../services/analytics'
+import { submitForm } from '../../services/formSubmit'
 
 const LEAD_FORM_ANCHOR = '#cadastro-lead'
 const ATTRIBUTION_KEYS = [
@@ -24,6 +25,29 @@ const INITIAL_LEAD_FORM = {
   phone: '',
   already_advertised_radio_tv: '',
 }
+function getBrazilianPhoneDigits(value) {
+  return String(value ?? '').replace(/\D/g, '')
+}
+
+function formatBrazilianPhone(value) {
+  const digits = getBrazilianPhoneDigits(value)
+  if (digits.length === 0) return ''
+  if (digits.length <= 2) return '(' + digits + (digits.length === 2 ? ')' : '')
+
+  const areaCode = digits.slice(0, 2)
+  const subscriber = digits.slice(2)
+  const prefixLength = digits.length > 10 ? 5 : 4
+  const prefix = subscriber.slice(0, prefixLength)
+  const suffix = subscriber.slice(prefixLength)
+
+  return '(' + areaCode + ') ' + prefix + (suffix ? '-' + suffix : '')
+}
+
+function isBrazilianPhoneValid(value) {
+  const digitsLength = getBrazilianPhoneDigits(value).length
+  return digitsLength === 10 || digitsLength === 11
+}
+
 const HERO_SLIDES = [
   {
     id: 'planning',
@@ -196,64 +220,45 @@ function CampaignCta({ placement, children }) {
 function CampaignLeadForm() {
   const [form, setForm] = useState(INITIAL_LEAD_FORM)
   const [status, setStatus] = useState('idle')
-  const [notificationFailed, setNotificationFailed] = useState(false)
+  const [phoneTouched, setPhoneTouched] = useState(false)
   const submissionInProgress = useRef(false)
+  const phoneInvalid = phoneTouched && !isBrazilianPhoneValid(form.phone)
 
   function updateField(event) {
     const { name, value } = event.target
-    setForm((current) => ({ ...current, [name]: value }))
+    const nextValue = name === 'phone' ? formatBrazilianPhone(value) : value
+    setForm((current) => ({ ...current, [name]: nextValue }))
   }
 
   async function handleSubmit(event) {
     event.preventDefault()
     if (submissionInProgress.current) return
 
+    if (!isBrazilianPhoneValid(form.phone)) {
+      setPhoneTouched(true)
+      setStatus('idle')
+      document.getElementById('campaign-lead-phone')?.focus()
+      return
+    }
+
     submissionInProgress.current = true
     setStatus('submitting')
-    setNotificationFailed(false)
-
     try {
-      const attribution = getAttributionParameters()
-      const honeypot = event.currentTarget.elements.namedItem('website')?.value ?? ''
-      const registrationResponse = await fetch('/api/pre-registration.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          fullName: form.name,
-          email: form.email,
-          phone: form.phone,
-          advertisedRadioTv: form.already_advertised_radio_tv === 'sim',
-          website: honeypot,
-          attribution,
-        }),
+      const result = await submitForm({
+        ...form,
+        _form_type: 'campaign',
+        website: event.currentTarget.elements.website?.value ?? '',
+        attribution: getAttributionParameters(),
       })
-      const registrationResult = await registrationResponse.json().catch(() => null)
-
-      if (!registrationResponse.ok || registrationResult?.success !== true) {
-        throw new Error('Não foi possível registrar seus dados.')
-      }
-
-      if (registrationResult.accepted === false) {
-        setStatus('success')
-        setForm(INITIAL_LEAD_FORM)
-        return
-      }
-
-      setNotificationFailed(registrationResult.notificationSent !== true)
+      if (result?.accepted !== true) throw new Error('Envio não confirmado.')
       pushDataLayerEvent('ummix_lead_submitted', {
-        ...attribution,
+        ...getAttributionParameters(),
         form_name: 'campaign_lead',
-        lead_created: registrationResult.created,
-        notification_sent: registrationResult.notificationSent === true,
         page_path: window.location.pathname,
         page_type: 'lp_campanha',
+        submission_channel: 'site_form',
       })
-
       setStatus('success')
-      setForm(INITIAL_LEAD_FORM)
     } catch {
       setStatus('error')
     } finally {
@@ -275,10 +280,7 @@ function CampaignLeadForm() {
             <div className="campaign-lp__lead-success" role="status" aria-live="polite">
               <span className="campaign-lp__lead-success-icon"><CheckIcon /></span>
               <h3>Recebemos seus dados.</h3>
-              <p>{notificationFailed
-                ? 'Seus dados foram registrados, mas não conseguimos confirmar o aviso por e-mail à equipe. Você não precisa preencher novamente.'
-                : 'Obrigado pelo interesse. A equipe da Ummix entrará em contato em breve.'}
-              </p>
+              <p>Obrigado pelo interesse. A equipe da Ummix entrará em contato em breve.</p>
             </div>
           ) : (
             <form className="campaign-lp__lead-form" onSubmit={handleSubmit}>
@@ -297,7 +299,26 @@ function CampaignLeadForm() {
                 </div>
                 <div className="campaign-lp__lead-field">
                   <label htmlFor="campaign-lead-phone">Telefone</label>
-                  <input id="campaign-lead-phone" name="phone" value={form.phone} onChange={updateField} type="tel" autoComplete="tel" required />
+                  <input
+                    id="campaign-lead-phone"
+                    name="phone"
+                    value={form.phone}
+                    onChange={updateField}
+                    onBlur={() => setPhoneTouched(true)}
+                    onInvalid={() => setPhoneTouched(true)}
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel-national"
+                    placeholder="(11) 91234-5678"
+                    aria-invalid={phoneInvalid}
+                    aria-describedby={phoneInvalid ? 'campaign-lead-phone-error' : undefined}
+                    required
+                  />
+                  {phoneInvalid && (
+                    <p id="campaign-lead-phone-error" className="campaign-lp__lead-status campaign-lp__lead-status--error" role="alert">
+                      Telefone incorreto. Informe o DDD e um telefone com 10 ou 11 dígitos.
+                    </p>
+                  )}
                 </div>
                 <div className="campaign-lp__lead-field">
                   <label htmlFor="campaign-lead-advertised">Você já anunciou em rádio e TV?</label>
@@ -314,9 +335,8 @@ function CampaignLeadForm() {
                   Não foi possível enviar seus dados agora. Tente novamente em instantes.
                 </p>
               )}
-
               <button className="campaign-lp__lead-submit" type="submit" disabled={status === 'submitting'}>
-                {status === 'submitting' ? 'Enviando seus dados...' : 'Quero falar com a Ummix'}
+                {status === 'submitting' ? 'Enviando...' : 'Quero falar com a Ummix'}
                 <ArrowIcon />
               </button>
               <p className="campaign-lp__lead-note">Seus dados serão usados apenas para este contato.</p>
@@ -327,7 +347,6 @@ function CampaignLeadForm() {
     </section>
   )
 }
-
 function Header() {
   return (
     <header className="campaign-lp__header">
@@ -698,7 +717,18 @@ function CampaignPage() {
             <img src="/assets/Logo%20Ummix%20ads%20-%20Branca.svg" alt="Ummix Ads" />
           </a>
           <p>Mídia offline com mais clareza para decisões que movem o negócio.</p>
-          <a href="https://app.ummix.com.br/login">Entrar na plataforma <span aria-hidden="true">↗</span></a>
+          <div className="campaign-lp__footer-actions">
+            <a
+              className="campaign-lp__commercial-contact"
+              href="https://wa.me/5511986435655"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contato Comercial pelo WhatsApp (abre em nova aba)"
+            >
+              Contato Comercial
+            </a>
+            <a href="https://app.ummix.com.br/login">Entrar na plataforma <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </footer>
     </div>

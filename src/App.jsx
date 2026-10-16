@@ -1,5 +1,8 @@
 import Header from './components/Header'
 import Hero from './components/home/Hero'
+import { HeroProof } from './components/Partners'
+import CampaignGuide from './components/home/CampaignGuide'
+import CampaignQuestions from './components/home/CampaignQuestions'
 import ClientView from './components/home/ClientView'
 import Backstage from './components/home/Backstage'
 import Method from './components/home/Method'
@@ -24,15 +27,18 @@ export default function App() {
       <a className="skip-link" href="#main-content">{labels.skipToContent}</a>
       <main id="main-content" tabIndex="-1">
         <Hero />
+        <HeroProof />
+        <CampaignGuide />
         <Segmentations />
         <ClientView />
+        <Deliverables />
+        <Eliminates />
         <Backstage />
         <Method />
-        <Eliminates />
-        <Deliverables />
         <CashbackSection />
         <ForWhom />
         <Partners />
+        <CampaignQuestions />
         <Contact />
       </main>
       <Footer />

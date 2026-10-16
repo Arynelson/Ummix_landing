@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import { CONTACT_FORM_CC_EMAIL } from '../constants/urls'
 import { useLocale } from '../LocaleProvider.jsx'
 import { LABELS } from '../i18n-labels.js'
 import { submitForm as sendForm } from '../services/formSubmit'
@@ -250,8 +249,7 @@ function MonetizeForm({ copy, locale }) {
     try {
       await sendForm({
         ...Object.fromEntries(formData.entries()),
-        _subject: copy.subject,
-        _cc: CONTACT_FORM_CC_EMAIL,
+        _form_type: 'monetize',
         origem: 'monetize',
       })
       pushDataLayerEvent('ummix_lead_submitted', {

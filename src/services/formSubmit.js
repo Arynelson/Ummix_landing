@@ -6,6 +6,7 @@ function isRejectedSubmission(result) {
 
   return success === false
     || success === 'false'
+    || result?.accepted !== true
     || /activat/i.test(message)
     || /unable to submit/i.test(message)
 }

@@ -1,5 +1,6 @@
 const VARIANTS = {
   primary: 'bg-ummix-red text-white shadow-lg hover:scale-[1.03] hover:bg-ummix-red-dark',
+  inverse: 'bg-white text-ummix-red hover:scale-[1.03] hover:bg-ummix-gray',
   'outline-dark': 'border-[1.5px] border-ummix-dark text-ummix-dark hover:scale-[1.03] hover:bg-ummix-dark hover:text-white',
   'outline-light': 'border-[1.5px] border-white/40 text-white hover:scale-[1.03] hover:bg-white/10',
 };

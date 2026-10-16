@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { CONTACT_FORM_CC_EMAILS } from '../../constants/urls';
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
 import { submitForm as sendForm } from '../../services/formSubmit';
 import { pushDataLayerEvent } from '../../services/analytics';
@@ -41,8 +40,7 @@ export default function Contact() {
     try {
       await sendForm({
         ...form,
-        _subject: copy.subject,
-        _cc: CONTACT_FORM_CC_EMAILS,
+        _form_type: 'contact',
       });
 
       pushDataLayerEvent('ummix_lead_submitted', {
