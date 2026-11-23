@@ -19,3 +19,7 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Baseline screenshots (local only)
+specs/*/baseline/screens/
+.specify/workflows/runs/

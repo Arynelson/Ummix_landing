@@ -7,7 +7,7 @@ const CARDS = [
     id: 'campanha',
     label: 'Uma única campanha',
     icon: (
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <line x1="8" y1="13" x2="16" y2="13" />
@@ -19,7 +19,7 @@ const CARDS = [
     id: 'contrato',
     label: 'Um único contrato',
     icon: (
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M11 12l-3-3-4 4 4 4 3-3" />
         <path d="M14 6l3 3" />
         <path d="M18 4l3 3-7 7-3-3z" />
@@ -31,7 +31,7 @@ const CARDS = [
     id: 'relatorio',
     label: 'Um único relatório',
     icon: (
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 3v18h18" />
         <rect x="7" y="13" width="3" height="6" />
         <rect x="12" y="9" width="3" height="10" />
@@ -47,20 +47,20 @@ export default function ClientView() {
   const anim = useAnimateOnScroll();
 
   return (
-    <section className="bg-white py-20 md:py-24">
+    <section className="bg-page py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <div
             ref={anim.ref}
             style={anim.style}
-            className="font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red"
+            className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-brand"
           >
             {copy.kicker}
           </div>
-          <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
-            <span className="text-ummix-red">{copy.titleAccent}</span> {copy.titleRest}
+          <h2 className="mt-3.5 font-display text-4xl font-extrabold leading-tight tracking-tight text-strong md:text-5xl">
+            <span className="text-brand">{copy.titleAccent}</span> {copy.titleRest}
           </h2>
-          <p className="section-subtitle mt-4 font-sans text-base leading-relaxed text-ummix-gray-dark md:text-lg">
+          <p className="section-subtitle mt-4 font-sans text-base leading-relaxed text-body md:text-lg">
             {copy.description}
           </p>
         </div>
@@ -69,12 +69,12 @@ export default function ClientView() {
           {CARDS.map((card, index) => (
             <div
               key={card.id}
-              className="rounded-3xl border border-transparent bg-ummix-gray p-7 text-center md:p-9"
+              className="rounded-[var(--radius-xl)] border border-line-subtle bg-sunken p-7 text-center md:p-9"
             >
-              <div className="mx-auto flex h-18 w-18 items-center justify-center rounded-2xl bg-ummix-red/10 text-ummix-red">
+              <div className="mx-auto flex h-18 w-18 items-center justify-center rounded-[var(--radius-lg)] bg-accent-soft text-brand">
                 {card.icon}
               </div>
-              <div className="mt-6 font-heading text-lg font-extrabold uppercase tracking-wide text-ummix-dark">
+              <div className="mt-6 font-display text-lg font-bold text-strong">
                 {copy.cards[index]}
               </div>
             </div>

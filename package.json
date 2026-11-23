@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "verify:build-assets": "node scripts/verify-build-assets.mjs",
-    "verify:hosting": "node scripts/verify-hosting-routes.mjs"
+    "verify:hosting": "node scripts/verify-hosting-routes.mjs",
+    "verify:design-system": "node scripts/verify-design-system.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

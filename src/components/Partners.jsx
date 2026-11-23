@@ -3,9 +3,7 @@ import { useLocale } from '../LocaleProvider.jsx'
 import { HOME_COPY } from '../home-copy.js'
 
 const vehicles = [
-  { name: 'TV Anhanguera',  src: '/assets/canais/tv_anhanguera.png' },
   { name: 'Band News',      src: '/assets/canais/band_news.png' },
-  { name: 'CBN',            src: '/assets/canais/cbn.png' },
   { name: 'Antena 1',       src: '/assets/canais/antena1.png' },
   { name: 'Nativa',         src: '/assets/canais/nativa.png' },
   { name: 'Brahma FM',      src: '/assets/canais/brahma_fm.png' },
@@ -40,7 +38,6 @@ const clients = [
   { name: 'Construjá',        src: '/assets/partners/construja.png' },
   { name: 'Creative Pack',    src: '/assets/partners/creative_pack.png' },
   { name: 'DPA',              src: '/assets/partners/dpa.png' },
-  { name: 'Eysecor',          src: '/assets/partners/eysecor.png' },
   { name: 'Faje',             src: '/assets/partners/faje.png' },
   { name: 'Fecomércio',       src: '/assets/partners/fecomercio.png' },
   { name: 'Gabisa',           src: '/assets/partners/gabisa.png' },
@@ -102,9 +99,9 @@ export function HeroProof() {
   const selectedClients = HERO_PROOF_CLIENTS.map((name) => clients.find((client) => client.name === name)).filter(Boolean)
 
   return (
-    <section className="border-y border-ummix-dark/10 bg-ummix-gray px-6 py-5" aria-label={copy.clients}>
+    <section className="border-y border-line-subtle bg-sunken px-6 py-5" aria-label={copy.clients}>
       <div className="mx-auto max-w-6xl">
-        <p className="text-center text-xs font-medium leading-relaxed text-ummix-gray-dark sm:text-sm">
+        <p className="text-center text-xs font-medium leading-relaxed text-muted sm:text-sm">
           {copy.clients}
         </p>
         <ul className="mt-4 grid grid-cols-3 items-center justify-items-center gap-x-3 gap-y-4 sm:grid-cols-6 sm:gap-x-6">
@@ -126,12 +123,12 @@ export default function Partners() {
   const animClients  = useAnimateOnScroll()
 
   return (
-    <section id="veiculos" className="overflow-hidden bg-ummix-gray py-14 md:py-18">
+    <section id="veiculos" className="overflow-hidden bg-sunken py-14 md:py-18">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Vehicles */}
         <div ref={animVehicles.ref} style={animVehicles.style} className="mb-12 md:mb-14">
-          <h2 className="mb-8 text-center text-2xl font-bold text-ummix-dark md:text-3xl">
+          <h2 className="mb-8 text-center text-2xl font-display font-semibold text-strong md:text-3xl">
             {copy.vehicles}
           </h2>
           <Marquee items={vehicles} speed={45} />
@@ -139,7 +136,7 @@ export default function Partners() {
 
         {/* Clients */}
         <div ref={animClients.ref} style={animClients.style}>
-          <h2 className="mb-8 text-center text-2xl font-bold text-ummix-dark md:text-3xl">
+          <h2 className="mb-8 text-center text-2xl font-display font-semibold text-strong md:text-3xl">
             {copy.clients}
           </h2>
           <Marquee items={clients} reverse speed={50} />

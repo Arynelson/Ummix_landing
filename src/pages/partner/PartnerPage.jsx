@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { ArrowRight, ArrowUpRight, Check, Star, TrendingUp, UserCheck } from 'lucide-react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import { Button, Input, Toast } from '../../ds/components'
 import { CONTACT_EMAIL } from '../../constants/urls'
 import { submitForm as sendForm } from '../../services/formSubmit'
 import { pushDataLayerEvent } from '../../services/analytics'
@@ -8,13 +10,16 @@ import { useLocale } from '../../LocaleProvider.jsx'
 import { LABELS } from '../../i18n-labels.js'
 import { PARTNER_COPY } from '../../partner-copy.js'
 
+const ICON_PROPS = { strokeWidth: 1.75, 'aria-hidden': true }
+const KICKER = 'font-mono text-xs font-medium uppercase tracking-[0.08em] text-brand'
+
 /* ---- Hero ---- */
 function Eyebrow() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
   return (
-    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-ummix-red mb-7">
-      <span className="w-2 h-2 rounded-full bg-ummix-red shadow-[0_0_0_4px_rgba(155,25,26,0.15)]" />
+    <span className={`inline-flex items-center gap-2 mb-7 ${KICKER}`}>
+      <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
       {copy.eyebrow}
     </span>
   )
@@ -25,19 +30,18 @@ function HeroCTAs() {
   const copy = PARTNER_COPY[locale]
   return (
     <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-      <a
+      <Button
         href="#candidatura"
-        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-ummix-red px-6 py-3 font-semibold text-white transition-all hover:scale-105 hover:bg-ummix-red-dark sm:w-auto"
+        variant="primary"
+        size="lg"
+        className="w-full sm:w-auto"
+        iconRight={<ArrowRight size={16} {...ICON_PROPS} />}
       >
         {copy.apply}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <a
-        href="#parceiros"
-        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/25 px-6 py-3 font-semibold text-white/80 transition-all hover:border-white/50 hover:text-white sm:w-auto"
-      >
+      </Button>
+      <Button href="#parceiros" variant="secondary" size="lg" className="w-full sm:w-auto">
         {copy.meetPartners}
-      </a>
+      </Button>
     </div>
   )
 }
@@ -46,36 +50,26 @@ function KpiPanel() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
   const kpis = [
-    {
-      value: copy.kpis[0][0],
-      label: copy.kpis[0][1],
-      icon: <><path d="M3 3v18h18"/><polyline points="7 15 12 10 16 14 21 8"/></>,
-    },
-    {
-      value: copy.kpis[1][0],
-      label: copy.kpis[1][1],
-      highlight: true,
-      icon: <><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/><path d="M18 8l2 2 3-4"/></>,
-    },
-    {
-      value: copy.kpis[2][0],
-      label: copy.kpis[2][1],
-      icon: <><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2-6.3-4.6L5.7 21l2.3-7.2-6-4.4h7.6z"/></>,
-    },
+    { value: copy.kpis[0][0], label: copy.kpis[0][1], icon: TrendingUp },
+    { value: copy.kpis[1][0], label: copy.kpis[1][1], highlight: true, icon: UserCheck },
+    { value: copy.kpis[2][0], label: copy.kpis[2][1], icon: Star },
   ]
   return (
     <div className="grid gap-3">
-      {kpis.map((k, i) => (
-        <div key={i} className="flex items-center gap-4 rounded-2xl bg-ummix-gray p-5 text-ummix-dark shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] sm:p-6">
-          <div className="w-11 h-11 rounded-xl bg-ummix-red/10 text-ummix-red flex items-center justify-center shrink-0">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{k.icon}</svg>
+      {kpis.map((k, i) => {
+        const Icon = k.icon
+        return (
+          <div key={i} className="flex items-center gap-4 rounded-[var(--radius-xl)] border border-line bg-raised p-5 text-strong sm:p-6">
+            <div className="w-11 h-11 rounded-[var(--radius-lg)] bg-accent-soft text-brand flex items-center justify-center shrink-0">
+              <Icon size={22} {...ICON_PROPS} />
+            </div>
+            <div>
+              <div className={`font-mono text-[22px] font-semibold leading-none tracking-tight sm:text-[26px] ${k.highlight ? 'text-brand' : 'text-strong'}`}>{k.value}</div>
+              <div className="text-[13px] text-muted mt-1">{k.label}</div>
+            </div>
           </div>
-          <div>
-            <div className={`font-heading text-[22px] font-extrabold leading-none tracking-tight sm:text-[26px] ${k.highlight ? 'text-ummix-red' : ''}`}>{k.value}</div>
-            <div className="text-[13px] text-ummix-gray-dark mt-1">{k.label}</div>
-          </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
@@ -84,20 +78,15 @@ function Hero() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
   return (
-    <section className="relative overflow-hidden bg-ummix-dark text-white">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0" style={{background: 'radial-gradient(1100px 560px at 12% 20%, rgba(155,25,26,0.32), transparent 62%), radial-gradient(820px 460px at 88% 90%, rgba(155,25,26,0.14), transparent 66%)'}} />
-        <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)', backgroundSize: '56px 56px', maskImage: 'radial-gradient(ellipse 80% 70% at 40% 40%, #000 35%, transparent 100%)'}} />
-      </div>
-
+    <section data-theme="dark" className="relative overflow-hidden bg-ink-900 text-strong">
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-20 pt-36 md:pb-24 md:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         <div>
           <Eyebrow />
-          <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
+          <h1 className="font-display font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance text-strong mb-6">
             {copy.heroTitle}{' '}
-            <em className="not-italic text-ummix-red">{copy.heroAccent}</em>.
+            <em className="not-italic text-brand">{copy.heroAccent}</em>.
           </h1>
-          <p className="copy-justify max-w-[560px] text-[18px] leading-relaxed text-white/75 sm:text-[19px]">
+          <p className="copy-justify max-w-[560px] text-[18px] leading-relaxed text-body sm:text-[19px]">
             {copy.heroDescription}
           </p>
           <HeroCTAs />
@@ -114,38 +103,36 @@ function AudiencePaths() {
   const copy = PARTNER_COPY[locale]
 
   return (
-    <section id="caminhos" aria-labelledby="partner-paths-title" className="scroll-mt-28 bg-white py-16 md:py-20">
+    <section id="caminhos" aria-labelledby="partner-paths-title" className="scroll-mt-28 bg-page py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 max-w-2xl md:mb-12">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-ummix-red">{copy.pathsKicker}</p>
-          <h2 id="partner-paths-title" className="font-heading text-[clamp(32px,4vw,52px)] font-extrabold leading-[1.02] tracking-tight text-ummix-dark text-balance">
+          <p className={`mb-3 ${KICKER}`}>{copy.pathsKicker}</p>
+          <h2 id="partner-paths-title" className="font-display text-[clamp(32px,4vw,52px)] font-extrabold leading-[1.02] tracking-tight text-strong text-balance">
             {copy.pathsTitle}
           </h2>
-          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-ummix-gray-dark md:text-lg">
+          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-body md:text-lg">
             {copy.pathsDescription}
           </p>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-          <a href="#candidatura" className="group relative flex min-h-64 flex-col overflow-hidden rounded-3xl bg-ummix-dark p-7 text-white transition-transform duration-300 hover:-translate-y-1 md:p-9">
-            <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-ummix-red/30 blur-3xl" aria-hidden="true" />
-            <p className="relative text-xs font-bold uppercase tracking-[0.16em] text-ummix-red">{copy.pathJoinEyebrow}</p>
-            <h3 className="relative mt-4 font-heading text-3xl font-extrabold tracking-tight md:text-4xl">{copy.pathJoinTitle}</h3>
-            <p className="relative mt-3 max-w-md text-base leading-relaxed text-white/70">{copy.pathJoinDescription}</p>
-            <span className="relative mt-auto inline-flex min-h-11 items-center gap-2 pt-8 text-sm font-bold text-white transition-colors group-hover:text-ummix-red">
+          <a href="#candidatura" data-theme="dark" className="group relative flex min-h-64 flex-col overflow-hidden rounded-[var(--radius-xl)] bg-ink-900 p-7 text-strong transition-transform duration-300 hover:-translate-y-1 md:p-9">
+            <p className={`relative ${KICKER}`}>{copy.pathJoinEyebrow}</p>
+            <h3 className="relative mt-4 font-display text-3xl font-extrabold tracking-tight text-strong md:text-4xl">{copy.pathJoinTitle}</h3>
+            <p className="relative mt-3 max-w-md text-base leading-relaxed text-body">{copy.pathJoinDescription}</p>
+            <span className="relative mt-auto inline-flex min-h-11 items-center gap-2 pt-8 text-sm font-bold text-strong transition-colors group-hover:text-brand">
               {copy.pathJoinCta}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              <ArrowRight size={16} {...ICON_PROPS} />
             </span>
           </a>
 
-          <a href="#parceiros" className="group relative flex min-h-64 flex-col overflow-hidden rounded-3xl border border-ummix-dark/10 bg-ummix-gray p-7 text-ummix-dark transition-transform duration-300 hover:-translate-y-1 hover:border-ummix-red/25 md:p-9">
-            <div className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full bg-ummix-red/10 blur-3xl" aria-hidden="true" />
-            <p className="relative text-xs font-bold uppercase tracking-[0.16em] text-ummix-red">{copy.pathFindEyebrow}</p>
-            <h3 className="relative mt-4 font-heading text-3xl font-extrabold tracking-tight md:text-4xl">{copy.pathFindTitle}</h3>
-            <p className="relative mt-3 max-w-md text-base leading-relaxed text-ummix-gray-dark">{copy.pathFindDescription}</p>
-            <span className="relative mt-auto inline-flex min-h-11 items-center gap-2 pt-8 text-sm font-bold text-ummix-dark transition-colors group-hover:text-ummix-red">
+          <a href="#parceiros" className="group relative flex min-h-64 flex-col overflow-hidden rounded-[var(--radius-xl)] border border-line-subtle bg-sunken p-7 text-strong transition-transform duration-300 hover:-translate-y-1 hover:border-red-300 md:p-9">
+            <p className={`relative ${KICKER}`}>{copy.pathFindEyebrow}</p>
+            <h3 className="relative mt-4 font-display text-3xl font-extrabold tracking-tight text-strong md:text-4xl">{copy.pathFindTitle}</h3>
+            <p className="relative mt-3 max-w-md text-base leading-relaxed text-body">{copy.pathFindDescription}</p>
+            <span className="relative mt-auto inline-flex min-h-11 items-center gap-2 pt-8 text-sm font-bold text-strong transition-colors group-hover:text-brand">
               {copy.pathFindCta}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              <ArrowRight size={16} {...ICON_PROPS} />
             </span>
           </a>
         </div>
@@ -166,14 +153,14 @@ function Process() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
   return (
-    <section id="processo" className="scroll-mt-28 bg-ummix-gray py-18 md:py-24">
+    <section id="processo" className="scroll-mt-28 bg-sunken py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
-          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.processKicker}</span>
-          <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
+          <span className={`inline-block mb-3 ${KICKER}`}>{copy.processKicker}</span>
+          <h2 className="font-display font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-strong text-balance mb-4">
             {copy.processTitle}
           </h2>
-          <p className="mx-auto max-w-xl text-center text-lg text-ummix-gray-dark text-pretty [hyphens:none]">
+          <p className="mx-auto max-w-xl text-center text-lg text-body text-pretty [hyphens:none]">
             {copy.processDescription}
           </p>
         </div>
@@ -182,16 +169,16 @@ function Process() {
           {PROCESS.map((s, i) => (
             <div
               key={i}
-              className="group relative rounded-2xl border border-black/6 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ummix-red/22 hover:shadow-[0_20px_50px_-22px_rgba(155,25,26,0.2)] md:p-8"
+              className="group relative rounded-[var(--radius-xl)] border border-line-subtle bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-red-300 hover:shadow-[var(--shadow-md)] md:p-8"
             >
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-heading font-extrabold text-lg text-white mb-6 transition-colors duration-300 ${i === 0 ? 'bg-ummix-red' : 'bg-ummix-dark group-hover:bg-ummix-red'}`}>
+              <div className={`w-11 h-11 rounded-[var(--radius-lg)] flex items-center justify-center font-mono font-semibold text-lg mb-6 transition-colors duration-300 ${i === 0 ? 'bg-accent text-on-accent' : 'bg-accent-soft text-brand group-hover:bg-accent group-hover:text-on-accent'}`}>
                 {i + 1}
               </div>
-              <h3 className="font-heading font-bold text-[19px] tracking-tight text-ummix-dark mb-2">{copy.process[i][0]}</h3>
-              <p className="text-sm leading-relaxed text-ummix-gray-dark">{copy.process[i][1]}</p>
+              <h3 className="font-display font-bold text-[19px] tracking-tight text-strong mb-2">{copy.process[i][0]}</h3>
+              <p className="text-sm leading-relaxed text-body">{copy.process[i][1]}</p>
               {i < PROCESS.length - 1 && (
-                <span className="hidden lg:block absolute top-14 -right-3 z-10 text-ummix-red/40">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                <span className="hidden lg:block absolute top-14 -right-3 z-10 text-red-300" aria-hidden="true">
+                  <ArrowRight size={24} strokeWidth={1.75} />
                 </span>
               )}
             </div>
@@ -240,14 +227,14 @@ function PartnersGrid() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
   return (
-    <section id="parceiros" aria-labelledby="partners-title" className="scroll-mt-28 bg-white py-18 md:py-24">
+    <section id="parceiros" aria-labelledby="partners-title" className="scroll-mt-28 bg-page py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
-          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.partnersKicker}</span>
-          <h2 id="partners-title" className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
+          <span className={`inline-block mb-3 ${KICKER}`}>{copy.partnersKicker}</span>
+          <h2 id="partners-title" className="font-display font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-strong text-balance mb-4">
             {copy.partnersTitle}
           </h2>
-          <p className="mx-auto max-w-xl text-center text-lg text-ummix-gray-dark text-pretty [hyphens:none]">
+          <p className="mx-auto max-w-xl text-center text-lg text-body text-pretty [hyphens:none]">
             {copy.partnersDescription}
           </p>
         </div>
@@ -256,30 +243,24 @@ function PartnersGrid() {
           {PARTNERS.map((partner) => (
             <article
               key={partner.id}
-              className="relative overflow-hidden rounded-3xl border border-black/8 bg-ummix-gray p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ummix-red/25 hover:shadow-[0_24px_60px_-30px_rgba(30,30,30,0.45)] sm:p-7 md:p-8"
+              className="relative overflow-hidden rounded-[var(--radius-xl)] border border-line-subtle bg-sunken p-6 transition-all duration-300 hover:-translate-y-1 hover:border-red-300 hover:shadow-[var(--shadow-md)] sm:p-7 md:p-8"
             >
-              <div
-                className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full"
-                style={{ background: 'radial-gradient(circle, rgba(155,25,26,0.13), transparent 68%)' }}
-                aria-hidden="true"
-              />
-
               <div className="relative flex items-start gap-5">
-                <div className="grid h-18 w-18 shrink-0 place-items-center rounded-2xl bg-ummix-dark font-heading text-xl font-extrabold tracking-tight text-white shadow-[0_12px_30px_-18px_rgba(30,30,30,0.8)]">
+                <div data-theme="dark" className="grid h-18 w-18 shrink-0 place-items-center rounded-[var(--radius-lg)] bg-ink-900 font-display text-xl font-extrabold tracking-tight text-strong">
                   {partner.mark}
                 </div>
                 <div className="min-w-0">
-                  <span className="font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-ummix-red">
-                     {copy.partnerLabel}
+                  <span className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-brand">
+                    {copy.partnerLabel}
                   </span>
-                  <h3 className="mt-1 font-heading text-2xl font-extrabold tracking-tight text-ummix-dark">
+                  <h3 className="mt-1 font-display text-2xl font-extrabold tracking-tight text-strong">
                     {partner.name}
                   </h3>
                 </div>
               </div>
 
-              <div className="relative mt-7 border-t border-ummix-dark/10 pt-6">
-                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-ummix-gray-dark">{copy.partnerContactLabel}</p>
+              <div className="relative mt-7 border-t border-line-subtle pt-6">
+                <p className="mb-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-muted">{copy.partnerContactLabel}</p>
                 <div className="flex flex-wrap gap-2.5">
                   {partner.links.map((link) => (
                     <a
@@ -287,12 +268,10 @@ function PartnersGrid() {
                       href={link.href}
                       target={link.external ? '_blank' : undefined}
                       rel={link.external ? 'noopener noreferrer' : undefined}
-                      className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-ummix-dark/12 bg-white px-4 py-2 font-sans text-xs font-bold text-ummix-dark transition-colors hover:border-ummix-red/35 hover:text-ummix-red"
+                      className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-[var(--radius-md)] border border-line bg-card px-4 py-2 font-sans text-xs font-bold text-strong transition-colors hover:border-red-300 hover:text-brand"
                     >
                       <span className="break-all">{link.label}</span>
-                      <svg className="shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M7 17L17 7M7 7h10v10" />
-                      </svg>
+                      <ArrowUpRight className="shrink-0" size={13} {...ICON_PROPS} />
                     </a>
                   ))}
                 </div>
@@ -301,19 +280,21 @@ function PartnersGrid() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col gap-5 rounded-3xl border border-ummix-red/20 bg-ummix-red/5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div className="mt-10 flex flex-col gap-5 rounded-[var(--radius-xl)] border border-red-200 bg-accent-soft p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-ummix-red">{copy.partnerFallbackKicker}</p>
-            <h3 className="mt-2 font-heading text-2xl font-extrabold tracking-tight text-ummix-dark md:text-3xl">{copy.partnerFallbackTitle}</h3>
-            <p className="mt-3 text-base leading-relaxed text-ummix-gray-dark">{copy.partnerFallbackDescription}</p>
+            <p className={KICKER}>{copy.partnerFallbackKicker}</p>
+            <h3 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-strong md:text-3xl">{copy.partnerFallbackTitle}</h3>
+            <p className="mt-3 text-base leading-relaxed text-body">{copy.partnerFallbackDescription}</p>
           </div>
-          <a
+          <Button
             href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(copy.partnerFallbackSubject)}`}
-            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-ummix-red px-5 py-3 text-sm font-bold text-white transition-all hover:scale-[1.02] hover:bg-ummix-red-dark"
+            variant="primary"
+            size="lg"
+            className="shrink-0"
+            iconRight={<ArrowRight size={16} {...ICON_PROPS} />}
           >
             {copy.partnerFallbackCta}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-          </a>
+          </Button>
         </div>
       </div>
     </section>
@@ -321,6 +302,13 @@ function PartnersGrid() {
 }
 
 /* ---- Form ---- */
+const FORM_FIELDS = [
+  { id: 'partner-nome', name: 'nome', type: 'text', autoComplete: 'name' },
+  { id: 'partner-email', name: 'email', type: 'email', autoComplete: 'email' },
+  { id: 'partner-empresa', name: 'empresa', type: 'text', autoComplete: 'organization' },
+  { id: 'partner-telefone', name: 'telefone', type: 'tel', autoComplete: 'tel' },
+]
+
 function PartnerForm() {
   const { locale } = useLocale()
   const copy = PARTNER_COPY[locale]
@@ -355,22 +343,20 @@ function PartnerForm() {
   }
 
   return (
-    <section id="candidatura" className="scroll-mt-28 bg-ummix-gray py-18 md:py-24">
+    <section id="candidatura" className="scroll-mt-28 bg-sunken py-18 md:py-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="relative mx-auto grid max-w-[1080px] grid-cols-1 items-center gap-10 overflow-hidden rounded-3xl bg-ummix-dark p-6 text-white sm:p-8 md:grid-cols-[0.9fr_1.1fr] md:gap-14 md:p-14">
-          <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(600px 360px at 0% 0%, rgba(155,25,26,0.32), transparent 62%)'}} />
-
+        <div data-theme="dark" className="relative mx-auto grid max-w-[1080px] grid-cols-1 items-center gap-10 overflow-hidden rounded-[var(--radius-xl)] bg-ink-900 p-6 text-strong sm:p-8 md:grid-cols-[0.9fr_1.1fr] md:gap-14 md:p-14">
           <div className="relative z-10">
-            <h2 className="font-heading font-extrabold text-[clamp(28px,3.4vw,40px)] tracking-tight leading-tight text-white text-balance mb-4">
+            <h2 className="font-display font-extrabold text-[clamp(28px,3.4vw,40px)] tracking-tight leading-tight text-strong text-balance mb-4">
               {copy.formTitle}
             </h2>
-            <p className="mb-6 text-left text-base leading-relaxed text-white/70 [hyphens:none]">
+            <p className="mb-6 text-left text-base leading-relaxed text-body [hyphens:none]">
               {copy.formDescription}
             </p>
             <div className="grid gap-3">
               {copy.benefits.map(b => (
-                <div key={b} className="flex items-start gap-3 text-sm text-white/82">
-                  <svg className="text-ummix-red shrink-0 mt-0.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <div key={b} className="flex items-start gap-3 text-sm text-body">
+                  <Check className="text-brand shrink-0 mt-0.5" size={18} {...ICON_PROPS} />
                   {b}
                 </div>
               ))}
@@ -380,49 +366,42 @@ function PartnerForm() {
           {status !== 'success' ? (
             <form className="relative z-10 grid gap-4" onSubmit={onSubmit}>
               {copy.fields.map(([label, placeholder], index) => {
-                const field = [
-                  { id: 'partner-nome', name: 'nome', type: 'text', autoComplete: 'name' },
-                  { id: 'partner-email', name: 'email', type: 'email', autoComplete: 'email' },
-                  { id: 'partner-empresa', name: 'empresa', type: 'text', autoComplete: 'organization' },
-                  { id: 'partner-telefone', name: 'telefone', type: 'tel', autoComplete: 'tel' },
-                ][index]
-                const f = { ...field, label, placeholder }
+                const f = { ...FORM_FIELDS[index], label, placeholder }
                 return (
-                <div key={f.id} className="grid gap-2">
-                  <label htmlFor={f.id} className="text-xs font-bold tracking-widest uppercase text-white/60">{f.label}</label>
-                  <input
+                  <Input
+                    key={f.id}
                     id={f.id}
                     name={f.name}
                     type={f.type}
+                    label={f.label}
                     placeholder={f.placeholder}
                     autoComplete={f.autoComplete}
                     required
-                    className="w-full px-4 py-3.5 rounded-xl bg-white/6 border border-white/14 text-white placeholder-white/40 font-body text-[15px] focus:outline-none focus:border-ummix-red focus:bg-white/9 focus:shadow-[0_0_0_3px_rgba(155,25,26,0.3)] transition-all"
                   />
-                </div>
                 )
               })}
               {status === 'error' && (
-                <p className="text-sm font-semibold text-red-200" role="alert">
-                  {copy.error}
-                </p>
+                <div role="alert" className="rounded-[var(--radius-lg)] border border-line">
+                  <Toast tone="danger" message={copy.error} />
+                </div>
               )}
-              <button
+              <Button
                 type="submit"
+                variant="primary"
+                size="lg"
+                fullWidth
                 disabled={status === 'submitting'}
-                className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-ummix-red hover:bg-ummix-red-dark text-white font-semibold px-6 py-3.5 rounded-xl transition-all hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-65"
+                className="mt-2"
+                iconRight={<ArrowRight size={16} {...ICON_PROPS} />}
               >
                 {status === 'submitting' ? copy.submitting : copy.submit}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-              </button>
+              </Button>
             </form>
           ) : (
-            <div className="relative z-10 flex flex-col items-center justify-center text-center gap-4 py-8" role="status">
-              <div className="w-16 h-16 rounded-full bg-ummix-red/18 border border-ummix-red/50 flex items-center justify-center text-ummix-red">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <div className="relative z-10 flex justify-center py-8">
+              <div className="w-full max-w-[360px] rounded-[var(--radius-lg)] border border-line">
+                <Toast tone="success" title={copy.successTitle} message={copy.successDescription} />
               </div>
-              <h3 className="font-heading font-bold text-2xl text-white">{copy.successTitle}</h3>
-              <p className="text-base text-white/70">{copy.successDescription}</p>
             </div>
           )}
         </div>

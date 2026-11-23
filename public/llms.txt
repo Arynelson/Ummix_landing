@@ -1,18 +1,20 @@
 # Ummix
 
-> Plataforma ad-tech para anunciar em TV e rádio com segmentação e mensuração de performance, como no digital.
+> Central de dados que faz campanhas de rádio e TV performarem, com segmentação e mensuração como no digital.
 
-A Ummix é uma startup brasileira vencedora do Prêmio Nacional de Inovação (CNI/SEBRAE) e eleita top 4 ideias mais inovadoras do Brasil pela ABDI. Permite que anunciantes comprem mídia em TV, rádio e veículos offline com dados de segmentação por localização, renda, comportamento e perfil socioeconômico — e meçam resultados em tempo real.
+A Ummix Ads é uma startup brasileira, vencedora do 9º Prêmio Nacional de Inovação (CNI/SEBRAE) e Top 4 no Desafio Nacional de Inovação da ABDI. Anunciantes compram rádio e TV com dados de segmentação por localização, renda, comportamento e perfil socioeconômico, e acompanham os resultados da campanha. Atua em 6 cidades e está abrindo São Paulo.
 
 ## Plataforma
 
-- [App Ummix](https://app.ummix.com.br): plataforma self-service de compra e gestão de campanhas em mídia offline
+- [App Ummix](https://app.ummix.com.br): plataforma self-service de compra e gestão de campanhas de rádio e TV
 
 ## Seções do site
 
 - [Soluções](https://www.ummix.com.br/#solucoes): diferenciais e funcionalidades da plataforma
 - [Segmentações](https://www.ummix.com.br/#segmentacoes): critérios de segmentação disponíveis (geográfico, demográfico, comportamental, intenções, opinião)
-- [Veículos](https://www.ummix.com.br/#veiculos): emissoras parceiras (TV Anhanguera, CBN, Band News, Jovem Pan, Antena 1 e +200 outros)
+- [Veículos](https://www.ummix.com.br/#veiculos): emissoras parceiras de rádio e TV (Band News, Jovem Pan, Antena 1 e outras)
+- [Cashback](https://www.ummix.com.br/cashback): até 3% de cashback sobre o valor veiculado
+- [Monetize](https://www.ummix.com.br/monetize): para rádios e TVs transformarem o streaming em receita com pré-roll
 
 ## Contato
 

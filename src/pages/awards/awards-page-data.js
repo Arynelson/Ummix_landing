@@ -1,14 +1,6 @@
 export const AWARDS_PAGE_DATA = {
   awards: [
     {
-      id: 'indtechs',
-      name: 'Desafio INDTECHS 2026',
-      state: 'GO',
-      status: 'firstPlace',
-      category: null,
-      organizer: 'CDTI/FIEG',
-    },
-    {
       id: 'curicaca',
       name: 'Desafio Nacional de Inovação Curicaca (ABDI) 2025',
       state: 'DF',
@@ -24,7 +16,7 @@ export const AWARDS_PAGE_DATA = {
       id: 'mulheres-inovadoras',
       name: 'Mulheres Inovadoras 2026',
       state: 'DF',
-      status: 'firstPlace',
+      status: 'fourthPlace',
       category: {
         pt: 'Região Centro-Oeste - Tração ou Escala',
         en: 'Central-West Region - Traction or Scale',
@@ -36,27 +28,10 @@ export const AWARDS_PAGE_DATA = {
       id: 'brasil-criativo',
       name: 'Prêmio Brasil Criativo 2026',
       state: 'SP',
-      status: 'finalist',
-      category: {
-        pt: 'Tecnologia',
-        en: 'Technology',
-        es: 'Tecnología',
-      },
+      status: 'winner',
+      category: null,
       organizer: 'World Creativity Organization/Ministério da Cultura',
       image: '/assets/awards/premio-brasil-criativo.png',
-    },
-    {
-      id: 'catalisa',
-      name: 'Prêmio Catalisa 2026',
-      state: 'GO',
-      status: null,
-      category: {
-        pt: 'Líderes que Transformam',
-        en: 'Leaders Who Transform',
-        es: 'Líderes que Transforman',
-      },
-      organizer: 'FAJE Goiás',
-      image: '/assets/awards/catalisa-2026.png',
     },
     {
       id: 'premio-nacional-inovacao',
@@ -167,7 +142,7 @@ export const AWARDS_PAGE_COPY = {
       featuredImageAlt: 'Identidade visual do Prêmio Nacional de Inovação',
       moreLabel: 'Outros reconhecimentos',
       fields: { state: 'Estado', status: 'Status', category: 'Categoria', organizer: 'Realizador' },
-      statuses: { firstPlace: '1º lugar', fourthPlace: '4º lugar', finalist: 'Finalista' },
+      statuses: { firstPlace: '1º lugar', fourthPlace: 'Top 4', winner: 'Vencedora', finalist: 'Finalista' },
       empty: 'Não informado',
     },
     membersSection: {
@@ -208,7 +183,7 @@ export const AWARDS_PAGE_COPY = {
       featuredImageAlt: 'Prêmio Nacional de Inovação visual identity',
       moreLabel: 'More recognitions',
       fields: { state: 'State', status: 'Status', category: 'Category', organizer: 'Organizer' },
-      statuses: { firstPlace: '1st place', fourthPlace: '4th place', finalist: 'Finalist' },
+      statuses: { firstPlace: '1st place', fourthPlace: 'Top 4', winner: 'Winner', finalist: 'Finalist' },
       empty: 'Not provided',
     },
     membersSection: {
@@ -249,7 +224,7 @@ export const AWARDS_PAGE_COPY = {
       featuredImageAlt: 'Identidad visual del Prêmio Nacional de Inovação',
       moreLabel: 'Otros reconocimientos',
       fields: { state: 'Estado', status: 'Distinción', category: 'Categoría', organizer: 'Organizador' },
-      statuses: { firstPlace: '1.er lugar', fourthPlace: '4.º lugar', finalist: 'Finalista' },
+      statuses: { firstPlace: '1.er lugar', fourthPlace: 'Top 4', winner: 'Ganadora', finalist: 'Finalista' },
       empty: 'No informado',
     },
     membersSection: {

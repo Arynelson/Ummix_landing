@@ -20,21 +20,21 @@ export default function BrowserFrame({ images = DEFAULT_IMAGES }) {
   }, [images.length])
 
   return (
-    <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+    <div data-theme="dark" className="rounded-[var(--radius-lg)] overflow-hidden shadow-[var(--shadow-lg)] border border-line">
       {/* Browser chrome */}
-      <div className="bg-ummix-dark px-4 py-3 flex items-center gap-3">
+      <div className="bg-ink-900 px-4 py-3 flex items-center gap-3">
         <div className="flex gap-1.5 shrink-0">
-          <span className="w-3 h-3 rounded-full bg-red-500" />
-          <span className="w-3 h-3 rounded-full bg-yellow-400" />
-          <span className="w-3 h-3 rounded-full bg-green-500" />
+          <span className="w-3 h-3 rounded-full bg-ink-600" />
+          <span className="w-3 h-3 rounded-full bg-ink-600" />
+          <span className="w-3 h-3 rounded-full bg-ink-600" />
         </div>
-        <div className="flex-1 bg-[#2a2a2a] rounded-md px-3 py-1 text-xs text-white/40 font-mono truncate">
+        <div className="flex-1 bg-ink-800 rounded-[var(--radius-sm)] px-3 py-1 text-xs text-muted font-mono truncate">
           app.ummixads.com.br
         </div>
       </div>
 
       {/* Screenshot area */}
-      <div className="relative bg-ummix-dark overflow-hidden" style={{ aspectRatio: '16/10' }}>
+      <div className="relative bg-ink-900 overflow-hidden" style={{ aspectRatio: '16/10' }}>
         <AnimatePresence mode="wait">
           <motion.img
             key={current}
@@ -48,8 +48,8 @@ export default function BrowserFrame({ images = DEFAULT_IMAGES }) {
           />
         </AnimatePresence>
 
-        {/* Bottom fade mask */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-ummix-dark to-transparent pointer-events-none z-10" />
+        {/* Faixa chapada sob os indicadores (sem gradiente) */}
+        <div className="absolute bottom-0 left-0 right-0 h-8 bg-overlay pointer-events-none z-10" />
 
         {/* Dot indicators */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">

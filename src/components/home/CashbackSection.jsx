@@ -1,5 +1,5 @@
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll';
-import ButtonLink from '../ui/ButtonLink';
+import { Button } from '../../ds/components';
 import { useLocale } from '../../LocaleProvider.jsx';
 import { getLocalizedPath } from '../../LocaleProvider.jsx';
 import { HOME_COPY } from '../../home-copy.js';
@@ -10,30 +10,35 @@ export default function CashbackSection() {
   const anim = useAnimateOnScroll();
 
   return (
-    <section className="relative overflow-hidden bg-ummix-dark px-6 py-18 text-white md:px-16 md:py-24">
-      <div
-        className="pointer-events-none absolute -top-[20%] left-1/2 h-[700px] w-[1000px] -translate-x-1/2"
-        style={{ background: 'radial-gradient(ellipse, rgba(155,25,26,.18), transparent 60%)' }}
+    <section data-theme="dark" className="relative overflow-hidden bg-ink-900 px-6 py-18 text-body md:px-16 md:py-24">
+      {/* Espectro: grafismo oficial, à direita; o texto fica à esquerda sobre o grafite liso. */}
+      <img
+        src="/assets/ds/grafismo-espectro.svg"
+        alt=""
         aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[60%] object-cover object-right-bottom md:block"
       />
 
-      <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-2xl text-center">
-        <div className="font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-ummix-red">
-          {copy.kicker}
+      <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-6xl">
+        <div className="max-w-xl">
+          <div className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-brand">
+            {copy.kicker}
+          </div>
+          <h2 className="mt-3.5 font-display text-3xl font-bold leading-tight tracking-tight text-strong md:text-4xl">
+            {copy.title}
+          </h2>
+          <p className="mt-4 font-body text-lg leading-relaxed text-body">
+            {copy.description}
+          </p>
+          <Button
+            href={getLocalizedPath(locale, '/cashback')}
+            variant="primary"
+            size="lg"
+            className="mt-8"
+          >
+            {copy.cta}
+          </Button>
         </div>
-        <h2 className="mt-3.5 font-heading text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl">
-          {copy.title}
-        </h2>
-        <p className="section-subtitle mt-4 font-sans text-lg font-medium leading-relaxed text-white/75">
-          {copy.description}
-        </p>
-        <ButtonLink
-          href={getLocalizedPath(locale, '/cashback')}
-          className="mt-8"
-          size="xl"
-        >
-          {copy.cta}
-        </ButtonLink>
       </div>
     </section>
   );

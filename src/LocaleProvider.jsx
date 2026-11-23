@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { MotionConfig } from 'framer-motion'
 
 export const LOCALES = {
   pt: { code: 'pt-BR', label: 'Português', shortLabel: 'PT' },
@@ -114,7 +115,12 @@ export function LocaleProvider({ children }) {
     },
   }), [locale])
 
-  return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>
+  // reducedMotion="user": todas as animações do Framer Motion respeitam prefers-reduced-motion (CT-16)
+  return (
+    <MotionConfig reducedMotion="user">
+      <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>
+    </MotionConfig>
+  )
 }
 
 export function useLocale() {

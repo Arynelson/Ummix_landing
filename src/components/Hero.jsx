@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import BrowserFrame from './BrowserFrame'
+import { Button } from '../ds/components'
 import { PLATFORM_SIGNUP, PLATFORM_LOGIN } from '../constants/urls'
 
 const AWARDS = [
@@ -53,16 +54,16 @@ function AwardsCard() {
   }
 
   return (
-    <div ref={cardRef} className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur border border-white/25 rounded-2xl sm:rounded-full px-4 py-2">
-      <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/70 whitespace-nowrap">
+    <div ref={cardRef} className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-card border border-line rounded-[var(--radius-lg)] px-4 py-2">
+      <span className="font-mono text-[10px] md:text-xs font-medium tracking-[0.08em] uppercase text-muted whitespace-nowrap">
         Prêmios e Certificações
       </span>
       <div className="flex items-center gap-2">
         {AWARDS.map((award) => (
           <div key={award.id} className="relative">
             {activeId === award.id && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max max-w-[220px] px-3 py-2 rounded-lg bg-ummix-dark border border-white/15 text-[11px] leading-snug text-white text-center shadow-lg pointer-events-none z-20">
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-2 h-2 bg-ummix-dark border-l border-t border-white/15 rotate-45 -mb-1" />
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max max-w-[220px] px-3 py-2 rounded-[var(--radius-md)] bg-card border border-line text-[11px] leading-snug text-strong text-center shadow-[var(--shadow-md)] pointer-events-none z-20">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-2 h-2 bg-card border-l border-t border-line rotate-45 -mb-1" />
                 {award.label}
               </div>
             )}
@@ -74,7 +75,7 @@ function AwardsCard() {
               onMouseLeave={() => setActiveId((current) => (current === award.id ? null : current))}
               onClick={(e) => handleLogoClick(e, award)}
               aria-label={award.label}
-              className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-lg bg-white p-1.5 transition-transform hover:scale-105 cursor-pointer"
+              className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-[var(--radius-md)] bg-white p-1.5 transition-transform hover:scale-105 cursor-pointer"
             >
               <img
                 src={award.src}
@@ -91,37 +92,20 @@ function AwardsCard() {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-ummix-dark">
-      {/* Dot grid */}
-      <div
-        className="absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
-        }}
+    <section data-theme="dark" className="relative min-h-screen flex items-center overflow-hidden bg-ink-900">
+      {/* Grafismo Espectro: base da seção, sob grafite liso */}
+      <img
+        src="/assets/ds/grafismo-espectro.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 w-full object-cover object-right"
       />
-      {/* Primary glow — left, behind copy */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'radial-gradient(ellipse 70% 80% at 20% 50%, rgba(155,25,26,0.45) 0%, transparent 70%)',
-        }}
-      />
-      {/* Secondary glow — top right, adds depth */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'radial-gradient(ellipse 50% 50% at 85% 10%, rgba(155,25,26,0.18) 0%, transparent 60%)',
-        }}
-      />
-      {/* Bottom vignette */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-ummix-dark to-transparent" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-28 lg:py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
           {/* Left — copy */}
-          <div className="flex-1 text-white text-center lg:text-left">
+          <div className="flex-1 text-strong text-center lg:text-left">
 
             {/* Award badges */}
             <motion.div
@@ -134,18 +118,18 @@ export default function Hero() {
             </motion.div>
 
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              MÍDIA OFF.{' '}
+              RÁDIO E TV{' '}
               <br className="hidden md:block" />
-              INTELIGÊNCIA ON.
+              COM DADOS.
             </motion.h1>
 
             <motion.p
-              className="text-lg md:text-xl text-white/80 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
+              className="text-lg md:text-xl text-body max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -160,22 +144,12 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <a
-                href={PLATFORM_SIGNUP}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-ummix-red font-bold px-8 py-3 rounded-full text-base hover:bg-white/90 transition-all hover:scale-105 shadow-lg"
-              >
+              <Button href={PLATFORM_SIGNUP} target="_blank" variant="primary" size="lg">
                 Criar conta grátis
-              </a>
-              <a
-                href={PLATFORM_LOGIN}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-2 border-white/60 text-white font-semibold px-8 py-3 rounded-full text-base hover:bg-white/10 transition-all"
-              >
+              </Button>
+              <Button href={PLATFORM_LOGIN} target="_blank" variant="secondary" size="lg">
                 Entrar
-              </a>
+              </Button>
             </motion.div>
           </div>
 
@@ -185,7 +159,6 @@ export default function Hero() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
-            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
           >
             <BrowserFrame />
           </motion.div>
@@ -193,16 +166,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      {/* <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-3 bg-white/60 rounded-full" />
-        </div>
-      </motion.div> */}
     </section>
   )
 }

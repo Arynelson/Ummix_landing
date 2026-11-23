@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Button, Logo } from '../../ds/components'
 
 const PLATFORM_URL = 'https://app.ummix.com.br'
 
@@ -13,16 +14,15 @@ export function SubHeader({ active }) {
   }, [])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/95 backdrop-blur shadow-md py-3' : 'bg-transparent py-5'
-    }`}>
+    <header
+      data-theme={scrolled ? undefined : 'dark'}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-card/95 backdrop-blur shadow-[var(--shadow-md)] py-3' : 'bg-transparent py-5'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
-        <a href="/" className="flex items-center shrink-0">
-          <img
-            src="/assets/logo-ummix-ads.png"
-            alt="Ummix Ads"
-            className={`h-8 md:h-10 transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`}
-          />
+        <a href="/" className="flex items-center shrink-0" aria-label="Ummix Ads">
+          <Logo variant={scrolled ? 'vermelha' : 'branca'} height={28} />
         </a>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-semibold">
@@ -35,10 +35,11 @@ export function SubHeader({ active }) {
               <a
                 key={href}
                 href={href}
+                aria-current={isCurrent ? 'page' : undefined}
                 className={`transition-colors ${
                   isCurrent
-                    ? scrolled ? 'text-ummix-red' : 'text-white underline underline-offset-4 decoration-ummix-red'
-                    : scrolled ? 'text-ummix-dark hover:text-ummix-red' : 'text-white/80 hover:text-white'
+                    ? 'text-strong underline decoration-accent decoration-2 underline-offset-4'
+                    : 'text-body hover:text-brand'
                 }`}
               >
                 {label}
@@ -47,14 +48,9 @@ export function SubHeader({ active }) {
           })}
         </nav>
 
-        <a
-          href={PLATFORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-ummix-red hover:bg-ummix-red-dark text-white px-4 py-2 md:px-6 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 whitespace-nowrap"
-        >
+        <Button href={PLATFORM_URL} target="_blank" rel="noopener noreferrer" variant="primary" size="md">
           Acessar plataforma
-        </a>
+        </Button>
       </div>
     </header>
   )
@@ -62,15 +58,15 @@ export function SubHeader({ active }) {
 
 export function SubFooter() {
   return (
-    <footer className="bg-ummix-dark text-white py-12">
+    <footer data-theme="dark" className="bg-ink-900 text-body py-12">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-        <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className="h-8 brightness-0 invert" />
-        <nav className="flex flex-wrap justify-center gap-6 text-sm text-white/60">
-          <a href="/" className="hover:text-white transition-colors">Início</a>
-          <a href="/cashback" className="hover:text-white transition-colors">Cashback</a>
-          <a href="mailto:falecoma@ummix.com.br" className="hover:text-white transition-colors">Contato</a>
+        <Logo variant="branca" height={28} />
+        <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted">
+          <a href="/" className="hover:text-strong transition-colors">Início</a>
+          <a href="/cashback" className="hover:text-strong transition-colors">Cashback</a>
+          <a href="mailto:falecoma@ummix.com.br" className="hover:text-strong transition-colors">Contato</a>
         </nav>
-        <p className="text-sm text-white/40">
+        <p className="text-sm text-muted">
           &copy; {new Date().getFullYear()} Ummix Ads · Todos os direitos reservados
         </p>
       </div>

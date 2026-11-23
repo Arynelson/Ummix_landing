@@ -8,12 +8,7 @@ const TABS = [
   {
     id: 'demografica',
     label: 'Demográfica',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" />
-      </svg>
-    ),
+    pixel: 'audiencia',
     attributes: [
       { id: 'idade', label: 'Idade' },
       { id: 'sexo', label: 'Sexo' },
@@ -28,12 +23,7 @@ const TABS = [
   {
     id: 'geografica',
     label: 'Geográfica',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-        <circle cx="12" cy="10" r="3" />
-      </svg>
-    ),
+    pixel: 'praca',
     attributes: [
       { id: 'pais', label: 'País' },
       { id: 'regiao', label: 'Região' },
@@ -48,12 +38,7 @@ const TABS = [
   {
     id: 'comportamental',
     label: 'Comportamental',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M3 3v18h18" />
-        <path d="M7 14l4-4 4 4 5-5" />
-      </svg>
-    ),
+    pixel: 'alvo',
     attributes: [
       { id: 'interesses', label: 'Interesses' },
       { id: 'habitos-de-consumo', label: 'Hábitos de consumo' },
@@ -76,16 +61,16 @@ export default function Segmentations() {
   const activeTabData = TABS.find((tab) => tab.id === activeTab);
 
   return (
-    <section id="segmentacoes" className="relative border-t border-[#f0eeec] bg-ummix-gray px-6 py-20 md:px-16 md:py-24">
+    <section id="segmentacoes" className="relative border-t border-line-subtle bg-sunken px-6 py-20 md:px-16 md:py-24">
       <div ref={anim.ref} style={anim.style} className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="font-sans text-[11px] font-bold uppercase leading-none tracking-[.22em] text-ummix-red">
+          <div className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-brand">
             {copy.kicker}
           </div>
-          <h2 className="mt-3.5 font-heading text-4xl font-extrabold leading-tight tracking-tight text-ummix-dark md:text-5xl">
-            {copy.title} <span className="text-ummix-red">{copy.titleAccent}</span>.
+          <h2 className="mt-3.5 font-display text-4xl font-extrabold leading-tight tracking-tight text-strong md:text-5xl">
+            {copy.title} <span className="text-brand">{copy.titleAccent}</span>.
           </h2>
-          <p className="section-subtitle mt-4 text-[17px] leading-relaxed text-[#555]">
+          <p className="section-subtitle mt-4 text-[17px] leading-relaxed text-body">
             {copy.description}
           </p>
         </div>
@@ -102,20 +87,26 @@ export default function Segmentations() {
                 aria-selected={isActive}
                 aria-current={isActive ? 'true' : 'false'}
                 onClick={() => setActiveTab(tab.id)}
-                className={`inline-flex items-center gap-2.5 rounded-full px-6.5 py-3.5 font-sans text-sm font-bold tracking-wide transition-colors ${
+                className={`inline-flex items-center gap-2.5 rounded-[var(--radius-md)] px-6.5 py-3.5 font-sans text-sm font-bold tracking-wide transition-colors ${
                   isActive
-                    ? 'border-none bg-ummix-red text-white shadow-[0_8px_20px_-8px_rgba(155,25,26,.6)]'
-                    : 'border border-[#e5e3e0] bg-white text-ummix-dark hover:border-ummix-red/40 hover:bg-ummix-gray'
+                    ? 'border border-transparent bg-accent text-white'
+                    : 'border border-line bg-card text-strong hover:border-accent hover:bg-sunken'
                 }`}
               >
-                {tab.icon}
+                <img
+                  src={`/assets/ds/icones-pixel/${tab.pixel}${isActive ? '-branco' : ''}.svg`}
+                  alt=""
+                  aria-hidden="true"
+                  width={16}
+                  height={16}
+                />
                 {tabCopy.label}
               </button>
             );
           })}
         </div>
 
-        <div className="relative mt-10 min-h-[240px]">
+        <div className="relative mt-10 min-h-[136px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTabData.id}
@@ -132,11 +123,10 @@ export default function Segmentations() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, ease: 'easeOut', delay: index * 0.04 }}
-                  className="flex items-center gap-3.5 rounded-2xl border border-transparent bg-white px-5.5 py-4.5 font-sans text-sm font-semibold text-ummix-dark transition-all duration-300 hover:-translate-y-0.5 hover:border-ummix-red/50 hover:shadow-[0_8px_20px_-10px_rgba(155,25,26,.3)]"
+                  className="flex items-center gap-3.5 rounded-[var(--radius-lg)] border border-line-subtle bg-card px-5.5 py-4.5 font-sans text-sm font-semibold text-strong transition-[border-color,box-shadow] duration-[var(--duration-base)] hover:border-line-strong hover:shadow-[var(--shadow-md)]"
                 >
                   <span
-                    className="h-2 w-2 flex-none rounded-full bg-ummix-red"
-                    style={{ boxShadow: '0 0 0 3px rgba(155,25,26,.15)' }}
+                    className="h-2 w-2 flex-none rounded-full bg-accent"
                     aria-hidden="true"
                   />
                   {copy.tabs[activeTabData.id].attributes[index]}
@@ -146,7 +136,7 @@ export default function Segmentations() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-8 text-center font-sans text-sm font-medium text-[#666] md:mt-10">
+        <div className="mt-8 text-center font-sans text-sm font-medium text-muted md:mt-10">
           {copy.footer}
         </div>
       </div>

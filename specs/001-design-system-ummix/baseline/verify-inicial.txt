@@ -1,0 +1,611 @@
+src/components/BrowserFrame.jsx:25  old-tokens  ummix-dark
+src/components/BrowserFrame.jsx:37  old-tokens  ummix-dark
+src/components/BrowserFrame.jsx:52  old-tokens  ummix-dark
+src/components/Footer.jsx:10  old-tokens  ummix-dark
+src/components/Header.jsx:37  old-tokens  ummix-dark
+src/components/Header.jsx:42  old-tokens  ummix-gray
+src/components/Header.jsx:65  old-tokens  ummix-red
+src/components/Header.jsx:66  old-tokens  ummix-dark
+src/components/Header.jsx:102  old-tokens  ummix-red
+src/components/Header.jsx:103  old-tokens  ummix-dark
+src/components/Header.jsx:118  old-tokens  ummix-red
+src/components/Header.jsx:127  old-tokens  ummix-dark
+src/components/Header.jsx:156  old-tokens  ummix-red
+src/components/Header.jsx:163  old-tokens  ummix-dark
+src/components/Hero.jsx:64  old-tokens  ummix-dark
+src/components/Hero.jsx:65  old-tokens  ummix-dark
+src/components/Hero.jsx:94  old-tokens  ummix-dark
+src/components/Hero.jsx:118  old-tokens  ummix-dark
+src/components/Hero.jsx:167  old-tokens  ummix-red
+src/components/home/Backstage.jsx:75  old-tokens  ummix-dark
+src/components/home/Backstage.jsx:86  old-tokens  ummix-red
+src/components/home/Backstage.jsx:95  old-tokens  ummix-red
+src/components/home/Backstage.jsx:113  old-tokens  ummix-red
+src/components/home/Backstage.jsx:123  old-tokens  ummix-red
+src/components/home/Backstage.jsx:157  old-tokens  ummix-red
+src/components/home/Backstage.jsx:164  old-tokens  ummix-red
+src/components/home/Backstage.jsx:175  old-tokens  ummix-red
+src/components/home/Backstage.jsx:176  old-tokens  ummix-red
+src/components/home/Backstage.jsx:189  old-tokens  ummix-red
+src/components/home/CampaignGuide.jsx:17  old-tokens  ummix-gray
+src/components/home/CampaignGuide.jsx:20  old-tokens  ummix-dark
+src/components/home/CampaignGuide.jsx:23  old-tokens  ummix-gray
+src/components/home/CampaignGuide.jsx:28  old-tokens  ummix-dark
+src/components/home/CampaignGuide.jsx:34  old-tokens  ummix-red
+src/components/home/CampaignGuide.jsx:35  old-tokens  ummix-gray
+src/components/home/CampaignGuide.jsx:37  old-tokens  ummix-red
+src/components/home/CampaignGuide.jsx:41  old-tokens  ummix-red
+src/components/home/CampaignGuide.jsx:46  old-tokens  ummix-dark
+src/components/home/CampaignGuide.jsx:48  old-tokens  ummix-gray
+src/components/home/CampaignGuide.jsx:49  old-tokens  ummix-red
+src/components/home/CampaignGuide.jsx:55  old-tokens  ummix-gray
+src/components/home/CampaignQuestions.jsx:16  old-tokens  ummix-dark
+src/components/home/CampaignQuestions.jsx:19  old-tokens  ummix-gray
+src/components/home/CampaignQuestions.jsx:24  old-tokens  ummix-dark
+src/components/home/CampaignQuestions.jsx:27  old-tokens  ummix-dark
+src/components/home/CampaignQuestions.jsx:29  old-tokens  ummix-red
+src/components/home/CampaignQuestions.jsx:31  old-tokens  ummix-gray
+src/components/home/CampaignQuestions.jsx:37  old-tokens  ummix-dark
+src/components/home/CashbackSection.jsx:13  old-tokens  ummix-dark
+src/components/home/CashbackSection.jsx:21  old-tokens  ummix-red
+src/components/home/ClientView.jsx:56  old-tokens  ummix-red
+src/components/home/ClientView.jsx:60  old-tokens  ummix-dark
+src/components/home/ClientView.jsx:61  old-tokens  ummix-red
+src/components/home/ClientView.jsx:63  old-tokens  ummix-gray
+src/components/home/ClientView.jsx:72  old-tokens  ummix-gray
+src/components/home/ClientView.jsx:74  old-tokens  ummix-red
+src/components/home/ClientView.jsx:77  old-tokens  ummix-dark
+src/components/home/Contact.jsx:59  old-tokens  ummix-dark
+src/components/home/Contact.jsx:74  old-tokens  ummix-red
+src/components/home/Contact.jsx:86  old-tokens  ummix-dark
+src/components/home/Contact.jsx:92  old-tokens  ummix-dark
+src/components/home/Contact.jsx:103  old-tokens  ummix-gray
+src/components/home/Contact.jsx:108  old-tokens  ummix-gray
+src/components/home/Contact.jsx:110  old-tokens  ummix-gray
+src/components/home/Contact.jsx:116  old-tokens  ummix-dark
+src/components/home/Contact.jsx:120  old-tokens  ummix-dark
+src/components/home/Contact.jsx:124  old-tokens  ummix-dark
+src/components/home/Contact.jsx:128  old-tokens  ummix-dark
+src/components/home/Contact.jsx:130  old-tokens  ummix-red
+src/components/home/Contact.jsx:131  old-tokens  ummix-red
+src/components/home/Deliverables.jsx:63  old-tokens  ummix-dark
+src/components/home/Deliverables.jsx:71  old-tokens  ummix-red
+src/components/home/Deliverables.jsx:77  old-tokens  ummix-red
+src/components/home/Deliverables.jsx:89  old-tokens  ummix-red
+src/components/home/Eliminates.jsx:23  old-tokens  ummix-red
+src/components/home/Eliminates.jsx:26  old-tokens  ummix-dark
+src/components/home/Eliminates.jsx:27  old-tokens  ummix-red
+src/components/home/Eliminates.jsx:29  old-tokens  ummix-gray
+src/components/home/Eliminates.jsx:38  old-tokens  ummix-red
+src/components/home/Eliminates.jsx:45  old-tokens  #9B191A
+src/components/home/Eliminates.jsx:56  old-tokens  ummix-dark
+src/components/home/ForWhom.jsx:92  old-tokens  ummix-gray
+src/components/home/ForWhom.jsx:95  old-tokens  ummix-red
+src/components/home/ForWhom.jsx:98  old-tokens  ummix-dark
+src/components/home/ForWhom.jsx:100  old-tokens  ummix-red
+src/components/home/ForWhom.jsx:109  old-tokens  ummix-red
+src/components/home/ForWhom.jsx:112  old-tokens  ummix-dark
+src/components/home/Hero.jsx:9  old-tokens  ummix-dark
+src/components/home/Hero.jsx:48  old-tokens  ummix-dark
+src/components/home/Hero.jsx:50  old-tokens  ummix-red
+src/components/home/Hero.jsx:52  old-tokens  ummix-gray
+src/components/home/Hero.jsx:53  old-tokens  ummix-gray
+src/components/home/Hero.jsx:66  old-tokens  ummix-gray
+src/components/home/Method.jsx:177  old-tokens  ummix-gray
+src/components/home/Method.jsx:186  old-tokens  ummix-red
+src/components/home/Method.jsx:189  old-tokens  ummix-dark
+src/components/home/Method.jsx:190  old-tokens  ummix-red
+src/components/home/Method.jsx:214  old-tokens  ummix-gray
+src/components/home/Method.jsx:224  old-tokens  ummix-red
+src/components/home/Method.jsx:235  old-tokens  ummix-dark
+src/components/home/Method.jsx:252  old-tokens  ummix-red
+src/components/home/Method.jsx:256  old-tokens  ummix-red
+src/components/home/Method.jsx:264  old-tokens  ummix-red
+src/components/home/Method.jsx:273  old-tokens  ummix-red
+src/components/home/Method.jsx:274  old-tokens  ummix-red
+src/components/home/Method.jsx:276  old-tokens  ummix-red
+src/components/home/Method.jsx:277  old-tokens  #1E1E1E
+src/components/home/Method.jsx:298  old-tokens  ummix-red
+src/components/home/Method.jsx:309  old-tokens  ummix-red
+src/components/home/Segmentations.jsx:79  old-tokens  ummix-gray
+src/components/home/Segmentations.jsx:82  old-tokens  ummix-red
+src/components/home/Segmentations.jsx:85  old-tokens  ummix-dark
+src/components/home/Segmentations.jsx:86  old-tokens  ummix-red
+src/components/home/Segmentations.jsx:107  old-tokens  ummix-red
+src/components/home/Segmentations.jsx:108  old-tokens  ummix-dark
+src/components/home/Segmentations.jsx:135  old-tokens  ummix-dark
+src/components/home/Segmentations.jsx:138  old-tokens  ummix-red
+src/components/Partners.jsx:105  old-tokens  ummix-dark
+src/components/Partners.jsx:107  old-tokens  ummix-gray
+src/components/Partners.jsx:129  old-tokens  ummix-gray
+src/components/Partners.jsx:134  old-tokens  ummix-dark
+src/components/Partners.jsx:142  old-tokens  ummix-dark
+src/components/ui/ButtonLink.jsx:2  old-tokens  ummix-red
+src/components/ui/ButtonLink.jsx:3  old-tokens  ummix-red
+src/components/ui/ButtonLink.jsx:4  old-tokens  ummix-dark
+src/components/ValueProp.jsx:7  old-tokens  ummix-dark
+src/index.css:4  old-tokens  #9b191a
+src/index.css:5  old-tokens  #7a1415
+src/index.css:6  old-tokens  #1e1e1e
+src/index.css:7  old-tokens  #f4f2f2
+src/index.css:8  old-tokens  ummix-gray
+src/index.css:9  old-tokens  --ummix-
+src/index.css:10  old-tokens  --ummix-
+src/index.css:14  old-tokens  #9b191a
+src/index.css:15  old-tokens  #7a1415
+src/index.css:16  old-tokens  #1e1e1e
+src/index.css:17  old-tokens  #f4f2f2
+src/index.css:18  old-tokens  ummix-gray
+src/index.css:19  old-tokens  ummix-grafite
+src/index.css:54  old-tokens  ummix-red
+src/index.css:55  old-tokens  ummix-red
+src/index.css:78  old-tokens  --ummix-
+src/index.css:88  old-tokens  ummix-dark
+src/index.css:95  old-tokens  ummix-red
+src/index.css:123  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:13  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:14  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:16  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:20  old-tokens  ummix-gray
+src/pages/awards/AwardsPage.jsx:32  old-tokens  ummix-gray
+src/pages/awards/AwardsPage.jsx:33  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:44  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:45  old-tokens  ummix-gray
+src/pages/awards/AwardsPage.jsx:54  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:86  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:91  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:92  old-tokens  ummix-gray
+src/pages/awards/AwardsPage.jsx:96  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:99  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:114  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:115  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:117  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:120  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:127  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:142  old-tokens  ummix-gray
+src/pages/awards/AwardsPage.jsx:160  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:161  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:162  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:179  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:188  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:190  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:192  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:193  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:195  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:196  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:207  old-tokens  ummix-gray
+src/pages/awards/AwardsPage.jsx:216  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:217  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:224  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:225  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:226  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:289  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:290  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:301  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:303  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:323  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:331  old-tokens  ummix-red
+src/pages/awards/AwardsPage.jsx:361  old-tokens  ummix-gray
+src/pages/awards/AwardsPage.jsx:362  old-tokens  ummix-dark
+src/pages/awards/AwardsPage.jsx:364  old-tokens  ummix-red
+src/pages/campanha/campanha.css:5  old-tokens  #9b191a
+src/pages/campanha/campanha.css:6  old-tokens  #1e1e1e
+src/pages/cashback/CashbackPage.jsx:15  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:16  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:54  old-tokens  ummix-dark
+src/pages/cashback/CashbackPage.jsx:64  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:103  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:104  old-tokens  ummix-dark
+src/pages/cashback/CashbackPage.jsx:107  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:114  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:115  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:118  old-tokens  ummix-dark
+src/pages/cashback/CashbackPage.jsx:119  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:120  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:121  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:129  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:130  old-tokens  ummix-dark
+src/pages/cashback/CashbackPage.jsx:134  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:135  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:180  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:183  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:184  old-tokens  ummix-dark
+src/pages/cashback/CashbackPage.jsx:187  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:200  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:201  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:204  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:207  old-tokens  ummix-dark
+src/pages/cashback/CashbackPage.jsx:208  old-tokens  ummix-gray
+src/pages/cashback/CashbackPage.jsx:226  old-tokens  ummix-dark
+src/pages/cashback/CashbackPage.jsx:230  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:243  old-tokens  ummix-red
+src/pages/cashback/CashbackPage.jsx:262  old-tokens  ummix-dark
+src/pages/investidores/investidores.css:4  old-tokens  #9b191a
+src/pages/investidores/investidores.css:550  old-tokens  #f4f2f2
+src/pages/investidores/investidores.css:753  old-tokens  #f4f2f2
+src/pages/investidores/InvestidoresPage.jsx:8  old-tokens  #7a1415
+src/pages/investidores/InvestidoresPage.jsx:10  old-tokens  #9b191a
+src/pages/monetize.css:2  old-tokens  #9b191a
+src/pages/monetize.css:3  old-tokens  #7a1415
+src/pages/monetize.css:4  old-tokens  #1e1e1e
+src/pages/monetize.css:6  old-tokens  #f4f2f2
+src/pages/partner/PartnerPage.jsx:16  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:17  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:30  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:69  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:70  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:74  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:75  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:87  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:98  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:120  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:121  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:124  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:130  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:131  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:132  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:135  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:141  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:142  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:143  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:145  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:146  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:169  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:172  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:173  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:176  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:185  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:187  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:190  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:191  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:193  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:246  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:247  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:250  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:259  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:268  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:272  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:275  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:281  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:282  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:290  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:304  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:306  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:307  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:308  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:312  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:358  old-tokens  ummix-gray
+src/pages/partner/PartnerPage.jsx:360  old-tokens  ummix-dark
+src/pages/partner/PartnerPage.jsx:373  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:400  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:413  old-tokens  ummix-red
+src/pages/partner/PartnerPage.jsx:421  old-tokens  ummix-red
+src/pages/subpages/SubChrome.jsx:40  old-tokens  ummix-red
+src/pages/subpages/SubChrome.jsx:41  old-tokens  ummix-dark
+src/pages/subpages/SubChrome.jsx:54  old-tokens  ummix-red
+src/pages/subpages/SubChrome.jsx:65  old-tokens  ummix-dark
+src/components/BrowserFrame.jsx:31  loose-hex  #2a2a2a
+src/components/home/Backstage.jsx:114  loose-hex  #2A2A2A
+src/components/home/Backstage.jsx:158  loose-hex  #2A2A2A
+src/components/home/Eliminates.jsx:45  loose-hex  #9B191A
+src/components/home/ForWhom.jsx:107  loose-hex  #eee
+src/components/home/ForWhom.jsx:115  loose-hex  #666
+src/components/home/Method.jsx:192  loose-hex  #555
+src/components/home/Method.jsx:197  loose-hex  #eee
+src/components/home/Method.jsx:198  loose-hex  #666
+src/components/home/Method.jsx:202  loose-hex  #16A34A
+src/components/home/Method.jsx:203  loose-hex  #16A34A
+src/components/home/Method.jsx:208  loose-hex  #ddd
+src/components/home/Method.jsx:277  loose-hex  #3A1112
+src/components/home/Method.jsx:309  loose-hex  #D02326
+src/components/home/Segmentations.jsx:79  loose-hex  #f0eeec
+src/components/home/Segmentations.jsx:88  loose-hex  #555
+src/components/home/Segmentations.jsx:108  loose-hex  #e5e3e0
+src/components/home/Segmentations.jsx:149  loose-hex  #666
+src/index.css:4  loose-hex  #9b191a
+src/index.css:5  loose-hex  #7a1415
+src/index.css:6  loose-hex  #1e1e1e
+src/index.css:7  loose-hex  #f4f2f2
+src/index.css:8  loose-hex  #333333
+src/index.css:14  loose-hex  #9b191a
+src/index.css:15  loose-hex  #7a1415
+src/index.css:16  loose-hex  #1e1e1e
+src/index.css:17  loose-hex  #f4f2f2
+src/index.css:18  loose-hex  #333333
+src/index.css:19  loose-hex  #2A2A2A
+src/pages/campanha/campanha.css:2  loose-hex  #101010
+src/pages/campanha/campanha.css:3  loose-hex  #181818
+src/pages/campanha/campanha.css:4  loose-hex  #ed3436
+src/pages/campanha/campanha.css:5  loose-hex  #9b191a
+src/pages/campanha/campanha.css:6  loose-hex  #1e1e1e
+src/pages/campanha/campanha.css:7  loose-hex  #66615f
+src/pages/campanha/campanha.css:8  loose-hex  #f5f3f1
+src/pages/campanha/campanha.css:9  loose-hex  #e8e4e1
+src/pages/campanha/campanha.css:45  loose-hex  #0d0d0d
+src/pages/campanha/campanha.css:57  loose-hex  #000
+src/pages/campanha/campanha.css:198  loose-hex  #f24648
+src/pages/campanha/campanha.css:278  loose-hex  #6a6867
+src/pages/campanha/campanha.css:284  loose-hex  #fafafa
+src/pages/campanha/campanha.css:295  loose-hex  #e9e7e5
+src/pages/campanha/campanha.css:300  loose-hex  #222
+src/pages/campanha/campanha.css:334  loose-hex  #77716e
+src/pages/campanha/campanha.css:347  loose-hex  #d5d0cd
+src/pages/campanha/campanha.css:360  loose-hex  #e3dfdc
+src/pages/campanha/campanha.css:370  loose-hex  #fff3f2
+src/pages/campanha/campanha.css:392  loose-hex  #000
+src/pages/campanha/campanha.css:652  loose-hex  #fafafa
+src/pages/campanha/campanha.css:958  loose-hex  #fff0ef
+src/pages/campanha/campanha.css:970  loose-hex  #55504d
+src/pages/campanha/campanha.css:1070  loose-hex  #d8d2ce
+src/pages/campanha/campanha.css:1116  loose-hex  #f24648
+src/pages/campanha/campanha.css:1151  loose-hex  #fff0ef
+src/pages/campanha/campanha.css:1226  loose-hex  #fff8f7
+src/pages/cashback/CashbackPage.jsx:58  loose-hex  #000
+src/pages/investidores/investidores.css:2  loose-hex  #070707
+src/pages/investidores/investidores.css:3  loose-hex  #101010
+src/pages/investidores/investidores.css:4  loose-hex  #9b191a
+src/pages/investidores/investidores.css:5  loose-hex  #c52224
+src/pages/investidores/investidores.css:6  loose-hex  #d6a23d
+src/pages/investidores/investidores.css:22  loose-hex  #e23a3c
+src/pages/investidores/investidores.css:112  loose-hex  #111
+src/pages/investidores/investidores.css:142  loose-hex  #242424
+src/pages/investidores/investidores.css:190  loose-hex  #270b0c
+src/pages/investidores/investidores.css:215  loose-hex  #090909
+src/pages/investidores/investidores.css:251  loose-hex  #130707
+src/pages/investidores/investidores.css:330  loose-hex  #090909
+src/pages/investidores/investidores.css:358  loose-hex  #242424
+src/pages/investidores/investidores.css:367  loose-hex  #121212
+src/pages/investidores/investidores.css:379  loose-hex  #111
+src/pages/investidores/investidores.css:387  loose-hex  #202020
+src/pages/investidores/investidores.css:388  loose-hex  #171717
+src/pages/investidores/investidores.css:401  loose-hex  #000
+src/pages/investidores/investidores.css:450  loose-hex  #080303
+src/pages/investidores/investidores.css:461  loose-hex  #000
+src/pages/investidores/investidores.css:478  loose-hex  #e3282b
+src/pages/investidores/investidores.css:498  loose-hex  #090909
+src/pages/investidores/investidores.css:550  loose-hex  #f4f2f2
+src/pages/investidores/investidores.css:552  loose-hex  #181818
+src/pages/investidores/investidores.css:565  loose-hex  #110505
+src/pages/investidores/investidores.css:575  loose-hex  #000
+src/pages/investidores/investidores.css:726  loose-hex  #181818
+src/pages/investidores/investidores.css:745  loose-hex  #101010
+src/pages/investidores/investidores.css:753  loose-hex  #f4f2f2
+src/pages/investidores/InvestidoresPage.jsx:8  loose-hex  #7a1415
+src/pages/investidores/InvestidoresPage.jsx:9  loose-hex  #c44a3f
+src/pages/investidores/InvestidoresPage.jsx:10  loose-hex  #9b191a
+src/pages/investidores/InvestidoresPage.jsx:11  loose-hex  #a52c2d
+src/pages/investidores/InvestidoresPage.jsx:12  loose-hex  #d1844f
+src/pages/monetize.css:2  loose-hex  #9b191a
+src/pages/monetize.css:3  loose-hex  #7a1415
+src/pages/monetize.css:4  loose-hex  #1e1e1e
+src/pages/monetize.css:5  loose-hex  #3d3a3a
+src/pages/monetize.css:6  loose-hex  #f4f2f2
+src/pages/monetize.css:148  loose-hex  #000
+src/pages/monetize.css:193  loose-hex  #d7605d
+src/pages/monetize.css:226  loose-hex  #252525
+src/pages/monetize.css:272  loose-hex  #d7605d
+src/pages/monetize.css:282  loose-hex  #191919
+src/pages/monetize.css:305  loose-hex  #d7605d
+src/pages/monetize.css:313  loose-hex  #d7605d
+src/pages/monetize.css:485  loose-hex  #6b6666
+src/pages/monetize.css:603  loose-hex  #d7605d
+src/pages/monetize.css:629  loose-hex  #d7605d
+src/pages/monetize.css:687  loose-hex  #d7605d
+src/pages/monetize.css:759  loose-hex  #6b6666
+src/pages/monetize.css:817  loose-hex  #4d4848
+src/pages/monetize.css:833  loose-hex  #d7d3d3
+src/pages/monetize.css:845  loose-hex  #736d6d
+src/pages/monetize.css:859  loose-hex  #a33d3d
+src/pages/monetize.css:876  loose-hex  #d7d3d3
+src/pages/monetize.css:879  loose-hex  #4d4848
+src/pages/monetize.css:910  loose-hex  #6b6666
+src/pages/monetize.css:920  loose-hex  #4d4848
+src/pages/monetize.css:936  loose-hex  #8d2628
+src/pages/partner/PartnerPage.jsx:90  loose-hex  #000
+index.html:151  old-fonts  Baloo
+cashback.html:37  old-fonts  Baloo
+partner.html:37  old-fonts  Baloo
+monetize.html:37  old-fonts  Baloo
+investidores.html:36  old-fonts  Baloo
+premios.html:39  old-fonts  Baloo
+en/index.html:83  old-fonts  Baloo
+en/cashback.html:34  old-fonts  Baloo
+en/partner.html:34  old-fonts  Baloo
+en/monetize.html:37  old-fonts  Baloo
+en/investidores.html:34  old-fonts  Baloo
+en/investidores.html:35  old-fonts  Plus+Jakarta
+en/premios.html:37  old-fonts  Baloo
+es/index.html:141  old-fonts  Baloo
+es/cashback.html:36  old-fonts  Baloo
+es/partner.html:36  old-fonts  Baloo
+es/monetize.html:36  old-fonts  Baloo
+es/investidores.html:34  old-fonts  Baloo
+es/premios.html:39  old-fonts  Baloo
+lp/campanha.html:33  old-fonts  Baloo
+src/index.css:20  old-fonts  Baloo
+src/index.css:21  old-fonts  Plus Jakarta
+index.html:0  new-fonts  falta Poppins
+index.html:0  new-fonts  falta IBM+Plex+Sans
+index.html:0  new-fonts  falta IBM+Plex+Mono
+cashback.html:0  new-fonts  falta Poppins
+cashback.html:0  new-fonts  falta IBM+Plex+Sans
+cashback.html:0  new-fonts  falta IBM+Plex+Mono
+partner.html:0  new-fonts  falta Poppins
+partner.html:0  new-fonts  falta IBM+Plex+Sans
+partner.html:0  new-fonts  falta IBM+Plex+Mono
+monetize.html:0  new-fonts  falta Poppins
+monetize.html:0  new-fonts  falta IBM+Plex+Sans
+monetize.html:0  new-fonts  falta IBM+Plex+Mono
+investidores.html:0  new-fonts  falta Poppins
+investidores.html:0  new-fonts  falta IBM+Plex+Sans
+investidores.html:0  new-fonts  falta IBM+Plex+Mono
+premios.html:0  new-fonts  falta Poppins
+premios.html:0  new-fonts  falta IBM+Plex+Sans
+premios.html:0  new-fonts  falta IBM+Plex+Mono
+en/index.html:0  new-fonts  falta Poppins
+en/index.html:0  new-fonts  falta IBM+Plex+Sans
+en/index.html:0  new-fonts  falta IBM+Plex+Mono
+en/cashback.html:0  new-fonts  falta Poppins
+en/cashback.html:0  new-fonts  falta IBM+Plex+Sans
+en/cashback.html:0  new-fonts  falta IBM+Plex+Mono
+en/partner.html:0  new-fonts  falta Poppins
+en/partner.html:0  new-fonts  falta IBM+Plex+Sans
+en/partner.html:0  new-fonts  falta IBM+Plex+Mono
+en/monetize.html:0  new-fonts  falta Poppins
+en/monetize.html:0  new-fonts  falta IBM+Plex+Sans
+en/monetize.html:0  new-fonts  falta IBM+Plex+Mono
+en/investidores.html:0  new-fonts  falta Poppins
+en/investidores.html:0  new-fonts  falta IBM+Plex+Sans
+en/investidores.html:0  new-fonts  falta IBM+Plex+Mono
+en/premios.html:0  new-fonts  falta Poppins
+en/premios.html:0  new-fonts  falta IBM+Plex+Sans
+en/premios.html:0  new-fonts  falta IBM+Plex+Mono
+es/index.html:0  new-fonts  falta Poppins
+es/index.html:0  new-fonts  falta IBM+Plex+Sans
+es/index.html:0  new-fonts  falta IBM+Plex+Mono
+es/cashback.html:0  new-fonts  falta Poppins
+es/cashback.html:0  new-fonts  falta IBM+Plex+Sans
+es/cashback.html:0  new-fonts  falta IBM+Plex+Mono
+es/partner.html:0  new-fonts  falta Poppins
+es/partner.html:0  new-fonts  falta IBM+Plex+Sans
+es/partner.html:0  new-fonts  falta IBM+Plex+Mono
+es/monetize.html:0  new-fonts  falta Poppins
+es/monetize.html:0  new-fonts  falta IBM+Plex+Sans
+es/monetize.html:0  new-fonts  falta IBM+Plex+Mono
+es/investidores.html:0  new-fonts  falta Poppins
+es/investidores.html:0  new-fonts  falta IBM+Plex+Sans
+es/investidores.html:0  new-fonts  falta IBM+Plex+Mono
+es/premios.html:0  new-fonts  falta Poppins
+es/premios.html:0  new-fonts  falta IBM+Plex+Sans
+es/premios.html:0  new-fonts  falta IBM+Plex+Mono
+lp/campanha.html:0  new-fonts  falta Poppins
+lp/campanha.html:0  new-fonts  falta IBM+Plex+Sans
+lp/campanha.html:0  new-fonts  falta IBM+Plex+Mono
+src/components/BrowserFrame.jsx:52  glow-gradient  bg-linear-
+src/components/Hero.jsx:99  glow-gradient  radial-gradient(
+src/components/Hero.jsx:107  glow-gradient  radial-gradient(
+src/components/Hero.jsx:114  glow-gradient  radial-gradient(
+src/components/Hero.jsx:118  glow-gradient  bg-linear-
+src/components/home/Backstage.jsx:79  glow-gradient  radial-gradient(
+src/components/home/Backstage.jsx:114  glow-gradient  radial-gradient(
+src/components/home/Backstage.jsx:152  glow-gradient  arc-dot
+src/components/home/Backstage.jsx:153  glow-gradient  arc-dot
+src/components/home/Backstage.jsx:154  glow-gradient  arc-dot
+src/components/home/Backstage.jsx:157  glow-gradient  pulse-ring
+src/components/home/Backstage.jsx:158  glow-gradient  radial-gradient(
+src/components/home/CashbackSection.jsx:16  glow-gradient  radial-gradient(
+src/components/home/Contact.jsx:62  glow-gradient  radial-gradient(
+src/components/home/Deliverables.jsx:66  glow-gradient  radial-gradient(
+src/components/home/Method.jsx:180  glow-gradient  radial-gradient(
+src/components/home/Method.jsx:238  glow-gradient  radial-gradient(
+src/components/home/Method.jsx:277  glow-gradient  radial-gradient(
+src/components/home/Method.jsx:309  glow-gradient  linear-gradient(
+src/ds/tokens/effects.css:7  glow-gradient  --glow-red
+src/ds/tokens/effects.css:8  glow-gradient  --glow-red
+src/index.css:33  glow-gradient  redPulse
+src/index.css:47  glow-gradient  arc-dot
+src/index.css:60  glow-gradient  arc-dot
+src/index.css:61  glow-gradient  arc-dot
+src/index.css:66  glow-gradient  pulse-ring
+src/index.css:67  glow-gradient  redPulse
+src/pages/awards/AwardsPage.jsx:57  glow-gradient  radial-gradient(
+src/pages/awards/AwardsPage.jsx:326  glow-gradient  radial-gradient(
+src/pages/campanha/campanha.css:44  glow-gradient  radial-gradient(
+src/pages/campanha/campanha.css:45  glow-gradient  linear-gradient(
+src/pages/campanha/campanha.css:53  glow-gradient  linear-gradient(
+src/pages/campanha/campanha.css:54  glow-gradient  linear-gradient(
+src/pages/campanha/campanha.css:57  glow-gradient  linear-gradient(
+src/pages/cashback/CashbackPage.jsx:57  glow-gradient  radial-gradient(
+src/pages/cashback/CashbackPage.jsx:58  glow-gradient  linear-gradient(
+src/pages/cashback/CashbackPage.jsx:227  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:47  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:48  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:49  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:141  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:190  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:250  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:378  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:379  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:387  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:388  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:397  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:398  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:401  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:449  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:459  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:460  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:461  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:497  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:520  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:573  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:574  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:575  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:662  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:663  glow-gradient  linear-gradient(
+src/pages/investidores/investidores.css:692  glow-gradient  radial-gradient(
+src/pages/investidores/investidores.css:693  glow-gradient  linear-gradient(
+src/pages/monetize.css:137  glow-gradient  radial-gradient(
+src/pages/monetize.css:145  glow-gradient  linear-gradient(
+src/pages/monetize.css:148  glow-gradient  radial-gradient(
+src/pages/partner/PartnerPage.jsx:89  glow-gradient  radial-gradient(
+src/pages/partner/PartnerPage.jsx:90  glow-gradient  linear-gradient(
+src/pages/partner/PartnerPage.jsx:263  glow-gradient  radial-gradient(
+src/pages/partner/PartnerPage.jsx:361  glow-gradient  radial-gradient(
+src/partner-copy.js:64  forbidden-terms  out-of-home
+en/partner.html:18  forbidden-terms  out-of-home
+src/components/home/ForWhom.jsx:74  offline-media  Mídia offline
+src/home-copy.js:126  offline-media  Mídia offline
+src/home-copy.js:201  offline-media  offline media
+src/home-copy.js:205  offline-media  offline media
+src/home-copy.js:256  offline-media  offline media
+src/home-copy.js:280  offline-media  Offline media
+src/home-copy.js:355  offline-media  medios offline
+src/home-copy.js:410  offline-media  medios offline
+src/home-copy.js:434  offline-media  Medios offline
+src/pages/campanha/main.jsx:466  offline-media  Mídia offline
+src/pages/campanha/main.jsx:606  offline-media  mídia offline
+src/pages/campanha/main.jsx:611  offline-media  mídia offline
+src/pages/campanha/main.jsx:719  offline-media  Mídia offline
+src/partner-copy.js:19  offline-media  mídia offline
+src/partner-copy.js:77  offline-media  offline media
+src/partner-copy.js:135  offline-media  medios offline
+index.html:22  offline-media  mídia offline
+index.html:23  offline-media  mídia offline
+index.html:37  offline-media  mídia offline
+index.html:41  offline-media  mídia offline
+index.html:47  offline-media  mídia offline
+index.html:92  offline-media  mídia offline
+cashback.html:21  offline-media  mídia offline
+cashback.html:32  offline-media  mídia offline
+investidores.html:12  offline-media  mídia offline
+investidores.html:23  offline-media  mídia offline
+en/index.html:18  offline-media  offline media
+en/index.html:19  offline-media  offline media
+en/index.html:30  offline-media  offline media
+en/index.html:31  offline-media  offline media
+en/index.html:33  offline-media  offline media
+en/index.html:35  offline-media  offline media
+en/index.html:36  offline-media  offline media
+en/cashback.html:18  offline-media  offline media
+en/partner.html:29  offline-media  offline media
+en/investidores.html:11  offline-media  offline media
+en/investidores.html:22  offline-media  offline media
+es/index.html:20  offline-media  Medios offline
+es/index.html:21  offline-media  medios offline
+es/index.html:22  offline-media  medios offline
+es/index.html:34  offline-media  Medios offline
+es/index.html:35  offline-media  medios offline
+es/index.html:37  offline-media  medios offline
+es/index.html:41  offline-media  Medios offline
+es/index.html:42  offline-media  medios offline
+es/index.html:84  offline-media  medios offline
+es/cashback.html:20  offline-media  medios offline
+es/partner.html:31  offline-media  medios offline
+es/investidores.html:11  offline-media  medios offline
+es/investidores.html:22  offline-media  medios offline
+public/llms.txt:9  offline-media  mídia offline
+src/pages/awards/awards-page-data.js:170  awards-top-n  4º lugar
+src/pages/awards/awards-page-data.js:211  awards-top-n  4th place
+src/pages/awards/awards-page-data.js:252  awards-top-n  4.º lugar
+
+verify-design-system: 609 violações em 76 arquivos (10 regras)
