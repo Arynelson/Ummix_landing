@@ -1,0 +1,301 @@
+=== src/components/home/Contact.jsx
+8:const INITIAL_FORM = {
+9-  name: '',
+10-  phone: '',
+11-  email: '',
+12-  message: '',
+13-};
+14-
+15-export default function Contact() {
+16-  const { locale } = useLocale();
+17-  const copy = HOME_COPY[locale].contact;
+18-  const anim = useAnimateOnScroll();
+19-  const [isOpen, setIsOpen] = useState(false);
+20-  const [form, setForm] = useState(INITIAL_FORM);
+21-  const [status, setStatus] = useState('idle');
+22-
+23-  useEffect(() => {
+24-    const onKeyDown = (event) => {
+--
+41:      await sendForm({
+42-        ...form,
+43-        _form_type: 'contact',
+44-      });
+45-
+46-      pushDataLayerEvent('ummix_lead_submitted', {
+47-        form_name: 'contact',
+48-        page_type: 'home',
+49-        language: locale === 'pt' ? 'pt-BR' : locale,
+50-      });
+51-      setStatus('success');
+52-      setForm(INITIAL_FORM);
+53-    } catch {
+54-      setStatus('error');
+55-    }
+56-  };
+57-
+--
+116:                  <input id="contact-name" name="name" value={form.name} onChange={updateField} required autoComplete="name" className="min-h-12 w-full rounded-xl border border-ummix-dark/20 px-4 text-base" />
+117-                </div>
+118-                <div>
+119-                  <label htmlFor="contact-phone" className="mb-2 block text-sm font-bold">{copy.phone}</label>
+120:                  <input id="contact-phone" name="phone" value={form.phone} onChange={updateField} required type="tel" autoComplete="tel" className="min-h-12 w-full rounded-xl border border-ummix-dark/20 px-4 text-base" />
+121-                </div>
+122-                <div>
+123-                  <label htmlFor="contact-email" className="mb-2 block text-sm font-bold">{copy.email}</label>
+124:                  <input id="contact-email" name="email" value={form.email} onChange={updateField} required type="email" autoComplete="email" className="min-h-12 w-full rounded-xl border border-ummix-dark/20 px-4 text-base" />
+125-                </div>
+126-                <div>
+127-                  <label htmlFor="contact-message" className="mb-2 block text-sm font-bold">{copy.message}</label>
+128:                  <textarea id="contact-message" name="message" value={form.message} onChange={updateField} rows="3" className="w-full rounded-xl border border-ummix-dark/20 px-4 py-3 text-base" />
+129-                </div>
+130-                {status === 'error' && <p className="text-sm font-semibold text-ummix-red" role="alert">{copy.error}</p>}
+131-                <button type="submit" disabled={status === 'submitting'} className="inline-flex min-h-12 items-center justify-center rounded-full bg-ummix-red px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-70">
+132-                  {status === 'submitting' ? copy.submitting : copy.submit}
+133-                </button>
+134-              </form>
+135-            )}
+136-          </div>
+137-        </div>
+138-      )}
+139-    </section>
+140-  );
+141-}
+=== src/pages/campanha/main.jsx
+247:      const result = await submitForm({
+248-        ...form,
+249-        _form_type: 'campaign',
+250-        website: event.currentTarget.elements.website?.value ?? '',
+251-        attribution: getAttributionParameters(),
+252-      })
+253-      if (result?.accepted !== true) throw new Error('Envio não confirmado.')
+254-      pushDataLayerEvent('ummix_lead_submitted', {
+255-        ...getAttributionParameters(),
+256-        form_name: 'campaign_lead',
+257-        page_path: window.location.pathname,
+258-        page_type: 'lp_campanha',
+259-        submission_channel: 'site_form',
+260-      })
+261-      setStatus('success')
+262-    } catch {
+263-      setStatus('error')
+--
+289:                <input id="campaign-lead-website" name="website" type="text" tabIndex="-1" autoComplete="off" />
+290-              </div>
+291-              <div className="campaign-lp__lead-fields">
+292-                <div className="campaign-lp__lead-field">
+293-                  <label htmlFor="campaign-lead-name">Nome</label>
+294:                  <input id="campaign-lead-name" name="name" value={form.name} onChange={updateField} autoComplete="name" required />
+295-                </div>
+296-                <div className="campaign-lp__lead-field">
+297-                  <label htmlFor="campaign-lead-email">E-mail</label>
+298:                  <input id="campaign-lead-email" name="email" value={form.email} onChange={updateField} type="email" autoComplete="email" required />
+299-                </div>
+300-                <div className="campaign-lp__lead-field">
+301-                  <label htmlFor="campaign-lead-phone">Telefone</label>
+302-                  <input
+303-                    id="campaign-lead-phone"
+304:                    name="phone"
+305-                    value={form.phone}
+306-                    onChange={updateField}
+307-                    onBlur={() => setPhoneTouched(true)}
+308-                    onInvalid={() => setPhoneTouched(true)}
+309-                    type="tel"
+310-                    inputMode="tel"
+311-                    autoComplete="tel-national"
+312-                    placeholder="(11) 91234-5678"
+313-                    aria-invalid={phoneInvalid}
+314-                    aria-describedby={phoneInvalid ? 'campaign-lead-phone-error' : undefined}
+315-                    required
+316-                  />
+317-                  {phoneInvalid && (
+318-                    <p id="campaign-lead-phone-error" className="campaign-lp__lead-status campaign-lp__lead-status--error" role="alert">
+319-                      Telefone incorreto. Informe o DDD e um telefone com 10 ou 11 dígitos.
+320-                    </p>
+--
+325:                  <select id="campaign-lead-advertised" name="already_advertised_radio_tv" value={form.already_advertised_radio_tv} onChange={updateField} required>
+326-                    <option value="" disabled>Selecione uma opção</option>
+327-                    <option value="sim">Sim</option>
+328-                    <option value="nao">Não</option>
+329-                  </select>
+330-                </div>
+331-              </div>
+332-
+333-              {status === 'error' && (
+334-                <p className="campaign-lp__lead-status campaign-lp__lead-status--error" role="alert">
+335-                  Não foi possível enviar seus dados agora. Tente novamente em instantes.
+336-                </p>
+337-              )}
+338-              <button className="campaign-lp__lead-submit" type="submit" disabled={status === 'submitting'}>
+339-                {status === 'submitting' ? 'Enviando...' : 'Quero falar com a Ummix'}
+340-                <ArrowIcon />
+341-              </button>
+=== src/pages/MonetizePage.jsx
+250:      await sendForm({
+251-        ...Object.fromEntries(formData.entries()),
+252-        _form_type: 'monetize',
+253-        origem: 'monetize',
+254-      })
+255-      pushDataLayerEvent('ummix_lead_submitted', {
+256-        form_name: 'monetize',
+257-        page_type: 'monetize',
+258-        language: locale === 'pt' ? 'pt-BR' : locale,
+259-      })
+260-      formElement.reset()
+261-      setHasStreaming('')
+262-      setAudienceKnown('')
+263-      setStatus('success')
+264-    } catch {
+265-      setStatus('error')
+266-    }
+--
+288:            <input id="monetize-vehicle-name" name="nomeVeiculo" type="text" placeholder={copy.placeholders.vehicleName} autoComplete="organization" required />
+289-          </div>
+290-          <div className="monetize-field monetize-field--full">
+291-            <span className="monetize-field__label" id="monetize-vehicle-type-label">{copy.fields.vehicleType}<span aria-hidden="true">*</span></span>
+292:            <ChoiceGroup name="tipoVeiculo" options={copy.vehicleTypes} required labelledBy="monetize-vehicle-type-label" />
+293-          </div>
+294-          <div className="monetize-field">
+295-            <FieldLabel htmlFor="monetize-legal-name" label={copy.fields.legalName} />
+296:            <input id="monetize-legal-name" name="razaoSocial" type="text" placeholder={copy.placeholders.legalName} autoComplete="organization" required />
+297-          </div>
+298-          <div className="monetize-field">
+299-            <FieldLabel htmlFor="monetize-cnpj" label={copy.fields.cnpj} />
+300:            <input id="monetize-cnpj" name="cnpj" type="text" inputMode="numeric" placeholder={copy.placeholders.cnpj} maxLength="18" autoComplete="off" onInput={(event) => { event.currentTarget.value = formatCnpj(event.currentTarget.value) }} required />
+301-          </div>
+302-          <div className="monetize-field">
+303-            <FieldLabel htmlFor="monetize-city" label={copy.fields.city} />
+304:            <input id="monetize-city" name="cidade" type="text" placeholder={copy.placeholders.city} autoComplete="address-level2" required />
+305-          </div>
+306-          <div className="monetize-field">
+307-            <FieldLabel htmlFor="monetize-state" label={copy.fields.state} />
+308:            <select id="monetize-state" name="estado" defaultValue="" autoComplete="address-level1" required>
+309-              <option value="" disabled>{copy.statePlaceholder}</option>
+310-              {copy.states.map(([value, label]) => <option value={value} key={value}>{label}</option>)}
+311-            </select>
+312-          </div>
+313-          <div className="monetize-field monetize-field--full">
+314-            <FieldLabel htmlFor="monetize-site" label={copy.fields.site} />
+315:            <input id="monetize-site" name="site" type="text" inputMode="url" placeholder={copy.placeholders.site} autoComplete="url" spellCheck="false" required />
+316-          </div>
+317-        </div>
+318-      </fieldset>
+319-
+320-      <fieldset>
+321-        <legend>{copy.sections.responsible}</legend>
+322-        <div className="monetize-form-grid">
+323-          <div className="monetize-field">
+324-            <FieldLabel htmlFor="monetize-responsible-name" label={copy.fields.responsibleName} />
+325:            <input id="monetize-responsible-name" name="nomeResponsavel" type="text" placeholder={copy.placeholders.responsibleName} autoComplete="name" required />
+326-          </div>
+327-          <div className="monetize-field">
+328-            <FieldLabel htmlFor="monetize-role" label={copy.fields.role} />
+329:            <input id="monetize-role" name="cargo" type="text" placeholder={copy.placeholders.role} autoComplete="organization-title" required />
+330-          </div>
+331-          <div className="monetize-field">
+332-            <FieldLabel htmlFor="monetize-whatsapp" label={copy.fields.whatsapp} />
+333:            <input id="monetize-whatsapp" name="whatsapp" type="tel" inputMode="tel" placeholder={copy.placeholders.whatsapp} autoComplete="tel" maxLength="15" onInput={(event) => { event.currentTarget.value = formatPhone(event.currentTarget.value) }} required />
+334-          </div>
+335-          <div className="monetize-field">
+336-            <FieldLabel htmlFor="monetize-email" label={copy.fields.email} />
+337:            <input id="monetize-email" name="email" type="email" placeholder={copy.placeholders.email} autoComplete="email" required />
+338-          </div>
+339-        </div>
+340-      </fieldset>
+341-
+342-      <fieldset>
+343-        <legend>{copy.sections.streaming}</legend>
+344-        <div className="monetize-form-grid">
+345-          <div className="monetize-field monetize-field--full">
+346-            <span className="monetize-field__label" id="monetize-has-streaming-label">{copy.fields.hasStreaming}<span aria-hidden="true">*</span></span>
+347-            <ChoiceGroup
+348:              name="possuiStreaming"
+349-              options={[copy.yes, copy.no]}
+350-              value={hasStreaming}
+351-              onChange={handleStreamingChange}
+352-              required
+353-              labelledBy="monetize-has-streaming-label"
+354-            />
+355-          </div>
+356-          {hasStreaming === copy.yes ? (
+357-            <>
+358-              <div className="monetize-field monetize-field--full">
+359-                <span className="monetize-field__label" id="monetize-stream-type-label">{copy.fields.streamType}<span aria-hidden="true">*</span></span>
+360:                <ChoiceGroup name="tipoStreaming" options={copy.streamTypes} required labelledBy="monetize-stream-type-label" />
+361-              </div>
+362-              <div className="monetize-field monetize-field--full">
+363-                <FieldLabel htmlFor="monetize-stream-link" label={copy.fields.streamLink} />
+364:                <input id="monetize-stream-link" name="linkStreaming" type="url" placeholder={copy.placeholders.streamLink} required />
+365-              </div>
+366-              <div className="monetize-field monetize-field--full">
+367-                <FieldLabel htmlFor="monetize-provider" label={copy.fields.provider} required={false} />
+368:                <input id="monetize-provider" name="fornecedorStreaming" type="text" placeholder={copy.placeholders.provider} />
+369-              </div>
+370-              <div className="monetize-field monetize-field--full">
+371-                <FieldLabel htmlFor="monetize-monthly-cost" label={copy.fields.monthlyCost} />
+372:                <select id="monetize-monthly-cost" name="custoStreaming" defaultValue="" required>
+373-                  <option value="" disabled>{copy.chooseOption}</option>
+374-                  {copy.costOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+375-                </select>
+376-              </div>
+377-              <div className="monetize-field monetize-field--full">
+378-                <span className="monetize-field__label" id="monetize-audience-known-label">{copy.fields.knowsAudience}<span aria-hidden="true">*</span></span>
+379-                <ChoiceGroup
+380:                  name="conheceAudiencia"
+381-                  options={[copy.yes, copy.no]}
+382-                  value={audienceKnown}
+383-                  onChange={(event) => setAudienceKnown(event.currentTarget.value)}
+384-                  required
+385-                  labelledBy="monetize-audience-known-label"
+386-                />
+387-              </div>
+388-              {audienceKnown === copy.yes ? (
+389-                <div className="monetize-field monetize-field--full monetize-audience-field">
+390-                  <FieldLabel htmlFor="monetize-monthly-audience" label={copy.fields.monthlyAudience} />
+391:                  <input id="monetize-monthly-audience" name="audienciaMensal" type="number" min="0" inputMode="numeric" placeholder={copy.placeholders.monthlyAudience} required />
+392-                  <p>{copy.audienceHint}</p>
+393-                </div>
+394-              ) : null}
+395-            </>
+396-          ) : null}
+397-        </div>
+398-      </fieldset>
+399-
+400-      <fieldset className="monetize-consent">
+401-        <legend>{copy.sections.consent}</legend>
+402-        <label className="monetize-consent__label">
+403:          <input type="checkbox" name="consentimento" value="autorizado" required />
+404-          <span>{copy.consent}</span>
+405-        </label>
+406-      </fieldset>
+407-
+408-      {status === 'error' ? <p className="monetize-form-error" role="alert">{copy.error}</p> : null}
+409-      <button className="monetize-button monetize-button--submit" type="submit" disabled={status === 'submitting'}>
+410-        {status === 'submitting' ? copy.submitting : copy.submit}
+411-        <ArrowIcon />
+412-      </button>
+413-    </form>
+414-  )
+415-}
+416-
+417-function Registration({ copy, locale }) {
+418-  return (
+419-    <section id="cadastro" className="monetize-section monetize-registration" aria-labelledby="registration-title">
+=== src/pages/partner/PartnerPage.jsx
+337:      await sendForm({
+338-        nome: formData.get('nome'),
+339-        email: formData.get('email'),
+340-        empresa: formData.get('empresa'),
+341-        telefone: formData.get('telefone'),
+342-        _form_type: 'partner',
+343-      })
+344-
+345-      pushDataLayerEvent('ummix_lead_submitted', {
+346-        form_name: 'partner',
+347-        page_type: 'partner',
+348-        language: locale === 'pt' ? 'pt-BR' : locale,
+349-      })
+350-      formElement.reset()
+351-      setStatus('success')
+352-    } catch {
+353-      setStatus('error')

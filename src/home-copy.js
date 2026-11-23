@@ -1,7 +1,7 @@
 export const HOME_COPY = {
   pt: {
     hero: {
-      audience: 'Rádio e TV para pequenas e médias empresas.',
+      audience: 'A central de dados que faz campanhas de rádio e TV performarem, para pequenas e médias empresas.',
       headingLineOne: 'Mais impactos no público certo.',
       headingLineTwo: 'Mais eficiência para seu investimento.',
       description: 'Crie sua campanha de rádio ou TV em cinco minutos. Você define quem quer atingir e quanto investir; a Ummix Ads cuida da seleção dos veículos e horários.',
@@ -44,11 +44,11 @@ export const HOME_COPY = {
       kicker: 'O que o cliente vê',
       titleAccent: 'Simples',
       titleRest: 'para quem contrata.',
-      description: 'Toda a complexidade da mídia off, embrulhada em três entregáveis claros.',
+      description: 'Toda a complexidade de rádio e TV, embrulhada em três entregáveis claros.',
       cards: ['Uma única campanha', 'Um único contrato', 'Um único relatório'],
     },
     segmentations: {
-      kicker: 'A precisão do digital, na mídia OFF',
+      kicker: 'A precisão do digital, no rádio e na TV',
       title: 'Segmentações',
       titleAccent: 'disponíveis',
       description: 'Escolha o público certo. Atinja exatamente quem importa para sua campanha.',
@@ -99,7 +99,7 @@ export const HOME_COPY = {
       title: 'Menos complexidade.',
       accent: 'Mais tempo',
       titleRest: 'para o que importa.',
-      description: 'A Ummix absorve toda a operação da mídia off para que você foque em estratégia e resultado.',
+      description: 'A Ummix absorve toda a operação de rádio e TV para que você foque em estratégia e resultado.',
       items: ['Negociar com dezenas de veículos', 'Controlar entregas e prazos', 'Conferir veiculações', 'Gerenciar pagamentos', 'Consolidar dados e relatórios'],
     },
     deliverables: {
@@ -123,7 +123,7 @@ export const HOME_COPY = {
         ['Veículos', 'Relacionamento profissional, claro e de longo prazo.'],
         ['Poder Público', 'Comunicação institucional planejada para cada região e público.'],
         ['Bandas, cantores, duplas e escritórios musicais', 'Divulgação de lançamentos, shows e projetos para públicos locais.'],
-        ['Agências Digitais e Gestores de Tráfego', 'Mídia offline para complementar estratégias e campanhas digitais.'],
+        ['Agências Digitais e Gestores de Tráfego', 'Rádio e TV para complementar estratégias e campanhas digitais.'],
       ],
     },
     cashbackSection: {
@@ -134,6 +134,7 @@ export const HOME_COPY = {
     },
     contact: {
       button: 'Falar com a Ummix',
+      sectionTitle: 'Prefere conversar antes de começar?',
       close: 'Fechar formulário',
       title: 'Fale com a Ummix',
       description: 'Conte um pouco sobre o que você precisa. Nossa equipe entra em contato.',
@@ -155,7 +156,7 @@ export const HOME_COPY = {
   },
   en: {
     hero: {
-      audience: 'Radio and TV for small and medium-sized businesses.',
+      audience: 'The data hub that makes radio and TV campaigns perform, for small and medium-sized businesses.',
       headingLineOne: 'More impressions with the right audience.',
       headingLineTwo: 'More efficiency for your investment.',
       description: 'Create your radio or TV campaign in five minutes. You define who you want to reach and how much to invest; Ummix Ads takes care of selecting the media outlets and time slots.',
@@ -198,11 +199,11 @@ export const HOME_COPY = {
       kicker: 'What the client sees',
       titleAccent: 'Simple',
       titleRest: 'for the people who hire us.',
-      description: 'All the complexity of offline media, wrapped into three clear deliverables.',
+      description: 'All the complexity of radio and TV, wrapped into three clear deliverables.',
       cards: ['One campaign', 'One contract', 'One report'],
     },
     segmentations: {
-      kicker: 'Digital precision for offline media',
+      kicker: 'Digital precision for radio and TV',
       title: 'Available',
       titleAccent: 'targeting',
       description: 'Choose the right audience. Reach exactly who matters to your campaign.',
@@ -253,7 +254,7 @@ export const HOME_COPY = {
       title: 'Less complexity.',
       accent: 'More time',
       titleRest: 'for what matters.',
-      description: 'Ummix absorbs the entire offline media operation so you can focus on strategy and results.',
+      description: 'Ummix absorbs the entire radio and TV operation so you can focus on strategy and results.',
       items: ['Negotiating with dozens of media outlets', 'Tracking deliveries and deadlines', 'Checking placements', 'Managing payments', 'Consolidating data and reports'],
     },
     deliverables: {
@@ -277,7 +278,7 @@ export const HOME_COPY = {
         ['Media outlets', 'Professional, clear and long-term relationships.'],
         ['Public sector', 'Institutional communication planned for each region and audience.'],
         ['Bands, singers, duos and music offices', 'Promotion for releases, shows and projects aimed at local audiences.'],
-        ['Digital agencies and media buyers', 'Offline media to complement digital strategies and campaigns.'],
+        ['Digital agencies and media buyers', 'Radio and TV to complement digital strategies and campaigns.'],
       ],
     },
     cashbackSection: {
@@ -288,6 +289,7 @@ export const HOME_COPY = {
     },
     contact: {
       button: 'Talk to Ummix',
+      sectionTitle: 'Prefer to talk before you start?',
       close: 'Close form',
       title: 'Talk to Ummix',
       description: 'Tell us a little about what you need. Our team will get in touch.',
@@ -309,7 +311,7 @@ export const HOME_COPY = {
   },
   es: {
     hero: {
-      audience: 'Radio y TV para pequeñas y medianas empresas.',
+      audience: 'La central de datos que hace que las campañas de radio y TV rindan, para pequeñas y medianas empresas.',
       headingLineOne: 'Más impactos en la audiencia correcta.',
       headingLineTwo: 'Más eficiencia para tu inversión.',
       description: 'Crea tu campaña de radio o televisión en cinco minutos. Tú defines a quién quieres alcanzar y cuánto invertir; Ummix Ads se encarga de seleccionar los medios y horarios.',
@@ -352,11 +354,11 @@ export const HOME_COPY = {
       kicker: 'Lo que ve el cliente',
       titleAccent: 'Simple',
       titleRest: 'para quien contrata.',
-      description: 'Toda la complejidad de los medios offline, resumida en tres entregables claros.',
+      description: 'Toda la complejidad de la radio y la TV, resumida en tres entregables claros.',
       cards: ['Una sola campaña', 'Un solo contrato', 'Un solo informe'],
     },
     segmentations: {
-      kicker: 'La precisión de lo digital, en los medios OFF',
+      kicker: 'La precisión de lo digital, en la radio y la TV',
       title: 'Segmentaciones',
       titleAccent: 'disponibles',
       description: 'Elige la audiencia adecuada. Llega exactamente a quienes importan para tu campaña.',
@@ -407,7 +409,7 @@ export const HOME_COPY = {
       title: 'Menos complejidad.',
       accent: 'Más tiempo',
       titleRest: 'para lo que importa.',
-      description: 'Ummix absorbe toda la operación de medios offline para que te enfoques en la estrategia y los resultados.',
+      description: 'Ummix absorbe toda la operación de radio y TV para que te enfoques en la estrategia y los resultados.',
       items: ['Negociar con decenas de medios', 'Controlar entregas y plazos', 'Comprobar publicaciones', 'Gestionar pagos', 'Consolidar datos e informes'],
     },
     deliverables: {
@@ -431,7 +433,7 @@ export const HOME_COPY = {
         ['Medios', 'Una relación profesional, clara y de largo plazo.'],
         ['Sector público', 'Comunicación institucional planificada para cada región y audiencia.'],
         ['Bandas, cantantes, dúos y oficinas de música', 'Promoción de lanzamientos, shows y proyectos para audiencias locales.'],
-        ['Agencias digitales y gestores de tráfico', 'Medios offline para complementar estrategias y campañas digitales.'],
+        ['Agencias digitales y gestores de tráfico', 'Radio y TV para complementar estrategias y campañas digitales.'],
       ],
     },
     cashbackSection: {
@@ -442,6 +444,7 @@ export const HOME_COPY = {
     },
     contact: {
       button: 'Hablar con Ummix',
+      sectionTitle: '¿Prefieres conversar antes de empezar?',
       close: 'Cerrar formulario',
       title: 'Habla con Ummix',
       description: 'Cuéntanos un poco sobre lo que necesitas. Nuestro equipo se pondrá en contacto.',

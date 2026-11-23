@@ -1,19 +1,22 @@
+import { ArrowDownToLine, ArrowRight, Briefcase, Building2, CreditCard, FileText, UserPlus, Wallet } from 'lucide-react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import ButtonLink from '../../components/ui/ButtonLink'
+import { Button } from '../../ds/components'
 import { PLATFORM_SIGNUP } from '../../constants/urls'
 import { useAnimateOnScroll } from '../../hooks/useAnimateOnScroll'
 import { useLocale } from '../../LocaleProvider.jsx'
 import { LABELS } from '../../i18n-labels.js'
 import { CASHBACK_COPY } from '../../cashback-copy.js'
 
+const ICON_PROPS = { strokeWidth: 1.75, 'aria-hidden': true }
+
 /* ---- Hero ---- */
 function Eyebrow() {
   const { locale } = useLocale()
   const copy = CASHBACK_COPY[locale]
   return (
-    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-ummix-red mb-7">
-      <span className="w-2 h-2 rounded-full bg-ummix-red shadow-[0_0_0_4px_rgba(155,25,26,0.15)]" />
+    <span className="inline-flex items-center gap-2 font-mono text-xs font-medium tracking-[0.08em] uppercase text-brand mb-7">
+      <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
       {copy.eyebrow}
     </span>
   )
@@ -24,23 +27,21 @@ function HeroCTAs() {
   const copy = CASHBACK_COPY[locale]
   return (
     <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-      <ButtonLink
+      <Button
         href={PLATFORM_SIGNUP}
         target="_blank"
         rel="noopener noreferrer"
+        variant="primary"
+        size="lg"
         className="w-full sm:w-auto"
+        iconRight={<ArrowRight size={16} {...ICON_PROPS} />}
       >
         <span className="sm:hidden">{copy.platformShort}</span>
         <span className="hidden sm:inline">{copy.platformLong}</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </ButtonLink>
-      <ButtonLink
-        href="#como-funciona"
-        variant="outline-light"
-        className="w-full sm:w-auto"
-      >
+      </Button>
+      <Button href="#como-funciona" variant="secondary" size="lg" className="w-full sm:w-auto">
         {copy.howItWorks}
-      </ButtonLink>
+      </Button>
     </div>
   )
 }
@@ -51,19 +52,13 @@ function Hero() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section className="relative overflow-hidden bg-ummix-dark text-white">
-      {/* Background glow */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0" style={{background: 'radial-gradient(1100px 560px at 12% 20%, rgba(155,25,26,0.32), transparent 62%), radial-gradient(820px 460px at 88% 90%, rgba(155,25,26,0.14), transparent 66%)'}} />
-        <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)', backgroundSize: '56px 56px', maskImage: 'radial-gradient(ellipse 80% 70% at 40% 40%, #000 35%, transparent 100%)'}} />
-      </div>
-
+    <section data-theme="dark" className="relative overflow-hidden bg-ink-900 text-strong">
       <div ref={anim.ref} style={anim.style} className="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-6 pb-20 pt-36 text-center md:pb-24 md:pt-40">
         <Eyebrow />
-        <h1 className="font-heading font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance mb-6">
-          {copy.heroTitle} <em className="not-italic text-ummix-red">{copy.heroAccent}</em>.
+        <h1 className="font-display font-extrabold text-[clamp(40px,5.4vw,68px)] leading-none tracking-tight text-balance text-strong mb-6">
+          {copy.heroTitle} <em className="not-italic text-brand">{copy.heroAccent}</em>.
         </h1>
-        <p className="section-subtitle max-w-[560px] text-[18px] leading-relaxed text-white/75 sm:text-[19px]">
+        <p className="section-subtitle max-w-[560px] text-[18px] leading-relaxed text-body sm:text-[19px]">
           {copy.heroDescription}
         </p>
         <HeroCTAs />
@@ -77,17 +72,17 @@ const PARTICIPANTS = [
   {
     t: 'Contratante',
     d: 'O anunciante que realiza a contratação da campanha diretamente.',
-    icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></>,
+    icon: <Building2 size={24} {...ICON_PROPS} />,
   },
   {
     t: 'Mídia',
     d: 'O veículo que assina o PI, quando aplicável à negociação.',
-    icon: <><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></>,
+    icon: <img src="/assets/ds/icones-pixel/torre.svg" alt="" aria-hidden="true" width="28" height="28" />,
   },
   {
     t: 'Agência / Agência Digital / Gestor de Tráfego',
     d: 'Gestor ou intermediador responsável pela contratação.',
-    icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></>,
+    icon: <Briefcase size={24} {...ICON_PROPS} />,
   },
 ]
 
@@ -97,28 +92,28 @@ function WhoIsEligible() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section className="bg-white py-18 md:py-24">
+    <section className="bg-page py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
-          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.eligibility}</span>
-          <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
+          <span className="inline-block font-mono text-xs font-medium tracking-[0.08em] uppercase text-brand mb-3">{copy.eligibility}</span>
+          <h2 className="font-display font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-strong text-balance mb-4">
             {copy.eligibilityTitle}
           </h2>
-          <p className="section-subtitle text-lg text-ummix-gray-dark">
+          <p className="section-subtitle text-lg text-body">
             {copy.eligibilityDescription}
           </p>
         </div>
 
         <div className="mb-12 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
           {PARTICIPANTS.map((p, index) => (
-            <div key={p.t} className="rounded-3xl border border-black/8 bg-white p-6 transition-all hover:-translate-y-1 hover:bg-ummix-gray md:p-8">
-              <div className="w-13 h-13 rounded-2xl bg-ummix-red/8 text-ummix-red flex items-center justify-center mb-5">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{p.icon}</svg>
+            <div key={p.t} className="rounded-[var(--radius-xl)] border border-line-subtle bg-card p-6 transition-colors hover:bg-sunken md:p-8">
+              <div className="w-13 h-13 rounded-[var(--radius-lg)] bg-accent-soft text-brand flex items-center justify-center mb-5">
+                {p.icon}
               </div>
-              <h3 className="font-heading font-bold text-[19px] tracking-tight text-ummix-dark mb-2">{copy.participants[index][0]}</h3>
-              <p className="text-sm leading-relaxed text-ummix-gray-dark">{copy.participants[index][1]}</p>
-              <div className="mt-5 inline-flex items-center gap-2 text-ummix-red text-sm font-bold">
-                <span className="w-2 h-2 rounded-full bg-ummix-red" />
+              <h3 className="font-display font-bold text-[19px] tracking-tight text-strong mb-2">{copy.participants[index][0]}</h3>
+              <p className="text-sm leading-relaxed text-body">{copy.participants[index][1]}</p>
+              <div className="mt-5 inline-flex items-center gap-2 text-brand text-sm font-bold">
+                <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
                 {copy.eachCashback}
               </div>
             </div>
@@ -126,13 +121,13 @@ function WhoIsEligible() {
         </div>
 
         {/* Rules */}
-        <div className="mx-auto max-w-3xl rounded-3xl border border-black/8 bg-ummix-gray p-6 sm:p-8 md:p-10">
-          <h3 className="font-heading font-bold text-xl tracking-tight text-ummix-dark mb-6">{copy.rulesTitle}</h3>
+        <div className="mx-auto max-w-3xl rounded-[var(--radius-xl)] border border-line-subtle bg-sunken p-6 sm:p-8 md:p-10">
+          <h3 className="font-display font-bold text-xl tracking-tight text-strong mb-6">{copy.rulesTitle}</h3>
           <ul className="space-y-4">
             {copy.rules.map((rule, i) => (
               <li key={i} className="flex items-start gap-4">
-                <span className="mt-0.5 w-6 h-6 rounded-full bg-ummix-red/10 text-ummix-red text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
-                <p className="text-sm leading-relaxed text-ummix-gray-dark">{rule}</p>
+                <span className="mt-0.5 w-6 h-6 rounded-full bg-accent-soft text-brand font-mono text-xs font-medium flex items-center justify-center shrink-0">{i + 1}</span>
+                <p className="text-sm leading-relaxed text-body">{rule}</p>
               </li>
             ))}
           </ul>
@@ -147,27 +142,27 @@ const STEPS = [
   {
     n: '01', t: 'Cadastro',
     d: 'O participante realiza seu cadastro na Plataforma de Cashback da Ummix Ads.',
-    icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></>,
+    icon: UserPlus,
   },
   {
     n: '02', t: 'Pagamento do contrato',
     d: 'Após a confirmação do pagamento dentro do prazo de vencimento, o cashback torna-se elegível.',
-    icon: <><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></>,
+    icon: CreditCard,
   },
   {
     n: '03', t: 'Solicitação',
     d: 'O participante solicita o crédito direto na plataforma, informando os dados do contrato.',
-    icon: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></>,
+    icon: FileText,
   },
   {
     n: '04', t: 'Crédito disponibilizado',
     d: 'Após a validação das informações, o valor é creditado na conta do participante dentro da plataforma.',
-    icon: <><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></>,
+    icon: Wallet,
   },
   {
     n: '05', t: 'Utilização do benefício',
     d: 'O crédito pode ser usado para resgatar vouchers, trocar por produtos parceiros ou sacar em dinheiro.',
-    icon: <><path d="M12 2v14M6 10l6 6 6-6"/><path d="M4 20h16"/></>,
+    icon: ArrowDownToLine,
   },
 ]
 
@@ -177,37 +172,40 @@ function HowItWorks() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section id="como-funciona" className="bg-ummix-gray py-18 md:py-24">
+    <section id="como-funciona" className="bg-sunken py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
         <div className="mb-10 text-center md:mb-12">
-          <span className="inline-block text-xs font-bold tracking-widest uppercase text-ummix-red mb-3">{copy.howKicker}</span>
-          <h2 className="font-heading font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-ummix-dark text-balance mb-4">
+          <span className="inline-block font-mono text-xs font-medium tracking-[0.08em] uppercase text-brand mb-3">{copy.howKicker}</span>
+          <h2 className="font-display font-extrabold text-[clamp(30px,3.6vw,48px)] tracking-tight text-strong text-balance mb-4">
             {copy.howTitle}
           </h2>
-          <p className="section-subtitle text-lg text-ummix-gray-dark">
+          <p className="section-subtitle text-lg text-body">
             {copy.howDescription}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-black/8 bg-black/8 sm:grid-cols-2 lg:grid-cols-5">
-          {STEPS.map((s, i) => (
-            <div
-              key={s.n}
-              className={`group relative bg-white p-6 transition-colors hover:bg-white/80 md:p-8 ${
-                i === STEPS.length - 1 ? 'sm:col-span-2 lg:col-span-1' : ''
-              }`}
-            >
-              <div className="inline-flex items-center gap-2 text-ummix-red text-xs font-bold tracking-widest uppercase mb-6">
-                <span className="w-2 h-2 rounded-full bg-ummix-red shadow-[0_0_0_4px_rgba(155,25,26,0.15)]" />
-                {copy.stepLabel} {s.n}
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-xl)] border border-line-subtle bg-line-subtle sm:grid-cols-2 lg:grid-cols-5">
+          {STEPS.map((s, i) => {
+            const Icon = s.icon
+            return (
+              <div
+                key={s.n}
+                className={`group relative bg-card p-6 transition-colors hover:bg-page md:p-8 ${
+                  i === STEPS.length - 1 ? 'sm:col-span-2 lg:col-span-1' : ''
+                }`}
+              >
+                <div className="inline-flex items-center gap-2 text-brand font-mono text-xs font-medium tracking-[0.08em] uppercase mb-6">
+                  <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
+                  {copy.stepLabel} {s.n}
+                </div>
+                <div className="w-11 h-11 rounded-[var(--radius-lg)] bg-accent-soft text-brand flex items-center justify-center mb-5">
+                  <Icon size={20} {...ICON_PROPS} />
+                </div>
+                <h3 className="font-display font-bold text-[17px] tracking-tight text-strong mb-2">{copy.steps[i][0]}</h3>
+                <p className="text-sm leading-relaxed text-body">{copy.steps[i][1]}</p>
               </div>
-              <div className="w-11 h-11 rounded-2xl bg-ummix-red/8 text-ummix-red flex items-center justify-center mb-5">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{s.icon}</svg>
-              </div>
-              <h3 className="font-heading font-bold text-[17px] tracking-tight text-ummix-dark mb-2">{copy.steps[i][0]}</h3>
-              <p className="text-sm leading-relaxed text-ummix-gray-dark">{copy.steps[i][1]}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
@@ -221,26 +219,24 @@ function Highlight() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section className="bg-white py-18 md:py-24">
+    <section className="bg-page py-18 md:py-24">
       <div ref={anim.ref} style={anim.style} className="max-w-6xl mx-auto px-6">
-        <div className="relative mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 overflow-hidden rounded-3xl bg-ummix-dark p-6 text-white sm:p-8 md:grid-cols-[auto_1fr] md:gap-12 md:p-12 lg:p-14">
-          <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(560px 340px at 100% 0%, rgba(155,25,26,0.4), transparent 60%)'}} />
-
-          <div className="relative z-10 font-heading font-extrabold leading-none tracking-tighter text-white flex items-start" style={{fontSize: 'clamp(80px, 12vw, 140px)', letterSpacing: '-0.05em'}}>
-            3<span className="text-ummix-red" style={{fontSize: '0.5em', marginTop: '0.15em'}}>%</span>
+        <div data-theme="dark" className="relative mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 overflow-hidden rounded-[var(--radius-xl)] bg-ink-900 p-6 text-strong sm:p-8 md:grid-cols-[auto_1fr] md:gap-12 md:p-12 lg:p-14">
+          <div className="relative z-10 font-mono font-semibold leading-none text-strong flex items-start" style={{fontSize: 'clamp(80px, 12vw, 140px)', letterSpacing: '-0.04em'}}>
+            3<span className="text-brand" style={{fontSize: '0.5em', marginTop: '0.15em'}}>%</span>
           </div>
 
           <div className="relative z-10">
-            <h2 className="font-heading font-extrabold text-[clamp(26px,3.2vw,38px)] tracking-tight leading-tight text-white text-balance mb-4">
+            <h2 className="font-display font-extrabold text-[clamp(26px,3.2vw,38px)] tracking-tight leading-tight text-strong text-balance mb-4">
               {copy.highlightTitle}
             </h2>
-            <p className="copy-justify mb-6 text-base leading-relaxed text-white/75">
+            <p className="copy-justify mb-6 text-base leading-relaxed text-body">
               {copy.highlightDescription}
             </p>
             <div className="flex flex-wrap gap-3">
               {copy.split.map((label) => (
-                <span key={label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/6 border border-white/14 text-sm text-white/85">
-                  <span className="w-2 h-2 rounded-full bg-ummix-red" />
+                <span key={label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-raised border border-line text-sm text-body">
+                  <span className="w-2 h-2 rounded-full bg-accent" aria-hidden="true" />
                   {label}
                 </span>
               ))}
@@ -259,12 +255,12 @@ function CTA() {
   const anim = useAnimateOnScroll()
 
   return (
-    <section id="formulario" className="bg-ummix-dark text-white py-12 md:py-16">
-      <div ref={anim.ref} style={anim.style} className="mx-auto flex max-w-3xl justify-center px-6">
-        <h2 className="sr-only">{copy.ctaTitle}</h2>
-        <ButtonLink href={PLATFORM_SIGNUP} target="_blank" rel="noopener noreferrer" size="lg">
+    <section id="formulario" data-theme="dark" className="bg-ink-900 text-strong py-12 md:py-16">
+      <div ref={anim.ref} style={anim.style} className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 md:flex-row md:items-center md:justify-between">
+        <h2 className="max-w-xl font-display text-3xl font-bold leading-tight tracking-tight text-strong md:text-4xl">{copy.ctaHeading}</h2>
+        <Button href={PLATFORM_SIGNUP} target="_blank" rel="noopener noreferrer" variant="primary" size="lg">
           {copy.cta}
-        </ButtonLink>
+        </Button>
       </div>
     </section>
   )

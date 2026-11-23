@@ -37,6 +37,7 @@ export const CASHBACK_COPY = {
     highlightDescription: 'Contratante, veículo de mídia e agência recebem 1% cada. O cashback é creditado de forma transparente e tem validade de 90 dias após a disponibilização.',
     split: ['Contratante: 1%', 'Veículo: 1%', 'Agência: 1%'],
     ctaTitle: 'Solicitar cashback',
+    ctaHeading: 'Pronto para receber seu cashback?',
     cta: 'Solicitar meu cashback',
   },
   en: {
@@ -77,6 +78,7 @@ export const CASHBACK_COPY = {
     highlightDescription: 'The contracting client, media outlet and agency each receive 1%. Cashback is credited transparently and remains valid for 90 days after it becomes available.',
     split: ['Contracting client: 1%', 'Media outlet: 1%', 'Agency: 1%'],
     ctaTitle: 'Request cashback',
+    ctaHeading: 'Ready to get your cashback?',
     cta: 'Request my cashback',
   },
   es: {
@@ -117,6 +119,7 @@ export const CASHBACK_COPY = {
     highlightDescription: 'El contratante, el medio y la agencia reciben un 1% cada uno. El cashback se acredita de forma transparente y es válido durante 90 días después de estar disponible.',
     split: ['Contratante: 1%', 'Medio: 1%', 'Agencia: 1%'],
     ctaTitle: 'Solicitar cashback',
+    ctaHeading: '¿Listo para recibir tu cashback?',
     cta: 'Solicitar mi cashback',
   },
 }

@@ -1,12 +1,10 @@
+/* Investidores / Quem Somos: só tokens do design system oficial (src/ds/tokens).
+   Todas as seções têm data-theme="dark", então --text-*, --border-* e --surface-* já vêm invertidos. */
 .investors-page {
-  --investors-black: #070707;
-  --investors-panel: #101010;
-  --investors-red: #9b191a;
-  --investors-red-bright: #c52224;
-  --investors-gold: #d6a23d;
   overflow: clip;
-  background: var(--investors-black);
-  color: #fff;
+  background: var(--ink-900);
+  color: var(--text-inverse);
+  font-family: var(--font-body);
 }
 
 .investors-shell {
@@ -14,15 +12,17 @@
   margin-inline: auto;
 }
 
+/* Kickers: IBM Plex Mono em caixa alta. */
 .investors-kicker,
 .investors-section-heading > span {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  color: #e23a3c;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.13em;
+  color: var(--text-brand);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
 }
 
@@ -31,30 +31,28 @@
   height: 1px;
   background: currentColor;
   content: "";
-  opacity: 0.7;
 }
 
+/* Variante neutra (antes dourada; o design system não tem dourado fora da paleta de gráficos). */
 .investors-kicker--gold {
-  color: var(--investors-gold);
+  color: var(--text-body);
 }
 
-/* Hero: stacked mobile layout, balanced text and collage from 1024px. */
+.investors-hero,
+.investors-leadership,
+.investors-ecosystem {
+  color: var(--text-strong);
+}
+
+/* Hero editorial: grafite liso. */
 .investors-hero {
-  min-height: 100vh;
-  min-height: 100svh;
-  padding-block: clamp(7.5rem, 13vw, 10rem) clamp(4rem, 8vw, 7rem);
-  background:
-    radial-gradient(circle at 78% 38%, rgba(155, 25, 26, 0.2), transparent 32%),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    var(--investors-black);
-  background-size: auto, 72px 72px, 72px 72px, auto;
+  padding-block: clamp(9rem, 18vw, 13rem) clamp(5rem, 10vw, 8rem);
+  background: var(--ink-900);
 }
 
 .investors-hero__layout {
-  display: grid;
-  align-items: center;
-  gap: clamp(3rem, 8vw, 7rem);
+  display: block;
+  max-width: 760px;
 }
 
 .investors-hero__copy {
@@ -64,270 +62,39 @@
 .investors-hero h1 {
   max-width: 13ch;
   margin-block: 1.25rem 1.5rem;
-  font-family: var(--font-family-heading);
-  font-size: clamp(2.9rem, 9vw, 4.75rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.94;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 8.5vw, 4.5rem);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
   text-wrap: balance;
 }
 
 .investors-hero__copy > p {
-  max-width: 38rem;
-  color: rgba(255, 255, 255, 0.75);
+  max-width: 43rem;
+  color: var(--text-body);
   font-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
   hyphens: none;
   line-height: 1.8;
-  text-align: start;
+  text-align: justify;
 }
 
-.investors-collage {
-  position: relative;
-  min-width: 0;
-  height: clamp(25rem, 100vw, 34rem);
-  isolation: isolate;
-}
-
-.investors-network {
-  position: absolute;
-  inset: 2% -8% auto;
-  width: 116%;
-  height: 94%;
-  fill: var(--investors-red-bright);
-  stroke: rgba(197, 34, 36, 0.55);
-  stroke-width: 1.6;
-}
-
-.investors-network path {
-  fill: none;
-  stroke-dasharray: 5 10;
-}
-
-.collage-frame,
-.collage-billboard,
-.collage-data {
-  position: absolute;
-  overflow: clip;
-  border: 1px solid rgba(197, 34, 36, 0.44);
-  background: #111;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-}
-
-.collage-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.collage-frame--campaign {
-  inset: 4% auto auto 3%;
-  width: 49%;
-  aspect-ratio: 1.1;
-  transform: rotate(-2deg);
-}
-
-.collage-frame--campaign img {
-  object-position: 8% center;
-}
-
-.collage-billboard {
-  inset: 1% 2% auto auto;
-  display: flex;
-  width: 40%;
-  aspect-ratio: 1.5;
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.12), transparent 45%),
-    #242424;
-  transform: rotate(2deg);
-}
-
-.collage-billboard::before {
-  position: absolute;
-  inset: 18%;
-  background: var(--investors-red);
-  box-shadow: 0 0 35px rgba(197, 34, 36, 0.42);
-  content: "";
-}
-
-.collage-billboard span,
-.collage-billboard small {
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-family-heading);
-  font-weight: 800;
-}
-
-.collage-billboard span {
-  font-size: clamp(1.1rem, 4vw, 2.2rem);
-}
-
-.collage-billboard small {
-  margin-left: 0.2rem;
-}
-
-.collage-frame--dashboard {
-  inset: auto 2% 2% auto;
-  width: 60%;
-  aspect-ratio: 1.4;
-  transform: rotate(-1deg);
-}
-
-.collage-frame--dashboard img {
-  object-position: 24% center;
-}
-
-.collage-data {
-  inset: auto auto 11% 0;
-  display: flex;
-  width: 35%;
-  height: 31%;
-  align-items: end;
-  justify-content: center;
-  gap: 7%;
-  padding: 12%;
-  background: linear-gradient(160deg, #270b0c, #0e0e0e 70%);
-}
-
-.collage-data__line {
-  width: 11%;
-  min-height: 22%;
-  background: var(--investors-red-bright);
-  box-shadow: 0 0 16px rgba(197, 34, 36, 0.38);
-}
-
-.collage-data__line--one { height: 38%; }
-.collage-data__line--two { height: 66%; }
-.collage-data__line--three { height: 48%; }
-.collage-data__line--four { height: 82%; }
-.collage-data__line--five { height: 100%; }
-
-.collage-orbit {
-  position: absolute;
-  inset: 42% auto auto 43%;
-  display: grid;
-  width: 4rem;
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid rgba(197, 34, 36, 0.6);
-  border-radius: 50%;
-  background: #090909;
-}
-
-.collage-orbit::before,
-.collage-orbit::after,
-.collage-orbit span {
-  position: absolute;
-  border-radius: 50%;
-  content: "";
-}
-
-.collage-orbit::before {
-  width: 0.75rem;
-  aspect-ratio: 1;
-  background: var(--investors-red-bright);
-  box-shadow: 0 0 18px rgba(197, 34, 36, 0.75);
-}
-
-.collage-orbit::after {
-  width: 6rem;
-  aspect-ratio: 1;
-  border: 1px dashed rgba(197, 34, 36, 0.36);
-}
-
-.collage-orbit span {
-  inset: -1.15rem auto auto 1.6rem;
-  width: 0.5rem;
-  aspect-ratio: 1;
-  background: var(--investors-gold);
-}
-
-.investors-vision {
-  padding-block: clamp(4.5rem, 9vw, 7rem);
-  border-block: 1px solid rgba(197, 34, 36, 0.18);
-  background:
-    radial-gradient(circle at 16% 25%, rgba(155, 25, 26, 0.2), transparent 33%),
-    #130707;
-}
-
-.investors-vision__intro {
-  display: grid;
-  gap: 2rem;
-  margin-bottom: clamp(2.5rem, 6vw, 4rem);
-}
-
-.investors-vision h2,
 .investors-leadership h2,
-.investors-ecosystem h2,
-.investors-closing h2 {
-  color: #fff;
+.investors-ecosystem h2 {
+  color: var(--text-strong);
+  font-family: var(--font-display);
   font-size: clamp(2rem, 1.52rem + 2.1vw, 3.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
   text-wrap: balance;
-}
-
-.investors-vision h2 {
-  max-width: 15ch;
-  margin-top: 1.1rem;
-}
-
-.investors-vision__intro > p {
-  max-width: 42rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.8;
-}
-
-.investors-pillars {
-  display: grid;
-  overflow: clip;
-  border: 1px solid rgba(197, 34, 36, 0.32);
-  border-radius: 1.25rem;
-  background: rgba(155, 25, 26, 0.09);
-}
-
-.investors-pillar {
-  display: flex;
-  min-width: 0;
-  gap: 1rem;
-  padding: clamp(1.35rem, 3.2vw, 2rem);
-}
-
-.investors-pillar + .investors-pillar {
-  border-top: 1px solid rgba(197, 34, 36, 0.25);
-}
-
-.investors-pillar__icon {
-  display: grid;
-  width: 3rem;
-  height: 3rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid rgba(214, 162, 61, 0.6);
-  border-radius: 50%;
-  color: var(--investors-gold);
-}
-
-.investors-pillar h3 {
-  margin-bottom: 0.35rem;
-  font-family: var(--font-family-heading);
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.investors-pillar p {
-  color: rgba(255, 255, 255, 0.64);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  text-align: start;
-  hyphens: none;
 }
 
 .investors-leadership {
   padding-block: clamp(4.5rem, 9vw, 7rem);
-  background: #090909;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--ink-950);
 }
 
 .investors-section-heading {
@@ -341,7 +108,7 @@
 .investors-section-heading p {
   max-width: 42rem;
   margin-top: 0.8rem;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--text-body);
   text-align: start;
   hyphens: none;
 }
@@ -355,61 +122,40 @@
   overflow-x: auto;
   padding: 0.25rem 0.1rem 1rem;
   scroll-snap-type: x mandatory;
-  scrollbar-color: var(--investors-red) #242424;
+  scrollbar-color: var(--accent) var(--ink-800);
 }
 
 .leadership-card {
   position: relative;
   min-width: 0;
   overflow: clip;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1rem;
-  background: #121212;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
   scroll-snap-align: start;
 }
 
+/* Retrato: fundo chapado e avatar circular com as iniciais na cor de destaque da pessoa (tons da escala red). */
 .leadership-card__portrait {
   position: relative;
   display: grid;
   min-height: 20rem;
   place-items: center;
   overflow: clip;
-  background:
-    radial-gradient(circle at 50% 32%, color-mix(in srgb, var(--portrait-accent) 48%, transparent), transparent 30%),
-    linear-gradient(155deg, color-mix(in srgb, var(--portrait-accent) 38%, #111), #080808 72%);
-}
-
-.leadership-card__portrait::before {
-  position: absolute;
-  inset: 15% 13% -8%;
-  border-radius: 50% 50% 12% 12%;
-  background:
-    radial-gradient(circle at 50% 18%, #202020 0 14%, transparent 15%),
-    radial-gradient(ellipse at 50% 60%, #171717 0 46%, transparent 47%);
-  filter: drop-shadow(0 28px 30px rgba(0, 0, 0, 0.65));
-  content: "";
-}
-
-.leadership-card__portrait::after {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, transparent 49.7%, rgba(255, 255, 255, 0.04) 50%, transparent 50.3%),
-    linear-gradient(transparent 49.7%, rgba(255, 255, 255, 0.04) 50%, transparent 50.3%);
-  background-size: 48px 48px;
-  content: "";
-  mask-image: linear-gradient(to bottom, #000, transparent);
+  background: var(--surface-raised);
 }
 
 .leadership-card__portrait span {
-  position: relative;
-  z-index: 1;
-  margin-top: auto;
-  margin-bottom: 1.25rem;
-  color: rgba(255, 255, 255, 0.18);
-  font-family: var(--font-family-heading);
-  font-size: 4.25rem;
-  font-weight: 800;
+  display: grid;
+  width: 7.5rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--portrait-accent);
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
 }
 
 .leadership-card__content {
@@ -426,76 +172,24 @@
 }
 
 .leadership-card h3 {
-  font-family: var(--font-family-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
 }
 
 .leadership-card p {
   margin-top: 0.2rem;
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
   text-align: start;
   hyphens: none;
 }
 
-.investors-impact {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  padding-block: clamp(3.8rem, 9vw, 6.5rem);
-  border-block: 1px solid rgba(197, 34, 36, 0.3);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(155, 25, 26, 0.34), transparent 42%),
-    #080303;
-}
-
-.investors-impact__lines {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  opacity: 0.55;
-  background:
-    repeating-linear-gradient(165deg, transparent 0 18px, rgba(197, 34, 36, 0.24) 19px, transparent 21px),
-    linear-gradient(90deg, rgba(155, 25, 26, 0.55), transparent 28% 72%, rgba(155, 25, 26, 0.55));
-  mask-image: linear-gradient(90deg, #000, transparent 38% 62%, #000);
-}
-
-.investors-impact__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.investors-impact span {
-  color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(0.95rem, 0.8rem + 0.7vw, 1.35rem);
-  font-weight: 700;
-}
-
-.investors-impact strong {
-  color: #e3282b;
-  font-family: var(--font-family-heading);
-  font-size: clamp(3.2rem, 14vw, 7.25rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  text-transform: uppercase;
-}
-
-.investors-impact b {
-  font-family: var(--font-family-heading);
-  font-size: clamp(1.8rem, 7vw, 3.8rem);
-  line-height: 1;
-  text-transform: uppercase;
-}
-
 .investors-ecosystem {
   padding-block: clamp(4.5rem, 9vw, 7rem);
-  background:
-    radial-gradient(circle at 100% 38%, rgba(155, 25, 26, 0.12), transparent 28%),
-    #090909;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--ink-900);
 }
 
 .investors-ecosystem__top {
@@ -509,222 +203,93 @@
   margin-top: 1rem;
 }
 
+.investors-ecosystem__intro {
+  max-width: 42rem;
+  margin-top: 1rem;
+  color: var(--text-body);
+  line-height: 1.75;
+  text-align: justify;
+}
+
 .vellore-mark {
   display: flex;
   min-height: 8rem;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  border: 1px solid rgba(197, 34, 36, 0.5);
-  border-radius: 1rem;
-  background: linear-gradient(145deg, rgba(155, 25, 26, 0.22), rgba(155, 25, 26, 0.04));
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
 }
 
 .vellore-mark__symbol {
-  color: var(--investors-gold);
-  font-family: var(--font-family-heading);
+  color: var(--text-brand);
+  font-family: var(--font-display);
   font-size: 4rem;
-  font-weight: 800;
+  font-weight: var(--weight-black);
   line-height: 1;
   transform: scaleX(1.35);
 }
 
 .vellore-mark strong {
+  color: var(--text-strong);
+  font-family: var(--font-display);
   font-size: 1.4rem;
+  font-weight: var(--weight-semibold);
   line-height: 1.05;
   text-transform: uppercase;
-}
-
-.investors-ecosystem__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
-  gap: 0.6rem;
-}
-
-.ecosystem-company {
-  display: grid;
-  min-height: 5.6rem;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 0.75rem;
-  background: #f4f2f2;
-  padding: 1rem;
-  color: #181818;
-  font-family: var(--font-family-heading);
-  font-size: 1rem;
-  font-weight: 700;
-  text-align: center;
-}
-
-.investors-closing {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  padding-block: clamp(4rem, 10vw, 7rem);
-  border-top: 1px solid rgba(197, 34, 36, 0.28);
-  background: #110505;
-}
-
-.investors-closing__glow {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(90deg, rgba(155, 25, 26, 0.45), transparent 35% 65%, rgba(155, 25, 26, 0.45)),
-    repeating-linear-gradient(12deg, transparent 0 22px, rgba(197, 34, 36, 0.18) 23px, transparent 25px);
-  mask-image: linear-gradient(90deg, #000, transparent 43% 57%, #000);
-}
-
-.investors-closing__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.75rem;
-  text-align: center;
-}
-
-.investors-closing h2 {
-  max-width: 24ch;
-}
-
-@media (min-width: 48rem) {
-  .investors-shell {
-    width: min(1180px, calc(100% - 4rem));
-  }
-
-  .investors-vision__intro,
-  .investors-ecosystem__top {
-    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
-    align-items: end;
-  }
-
-  .investors-pillars {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .investors-pillar + .investors-pillar {
-    border-top: 0;
-    border-left: 1px solid rgba(197, 34, 36, 0.25);
-  }
-}
-
-@media (min-width: 64rem) {
-  .investors-hero__layout {
-    grid-template-columns: minmax(0, 0.85fr) minmax(34rem, 1.15fr);
-  }
-
-  .investors-collage {
-    height: 38rem;
-  }
-
-  .investors-leadership__track {
-    grid-auto-columns: auto;
-    grid-auto-flow: row;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    overflow: visible;
-    padding-bottom: 0;
-  }
-
-  .leadership-card__portrait {
-    min-height: 22rem;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .collage-frame--campaign {
-    animation: investor-float 8s ease-in-out infinite;
-  }
-
-  .collage-frame--dashboard {
-    animation: investor-float 9s ease-in-out -3s infinite reverse;
-  }
-
-  .collage-orbit::after {
-    animation: investor-spin 12s linear infinite;
-  }
-}
-
-@keyframes investor-float {
-  0%,
-  100% { translate: 0 0; }
-  50% { translate: 0 -0.65rem; }
-}
-
-@keyframes investor-spin {
-  to { rotate: 1turn; }
-}
-
-/* Quem Somos: hero editorial and ecosystem profiles. */
-.investors-hero {
-  min-height: auto;
-  padding-block: clamp(9rem, 18vw, 13rem) clamp(5rem, 10vw, 8rem);
-  background:
-    radial-gradient(circle at 82% 18%, rgba(155, 25, 26, 0.28), transparent 32%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 52%),
-    var(--investors-black);
-}
-
-.investors-hero__layout {
-  display: block;
-  max-width: 760px;
-}
-
-.investors-hero__copy > p {
-  max-width: 43rem;
-  text-align: justify;
-}
-
-.investors-ecosystem__intro {
-  max-width: 42rem;
-  margin-top: 1rem;
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.75;
-  text-align: justify;
 }
 
 .vellore-group {
   display: grid;
   gap: clamp(2rem, 5vw, 3.5rem);
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  border: 1px solid rgba(197, 34, 36, 0.42);
-  border-radius: 1.5rem;
-  background:
-    radial-gradient(circle at 100% 0%, rgba(155, 25, 26, 0.22), transparent 36%),
-    linear-gradient(145deg, rgba(155, 25, 26, 0.16), rgba(16, 16, 16, 0.92));
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  background: var(--surface-card);
 }
 
 .vellore-group__copy h3,
 .workintech-card h3 {
   max-width: 18ch;
   margin-top: 0.9rem;
-  color: #fff;
-  font-family: var(--font-family-heading);
+  color: var(--text-strong);
+  font-family: var(--font-display);
   font-size: clamp(1.65rem, 1.25rem + 1.2vw, 2.35rem);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
 }
 
 .vellore-group__copy p,
 .workintech-card p {
   max-width: 42rem;
   margin-top: 1rem;
-  color: rgba(255, 255, 255, 0.68);
+  color: var(--text-body);
   line-height: 1.75;
   text-align: justify;
 }
 
 .investors-ecosystem__grid {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.7rem;
 }
 
+/* Logos de empresas sobre fundo claro, para não recolorir marcas de terceiros. */
 .ecosystem-company {
+  display: grid;
   min-height: 4.6rem;
-  background: #fff;
+  place-items: center;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--ink-0);
   padding: 0.8rem;
-  color: #181818;
+  color: var(--ink-950);
+  font-family: var(--font-display);
   font-size: 0.86rem;
+  font-weight: var(--weight-semibold);
+  text-align: center;
 }
 
 .ecosystem-company img {
@@ -740,17 +305,17 @@
   gap: 2rem;
   margin-top: 1.5rem;
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 1.5rem;
-  background: #101010;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  background: var(--surface-card);
 }
 
 .workintech-card__brand {
   display: grid;
   min-height: 8rem;
   place-items: center;
-  border-radius: 1rem;
-  background: #f4f2f2;
+  border-radius: var(--radius-lg);
+  background: var(--ink-50);
   padding: 1.5rem;
 }
 
@@ -763,6 +328,15 @@
 }
 
 @media (min-width: 48rem) {
+  .investors-shell {
+    width: min(1180px, calc(100% - 4rem));
+  }
+
+  .investors-ecosystem__top {
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+    align-items: end;
+  }
+
   .vellore-group {
     grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
     align-items: start;
@@ -779,7 +353,26 @@
 }
 
 @media (min-width: 64rem) {
+  .investors-leadership__track {
+    grid-auto-columns: auto;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .leadership-card__portrait {
+    min-height: 22rem;
+  }
+
   .investors-ecosystem__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* 7 pessoas: 4 colunas no médio (4 + 3), 7 no grande */
+@media (min-width: 80rem) {
+  .investors-leadership__track {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 }

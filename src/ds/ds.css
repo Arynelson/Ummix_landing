@@ -1,0 +1,37 @@
+/* Ummix Ads — design system (cópia local). Ver src/ds/README.md */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/effects.css";
+
+/* Ajuste local de acessibilidade (WCAG AA), ver src/ds/README.md:
+   no tema escuro oficial, --text-brand (red-400) dá 3,9:1 e --text-muted (ink-400) dá 4,2:1 sobre o grafite. */
+[data-theme="dark"] {
+  --text-brand: var(--red-300);
+  --text-muted: var(--ink-300);
+}
+
+/* Interação dos componentes de src/ds/components (hover e pressionado em CSS, não em estado React) */
+.ds-btn {
+  background: var(--ds-bg);
+  transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.ds-btn:not(:disabled):not([aria-disabled="true"]):hover { background: var(--ds-bg-hover); text-decoration: none; color: var(--ds-fg); }
+.ds-btn:not(:disabled):not([aria-disabled="true"]):active { transform: scale(0.98); }
+.ds-btn:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+
+.ds-field { transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out); }
+.ds-field:focus-within { border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-soft); }
+.ds-field[data-invalid="true"] { border-color: var(--danger-600) !important; }
+
+.ds-check-input { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.ds-check-box {
+  width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border-strong); background: var(--surface-card);
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+.ds-check-box svg { opacity: 0; }
+.ds-check-input:checked + .ds-check-box { border-color: var(--accent); background: var(--accent); }
+.ds-check-input:checked + .ds-check-box svg { opacity: 1; }
+.ds-check-input:focus-visible + .ds-check-box { outline: 3px solid var(--focus-ring); outline-offset: 2px; }

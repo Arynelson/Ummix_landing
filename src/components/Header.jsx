@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import { PLATFORM_SIGNUP } from '../constants/urls'
 import { getLocalizedPath, useLocale } from '../LocaleProvider.jsx'
 import { LABELS } from '../i18n-labels.js'
+import { Button, Logo } from '../ds/components'
 
 export default function Header({ active, surface = 'overlay' }) {
   const { locale, rememberLocale } = useLocale()
   const labels = LABELS[locale]
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  // Fundo claro (rolado ou página clara) → tema claro e logo vermelha; sobre hero escuro → tema escuro e logo branca.
   const usesDarkInk = scrolled || surface === 'light'
   const navigationItems = [
     { href: '/', active: '/', label: labels.home },
@@ -33,15 +35,12 @@ export default function Header({ active, surface = 'overlay' }) {
 
   const languageSelector = (mobile = false) => (
     <div
-      className={`flex items-center gap-1 rounded-full border p-1 ${
-        usesDarkInk ? 'border-ummix-dark/15 bg-white' : 'border-white/25 bg-white/5'
-      } ${mobile ? 'w-full justify-between' : ''}`}
+      className={`flex items-center gap-1 rounded-[var(--radius-md)] border border-line bg-card p-1 ${
+        mobile ? 'w-full justify-between' : ''
+      }`}
       role="group"
       aria-label={labels.language}
     >
-      <span className={`px-2 text-[10px] font-bold uppercase tracking-wider ${usesDarkInk ? 'text-ummix-gray-dark' : 'text-white/65'}`}>
-        {labels.language}
-      </span>
       {['pt', 'en', 'es'].map((option) => {
         const selected = locale === option
         const optionLabel = {
@@ -60,10 +59,8 @@ export default function Header({ active, surface = 'overlay' }) {
               if (selected) event.preventDefault()
               rememberLocale(option)
             }}
-            className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-2 text-xs font-bold transition-colors ${
-              selected
-                ? 'bg-ummix-red text-white'
-                : usesDarkInk ? 'text-ummix-dark hover:bg-ummix-gray' : 'text-white/80 hover:bg-white/10 hover:text-white'
+            className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-sm)] px-2 text-xs font-semibold transition-colors ${
+              selected ? 'bg-sunken text-strong ring-1 ring-line' : 'text-muted hover:bg-sunken hover:text-strong'
             }`}
           >
             <span className="hidden lg:inline">{labels.languageOptions[option]}</span>
@@ -76,17 +73,16 @@ export default function Header({ active, surface = 'overlay' }) {
 
   return (
     <header
+      data-theme={usesDarkInk ? undefined : 'dark'}
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         usesDarkInk
-          ? `bg-white/95 backdrop-blur ${scrolled ? 'shadow-md py-3' : 'py-5'}`
+          ? `bg-card/95 backdrop-blur ${scrolled ? 'shadow-[var(--shadow-md)] py-3' : 'py-5'}`
           : 'bg-transparent py-5'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-4 md:px-6">
-        <a href={getLocalizedPath(locale, '/')} className="flex min-h-11 shrink-0 items-center">
-          <img src="/assets/logo-ummix-ads.png" alt="Ummix Ads" className={`h-auto w-[118px] transition-all sm:w-[150px] md:h-10 md:w-auto ${
-            usesDarkInk ? 'opacity-100' : 'brightness-0 invert'
-          }`} />
+        <a href={getLocalizedPath(locale, '/')} className="flex min-h-11 shrink-0 items-center" aria-label="Ummix Ads">
+          <Logo variant={usesDarkInk ? 'vermelha' : 'branca'} height={28} />
         </a>
 
         <nav aria-label={labels.mainNavigation} className="hidden items-center gap-4 text-sm font-semibold lg:flex lg:gap-6">
@@ -99,8 +95,8 @@ export default function Header({ active, surface = 'overlay' }) {
                 aria-current={isCurrent ? 'page' : undefined}
                 className={`transition-colors ${
                   isCurrent
-                    ? usesDarkInk ? 'text-ummix-red' : 'text-white underline underline-offset-4 decoration-ummix-red'
-                    : usesDarkInk ? 'text-ummix-dark hover:text-ummix-red' : 'text-white/80 hover:text-white'
+                    ? 'text-strong underline decoration-accent decoration-2 underline-offset-4'
+                    : 'text-body hover:text-brand'
                 }`}
               >
                 {label}
@@ -111,27 +107,20 @@ export default function Header({ active, surface = 'overlay' }) {
 
         <div className="hidden lg:block">{languageSelector()}</div>
 
-        <a
-          href={PLATFORM_SIGNUP}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center whitespace-nowrap rounded-lg bg-ummix-red px-3 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-ummix-red-dark md:px-6 md:py-2.5 md:text-sm"
-        >
+        <Button href={PLATFORM_SIGNUP} target="_blank" rel="noopener noreferrer" variant="primary" size="md">
           <span className="sm:hidden">{labels.platform}</span>
           <span className="hidden sm:inline">{labels.platformLong}</span>
-        </a>
+        </Button>
 
         <button
           type="button"
-          className={`grid h-11 w-11 place-items-center rounded-lg border lg:hidden ${
-            usesDarkInk ? 'border-ummix-dark/20 text-ummix-dark' : 'border-white/30 text-white'
-          }`}
+          className="grid h-11 w-11 place-items-center rounded-[var(--radius-md)] border border-line text-strong transition-colors hover:bg-sunken lg:hidden"
           aria-label={menuOpen ? labels.closeMenu : labels.openMenu}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" aria-hidden="true">
             {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
           </svg>
         </button>
@@ -140,7 +129,7 @@ export default function Header({ active, surface = 'overlay' }) {
       <nav
         id="mobile-navigation"
         aria-label={labels.mobileNavigation}
-        className={`absolute left-3 right-3 top-full mt-2 overflow-hidden rounded-2xl bg-white p-2 shadow-xl transition-all sm:left-4 sm:right-4 lg:hidden ${
+        className={`absolute left-3 right-3 top-full mt-2 overflow-hidden rounded-[var(--radius-lg)] border border-line-subtle bg-card p-2 shadow-[var(--shadow-lg)] transition-all sm:left-4 sm:right-4 lg:hidden ${
           menuOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
         }`}
       >
@@ -152,15 +141,15 @@ export default function Header({ active, surface = 'overlay' }) {
               href={getLocalizedPath(locale, href)}
               aria-current={isCurrent ? 'page' : undefined}
               onClick={() => setMenuOpen(false)}
-              className={`flex min-h-11 items-center rounded-xl px-4 text-sm font-bold transition-colors ${
-                isCurrent ? 'bg-ummix-red/10 text-ummix-red' : 'text-ummix-dark hover:bg-ummix-gray'
+              className={`flex min-h-11 items-center rounded-[var(--radius-md)] px-4 text-sm font-semibold transition-colors ${
+                isCurrent ? 'bg-accent-soft text-brand' : 'text-strong hover:bg-sunken'
               }`}
             >
               {label}
             </a>
           )
         })}
-        <div className="mt-2 border-t border-ummix-dark/10 pt-2">{languageSelector(true)}</div>
+        <div className="mt-2 border-t border-line-subtle pt-2">{languageSelector(true)}</div>
       </nav>
     </header>
   )

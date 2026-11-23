@@ -5,11 +5,13 @@ import { LABELS } from '../../i18n-labels.js'
 import { INVESTORS_COPY } from './investidores-copy.js'
 
 const leadership = [
-  { name: 'Ari', initials: 'A', accent: '#7a1415' },
-  { name: 'Débora', initials: 'D', accent: '#c44a3f' },
-  { name: 'Edy Medrado', initials: 'EM', accent: '#9b191a' },
-  { name: 'João', initials: 'J', accent: '#a52c2d' },
-  { name: 'Monique Evelle', initials: 'ME', accent: '#d1844f' },
+  { name: 'Ary Hauffe', initials: 'AH', accent: 'var(--red-700)' },
+  { name: 'Débora Freitas', initials: 'DF', accent: 'var(--red-900)' },
+  { name: 'Edy Medrado', initials: 'EM', accent: 'var(--red-600)' },
+  { name: 'Iuri Rincon Godinho', initials: 'IG', accent: 'var(--red-800)' },
+  { name: 'João Silva', initials: 'JS', accent: 'var(--red-500)' },
+  { name: 'Marcelo Bassetto', initials: 'MB', accent: 'var(--red-700)' },
+  { name: 'Monique Evelle', initials: 'ME', accent: 'var(--red-900)' },
 ]
 
 const velloreCompanies = [
@@ -29,7 +31,7 @@ const velloreCompanies = [
 
 function Hero({ copy }) {
   return (
-    <section className="investors-hero">
+    <section className="investors-hero" data-theme="dark">
       <div className="investors-shell investors-hero__layout">
         <div className="investors-hero__copy">
           <span className="investors-kicker">{copy.heroKicker}</span>
@@ -43,7 +45,7 @@ function Hero({ copy }) {
 
 function Leadership({ copy }) {
   return (
-    <section className="investors-leadership" aria-labelledby="leadership-title">
+    <section className="investors-leadership" data-theme="dark" aria-labelledby="leadership-title">
       <div className="investors-shell">
         <div className="investors-section-heading">
           <span>{copy.leadershipKicker}</span>
@@ -75,7 +77,7 @@ function Leadership({ copy }) {
 
 function Ecosystem({ copy }) {
   return (
-    <section className="investors-ecosystem" aria-labelledby="ecosystem-title">
+    <section className="investors-ecosystem" data-theme="dark" aria-labelledby="ecosystem-title">
       <div className="investors-shell">
         <div className="investors-ecosystem__top">
           <div>

@@ -8,6 +8,10 @@ export function useCountUp(target, duration = 1800) {
 
   useEffect(() => {
     if (!isInView) return
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      setCount(target)
+      return
+    }
     let start = 0
     const step = target / (duration / 16)
     const timer = setInterval(() => {

@@ -1,23 +1,40 @@
+import { Button } from '../../ds/components';
+
+// Mantém a API antiga (variant/size/className/...props de <a>) e renderiza o Button oficial com href.
+// Variantes antigas → oficiais:
+//   primary       → primary   (vermelho chapado)
+//   inverse       → inverse   (branco com texto vermelho, para fundo vermelho/escuro)
+//   outline-dark  → secondary (fundo claro)
+//   outline-light → secondary (em seção com data-theme="dark" os aliases invertem sozinhos)
+// As oficiais (primary | secondary | soft | ghost | inverse) também são aceitas direto.
 const VARIANTS = {
-  primary: 'bg-ummix-red text-white shadow-lg hover:scale-[1.03] hover:bg-ummix-red-dark',
-  inverse: 'bg-white text-ummix-red hover:scale-[1.03] hover:bg-ummix-gray',
-  'outline-dark': 'border-[1.5px] border-ummix-dark text-ummix-dark hover:scale-[1.03] hover:bg-ummix-dark hover:text-white',
-  'outline-light': 'border-[1.5px] border-white/40 text-white hover:scale-[1.03] hover:bg-white/10',
+  primary: 'primary',
+  inverse: 'inverse',
+  'outline-dark': 'secondary',
+  'outline-light': 'secondary',
+  secondary: 'secondary',
+  soft: 'soft',
+  ghost: 'ghost',
 };
 
+// Tamanhos antigos (md/lg/xl) eram todos CTAs grandes → lg oficial. sm aceito para casos compactos.
 const SIZES = {
-  md: 'px-7 py-4 text-sm',
-  lg: 'px-8 py-4.5 text-sm',
-  xl: 'px-10 py-4 text-base',
+  sm: 'sm',
+  md: 'lg',
+  lg: 'lg',
+  xl: 'lg',
 };
 
-export default function ButtonLink({ children, className = '', size = 'md', variant = 'primary', ...props }) {
+export default function ButtonLink({ children, className = '', size = 'md', variant = 'primary', href, ...props }) {
   return (
-    <a
-      className={`inline-flex items-center justify-center gap-2.5 rounded-full font-sans font-bold transition-all ${SIZES[size]} ${VARIANTS[variant]} ${className}`}
+    <Button
+      href={href}
+      variant={VARIANTS[variant] || 'primary'}
+      size={SIZES[size] || 'lg'}
+      className={className}
       {...props}
     >
       {children}
-    </a>
+    </Button>
   );
 }
