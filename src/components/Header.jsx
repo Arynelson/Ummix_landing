@@ -14,7 +14,15 @@ export default function Header({ active, surface = 'overlay' }) {
   const navigationItems = [
     { href: '/', active: '/', label: labels.home },
     { href: '/cashback', active: '/cashback', label: labels.cashback },
-    { href: '/partner', active: '/partner', label: labels.partners },
+    {
+      href: '/partner',
+      active: '/partner',
+      label: labels.partners,
+      children: [
+        { href: getLocalizedPath(locale, '/partner'), label: labels.partnerJoin },
+        { href: `${getLocalizedPath(locale, '/partner')}#parceiros`, label: labels.partnerMeet },
+      ],
+    },
     { href: '/monetize', active: '/monetize', label: labels.monetize },
     { href: '/premios', active: '/premios', label: labels.awards },
   ]
@@ -86,13 +94,14 @@ export default function Header({ active, surface = 'overlay' }) {
         </a>
 
         <nav aria-label={labels.mainNavigation} className="hidden items-center gap-4 text-sm font-semibold lg:flex lg:gap-6">
-          {navigationItems.map(({ href, active: activePath, label }) => {
+          {navigationItems.map(({ href, active: activePath, label, children }) => {
             const isCurrent = active === activePath
-            return (
+            const link = (
               <a
                 key={activePath}
                 href={getLocalizedPath(locale, href)}
                 aria-current={isCurrent ? 'page' : undefined}
+                aria-haspopup={children ? 'true' : undefined}
                 className={`transition-colors ${
                   isCurrent
                     ? 'text-strong underline decoration-accent decoration-2 underline-offset-4'
@@ -101,6 +110,25 @@ export default function Header({ active, surface = 'overlay' }) {
               >
                 {label}
               </a>
+            )
+            if (!children) return link
+            return (
+              <div key={activePath} className="group relative">
+                {link}
+                <div className="invisible absolute left-1/2 top-full z-10 -translate-x-1/2 pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="min-w-52 rounded-[var(--radius-lg)] border border-line-subtle bg-card p-2 shadow-[var(--shadow-lg)]">
+                    {children.map((child) => (
+                      <a
+                        key={child.href}
+                        href={child.href}
+                        className="flex min-h-11 items-center whitespace-nowrap rounded-[var(--radius-md)] px-4 text-sm font-semibold text-strong transition-colors hover:bg-sunken hover:text-brand"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
             )
           })}
         </nav>
@@ -133,8 +161,22 @@ export default function Header({ active, surface = 'overlay' }) {
           menuOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
         }`}
       >
-        {navigationItems.map(({ href, active: activePath, label }) => {
+        {navigationItems.flatMap(({ href, active: activePath, label, children }) => {
           const isCurrent = active === activePath
+          if (children) {
+            return children.map((child) => (
+              <a
+                key={child.href}
+                href={child.href}
+                onClick={() => setMenuOpen(false)}
+                className={`flex min-h-11 items-center rounded-[var(--radius-md)] px-4 text-sm font-semibold transition-colors ${
+                  isCurrent ? 'bg-accent-soft text-brand' : 'text-strong hover:bg-sunken'
+                }`}
+              >
+                {child.label}
+              </a>
+            ))
+          }
           return (
             <a
               key={activePath}
